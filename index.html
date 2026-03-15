@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bianca Maria Boninsegni | Sovereign Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-paper: #F4F1EA;
+            --text-dark: #2F2F2F;
+            --accent-green: #2D4F3E; /* iMac Green shade */
+        }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Inter', sans-serif; }
+        
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; color: #fff; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 100;
+            transition: opacity 1.5s ease;
+        }
+        .border-box { border: 1px solid #fff; padding: 40px; max-width: 600px; text-align: center; }
+        h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; letter-spacing: 4px; margin-bottom: 10px; }
+        .quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; line-height: 1.6; margin-bottom: 40px; color: #ccc; }
+        #start-btn { background: none; border: 1px solid #fff; color: #fff; padding: 10px 30px; cursor: pointer; letter-spacing: 2px; transition: 0.3s; }
+        #start-btn:hover { background: #fff; color: #000; }
+
+        /* The Studio Layout */
+        #studio-container {
+            opacity: 0; width: 100%; height: 100%; background: var(--bg-paper);
+            transition: opacity 2s ease; position: relative;
+        }
+
+        /* Interactive Elements Overlay */
+        .interactive-object {
+            position: absolute; cursor: pointer; transition: transform 0.3s;
+            filter: grayscale(20%);
+        }
+        .interactive-object:hover { transform: scale(1.05); filter: grayscale(0%); }
+
+        /* Modals for Dossiers */
+        .modal {
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 80%; max-width: 700px; background: white; padding: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2); z-index: 200;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .modal h2 { border-bottom: 1px solid #ddd; padding-bottom: 10px; font-weight: 300; }
+        .modal-close { position: absolute; top: 20px; right: 20px; cursor: pointer; font-family: 'Inter'; }
+
+        /* iMac Area */
+        #imac-container {
+            position: absolute; bottom: 10%; right: 10%; width: 300px; height: 250px;
+            background: var(--accent-green); border-radius: 10px; border: 5px solid #1a3328;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: white; font-size: 0.7rem; text-align: center;
+        }
+        #sudoku-paper { position: absolute; bottom: 5%; left: 15%; width: 120px; transform: rotate(-5deg); cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="splash-screen">
+        <div class="border-box">
+            <h1>BIANCA MARIA BONINSEGNI</h1>
+            <div style="font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 30px; color: #888;">PORTFOLIO ARCHIVE 2026</div>
+            <div class="quote">
+                "As you set out for Ithaka<br>
+                hope your road is a long one,<br>
+                full of adventure, full of discovery.<br>
+                Laistrygonians, Cyclops,<br>
+                angry Poseidon—don’t be afraid of them...<br>
+                as long as you keep your thoughts raised high,<br>
+                as long as a rare excitement<br>
+                stirs your spirit and your body."<br>
+                <span style="font-style: normal; font-size: 0.9rem;">— C. Kavafis</span>
+            </div>
+            <button id="start-btn" onclick="enterStudio()">CLICK TO ENTER</button>
+        </div>
+    </div>
+
+    <div id="studio-container">
+        <div id="imac-container" class="interactive-object" onclick="openModal('modal-cv')">
+            <div style="margin-top: -20px;">iMac 24" - Green</div>
+            <div style="font-size: 0.5rem; margin-top: 10px;">[ Click to access Technical Mastery & CV ]</div>
+        </div>
+
+        <div id="sudoku-paper" onclick="startSudoku()">
+            <img src="https://via.placeholder.com/100x100?text=Sudoku" alt="Sudoku Paper">
+            <div style="font-size: 0.6rem; color: #555;">Solve to unlock drawers</div>
+        </div>
+
+        <div style="position: absolute; top: 10%; left: 10%;" class="interactive-object" onclick="openModal('modal-campari')">
+            [ Botanical Print: Campari ]
+        </div>
+
+        <div style="position: absolute; top: 20%; left: 40%;" class="interactive-object" onclick="openModal('modal-richemont')">
+            [ Patek Philippe: Richemont ]
+        </div>
+
+        <div style="position: absolute; top: 50%; left: 20%;" class="interactive-object" onclick="openModal('modal-christies')">
+            [ Catalog: La Dolce Vita ]
+        </div>
+    </div>
+
+    <div id="modal-cv" class="modal">
+        <span class="modal-close" onclick="closeModal()">✕</span>
+        <h2>Technical Mastery & Global Experience</h2>
+        <p><strong>Certifications:</strong> Google Analytics (GA4), SAP, Meta Business Manager.</p>
+        <p><strong>Tools:</strong> Adobe Creative Suite, Advanced Excel.</p>
+        <p><strong>Download:</strong> <a href="#" style="color: var(--accent-green);">BM_Boninsegni_Dossier_2026.pdf</a></p>
+    </div>
+
+    <div id="modal-campari" class="modal">
+        <span class="modal-close" onclick="closeModal()">✕</span>
+        <h2>Campari: Il Cinema dei Sogni</h2>
+        <p>From aromatic roots to the red carpet. For Galleria Campari, I directed the digital strategy for 'Il Cinema dei Sogni', celebrating the historical link between the brand and stardom. Like a botanical recipe, I balanced heritage and innovation, monitoring exhibition impact via advanced reporting to ensure every communication 'scene' generated concrete ROI.</p>
+    </div>
+
+    <div id="modal-richemont" class="modal">
+        <span class="modal-close" onclick="closeModal()">✕</span>
+        <h2>Richemont: Journey to Glashütte</h2>
+        <p><em>Geneva, August 1st, 2024.</em> In the A. Lange & Söhne manufacture, I witnessed a choreography of energy: rubies set to reduce friction and artisans working in a silence that felt almost moral. This absolute dedication—an attention that improves the very eyesight of those who practice it—is the same precision I bring to global operational workflows like Homo Faber 2024.</p>
+    </div>
+
+    <div id="modal-christies" class="modal">
+        <span class="modal-close" onclick="closeModal()">✕</span>
+        <h2>Christie’s: HNWI Analysis</h2>
+        <p>Beyond the 'La Dolce Vita' auction (€1.77M), my research focused on the psychological drivers of High-Net-Worth Individuals. By analyzing positional good trends and Applying consumer behavior models (Theory-Context-Characteristics), I mapped how institutional prestige translates into digital trust and value.</p>
+    </div>
+
+    <script>
+        function enterStudio() {
+            document.getElementById('splash-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('splash-screen').style.display = 'none';
+                document.getElementById('studio-container').style.opacity = '1';
+                // Audio initialization for Jazz/Rain would go here
+            }, 1500);
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'block'; }
+        function closeModal() { 
+            const modals = document.getElementsByClassName('modal');
+            for(let m of modals) m.style.display = 'none';
+        }
+
+        function startSudoku() {
+            alert("LinkedIn-style 4x4 Sudoku activated. Solve to unlock the Flatlandia & White Holes drawers.");
+        }
+    </script>
+</body>
+</html>
