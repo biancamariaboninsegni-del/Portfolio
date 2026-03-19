@@ -151,7 +151,26 @@
     background: linear-gradient(to top, rgba(5,3,2,0.7), transparent);
     display: flex; justify-content: center; gap: 2.5rem;
     pointer-events: none;
+    opacity: 1;
+    transition: opacity 1.5s ease;
   }
+  #hint-bar.hidden { opacity: 0; }
+
+  /* Help button — recalls hint bar */
+  #help-btn {
+    position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 9;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    color: rgba(200,150,46,0.35);
+    cursor: pointer;
+    width: 22px; height: 22px;
+    border: 1px solid rgba(200,150,46,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+    background: rgba(0,0,0,0.4);
+  }
+  #help-btn:hover { color: rgba(200,150,46,0.9); border-color: rgba(200,150,46,0.5); background: rgba(0,0,0,0.6); }
   .hint-item {
     font-family: 'Courier Prime', monospace;
     font-size: 0.58rem;
@@ -159,6 +178,96 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
+
+  /* Notepad hotspot — blocco note sul tavolo */
+  #hs-notepad {
+    left: calc(21.875% + 0.27 * 56.25%);
+    top: 76%;
+    width: calc(0.16 * 56.25%);
+    height: 12%;
+    cursor: pointer;
+  }
+  #hs-notepad:hover { background: rgba(200,150,46,0.06); outline: 1px solid rgba(200,150,46,0.15); }
+  #hs-notepad::after {
+    content: '✉ contact';
+    position: absolute;
+    bottom: -1.8rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.62rem;
+    color: rgba(200,150,46,0.9);
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    background: rgba(0,0,0,0.65);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+  #hs-notepad:hover::after { opacity: 1; }
+
+  /* Contact note modal */
+  .note-window {
+    background: #f5f0e0;
+    border-radius: 2px;
+    width: min(380px, 90vw);
+    padding: 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 2px 3px 0 rgba(180,160,80,0.3);
+    animation: modalIn 0.3s ease;
+    overflow: hidden;
+  }
+  .note-lines {
+    background: repeating-linear-gradient(
+      to bottom,
+      #f5f0e0 0px, #f5f0e0 27px,
+      rgba(100,140,200,0.2) 27px, rgba(100,140,200,0.2) 28px
+    );
+    padding: 2.5rem 2rem 2rem 3.5rem;
+    position: relative;
+    min-height: 280px;
+  }
+  .note-lines::before {
+    content: '';
+    position: absolute;
+    left: 2.5rem; top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(220,100,100,0.35);
+  }
+  .note-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1rem;
+    color: #2a1a08;
+    margin-bottom: 1.2rem;
+    font-style: italic;
+    line-height: 28px;
+  }
+  .note-line {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.95rem;
+    color: #3a2a10;
+    line-height: 28px;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .note-line a {
+    color: #2a4a8a;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(42,74,138,0.3);
+    transition: border-color 0.2s;
+  }
+  .note-line a:hover { border-color: rgba(42,74,138,0.8); }
+  .note-close {
+    display: block; text-align: right;
+    padding: 0.5rem 1rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    color: rgba(80,60,20,0.4);
+    cursor: pointer;
+    background: rgba(180,160,80,0.08);
+    border-top: 1px solid rgba(180,160,80,0.2);
+    transition: color 0.2s;
+  }
+  .note-close:hover { color: rgba(80,60,20,0.8); }
 
   /*
    * Image is 1024x1024 contained in 16:9 viewport.
@@ -254,7 +363,7 @@
     background: #0d1117;
     min-height: 420px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     padding: 2rem;
     align-items: start;
@@ -295,12 +404,12 @@
   /* Sudoku */
   #sudoku-container { grid-column: 1 / -1; }
   #sudoku-grid {
-    display: grid; grid-template-columns: repeat(4, 44px);
+    display: grid; grid-template-columns: repeat(9, 36px);
     gap: 3px; margin: 0 auto;
     width: fit-content;
   }
   .sudoku-cell {
-    width: 44px; height: 44px;
+    width: 36px; height: 36px;
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.1);
     color: rgba(245,234,214,0.8);
@@ -314,6 +423,11 @@
   .sudoku-cell.given { color: rgba(200,150,46,0.9); pointer-events: none; background: rgba(200,150,46,0.05); }
   .sudoku-cell.wrong { background: rgba(255,80,60,0.15); border-color: rgba(255,80,60,0.5); }
   .sudoku-cell.correct { background: rgba(40,200,64,0.1); }
+  /* 9x9 box borders */
+  .sudoku-cell[data-c="2"], .sudoku-cell[data-c="5"] { border-right: 2px solid rgba(200,150,46,0.4); }
+  .sudoku-cell[data-c="3"], .sudoku-cell[data-c="6"] { border-left: 2px solid rgba(200,150,46,0.4); }
+  .sudoku-cell[data-r="2"], .sudoku-cell[data-r="5"] { border-bottom: 2px solid rgba(200,150,46,0.4); }
+  .sudoku-cell[data-r="3"], .sudoku-cell[data-r="6"] { border-top: 2px solid rgba(200,150,46,0.4); }
   #sudoku-msg {
     font-family: 'Courier Prime', monospace;
     font-size: 0.7rem;
@@ -536,7 +650,207 @@
   }
   #hs-books:hover::after { opacity: 1; }
 
-  /* Gollum riddle modal */
+  /* Left bookshelf hotspot */
+  /* Left bookshelf — full column, easy to find */
+  #hs-library {
+    left: 0%;
+    top: 0%;
+    width: 21.5%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 5;
+  }
+  #hs-library:hover { background: rgba(200,150,46,0.06); outline: 1px solid rgba(200,150,46,0.15); }
+  #hs-library::after {
+    content: '📚 favourites';
+    position: absolute;
+    top: 40%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.62rem;
+    color: rgba(200,150,46,0.9);
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    background: rgba(0,0,0,0.75);
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+  }
+  #hs-library:hover::after { opacity: 1; }
+
+
+  /* Library modal */
+  .library-window {
+    background: #1a120a;
+    border: 1px solid rgba(200,150,46,0.15);
+    border-radius: 4px;
+    width: min(700px, 92vw);
+    max-height: 85vh;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.9);
+    animation: modalIn 0.3s ease;
+  }
+  .library-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(200,150,46,0.1);
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(0,0,0,0.3);
+    flex-shrink: 0;
+  }
+  .library-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: rgba(245,234,214,0.7);
+    font-style: italic;
+    letter-spacing: 0.1em;
+  }
+  .library-close {
+    cursor: pointer;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    color: rgba(200,150,46,0.4);
+    border: 1px solid rgba(200,150,46,0.15);
+    padding: 0.2rem 0.6rem;
+    transition: all 0.2s;
+  }
+  .library-close:hover { color: var(--gold); border-color: rgba(200,150,46,0.4); }
+  .library-grid {
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+  }
+  .library-grid::-webkit-scrollbar { width: 4px; }
+  .library-grid::-webkit-scrollbar-thumb { background: rgba(200,150,46,0.2); }
+  .book-card {
+    display: flex; flex-direction: column; gap: 0.4rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .book-card:hover { transform: translateY(-5px); }
+  .book-card:hover .book-spine { box-shadow: 3px 6px 16px rgba(0,0,0,0.7), inset 1px 0 0 rgba(255,255,255,0.15); }
+
+  /* Book note modal */
+  .book-note-backdrop {
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(0,0,0,0.85);
+    display: none; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .book-note-backdrop.open { display: flex; }
+  .book-note-card {
+    background: linear-gradient(150deg, #1a120a, #120d06);
+    border: 1px solid rgba(200,150,46,0.25);
+    border-radius: 4px;
+    width: min(480px, 90vw);
+    padding: 2rem;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    animation: modalIn 0.25s ease;
+    position: relative;
+  }
+  .book-note-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
+    color: rgba(245,234,214,0.9);
+    margin-bottom: 0.2rem;
+    font-style: italic;
+  }
+  .book-note-author {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.62rem;
+    color: rgba(200,150,46,0.5);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .book-note-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: rgba(220,205,180,0.8);
+    line-height: 1.8;
+    border-left: 2px solid rgba(200,150,46,0.2);
+    padding-left: 1rem;
+    font-style: italic;
+  }
+  .book-note-close {
+    position: absolute; top: 0.8rem; right: 1rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    color: rgba(200,150,46,0.3);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .book-note-close:hover { color: rgba(200,150,46,0.8); }
+  .book-spine {
+    height: 130px;
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0.5rem 0.3rem;
+    position: relative;
+    box-shadow: 2px 3px 8px rgba(0,0,0,0.5), inset 1px 0 0 rgba(255,255,255,0.1);
+  }
+  .book-spine-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.55rem;
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    line-height: 1.3;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    max-height: 110px;
+    overflow: hidden;
+  }
+  .book-author {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.52rem;
+    color: rgba(200,150,46,0.5);
+    letter-spacing: 0.05em;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  /* Mind map modal */
+  .mindmap-window {
+    background: #0d1117;
+    border: 1px solid rgba(100,160,220,0.15);
+    border-radius: 8px;
+    width: min(820px, 94vw);
+    max-height: 88vh;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.9);
+    animation: modalIn 0.3s ease;
+  }
+  .mindmap-header {
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid rgba(100,160,220,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(0,0,0,0.3);
+    flex-shrink: 0;
+  }
+  .mindmap-title {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    color: rgba(100,180,255,0.5);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .mindmap-close {
+    cursor: pointer;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    color: rgba(100,180,255,0.3);
+    border: 1px solid rgba(100,180,255,0.12);
+    padding: 0.2rem 0.6rem;
+    transition: all 0.2s;
+  }
+  .mindmap-close:hover { color: rgba(100,180,255,0.8); border-color: rgba(100,180,255,0.35); }
+  #mindmap-svg { width: 100%; flex: 1; min-height: 480px; }
   .gollum-backdrop {
     position: fixed; inset: 0; z-index: 200;
     background: rgba(0,0,0,0.92);
@@ -901,25 +1215,35 @@
 <div class="hotspot" id="hs-drawer2" data-label="Flatland ✦ solve sudoku first" onclick="tryDrawer(2)"></div>
 <div class="hotspot" id="hs-ipod" onclick="tryIPod()"></div>
 <div class="hotspot" id="hs-books" onclick="openBooks()"></div>
+<div id="hs-notepad" onclick="openContact()"></div>
+<div id="hs-library" onclick="openLibrary()"></div>
 
-<!-- HINT BAR -->
+<!-- HELP BUTTON -->
+<div id="help-btn" onclick="showHints()" title="help">?</div>
+
+<!-- HINT BAR — auto-hides after 5s -->
 <div id="hint-bar">
   <span class="hint-item">🖥 click the screen</span>
   <span class="hint-item">💡 lamp = light toggle</span>
+  <span class="hint-item">✉ notepad = contact</span>
   <span class="hint-item">🔒 drawers unlock after sudoku</span>
 </div>
 
-<!-- DEBUG TOGGLE -->
-<div id="debug-btn" onclick="toggleDebug()" style="
-  position:fixed; bottom:1rem; right:1rem; z-index:999;
-  font-family:'Courier Prime',monospace; font-size:0.6rem;
-  color:rgba(200,150,46,0.4); letter-spacing:0.15em;
-  cursor:pointer; padding:0.3rem 0.7rem;
-  border:1px solid rgba(200,150,46,0.15);
-  transition:all 0.2s;
-" onmouseover="this.style.color='rgba(200,150,46,0.8)'" 
-   onmouseout="this.style.color='rgba(200,150,46,0.4)'">debug</div>
 <div id="locked-msg">— solve the sudoku to unlock —</div>
+
+<!-- ===== CONTACT NOTE MODAL ===== -->
+<div class="modal-backdrop" id="modal-contact">
+  <div class="note-window">
+    <div class="note-lines">
+      <div class="note-title">Get in touch —</div>
+      <div class="note-line">✉ &nbsp;<a href="mailto:biancamariaboninsegni@gmail.com">biancamariaboninsegni@gmail.com</a></div>
+      <div class="note-line" style="margin-top:0;">🔗 &nbsp;<a href="https://www.linkedin.com/in/biancamariaboninsegni" target="_blank">linkedin.com/in/biancamariaboninsegni</a></div>
+      <div class="note-line" style="margin-top:0;">📍 &nbsp;Bologna · Milan · Zurich</div>
+      <div class="note-line" style="margin-top:28px; font-style:italic; color:rgba(60,40,10,0.45); font-size:0.85rem;">Always open to the right conversation.</div>
+    </div>
+    <div class="note-close" onclick="closeModal('modal-contact')">close ×</div>
+  </div>
+</div>
 
 <!-- ===== MAC MODAL ===== -->
 <div class="modal-backdrop" id="modal-mac">
@@ -932,6 +1256,11 @@
     </div>
     <div class="mac-body" style="padding:0;">
       <div id="mac-desktop">
+        <!-- Mac clock bar -->
+        <div style="grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; padding:0 0.5rem 0.5rem; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:0.5rem;">
+          <span id="mac-clock" style="font-family:'Courier Prime',monospace;font-size:0.65rem;color:rgba(245,234,214,0.45);letter-spacing:0.12em;"></span>
+          <span style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(200,150,46,0.3);letter-spacing:0.1em;">bianca.portfolio</span>
+        </div>
         <!-- Folder: About -->
         <div class="folder-icon" onclick="openAbout()">
           <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(200,150,46,0.15)" stroke="rgba(200,150,46,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(200,150,46,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(200,150,46,0.25)" stroke="rgba(200,150,46,0.4)" stroke-width="1"/></svg>
@@ -946,6 +1275,23 @@
         <div class="folder-icon" onclick="openJournals()">
           <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(160,100,180,0.15)" stroke="rgba(160,100,180,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(160,100,180,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(160,100,180,0.25)" stroke="rgba(160,100,180,0.4)" stroke-width="1"/></svg>
           <span class="folder-label">Journals</span>
+        </div>
+        <!-- Folder: Mind Map -->
+        <div class="folder-icon" onclick="closeModal('modal-mac'); openMindMap()">
+          <svg viewBox="0 0 52 52" fill="none">
+            <circle cx="26" cy="26" r="6" fill="rgba(80,180,220,0.25)" stroke="rgba(80,180,220,0.7)" stroke-width="1.5"/>
+            <circle cx="10" cy="12" r="4" fill="rgba(80,180,220,0.15)" stroke="rgba(80,180,220,0.5)" stroke-width="1"/>
+            <circle cx="42" cy="12" r="4" fill="rgba(80,180,220,0.15)" stroke="rgba(80,180,220,0.5)" stroke-width="1"/>
+            <circle cx="8" cy="38" r="4" fill="rgba(80,180,220,0.15)" stroke="rgba(80,180,220,0.5)" stroke-width="1"/>
+            <circle cx="44" cy="38" r="4" fill="rgba(80,180,220,0.15)" stroke="rgba(80,180,220,0.5)" stroke-width="1"/>
+            <circle cx="26" cy="46" r="3.5" fill="rgba(80,180,220,0.15)" stroke="rgba(80,180,220,0.5)" stroke-width="1"/>
+            <line x1="20" y1="22" x2="13" y2="15" stroke="rgba(80,180,220,0.4)" stroke-width="1"/>
+            <line x1="32" y1="22" x2="39" y2="15" stroke="rgba(80,180,220,0.4)" stroke-width="1"/>
+            <line x1="21" y1="30" x2="11" y2="35" stroke="rgba(80,180,220,0.4)" stroke-width="1"/>
+            <line x1="31" y1="30" x2="41" y2="35" stroke="rgba(80,180,220,0.4)" stroke-width="1"/>
+            <line x1="26" y1="32" x2="26" y2="42" stroke="rgba(80,180,220,0.4)" stroke-width="1"/>
+          </svg>
+          <span class="folder-label">Mind Map</span>
         </div>
         <!-- Sudoku -->
         <div class="folder-icon" style="cursor:default;">
@@ -967,30 +1313,40 @@
 
 <!-- ===== ABOUT MODAL ===== -->
 <div class="modal-backdrop" id="modal-about">
-  <div class="parchment-window">
+  <div class="parchment-window" style="width:min(720px,92vw);">
     <div class="parchment-header">
       <span class="parchment-title">About</span>
       <span class="parchment-close" onclick="closeModal('modal-about')">close ×</span>
     </div>
     <div class="parchment-body">
-      <div class="about-grid">
-        <img class="about-photo" id="about-photo" src="" alt="Bianca Maria Boninsegni">
+      <!-- Top: photo + intro side by side -->
+      <div style="display:flex; gap:1.5rem; align-items:flex-start; margin-bottom:1.5rem;">
+        <img id="about-photo" src="" alt="Bianca Maria Boninsegni" style="
+          width:120px; height:150px; object-fit:cover; object-position:center top;
+          border-radius:2px; flex-shrink:0;
+          filter:sepia(0.15) contrast(1.05);
+          border:2px solid rgba(100,70,20,0.2);
+        ">
         <div>
-          <p style="margin-bottom:1rem;">I am a specialist in Digital Marketing and Communications, currently focused on the intersection of heritage storytelling and luxury brand strategy. In 2023, I graduated from Università Cattolica in Milan with a degree in Economics and Management in Arts, Culture, and Communication — a journey that allowed me to merge my appreciation for history with my curiosity for economics.</p>
-          <p style="margin-bottom:1rem; font-style:italic;">Thank you for taking the time to check out my portfolio. I really hope you enjoy exploring it as much as I enjoyed building it. If you have any questions or comments, feel free to shoot me an email at biancamariaboninsegni@gmail.com.</p>
+          <p style="margin-bottom:0.8rem; font-size:1.05rem;">I am a specialist in Digital Marketing and Communications, focused on the intersection of heritage storytelling and luxury brand strategy.</p>
+          <p style="font-style:italic; color:#7a5530; font-size:0.9rem; margin-bottom:0.8rem;">biancamariaboninsegni@gmail.com</p>
+          <p style="font-size:0.9rem; color:#5a3a1a;">Bologna · Milan · Zurich</p>
         </div>
       </div>
-      <h3 style="font-size:1rem; letter-spacing:0.15em; color:#5a3a1a; margin: 1.8rem 0 0.8rem; font-weight:400; text-transform:uppercase; font-family:'Courier Prime',monospace; font-size:0.75rem;">About Me</h3>
-      <p style="margin-bottom:1rem;">I was born in Bologna, a city of porticos and streets that still carry the songs of Lucio Dalla — growing up in the shadow of San Luca and everyday bike rides down via Saragozza. Since my school years, I have been drawn to how history and culture speak to us, while never losing interest in geopolitics, economics, and how these fields are interconnected.</p>
-      <p style="margin-bottom:1rem;">I truly believe that curiosity is the engine that should drive everything. It is exactly this mindset that makes me so enthusiastic about lifelong learning. I once spent five long hours on a train from Geneva to Milan, listening to a PhD student in physics talk to me about "spin" and theoretical physics. I believe that even if a subject feels light-years away from our own world, it is always worth sitting down and listening.</p>
-      <p style="margin-bottom:1rem;">In 2018, I moved to Milan to begin my studies, eventually graduating with a thesis titled <em>Recontextualization of Cultural Heritage Between Aesthetics and Economics</em>. At its core, the thesis asked a question that still feels urgent: what happens to heritage when we measure it only by what it produces? Nussbaum argues that treating education as though its primary goal were economic productivity erodes our ability to think critically and engage with complex problems — that culture, in this framework, becomes systematically undervalued. Eliot arrives at an adjacent concern from a different direction: culture permeates religion, family life, education, manners, the economy, and setting it against commerce is a mistake. My thesis sat in the tension between these two positions, and tried to map what is lost — economically and humanistically — when we fail to account for heritage properly.</p>
-      <p style="margin-bottom:1rem;">I continued at Università Cattolica for my Master's, which led to an exchange semester in New Orleans. That period changed something in me. From the strategy of baseball to classrooms where ideas moved fast and disagreement was welcomed, the American way of thinking is still part of how I work. It confirmed what I already suspected: that every brand, like every city, needs a real story to last.</p>
-      <p style="margin-bottom:1rem;">My professional journey has been a masterclass in the luxury and auction worlds. I started by managing the allure of rare pieces in the Jewelry Department at Christie's, where I learned the history of jewelry, how to communicate its value, and how to engage with High-Net-Worth Individuals. This was followed by a significant chapter at Richemont in Geneva, focusing on brand ecosystems. Most recently, I joined the team at Campari, where I learned that a brand is never just a product: it's a ritual.</p>
-      <p style="margin-bottom:1.5rem;">Through these experiences, I found that marketing is the discipline of closing the gap between where a brand is and where it could live in someone's life — through creativity that has a reason behind it, communication that knows exactly who it is speaking to, and the conviction that a brand without a real story is, in the end, just a name.</p>
-      <h3 style="font-family:'Courier Prime',monospace; font-size:0.75rem; letter-spacing:0.15em; color:#5a3a1a; margin-bottom:0.8rem; font-weight:400; text-transform:uppercase;">My Creative DNA</h3>
-      <p style="margin-bottom:1rem;">Beyond my professional life, I have a variety of hobbies that keep my marketing instincts sharp. I treat every project with an eye for detail, drawing inspiration from the chromatic strength of Carlo Scarpa architecture, David Hockney and the emotional intensity of the Expressionist movement. I find that staying creative requires constant "multilingual" input from diverse sources.</p>
-      <p style="margin-bottom:1rem;">I am a voracious consumer of content, ranging from Carlo Rovelli, Mark Twain, Dino Buzzati, and Han Kang to the immersive historical storytelling of Professor Barbero. I also dedicate much of my free time to language learning — I am currently perfecting my Spanish and French through podcasts, videos, and music.</p>
-      <p style="font-style:italic; color:#5a3a1a;">Thanks for reading about me — I hope you enjoy exploring the rest of the portfolio.</p>
+
+      <div style="border-top:1px solid rgba(100,70,20,0.12); padding-top:1.2rem;">
+        <p style="margin-bottom:1rem;">I was born in Bologna — growing up in the shadow of San Luca and everyday bike rides down via Saragozza. Since school, I have been drawn to how history and culture speak to us, while never losing interest in geopolitics, economics, and how these fields are interconnected.</p>
+        <p style="margin-bottom:1rem;">I truly believe curiosity is the engine that should drive everything. I once spent five hours on a train from Geneva to Milan, listening to a PhD student in physics talk about spin and theoretical physics. Even if a subject feels light-years away, it is always worth sitting down and listening.</p>
+        <p style="margin-bottom:1rem;">In 2018, I moved to Milan to begin my studies, graduating with a thesis titled <em>Recontextualization of Cultural Heritage Between Aesthetics and Economics</em> — a question that still feels urgent: what happens to heritage when we measure it only by what it produces?</p>
+        <p style="margin-bottom:1rem;">My Master's led to an exchange semester in New Orleans that changed something in me. It confirmed what I already suspected: that every brand, like every city, needs a real story to last.</p>
+        <p style="margin-bottom:1.2rem;">My professional journey spans the luxury and auction worlds — Christie's, Richemont, Campari. Through these experiences, I found that marketing is the discipline of closing the gap between where a brand is and where it could live in someone's life.</p>
+      </div>
+
+      <div style="border-top:1px solid rgba(100,70,20,0.12); padding-top:1rem;">
+        <p style="font-family:'Courier Prime',monospace; font-size:0.65rem; letter-spacing:0.15em; color:#7a5530; text-transform:uppercase; margin-bottom:0.6rem;">Creative DNA</p>
+        <p style="font-size:0.95rem; color:#3a2510; line-height:1.7;">Carlo Scarpa · David Hockney · Expressionism · Carlo Rovelli · Mark Twain · Han Kang · Dino Buzzati · Barbero · Rosalía · French hip-hop.</p>
+        <p style="margin-top:0.8rem; font-style:italic; color:#7a5530; font-size:0.9rem;">Thanks for reading — I hope you enjoy exploring the rest of the portfolio.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -1147,6 +1503,57 @@
   </div>
 </div>
 
+<!-- ===== CURRENTLY READING MODAL ===== -->
+<div class="modal-backdrop" id="modal-reading">
+  <div class="library-window">
+    <div class="library-header">
+      <span class="library-title">Currently Reading</span>
+      <span class="library-close" onclick="closeModal('modal-reading')">close ×</span>
+    </div>
+    <div class="library-grid" id="reading-grid"></div>
+  </div>
+</div>
+
+<!-- ===== BOOK NOTE MODAL ===== -->
+<div class="book-note-backdrop" id="modal-book-note">
+  <div class="book-note-card">
+    <span class="book-note-close" onclick="closeBookNote()">×</span>
+    <div class="book-note-title" id="bnote-title"></div>
+    <div class="book-note-author" id="bnote-author"></div>
+    <div class="book-note-text" id="bnote-text"></div>
+  </div>
+</div>
+
+<!-- ===== LIBRARY MODAL ===== -->
+<div class="modal-backdrop" id="modal-library">
+  <div class="library-window">
+    <div class="library-header">
+      <span class="library-title">My Library — Favourites</span>
+      <span class="library-close" onclick="closeModal('modal-library')">close ×</span>
+    </div>
+    <div class="library-grid" id="library-grid"></div>
+  </div>
+</div>
+
+<!-- ===== MIND MAP MODAL ===== -->
+<div class="modal-backdrop" id="modal-mindmap">
+  <div class="mindmap-window">
+    <div class="mindmap-header">
+      <span class="mindmap-title">Connections — Skills & Interests</span>
+      <span class="mindmap-close" onclick="closeModal('modal-mindmap')">close ×</span>
+    </div>
+    <div id="mindmap-container" style="flex:1;overflow:hidden;position:relative;min-height:480px;cursor:grab;">
+  <svg id="mindmap-svg" viewBox="0 0 820 480" xmlns="http://www.w3.org/2000/svg"
+    style="width:100%;height:100%;display:block;"></svg>
+  <div style="position:absolute;bottom:0.8rem;right:0.8rem;display:flex;gap:0.4rem;">
+    <button onclick="mmZoom(1.2)" style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(100,180,255,0.5);background:rgba(0,0,0,0.4);border:1px solid rgba(100,180,255,0.15);padding:0.2rem 0.5rem;cursor:pointer;">+</button>
+    <button onclick="mmZoom(0.83)" style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(100,180,255,0.5);background:rgba(0,0,0,0.4);border:1px solid rgba(100,180,255,0.15);padding:0.2rem 0.5rem;cursor:pointer;">−</button>
+    <button onclick="mmReset()" style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(100,180,255,0.5);background:rgba(0,0,0,0.4);border:1px solid rgba(100,180,255,0.15);padding:0.2rem 0.5rem;cursor:pointer;">reset</button>
+  </div>
+</div>
+  </div>
+</div>
+
 <!-- ===== GOLLUM RIDDLE ===== -->
 <div class="gollum-backdrop" id="modal-gollum">
   <div class="gollum-box">
@@ -1187,7 +1594,7 @@
       <div class="ipod-wheel-center">▶︎</div>
     </div>
     <a class="ipod-open-spotify"
-       href="https://open.spotify.com/playlist/6UC705uByseErCRtzybq4C"
+       href="https://open.spotify.com/playlist/6zCID88oNjNv9zx6puDHKj"
        target="_blank">
       open in spotify ↗
     </a>
@@ -1229,19 +1636,16 @@ function updateClock() {
   const m = String(now.getMinutes()).padStart(2,'0');
   const s = String(now.getSeconds()).padStart(2,'0');
   const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  document.getElementById('clock').textContent = `${days[now.getDay()]} — ${h}:${m}:${s}`;
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const timeStr = `${days[now.getDay()]} — ${h}:${m}:${s}`;
+  document.getElementById('clock').textContent = timeStr;
+  const macClock = document.getElementById('mac-clock');
+  if (macClock) macClock.textContent = `${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]}  ${h}:${m}`;
 }
 updateClock(); setInterval(updateClock, 1000);
 
 // Enter
-function enterRoom() {
-  document.getElementById('curtain').classList.add('fade-out');
-  document.getElementById('room').classList.add('entered');
-  setTimeout(() => document.getElementById('curtain').style.display = 'none', 1500);
-  initRain();
-}
-
-// ---- DEBUG MODE ----
+// ---- DEBUG (internal only, no UI) ----
 let debugOn = false;
 function toggleDebug() {
   debugOn = !debugOn;
@@ -1352,23 +1756,33 @@ function tryIPod() {
   setTimeout(() => document.getElementById('gollum-input').focus(), 200);
 }
 
+let gollumAttempts = 0;
+const GOLLUM_FAILS = [
+  'not that, no no no... try again, precious.',
+  'stupid hobbitses! we knows it, we does!',
+  'gollum... gollum... think harder, precious.',
+  'it devours everything... everything... still not guessing?',
+  '...perhaps precious needs a hint. it eats mountains. it eats kings.',
+  'WE HATES IT. WE HATES IT FOREVER. but we gives one more chance.',
+];
+
 function checkRiddle() {
   const val = document.getElementById('gollum-input').value.trim().toLowerCase();
-  const answers = ['time', 'il tempo', 'tempo'];
+  const answers = ['time', 'il tempo', 'tempo', 'time.'];
   if (answers.includes(val)) {
     document.getElementById('gollum-input').classList.add('right');
     document.getElementById('gollum-error').textContent = '...yes, precious. time. always time.';
     document.getElementById('gollum-error').style.color = 'rgba(100,200,100,0.7)';
-    setTimeout(() => {
-      closeModal('modal-gollum');
-      openIPod();
-    }, 1200);
+    gollumAttempts = 0;
+    setTimeout(() => { closeModal('modal-gollum'); openIPod(); }, 1200);
   } else {
     const input = document.getElementById('gollum-input');
     input.classList.add('wrong');
-    document.getElementById('gollum-error').textContent = 'not that, no no no... try again, precious.';
+    const msg = GOLLUM_FAILS[Math.min(gollumAttempts, GOLLUM_FAILS.length-1)];
+    document.getElementById('gollum-error').textContent = msg;
     document.getElementById('gollum-error').style.color = 'rgba(255,100,80,0.7)';
-    setTimeout(() => { input.classList.remove('wrong'); input.value=''; }, 800);
+    gollumAttempts++;
+    setTimeout(() => { input.classList.remove('wrong'); input.value=''; }, 900);
   }
 }
 
@@ -1404,64 +1818,118 @@ function initRain() {
     startRain();
   } catch(e) {}
 }
+
 function startRain() {
   if (!audioCtx || rainOn) return;
   rainOn = true;
+  const now = audioCtx.currentTime;
+
+  // Master output
   const masterGain = audioCtx.createGain();
-  masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
-  masterGain.gain.linearRampToValueAtTime(0.18, audioCtx.currentTime + 3);
+  masterGain.gain.setValueAtTime(0, now);
+  masterGain.gain.linearRampToValueAtTime(0.28, now + 4);
   masterGain.connect(audioCtx.destination);
   rainNodes.push(masterGain);
 
-  // White noise buffer for rain
-  const bufSize = audioCtx.sampleRate * 4;
-  const buf = audioCtx.createBuffer(1, bufSize, audioCtx.sampleRate);
-  const data = buf.getChannelData(0);
-  for (let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1;
+  // ---- LAYER 1: Heavy rain — low rumbling downpour ----
+  const bufSize = audioCtx.sampleRate * 6;
+  const buf1 = audioCtx.createBuffer(2, bufSize, audioCtx.sampleRate);
+  for (let c=0;c<2;c++) {
+    const d = buf1.getChannelData(c);
+    for (let i=0;i<bufSize;i++) d[i] = Math.random() * 2 - 1;
+  }
+  const src1 = audioCtx.createBufferSource();
+  src1.buffer = buf1; src1.loop = true;
+  rainNodes.push(src1);
 
-  const source = audioCtx.createBufferSource();
-  source.buffer = buf; source.loop = true;
-  rainNodes.push(source);
+  // Low-pass for heavy rain body (deep, dense)
+  const lp1 = audioCtx.createBiquadFilter();
+  lp1.type = 'lowpass'; lp1.frequency.value = 900; lp1.Q.value = 0.5;
+  const lp2 = audioCtx.createBiquadFilter();
+  lp2.type = 'lowpass'; lp2.frequency.value = 400; lp2.Q.value = 0.3;
+  const g1 = audioCtx.createGain(); g1.gain.value = 0.55;
+  rainNodes.push(lp1, lp2, g1);
 
-  // Filter for rain character
-  const filter = audioCtx.createBiquadFilter();
-  filter.type = 'bandpass'; filter.frequency.value = 1800; filter.Q.value = 0.4;
-  rainNodes.push(filter);
+  // ---- LAYER 2: Mid-range rain — the detail, drops on glass ----
+  const buf2 = audioCtx.createBuffer(2, bufSize, audioCtx.sampleRate);
+  for (let c=0;c<2;c++) {
+    const d = buf2.getChannelData(c);
+    for (let i=0;i<bufSize;i++) d[i] = Math.random() * 2 - 1;
+  }
+  const src2 = audioCtx.createBufferSource();
+  src2.buffer = buf2; src2.loop = true;
+  rainNodes.push(src2);
 
-  // Second filter layer — heavier drops
-  const filter2 = audioCtx.createBiquadFilter();
-  filter2.type = 'highpass'; filter2.frequency.value = 600;
-  rainNodes.push(filter2);
+  const bp1 = audioCtx.createBiquadFilter();
+  bp1.type = 'bandpass'; bp1.frequency.value = 1400; bp1.Q.value = 0.6;
+  const g2 = audioCtx.createGain(); g2.gain.value = 0.25;
+  rainNodes.push(bp1, g2);
 
-  // Subtle reverb via convolver impulse
+  // ---- LAYER 3: Distant wind rumble ----
+  const buf3 = audioCtx.createBuffer(1, audioCtx.sampleRate * 8, audioCtx.sampleRate);
+  const d3 = buf3.getChannelData(0);
+  // Smoother wind — filtered pink noise approximation
+  let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+  for (let i=0;i<buf3.length;i++) {
+    const wn = Math.random() * 2 - 1;
+    b0=0.99886*b0+wn*0.0555179; b1=0.99332*b1+wn*0.0750759;
+    b2=0.96900*b2+wn*0.1538520; b3=0.86650*b3+wn*0.3104856;
+    b4=0.55000*b4+wn*0.5329522; b5=-0.7616*b5-wn*0.0168980;
+    d3[i] = (b0+b1+b2+b3+b4+b5+b6+wn*0.5362)*0.11;
+    b6 = wn*0.115926;
+  }
+  const src3 = audioCtx.createBufferSource();
+  src3.buffer = buf3; src3.loop = true;
+  const lp3 = audioCtx.createBiquadFilter();
+  lp3.type = 'lowpass'; lp3.frequency.value = 200; lp3.Q.value = 0.4;
+  const g3 = audioCtx.createGain(); g3.gain.value = 0.5;
+  rainNodes.push(src3, lp3, g3);
+
+  // ---- SHARED REVERB — large room, like a house in a storm ----
   const convolver = audioCtx.createConvolver();
-  const irLen = audioCtx.sampleRate * 1.5;
+  const irLen = audioCtx.sampleRate * 3;
   const irBuf = audioCtx.createBuffer(2, irLen, audioCtx.sampleRate);
   for (let c=0;c<2;c++) {
     const d = irBuf.getChannelData(c);
-    for (let i=0;i<irLen;i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/irLen, 2.5);
+    for (let i=0;i<irLen;i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/irLen, 1.8);
   }
   convolver.buffer = irBuf;
-  rainNodes.push(convolver);
+  const revGain = audioCtx.createGain(); revGain.gain.value = 0.4;
+  const dryGain = audioCtx.createGain(); dryGain.gain.value = 0.6;
+  rainNodes.push(convolver, revGain, dryGain);
 
-  const reverbGain = audioCtx.createGain(); reverbGain.gain.value = 0.35;
-  const dryGain = audioCtx.createGain(); dryGain.gain.value = 0.65;
-  rainNodes.push(reverbGain, dryGain);
+  // Wire everything
+  src1.connect(lp1); lp1.connect(lp2); lp2.connect(g1);
+  g1.connect(dryGain); g1.connect(convolver);
+  src2.connect(bp1); bp1.connect(g2);
+  g2.connect(dryGain); g2.connect(convolver);
+  src3.connect(lp3); lp3.connect(g3);
+  g3.connect(dryGain); g3.connect(convolver);
+  convolver.connect(revGain);
+  dryGain.connect(masterGain);
+  revGain.connect(masterGain);
 
-  source.connect(filter); filter.connect(filter2);
-  filter2.connect(dryGain); dryGain.connect(masterGain);
-  filter2.connect(convolver); convolver.connect(reverbGain); reverbGain.connect(masterGain);
-  source.start();
+  src1.start(); src2.start(); src3.start();
 
-  // Start thunder loop
+  // Subtle volume swell — rain varies in intensity
+  function swellRain() {
+    if (!audioCtx) return;
+    const t = audioCtx.currentTime;
+    const target = 0.22 + Math.random() * 0.12;
+    masterGain.gain.linearRampToValueAtTime(target, t + 4 + Math.random() * 6);
+    setTimeout(swellRain, (5000 + Math.random() * 8000));
+  }
+  setTimeout(swellRain, 6000);
+
+  // Start distant thunder loop
   scheduleThunder();
 }
 
-// ---- THUNDER & LIGHTNING ----
+// ---- RELAXING THUNDER ----
 function scheduleThunder() {
   if (!audioCtx) return;
-  // Random interval between 8 and 22 seconds
-  const delay = 8000 + Math.random() * 14000;
+  // Distant, gentle — every 15–35 seconds
+  const delay = 15000 + Math.random() * 20000;
   setTimeout(() => {
     if (!audioCtx) return;
     triggerThunder();
@@ -1470,88 +1938,82 @@ function scheduleThunder() {
 }
 
 function triggerThunder() {
-  // --- LIGHTNING FLASH ---
+  // Soft, distant lightning — barely lights the room
   const flash = document.getElementById('lightning-flash');
-  // Sequence: pre-flash, main flash, brief dark, secondary flash, fade
-  flash.style.transition = 'none';
-  flash.style.opacity = '0.15';
+  const intensity = 0.08 + Math.random() * 0.18; // much gentler
+  flash.style.transition = 'opacity 0.06s';
+  flash.style.opacity = String(intensity);
   setTimeout(() => {
-    flash.style.transition = 'opacity 0.04s';
-    flash.style.opacity = '0.7';
-    setTimeout(() => {
-      flash.style.opacity = '0.0';
+    flash.style.transition = 'opacity 0.5s';
+    flash.style.opacity = '0';
+    // Occasional second flicker
+    if (Math.random() > 0.5) {
       setTimeout(() => {
-        // Secondary weaker flash
-        flash.style.transition = 'opacity 0.03s';
-        flash.style.opacity = '0.35';
+        flash.style.transition = 'opacity 0.05s';
+        flash.style.opacity = String(intensity * 0.5);
         setTimeout(() => {
-          flash.style.transition = 'opacity 0.3s';
+          flash.style.transition = 'opacity 0.6s';
           flash.style.opacity = '0';
-        }, 60);
-      }, 80);
-    }, 55);
-  }, 30);
+        }, 50);
+      }, 100);
+    }
+  }, 80);
 
-  // --- THUNDER SOUND ---
-  // Slight delay after lightning (distance simulation: 0.3–2s)
-  const soundDelay = 300 + Math.random() * 1700;
+  // Thunder — distant, low, long rumble
+  const soundDelay = 800 + Math.random() * 3000; // farther away
   setTimeout(() => {
     if (!audioCtx) return;
-
     const now = audioCtx.currentTime;
-    const thunderGain = audioCtx.createGain();
-    thunderGain.gain.setValueAtTime(0, now);
-    thunderGain.gain.linearRampToValueAtTime(0.9 + Math.random() * 0.3, now + 0.015);
-    thunderGain.gain.exponentialRampToValueAtTime(0.4, now + 0.3);
-    thunderGain.gain.exponentialRampToValueAtTime(0.15, now + 1.2);
-    thunderGain.gain.exponentialRampToValueAtTime(0.001, now + 3.5 + Math.random() * 2);
-    thunderGain.connect(audioCtx.destination);
 
-    // Thunder = layered noise burst at very low frequency
-    const bufLen = audioCtx.sampleRate * 5;
-    const tbuf = audioCtx.createBuffer(1, bufLen, audioCtx.sampleRate);
-    const tdata = tbuf.getChannelData(0);
-    for (let i = 0; i < bufLen; i++) tdata[i] = Math.random() * 2 - 1;
+    const tGain = audioCtx.createGain();
+    // Softer, relaxing — like thunder far away over hills
+    const vol = 0.25 + Math.random() * 0.2;
+    tGain.gain.setValueAtTime(0, now);
+    tGain.gain.linearRampToValueAtTime(vol, now + 0.08);
+    tGain.gain.exponentialRampToValueAtTime(vol * 0.6, now + 0.8);
+    tGain.gain.exponentialRampToValueAtTime(vol * 0.2, now + 2.5);
+    tGain.gain.exponentialRampToValueAtTime(0.001, now + 5 + Math.random() * 3);
+    tGain.connect(audioCtx.destination);
 
-    const tsource = audioCtx.createBufferSource();
-    tsource.buffer = tbuf;
-
-    // Low rumble filter
-    const rumble = audioCtx.createBiquadFilter();
-    rumble.type = 'lowpass';
-    rumble.frequency.value = 180 + Math.random() * 80;
-    rumble.Q.value = 0.8;
-
-    // Sub-bass emphasis
-    const bass = audioCtx.createBiquadFilter();
-    bass.type = 'peaking';
-    bass.frequency.value = 60 + Math.random() * 40;
-    bass.gain.value = 12;
-    bass.Q.value = 1.2;
-
-    // Long reverb for thunder
-    const tConv = audioCtx.createConvolver();
-    const tIrLen = audioCtx.sampleRate * 4;
-    const tIrBuf = audioCtx.createBuffer(2, tIrLen, audioCtx.sampleRate);
-    for (let c = 0; c < 2; c++) {
-      const d = tIrBuf.getChannelData(c);
-      for (let i = 0; i < tIrLen; i++) {
-        d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / tIrLen, 1.2);
+    // Pink-noise based thunder (warmer than white noise)
+    const tLen = audioCtx.sampleRate * 7;
+    const tBuf = audioCtx.createBuffer(2, tLen, audioCtx.sampleRate);
+    for (let c=0;c<2;c++) {
+      const td = tBuf.getChannelData(c);
+      let tb0=0,tb1=0,tb2=0;
+      for (let i=0;i<tLen;i++) {
+        const wn = Math.random()*2-1;
+        tb0 = 0.997*tb0 + 0.003*wn;
+        tb1 = 0.985*tb1 + 0.015*wn;
+        tb2 = 0.950*tb2 + 0.050*wn;
+        td[i] = (tb0 + tb1 + tb2) * 0.5;
       }
     }
+    const tSrc = audioCtx.createBufferSource();
+    tSrc.buffer = tBuf;
+
+    // Very low-pass for distant rumble
+    const tLP = audioCtx.createBiquadFilter();
+    tLP.type = 'lowpass'; tLP.frequency.value = 120 + Math.random() * 60; tLP.Q.value = 0.5;
+
+    // Big reverb tail — thunder echoing over landscape
+    const tConv = audioCtx.createConvolver();
+    const tIrLen = audioCtx.sampleRate * 5;
+    const tIrBuf = audioCtx.createBuffer(2, tIrLen, audioCtx.sampleRate);
+    for (let c=0;c<2;c++) {
+      const d = tIrBuf.getChannelData(c);
+      for (let i=0;i<tIrLen;i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/tIrLen, 0.9);
+    }
     tConv.buffer = tIrBuf;
+    const tRevG = audioCtx.createGain(); tRevG.gain.value = 0.7;
 
-    const tRevGain = audioCtx.createGain();
-    tRevGain.gain.value = 0.6;
-
-    tsource.connect(rumble);
-    rumble.connect(bass);
-    bass.connect(thunderGain);
-    bass.connect(tConv);
-    tConv.connect(tRevGain);
-    tRevGain.connect(thunderGain);
-    tsource.start(now);
-    tsource.stop(now + 5.5);
+    tSrc.connect(tLP);
+    tLP.connect(tGain);
+    tLP.connect(tConv);
+    tConv.connect(tRevG);
+    tRevG.connect(tGain);
+    tSrc.start(now);
+    tSrc.stop(now + 8);
   }, soundDelay);
 }
 
@@ -1563,11 +2025,16 @@ function toggleLamp() {
 }
 
 // Modals
-function openMac() { document.getElementById('modal-mac').classList.add('open'); }
-function openAbout() { closeModal('modal-mac'); document.getElementById('modal-about').classList.add('open'); }
-function openExperiences() { closeModal('modal-mac'); document.getElementById('modal-exp').classList.add('open'); }
-function openJournals() { closeModal('modal-mac'); document.getElementById('modal-journals').classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function setTitle(sub) {
+  document.title = sub ? 'Bianca · ' + sub : 'Bianca Maria Boninsegni';
+}
+function openMac() { document.getElementById('modal-mac').classList.add('open'); setTitle('Desktop'); }
+function openAbout() { closeModal('modal-mac'); document.getElementById('modal-about').classList.add('open'); setTitle('About'); }
+function openExperiences() { closeModal('modal-mac'); document.getElementById('modal-exp').classList.add('open'); setTitle('Experiences'); }
+function openJournals() { closeModal('modal-mac'); document.getElementById('modal-journals').classList.add('open'); setTitle('Journals'); }
+function openLibrary() { const g=document.getElementById('library-grid'); if(!g.children.length) buildLibrary(g); document.getElementById('modal-library').classList.add('open'); setTitle('Library'); }
+function openMindMap() { document.getElementById('modal-mindmap').classList.add('open'); setTitle('Mind Map'); setTimeout(buildMindMap,80); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); setTitle(null); }
 
 document.querySelectorAll('.modal-backdrop').forEach(el => {
   el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
@@ -1592,11 +2059,35 @@ function downloadCV() {
 
 // ---- SUDOKU ----
 let sudokuSolved = false;
-const puzzle = [[0,3,0,1],[1,0,3,0],[0,1,0,3],[3,0,1,0]];
-const solution = [[4,3,2,1],[1,2,3,4],[2,1,4,3],[3,4,1,2]];
+const puzzle = [
+  [5,3,0, 0,7,0, 0,0,0],
+  [6,0,0, 1,9,5, 0,0,0],
+  [0,9,8, 0,0,0, 0,6,0],
+
+  [8,0,0, 0,6,0, 0,0,3],
+  [4,0,0, 8,0,3, 0,0,1],
+  [7,0,0, 0,2,0, 0,0,6],
+
+  [0,6,0, 0,0,0, 2,8,0],
+  [0,0,0, 4,1,9, 0,0,5],
+  [0,0,0, 0,8,0, 0,7,9],
+];
+const solution = [
+  [5,3,4, 6,7,8, 9,1,2],
+  [6,7,2, 1,9,5, 3,4,8],
+  [1,9,8, 3,4,2, 5,6,7],
+
+  [8,5,9, 7,6,1, 4,2,3],
+  [4,2,6, 8,5,3, 7,9,1],
+  [7,1,3, 9,2,4, 8,5,6],
+
+  [9,6,1, 5,3,7, 2,8,4],
+  [2,8,7, 4,1,9, 6,3,5],
+  [3,4,5, 2,8,6, 1,7,9],
+];
 function buildSudoku() {
   const grid = document.getElementById('sudoku-grid'); grid.innerHTML = '';
-  for (let r=0;r<4;r++) for (let c=0;c<4;c++) {
+  for (let r=0;r<9;r++) for (let c=0;c<9;c++) {
     const cell = document.createElement('input');
     cell.type='text'; cell.maxLength=1; cell.classList.add('sudoku-cell');
     cell.dataset.r=r; cell.dataset.c=c;
@@ -1606,18 +2097,20 @@ function buildSudoku() {
   }
 }
 function onSudokuInput(e) {
-  const cell=e.target, r=+cell.dataset.r, c=+cell.dataset.c;
+  const cell=e.target;
+  const r=+cell.dataset.r, cv=+cell.dataset.c;
   const val=parseInt(cell.value);
   cell.classList.remove('wrong','correct');
-  if (isNaN(val)||val<1||val>4){cell.value='';return;}
-  cell.classList.add(val===solution[r][c]?'correct':'wrong');
+  if (isNaN(val)||val<1||val>9){cell.value='';return;}
+  cell.classList.add(val===solution[r][cv]?'correct':'wrong');
   checkSudoku();
 }
 function checkSudoku() {
   let ok=true;
   document.querySelectorAll('.sudoku-cell').forEach(cell=>{
     const r=+cell.dataset.r,c=+cell.dataset.c;
-    if (!puzzle[r][c] && parseInt(cell.value)!==solution[r][c]) ok=false;
+    const rv=+cell.dataset.r, cv=+cell.dataset.c;
+    if (!puzzle[rv][cv] && parseInt(cell.value)!==solution[rv][cv]) ok=false;
   });
   if (ok) { sudokuSolved=true; document.getElementById('sudoku-msg').textContent='✓ drawers unlocked'; document.getElementById('sudoku-hint').textContent=''; }
 }
@@ -1631,6 +2124,380 @@ function tryDrawer(n) {
   if (n===2) startFLAnimation();
 }
 buildSudoku();
+
+// Sudoku bypass — after 30s a subtle skip appears
+setTimeout(() => {
+  const hint = document.getElementById('sudoku-hint');
+  if (hint && !sudokuSolved) {
+    hint.innerHTML = 'complete to unlock · <span style="cursor:pointer;color:rgba(200,150,46,0.5);text-decoration:underline" onclick="bypassSudoku()">skip</span>';
+  }
+}, 30000);
+
+function bypassSudoku() {
+  sudokuSolved = true;
+  document.getElementById('sudoku-msg').textContent = '✓ drawers unlocked';
+  document.getElementById('sudoku-hint').textContent = '';
+}
+
+// Contact modal
+function openContact() {
+  document.getElementById('modal-contact').classList.add('open');
+}
+
+// Hint bar recall
+function showHints() {
+  const bar = document.getElementById('hint-bar');
+  bar.classList.remove('hidden');
+  clearTimeout(window._hintTimer);
+  window._hintTimer = setTimeout(() => bar.classList.add('hidden'), 4000);
+}
+
+// Currently reading
+const READING_NOW = [
+  { title: 'La realtà non è come ci appare', author: 'Rovelli', color: '#1a2a4a', text: '#c8d8f5' },
+  { title: 'Othello', author: 'Shakespeare', color: '#1a1a1a', text: '#e8e8e8' },
+  { title: 'Storia dell&#39;arte moderna', author: 'Argan', color: '#2a1a0a', text: '#f5e0c8' },
+];
+
+function openReadingNow() {
+  const grid = document.getElementById('reading-grid');
+  if (!grid.children.length) {
+    grid.innerHTML = '';
+    READING_NOW.forEach(b => {
+      const card = document.createElement('div');
+      card.className = 'book-card';
+      const spine = document.createElement('div');
+      spine.className = 'book-spine';
+      spine.style.background = b.color;
+      spine.style.position = 'relative';
+      const spineText = document.createElement('div');
+      spineText.className = 'book-spine-text';
+      spineText.style.color = b.text;
+      spineText.textContent = b.title;
+      const dot = document.createElement('div');
+      dot.style.cssText = 'position:absolute;top:4px;right:4px;width:6px;height:6px;background:rgba(200,150,46,0.8);border-radius:50%;';
+      spine.appendChild(spineText); spine.appendChild(dot);
+      const author = document.createElement('div');
+      author.className = 'book-author';
+      author.textContent = b.author;
+      card.appendChild(spine); card.appendChild(author);
+      grid.appendChild(card);
+    });
+    // Add a note
+    const note = document.createElement('div');
+    note.style.cssText = 'grid-column:1/-1;font-family:"EB Garamond",serif;font-style:italic;color:rgba(200,150,46,0.5);font-size:0.85rem;padding:1rem 0 0;text-align:center;';
+    note.textContent = '— currently on the desk —';
+    grid.appendChild(note);
+  }
+  document.getElementById('modal-reading').classList.add('open');
+}
+
+// ---- LIBRARY ----
+const BOOK_NOTES = {
+  'Il senso delle cose': { author: 'Feynman', note: '"I can live with doubt and uncertainty and not knowing. I think it is much more interesting to live not knowing than to have answers that might be wrong." Feynman teaches you that uncertainty is not weakness — it is the only honest position.' },
+  'La favola di Amore e Psiche': { author: 'Apuleius', note: '"Night fell, and after love&#39;s skirmishes and struggles he dropped into deep slumber." The elegance and softness of Apuleius will never cease to enchant me.' },
+  'The Great Gatsby': { author: 'Fitzgerald', note: 'The green light. The parties nobody remembers attending. The beautiful shirts. Fitzgerald understood that longing is more vivid than possession.' },
+  'Norwegian Wood': { author: 'Murakami', note: 'Murakami taught me that loss does not resolve — it becomes part of the furniture of who you are. Quiet, devastating, perfect.' },
+  'Ithaca': { author: 'Cavafy', note: 'The poem that opens this portfolio. Keep Ithaca always in your mind. The journey itself is the point.' },
+  'Il deserto dei Tartari': { author: 'Buzzati', note: 'The book I keep returning to during periods of waiting. Drogo waits his whole life for the enemy. I understand him more every year.' },
+  'The Order of Time': { author: 'Rovelli', note: 'Physics written like poetry. Changed how I think about the present moment as the only thing that actually exists.' },
+  'Flatland': { author: 'Abbott', note: 'The square lifted into three dimensions weeps — not from fear but recognition. The whole time, there was more. That sentence lives in me.' },
+  'Non per profitto': { author: 'Nussbaum', note: 'The book my thesis was in conversation with. What happens to culture when we measure it only by what it produces?' },
+  'A Room of One&#39;s Own': { author: 'Woolf', note: '&quot;A woman must have money and a room of her own if she is to write fiction." Still true. Still urgent.' },
+  'My Brilliant Friend': { author: 'Ferrante', note: 'Ferrante writes female friendship as it actually is — fierce, ambivalent, necessary, impossible to escape.' },
+};
+
+const BOOKS = [
+  { title: 'The Great Gatsby', author: 'Fitzgerald', color: '#2a5f4f', text: '#c8e6c9' },
+  { title: 'The Lion, the Witch and the Wardrobe', author: 'Lewis', color: '#5c3d1e', text: '#f5e6cc' },
+  { title: 'Inferno', author: 'Dante', color: '#8b1a1a', text: '#ffd0d0' },
+  { title: 'Perfume', author: 'Süskind', color: '#1a3a5c', text: '#c8dff5' },
+  { title: 'Norwegian Wood', author: 'Murakami', color: '#3d2b1a', text: '#f0d5b0' },
+  { title: 'Le lettere di Berlicche', author: 'Lewis', color: '#4a2060', text: '#dfc8f5' },
+  { title: 'La voce a te dovuta', author: 'Salinas', color: '#1a4a3a', text: '#c8f0e0' },
+  { title: 'Non per profitto', author: 'Nussbaum', color: '#3a3a1a', text: '#f0f0c8' },
+  { title: "L&#39;uomo che scambiò sua moglie", author: 'Sacks', color: '#2a1a4a', text: '#d0c8f5' },
+  { title: 'Le Metamorfosi', author: 'Ovidio', color: '#5c2a1a', text: '#f5d0c8' },
+  { title: 'Animal Farm / 1984', author: 'Orwell', color: '#1c1c1c', text: '#e8e8e8' },
+  { title: 'The Iliad / The Odyssey', author: 'Homer', color: '#5a4a1a', text: '#f5e8c8' },
+  { title: 'The Witches', author: 'Dahl', color: '#1a3a1a', text: '#c8f0c8' },
+  { title: 'The Neverending Story', author: 'Ende', color: '#1a2a5c', text: '#c8d8f5' },
+  { title: 'La boutique del mistero', author: 'Buzzati', color: '#3a1a3a', text: '#f0c8f0' },
+  { title: 'Spoon River Anthology', author: 'Masters', color: '#4a3a1a', text: '#f5e8c8' },
+  { title: 'The Order of Time', author: 'Rovelli', color: '#1a3a5a', text: '#c8e0f5' },
+  { title: 'Flatland', author: 'Abbott', color: '#1a1a3a', text: '#c8c8f5' },
+  { title: 'Confusione di stelle', author: 'Merini', color: '#5a1a3a', text: '#f5c8e0' },
+  { title: 'Il deserto dei Tartari', author: 'Buzzati', color: '#3a2a1a', text: '#f0e0c8' },
+  { title: 'Of Mice and Men', author: 'Steinbeck', color: '#2a3a1a', text: '#d8f0c8' },
+  { title: 'The Stranger', author: 'Camus', color: '#2a2a2a', text: '#e8e8e8' },
+  { title: 'My Brilliant Friend', author: 'Ferrante', color: '#5c3a1a', text: '#f5e0c8' },
+  { title: 'Ithaca', author: 'Cavafy', color: '#1a4a5a', text: '#c8f0f5' },
+  { title: 'Cronaca di una morte annunciata', author: 'García Márquez', color: '#4a1a1a', text: '#f5c8c8' },
+  { title: 'Nella notte più buia', author: 'Han Kang', color: '#1a1a2a', text: '#d0d0f5' },
+  { title: 'Carrie', author: 'King', color: '#2a0a0a', text: '#f0c8c8' },
+  { title: 'Lezioni americane', author: 'Calvino', color: '#1a3a2a', text: '#c8f0d8' },
+  { title: 'A Room of One\'s Own', author: 'Woolf', color: '#3a1a4a', text: '#eac8f5' },
+  { title: 'Brave New World', author: 'Huxley', color: '#1a2a3a', text: '#c8d8f0' },
+  { title: 'La favola di Amore e Psiche', author: 'Apuleius', color: '#5a3a1a', text: '#f5dcc8' },
+  { title: 'Orlando Furioso', author: 'Ariosto', color: '#4a1a2a', text: '#f5c8d0' },
+];
+
+// openLibrary now defined above
+
+function buildLibrary(grid) {
+  grid.innerHTML = '';
+  BOOKS.forEach(b => {
+    const hasNote = BOOK_NOTES[b.title];
+    const card = document.createElement('div');
+    card.className = 'book-card';
+    card.title = hasNote ? 'Click to read my note' : b.title;
+    if (hasNote) card.onclick = () => openBookNote(b.title);
+
+    const spine = document.createElement('div');
+    spine.className = 'book-spine';
+    spine.style.background = b.color;
+
+    const spineText = document.createElement('div');
+    spineText.className = 'book-spine-text';
+    spineText.style.color = b.text;
+    spineText.textContent = b.title;
+    spine.appendChild(spineText);
+
+    // Gold dot if has personal note
+    if (hasNote) {
+      const dot = document.createElement('div');
+      dot.style.cssText = 'position:absolute;bottom:5px;right:5px;width:5px;height:5px;background:rgba(200,150,46,0.9);border-radius:50%;';
+      spine.appendChild(dot);
+    }
+
+    const authorEl = document.createElement('div');
+    authorEl.className = 'book-author';
+    authorEl.textContent = b.author;
+
+    card.appendChild(spine);
+    card.appendChild(authorEl);
+    grid.appendChild(card);
+  });
+}
+
+function openBookNote(title) {
+  const note = BOOK_NOTES[title];
+  if (!note) return;
+  document.getElementById('bnote-title').textContent = title;
+  document.getElementById('bnote-author').textContent = note.author;
+  document.getElementById('bnote-text').textContent = note.note;
+  document.getElementById('modal-book-note').classList.add('open');
+}
+
+function closeBookNote() {
+  document.getElementById('modal-book-note').classList.remove('open');
+}
+
+// ---- MIND MAP ----
+
+function buildMindMap() {
+  const svg = document.getElementById('mindmap-svg');
+  if (svg.children.length > 0) return;
+
+  // Larger canvas so nothing clips
+  const W = 960, H = 600;
+  const cx = W / 2, cy = H / 2;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+  const nodes = [
+    { id: 'center', label: 'Bianca', x: cx, y: cy, r: 42, main: true },
+    // Main branches — pulled inward so sub-nodes have room
+    { id: 'dma', label: 'Digital Marketing\n& Analytics', x: cx - 210, y: cy - 130, r: 52, branch: true, color: '#2a5f8a' },
+    { id: 'lux', label: 'Luxury &\nAuction World',       x: cx + 210, y: cy - 130, r: 52, branch: true, color: '#7a3a1a' },
+    { id: 'css', label: 'Content Strategy\n& Storytelling', x: cx - 210, y: cy + 130, r: 52, branch: true, color: '#2a5a3a' },
+    { id: 'pm',  label: 'Project\nManagement',           x: cx + 210, y: cy + 130, r: 52, branch: true, color: '#4a2a6a' },
+    // Sub-nodes DMA — top-left quadrant
+    { id: 'ga4',  label: 'GA4',      x: cx - 340, y: cy - 220, r: 26, sub: true, parent: 'dma', color: '#1a4a6a' },
+    { id: 'meta', label: 'Meta Ads', x: cx - 390, y: cy - 120, r: 26, sub: true, parent: 'dma', color: '#1a4a6a' },
+    { id: 'sap',  label: 'SAP',      x: cx - 320, y: cy - 30,  r: 26, sub: true, parent: 'dma', color: '#1a4a6a' },
+    { id: 'crm',  label: 'CRM',      x: cx - 160, y: cy - 240, r: 26, sub: true, parent: 'dma', color: '#1a4a6a' },
+    // Sub-nodes LUX — top-right quadrant
+    { id: 'christie',  label: "Christie's", x: cx + 340, y: cy - 220, r: 28, sub: true, parent: 'lux', color: '#5a2a0a' },
+    { id: 'richemont', label: 'Richemont',  x: cx + 390, y: cy - 110, r: 28, sub: true, parent: 'lux', color: '#5a2a0a' },
+    { id: 'hnwi',      label: 'HNWI',       x: cx + 320, y: cy - 10,  r: 26, sub: true, parent: 'lux', color: '#5a2a0a' },
+    // Sub-nodes CSS — bottom-left quadrant
+    { id: 'heritage',  label: 'Heritage',  x: cx - 340, y: cy + 220, r: 28, sub: true, parent: 'css', color: '#1a4a2a' },
+    { id: 'campari',   label: 'Campari',   x: cx - 390, y: cy + 110, r: 28, sub: true, parent: 'css', color: '#1a4a2a' },
+    { id: 'editorial', label: 'Editorial', x: cx - 160, y: cy + 240, r: 26, sub: true, parent: 'css', color: '#1a4a2a' },
+    // Sub-nodes PM — bottom-right quadrant
+    { id: 'homofaber', label: 'Homo Faber\n50k visitors', x: cx + 340, y: cy + 220, r: 32, sub: true, parent: 'pm', color: '#3a1a5a' },
+    { id: 'coord',     label: '40+ countries',            x: cx + 390, y: cy + 110, r: 28, sub: true, parent: 'pm', color: '#3a1a5a' },
+    { id: 'events',    label: 'Events',                   x: cx + 180, y: cy + 240, r: 26, sub: true, parent: 'pm', color: '#3a1a5a' },
+  ];
+
+  const edges = [
+    ['center','dma'],['center','lux'],['center','css'],['center','pm'],
+    ['dma','ga4'],['dma','meta'],['dma','sap'],['dma','crm'],
+    ['lux','christie'],['lux','richemont'],['lux','hnwi'],
+    ['css','heritage'],['css','campari'],['css','editorial'],
+    ['pm','homofaber'],['pm','coord'],['pm','events'],
+  ];
+
+  const byId = {};
+  nodes.forEach(n => byId[n.id] = n);
+
+  let html = `<defs>
+    <radialGradient id="mg-center" cx="50%" cy="40%"><stop offset="0%" stop-color="#c8962e"/><stop offset="100%" stop-color="#8a5a10"/></radialGradient>
+    <radialGradient id="mg-dma" cx="50%" cy="40%"><stop offset="0%" stop-color="#3a8abf"/><stop offset="100%" stop-color="#1a4a6a"/></radialGradient>
+    <radialGradient id="mg-lux" cx="50%" cy="40%"><stop offset="0%" stop-color="#bf6a3a"/><stop offset="100%" stop-color="#7a3a1a"/></radialGradient>
+    <radialGradient id="mg-css" cx="50%" cy="40%"><stop offset="0%" stop-color="#3abf6a"/><stop offset="100%" stop-color="#1a5a3a"/></radialGradient>
+    <radialGradient id="mg-pm" cx="50%" cy="40%"><stop offset="0%" stop-color="#8a4abf"/><stop offset="100%" stop-color="#4a1a7a"/></radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>`;
+
+  // Edges
+  edges.forEach(([a, b]) => {
+    const na = byId[a], nb = byId[b];
+    const isSub = nb.sub;
+    html += `<line x1="${na.x}" y1="${na.y}" x2="${nb.x}" y2="${nb.y}"
+      stroke="${isSub ? 'rgba(150,150,180,0.25)' : 'rgba(200,150,46,0.4)'}"
+      stroke-width="${isSub ? 1 : 2.5}"
+      stroke-dasharray="${isSub ? '5 4' : 'none'}"/>`;
+  });
+
+  // Nodes
+  nodes.forEach(n => {
+    let fill, textColor, fontSize;
+    if (n.main)          { fill='url(#mg-center)'; textColor='#fff'; fontSize=14; }
+    else if (n.id==='dma') { fill='url(#mg-dma)'; textColor='#c8e8ff'; fontSize=10; }
+    else if (n.id==='lux') { fill='url(#mg-lux)'; textColor='#ffe8c8'; fontSize=10; }
+    else if (n.id==='css') { fill='url(#mg-css)'; textColor='#c8ffe8'; fontSize=10; }
+    else if (n.id==='pm')  { fill='url(#mg-pm)';  textColor='#e8c8ff'; fontSize=10; }
+    else { fill=n.color||'#222'; textColor='rgba(220,230,255,0.85)'; fontSize=8.5; }
+
+    const glow = (n.main||n.branch) ? 'filter="url(#glow)"' : '';
+    html += `<circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${fill}"
+      stroke="${n.main ? 'rgba(200,150,46,0.7)' : n.branch ? 'rgba(150,180,220,0.35)' : 'rgba(150,150,180,0.2)'}"
+      stroke-width="${n.main ? 2.5 : 1}" ${glow} data-id="${n.id}" style="cursor:pointer"/>`;
+
+    const lines = n.label.split('\n');
+    const lineH = fontSize * 1.35;
+    const startY = n.y - ((lines.length-1)*lineH)/2;
+    lines.forEach((line, i) => {
+      html += `<text x="${n.x}" y="${startY + i*lineH + fontSize*0.38}"
+        text-anchor="middle" fill="${textColor}"
+        font-family="'EB Garamond', serif" font-size="${fontSize}"
+        font-style="${n.main ? 'italic' : 'normal'}"
+        pointer-events="none">${line}</text>`;
+    });
+  });
+
+  svg.innerHTML = html;
+
+  // Animate in
+  svg.querySelectorAll('circle').forEach((circ, i) => {
+    circ.style.opacity = '0';
+    circ.style.transition = `opacity 0.4s ease ${i*0.04}s`;
+    setTimeout(() => circ.style.opacity = '1', 20);
+  });
+
+  // Tooltip
+  const nodeTooltips = {
+    'center':    'Marketing & Communications Specialist · Bologna · Zurich',
+    'dma':       'GA4 Certified · Meta Business Manager · SAP · CRM Analytics',
+    'lux':       'Christie&#39;s · Richemont · HNWI Communication · Auction Management',
+    'css':       'Heritage Storytelling · Brand Voice · Editorial Calendars · Campari',
+    'pm':        'Homo Faber 2024 · 50,000+ visitors · 40+ countries coordinated',
+    'ga4':       'Google Analytics 4 — certified',
+    'meta':      'Meta Business Manager — paid social',
+    'sap':       'SAP — operational reporting',
+    'crm':       'CRM strategy & audience segmentation',
+    'christie':  'Jewels & Watches — La Dolce Vita · €1.77M auction',
+    'richemont': 'Michelangelo Foundation · Young Ambassadors program',
+    'hnwi':      'High-Net-Worth Individual market intelligence',
+    'heritage':  'Futurist legacy · brand archives · cultural memory',
+    'campari':   'Brand custodian · editorial calendar · sensory branding',
+    'editorial': 'Content strategy · newsletters · social narratives',
+    'homofaber': 'Homo Faber 2024 — Geneva — 50,000 visitors',
+    'coord':     '40+ countries international coordination',
+    'events':    'Institutional events · corporate delegations',
+  };
+
+  const tooltip = document.createElementNS('http://www.w3.org/2000/svg','g');
+  tooltip.id = 'mm-tooltip'; tooltip.style.pointerEvents='none'; tooltip.style.opacity='0'; tooltip.style.transition='opacity 0.2s';
+  const ttRect = document.createElementNS('http://www.w3.org/2000/svg','rect');
+  ttRect.setAttribute('rx','4'); ttRect.setAttribute('fill','rgba(8,16,32,0.94)');
+  ttRect.setAttribute('stroke','rgba(100,160,220,0.35)'); ttRect.setAttribute('stroke-width','1');
+  const ttText = document.createElementNS('http://www.w3.org/2000/svg','text');
+  ttText.setAttribute('fill','rgba(200,225,255,0.9)'); ttText.setAttribute('font-size','9');
+  ttText.setAttribute('font-family',"'EB Garamond', serif");
+  tooltip.appendChild(ttRect); tooltip.appendChild(ttText); svg.appendChild(tooltip);
+
+  svg.querySelectorAll('circle[data-id]').forEach(circ => {
+    const id = circ.getAttribute('data-id');
+    const tip = nodeTooltips[id];
+    const node = byId[id];
+    if (!tip || !node) return;
+    circ.addEventListener('mouseenter', () => {
+      ttText.textContent = tip;
+      const tLen = tip.length * 5.2 + 24;
+      const tx = Math.min(Math.max(node.x - tLen/2, 4), W - tLen - 4);
+      const rawTy = node.y - node.r - 30;
+      const ty = rawTy < 4 ? node.y + node.r + 6 : rawTy;
+      ttRect.setAttribute('x', tx); ttRect.setAttribute('y', ty);
+      ttRect.setAttribute('width', tLen); ttRect.setAttribute('height', 20);
+      ttText.setAttribute('x', tx+10); ttText.setAttribute('y', ty+14);
+      tooltip.style.opacity='1';
+      circ.setAttribute('r', String(node.r * 1.07));
+    });
+    circ.addEventListener('mouseleave', () => {
+      tooltip.style.opacity='0';
+      circ.setAttribute('r', String(node.r));
+    });
+  });
+}
+
+
+// Hint bar auto-hide after 5s
+function enterRoom() {
+  document.getElementById('curtain').classList.add('fade-out');
+  document.getElementById('room').classList.add('entered');
+  setTimeout(() => document.getElementById('curtain').style.display = 'none', 1500);
+  initRain();
+  window._hintTimer = setTimeout(() => {
+    const bar = document.getElementById('hint-bar');
+    if (bar) bar.classList.add('hidden');
+  }, 5000);
+}
+
+// Mind map zoom/pan
+let mmScale = 1, mmX = 0, mmY = 0, mmDragging = false, mmDragStart = {x:0,y:0};
+function mmApplyTransform() {
+  const svg = document.getElementById('mindmap-svg');
+  if (svg) svg.style.transform = `translate(${mmX}px,${mmY}px) scale(${mmScale})`;
+}
+function mmZoom(factor) {
+  mmScale = Math.min(Math.max(mmScale * factor, 0.5), 2.5);
+  mmApplyTransform();
+}
+function mmReset() { mmScale=1; mmX=0; mmY=0; mmApplyTransform(); }
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('mindmap-container');
+  if (!container) return;
+  container.addEventListener('mousedown', e => {
+    mmDragging=true; mmDragStart={x:e.clientX-mmX, y:e.clientY-mmY};
+    container.style.cursor='grabbing';
+  });
+  document.addEventListener('mousemove', e => {
+    if (!mmDragging) return;
+    mmX=e.clientX-mmDragStart.x; mmY=e.clientY-mmDragStart.y;
+    mmApplyTransform();
+  });
+  document.addEventListener('mouseup', () => {
+    mmDragging=false;
+    const c2=document.getElementById('mindmap-container');
+    if(c2) c2.style.cursor='grab';
+  });
+  container.addEventListener('wheel', e => {
+    e.preventDefault();
+    mmZoom(e.deltaY < 0 ? 1.1 : 0.9);
+  }, {passive:false});
+});
 
 // ======== THREE.JS: WHITE HOLES ========
 let whRenderer, whScene, whCamera, whAnimId;
