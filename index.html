@@ -1397,98 +1397,13 @@
           <div id="sudoku-hint">complete to unlock the drawers</div>
         </div>
         <!-- CV download removed -->
-        <!-- Easter egg: Matrix pill — hidden, appears after 45s -->
-        <div id="matrix-pill-icon" class="folder-icon" onclick="openMatrixPill()" style="grid-column:1/-1; opacity:1; pointer-events:auto; transition: opacity 1.5s ease; margin-top:0.5rem;">
-          <svg viewBox="0 0 52 26" fill="none" width="52" height="26">
-            <rect x="1" y="1" width="50" height="24" rx="12" fill="rgba(180,20,20,0.15)" stroke="rgba(200,30,30,0.5)" stroke-width="1.2"/>
-            <circle cx="13" cy="13" r="9" fill="rgba(200,30,30,0.25)" stroke="rgba(220,50,50,0.6)" stroke-width="1"/>
-            <circle cx="39" cy="13" r="9" fill="rgba(30,30,30,0.3)" stroke="rgba(80,80,80,0.4)" stroke-width="1"/>
-            <text x="13" y="17" text-anchor="middle" font-family="Courier Prime, monospace" font-size="7" fill="rgba(255,80,80,0.9)">R</text>
-            <text x="39" y="17" text-anchor="middle" font-family="Courier Prime, monospace" font-size="7" fill="rgba(180,180,180,0.6)">B</text>
-          </svg>
-          <span class="folder-label" style="font-size:0.55rem; color:rgba(200,30,30,0.5);">choose wisely</span>
-        </div>
-      </div>
+              </div>
     </div>
   </div>
 </div>
 
-<!-- ===== MATRIX MODAL ===== -->
-<div class="modal-backdrop" id="modal-matrix">
-  <div style="
-    background:#000;
-    border:1px solid rgba(0,180,0,0.25);
-    border-radius:4px;
-    width:min(580px,94vw);
-    max-height:90vh;
-    overflow:hidden;
-    display:flex; flex-direction:column;
-    box-shadow: 0 0 80px rgba(0,180,0,0.12), 0 0 2px rgba(0,255,0,0.3);
-    animation: modalIn 0.3s ease;
-    font-family:'Courier Prime',monospace;
-  ">
-    <div style="padding:1rem 1.5rem; border-bottom:1px solid rgba(0,180,0,0.1); display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
-      <span style="color:rgba(0,200,0,0.6); font-size:0.6rem; letter-spacing:0.25em; text-transform:uppercase;">MORPHEUS://secure_channel</span>
-      <span onclick="closeModal('modal-matrix')" style="cursor:pointer; color:rgba(0,180,0,0.35); font-size:0.65rem; border:1px solid rgba(0,180,0,0.15); padding:0.2rem 0.6rem; transition:all 0.2s;" onmouseover="this.style.color='rgba(0,255,0,0.8)';this.style.borderColor='rgba(0,255,0,0.4)'" onmouseout="this.style.color='rgba(0,180,0,0.35)';this.style.borderColor='rgba(0,180,0,0.15)'">exit ×</span>
-    </div>
 
-    <!-- Phase 1: typing -->
-    <div id="matrix-phase-1" style="padding:2rem; overflow-y:auto; color:rgba(0,200,0,0.85); line-height:1.9; font-size:0.9rem; flex:1;">
-      <p id="matrix-typing" style="white-space:pre-wrap; min-height:9rem;"></p>
-      <div id="matrix-choice" style="display:none; margin-top:2.5rem; gap:3rem; justify-content:center; align-items:center; flex-direction:column;">
-        <div style="display:flex; gap:2rem; justify-content:center;">
-          <div onclick="takePill('red')" style="cursor:pointer; padding:0.7rem 2.2rem; border:1px solid rgba(200,30,30,0.5); color:rgba(220,60,60,0.9); font-size:0.75rem; letter-spacing:0.2em; transition:all 0.3s; border-radius:30px; background:rgba(180,20,20,0.08); text-transform:uppercase;" onmouseover="this.style.background='rgba(180,20,20,0.22)';this.style.boxShadow='0 0 20px rgba(200,30,30,0.3)'" onmouseout="this.style.background='rgba(180,20,20,0.08)';this.style.boxShadow='none'">Red pill</div>
-          <div onclick="takePill('blue')" style="cursor:pointer; padding:0.7rem 2.2rem; border:1px solid rgba(40,80,200,0.5); color:rgba(80,130,230,0.9); font-size:0.75rem; letter-spacing:0.2em; transition:all 0.3s; border-radius:30px; background:rgba(20,40,160,0.08); text-transform:uppercase;" onmouseover="this.style.background='rgba(20,40,160,0.22)';this.style.boxShadow='0 0 20px rgba(40,80,200,0.3)'" onmouseout="this.style.background='rgba(20,40,160,0.08)';this.style.boxShadow='none'">Blue pill</div>
-        </div>
-        <p style="font-size:0.6rem; color:rgba(0,180,0,0.3); letter-spacing:0.15em; margin-top:0.5rem;">choose wisely</p>
-      </div>
-    </div>
-
-    <!-- Phase 2: RED pill — the real Bianca -->
-    <div id="matrix-phase-red" style="display:none; flex:1; overflow-y:auto; padding:2rem;">
-      <div style="color:rgba(220,60,60,0.8); font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:1.5rem; border-bottom:1px solid rgba(200,30,30,0.15); padding-bottom:0.8rem;">// the real world</div>
-      <p style="color:rgba(0,220,0,0.9); font-size:0.85rem; line-height:1.9; margin-bottom:1.2rem;">
-        I am not a job title.<br>
-        I am not a list of achievements.<br>
-        I am not the sum of three anchor experiences.
-      </p>
-      <p style="color:rgba(0,180,0,0.7); font-size:0.82rem; line-height:1.9; margin-bottom:1.2rem;">
-        I am someone who reads Flatland and thinks about how we mistake our dimension for the only one.<br>
-        Who speaks four languages and finds the words that don't translate most interesting.<br>
-        Who once crossed the Atlantic alone for a semester in New Orleans, because discomfort is where things begin.<br>
-        Who cried at a Homo Faber exhibition not because it was beautiful, but because someone's hands had made it.
-      </p>
-      <p style="color:rgba(0,200,0,0.6); font-size:0.8rem; line-height:1.9; margin-bottom:1.8rem;">
-        What I want — truly — is to work on things that deserve to exist.<br>
-        Brands with a conscience. Stories that last. Rooms where craft is still the point.<br>
-        And I want to do it from Zurich, where precision is a form of poetry.
-      </p>
-      <div style="border-top:1px solid rgba(0,180,0,0.12); padding-top:1rem; font-size:0.62rem; color:rgba(0,180,0,0.35); letter-spacing:0.15em;">
-        — <span style="color:rgba(0,220,0,0.5);">bianca maria boninsegni</span> · not for the algorithm
-      </div>
-      <div style="margin-top:1.5rem; text-align:center;">
-        <span onclick="closeModal('modal-matrix')" style="cursor:pointer; font-size:0.62rem; color:rgba(0,180,0,0.35); border:1px solid rgba(0,180,0,0.15); padding:0.3rem 1rem; letter-spacing:0.15em; transition:all 0.2s;" onmouseover="this.style.color='rgba(0,255,0,0.7)'" onmouseout="this.style.color='rgba(0,180,0,0.35)'">return to the room</span>
-      </div>
-    </div>
-
-    <!-- Phase 3: BLUE pill — gentle farewell -->
-    <div id="matrix-phase-blue" style="display:none; flex:1; overflow-y:auto; padding:2.5rem; text-align:center;">
-      <p style="color:rgba(80,130,230,0.7); font-size:0.9rem; line-height:2; font-style:italic; margin-bottom:2rem;">
-        The story ends.<br><br>
-        You wake up in your bed.<br>
-        The portfolio was excellent.<br>
-        The rain was pleasant.<br>
-        The room felt like someone lived in it.<br><br>
-        <span style="font-size:0.75rem; color:rgba(80,130,230,0.4); letter-spacing:0.1em;">— and that was enough.</span>
-      </p>
-      <div style="margin-top:1rem;">
-        <span onclick="closeModal('modal-matrix')" style="cursor:pointer; font-size:0.62rem; color:rgba(80,130,230,0.3); border:1px solid rgba(80,130,230,0.15); padding:0.3rem 1rem; letter-spacing:0.15em; transition:all 0.2s;" onmouseover="this.style.color='rgba(80,130,230,0.7)'" onmouseout="this.style.color='rgba(80,130,230,0.3)'">close your eyes</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== ABOUT MODAL ===== -->
+<!-- ===== ABOUT MODAL<!-- ===== ABOUT MODAL ===== -->
 <div class="modal-backdrop" id="modal-about">
   <div class="parchment-window" style="width:min(720px,92vw);">
     <div class="parchment-header">
