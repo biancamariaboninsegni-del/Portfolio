@@ -289,9 +289,9 @@
   /* Lamp: in image roughly x:63%-78%, y:55%-85% */
   #hs-lamp {
     left: calc(21.875% + 0.63 * 56.25%);
-    top: 55%;
-    width: calc(0.15 * 56.25%);
-    height: 28%;
+    top: 56%;
+    width: calc(0.12 * 56.25%);
+    height: 22%;
   }
   /* Left drawer: recalibrated */
   #hs-drawer1 {
@@ -424,14 +424,12 @@
   .sudoku-cell.wrong { background: rgba(255,80,60,0.15); border-color: rgba(255,80,60,0.5); }
   .sudoku-cell.correct { background: rgba(40,200,64,0.1); }
   /* 6x6 box borders — 2x3 boxes */
-  .sudoku-cell[data-c="1"] { border-right: 2px solid rgba(200,150,46,0.4); }
-  .sudoku-cell[data-c="2"] { border-left: 2px solid rgba(200,150,46,0.4); }
-  .sudoku-cell[data-c="3"] { border-right: 2px solid rgba(200,150,46,0.4); }
-  .sudoku-cell[data-c="4"] { border-left: 2px solid rgba(200,150,46,0.4); }
-  .sudoku-cell[data-r="1"] { border-bottom: 2px solid rgba(200,150,46,0.4); }
-  .sudoku-cell[data-r="2"] { border-top: 2px solid rgba(200,150,46,0.4); }
-  .sudoku-cell[data-r="3"] { border-bottom: 2px solid rgba(200,150,46,0.4); }
-  .sudoku-cell[data-r="4"] { border-top: 2px solid rgba(200,150,46,0.4); }
+  .sudoku-cell[data-c="2"] { border-right: 2px solid rgba(200,150,46,0.5); }
+  .sudoku-cell[data-c="3"] { border-left: 2px solid rgba(200,150,46,0.5); }
+  .sudoku-cell[data-r="1"] { border-bottom: 2px solid rgba(200,150,46,0.5); }
+  .sudoku-cell[data-r="2"] { border-top: 2px solid rgba(200,150,46,0.5); }
+  .sudoku-cell[data-r="3"] { border-bottom: 2px solid rgba(200,150,46,0.5); }
+  .sudoku-cell[data-r="4"] { border-top: 2px solid rgba(200,150,46,0.5); }
   #sudoku-msg {
     font-family: 'Courier Prime', monospace;
     font-size: 0.7rem;
@@ -687,9 +685,9 @@
 
   /* iPod hotspot — recalibrated from debug screenshot */
   #hs-ipod {
-    left: 25.70%;
-    top: 76.80%;
-    width: 6.02%;
+    left: calc(21.875% + 0.27 * 56.25%);
+    top: 77%;
+    width: calc(0.08 * 56.25%);
     height: 9%;
     cursor: pointer;
   }
@@ -715,10 +713,10 @@
 
   /* Books hotspot — green + bordeaux books on right of desk */
   #hs-books {
-    left: 58.72%;
-    top: 72%;
-    width: 7.88%;
-    height: 21%;
+    left: calc(21.875% + 0.56 * 56.25%);
+    top: 70%;
+    width: calc(0.11 * 56.25%);
+    height: 13%;
     cursor: pointer;
   }
   #hs-books:hover { background: rgba(200,150,46,0.08); outline: 1px solid rgba(200,150,46,0.2); }
@@ -744,10 +742,10 @@
   /* Left bookshelf hotspot */
   #hs-library {
     position: fixed;
-    left: 0%;
-    top: 0%;
-    width: 21.5%;
-    height: 100%;
+    left: calc(21.875% + 0.0 * 56.25%);
+    top: 5%;
+    width: calc(0.20 * 56.25%);
+    height: 90%;
     cursor: pointer;
     z-index: 5;
   }
@@ -792,8 +790,6 @@
   /* Library dot — same subtle style, mid-left bookshelf */
   #dot-library {
     width: 6px; height: 6px;
-    left: 9%;
-    top: 42%;
     animation-delay: 0s;
   }
 
@@ -1338,15 +1334,56 @@
 <!-- HELP BUTTON -->
 <div id="help-btn" onclick="showHints()" title="help">?</div>
 
-<!-- DISCOVERY DOTS — pulsing pointers to clickable areas -->
-<div class="hotspot-dot" id="dot-library" title="Hidden Library"></div>
-<div class="hotspot-dot" id="dot-imac" style="left:calc(21.875% + 0.49*56.25%); top:63%; animation-delay:0.4s;"></div>
-<div class="hotspot-dot" id="dot-lamp" style="left:calc(21.875% + 0.70*56.25%); top:57%; animation-delay:0.8s;"></div>
-<div class="hotspot-dot" id="dot-ipod" style="left:28.3%; top:79%; animation-delay:1.2s;"></div>
-<div class="hotspot-dot" id="dot-books" style="left:62%; top:75%; animation-delay:1.6s;"></div>
-<div class="hotspot-dot" id="dot-notepad" style="left:calc(21.875% + 0.35*56.25%); top:79%; animation-delay:2s;"></div>
-<div class="hotspot-dot" id="dot-drawer1" style="left:35.5%; top:86%; animation-delay:0.6s;"></div>
-<div class="hotspot-dot" id="dot-drawer2" style="left:63%; top:86%; animation-delay:1.0s;"></div>
+<!-- DEBUG COORD OVERLAY -->
+<div id="debug-overlay" style="
+  display:none; position:fixed; inset:0; z-index:999;
+  pointer-events:none;
+">
+  <!-- Crosshair lines -->
+  <div id="dbg-hline" style="position:absolute;left:0;right:0;height:1px;background:rgba(255,80,80,0.7);pointer-events:none;"></div>
+  <div id="dbg-vline" style="position:absolute;top:0;bottom:0;width:1px;background:rgba(255,80,80,0.7);pointer-events:none;"></div>
+  <!-- Coord label -->
+  <div id="dbg-label" style="
+    position:absolute;
+    font-family:monospace; font-size:13px; font-weight:bold;
+    color:#fff; background:rgba(0,0,0,0.85);
+    padding:4px 8px; border-radius:3px;
+    border:1px solid rgba(255,80,80,0.6);
+    pointer-events:none; white-space:nowrap;
+  "></div>
+  <!-- Selection box -->
+  <div id="dbg-box" style="position:absolute;border:2px dashed rgba(255,200,0,0.8);background:rgba(255,200,0,0.08);pointer-events:none;display:none;"></div>
+  <!-- Instructions -->
+  <div style="position:fixed;top:1rem;left:50%;transform:translateX(-50%);
+    font-family:monospace;font-size:12px;color:#fff;background:rgba(0,0,0,0.8);
+    padding:6px 14px;border-radius:4px;border:1px solid rgba(255,80,80,0.4);
+    pointer-events:none;text-align:center;">
+    🔴 DEBUG MODE — hover to see coords · click+drag to measure a box · press D to exit
+  </div>
+</div>
+<div id="dbg-toggle" onclick="toggleDebugCoords()" style="
+  position:fixed; bottom:3.5rem; right:1.2rem; z-index:9;
+  font-family:'Courier Prime',monospace; font-size:0.58rem;
+  color:rgba(200,150,46,0.25); cursor:pointer;
+  width:22px; height:22px;
+  border:1px solid rgba(200,150,46,0.12); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.4); transition:all 0.3s;
+" title="debug coordinates" onmouseover="this.style.color='rgba(200,150,46,0.7)'" onmouseout="this.style.color='rgba(200,150,46,0.25)'">d</div>
+
+<!-- DISCOVERY DOTS — precise object positions -->
+<!-- Bookshelf left: a book spine mid-left shelf -->
+<div class="hotspot-dot" id="dot-library" style="left:26.54%; top:34.18%;"></div>
+<!-- iMac screen center -->
+<div class="hotspot-dot" id="dot-imac" style="left:49.89%; top:60.55%; animation-delay:0.3s;"></div>
+<!-- Dictionaries: books on right of desk -->
+<div class="hotspot-dot" id="dot-books" style="left:60.33%; top:73.73%; animation-delay:0.6s;"></div>
+<!-- iPod: device left of desk -->
+<div class="hotspot-dot" id="dot-ipod" style="left:34.07%; top:83.50%; animation-delay:0.9s;"></div>
+<!-- Left drawer handle -->
+<div class="hotspot-dot" id="dot-drawer1" style="left:32.75%; top:94.04%; animation-delay:1.2s;"></div>
+<!-- Right drawer handle -->
+<div class="hotspot-dot" id="dot-drawer2" style="left:63.73%; top:94.04%; animation-delay:1.5s;"></div>
 
 <!-- HINT BAR — auto-hides after 5s -->
 <div id="hint-bar">
@@ -1363,7 +1400,7 @@
   <div class="note-window">
     <div class="note-lines">
       <div class="note-title">Get in touch —</div>
-      <div class="note-line">✉ &nbsp;<a href="/cdn-cgi/l/email-protection#1f7d767e717c7e727e6d767e7d707176716c7a7871765f78727e7673317c7072"><span class="__cf_email__" data-cfemail="d7b5beb6b9b4b6bab6a5beb6b5b8b9beb9a4b2b0b9be97b0bab6bebbf9b4b8ba">[email&#160;protected]</span></a></div>
+      <div class="note-line">✉ &nbsp;<a href="/cdn-cgi/l/email-protection#bedcd7dfd0dddfd3dfccd7dfdcd1d0d7d0cddbd9d0d7fed9d3dfd7d290ddd1d3"><span class="__cf_email__" data-cfemail="214348404f42404c40534840434e4f484f5244464f4861464c40484d0f424e4c">[email&#160;protected]</span></a></div>
       <div class="note-line" style="margin-top:0;">🔗 &nbsp;<a href="https://www.linkedin.com/in/biancamariaboninsegni" target="_blank">linkedin.com/in/biancamariaboninsegni</a></div>
       <div class="note-line" style="margin-top:0;">📍 &nbsp;Bologna · Milan · Zurich</div>
       <div class="note-line" style="margin-top:28px; font-style:italic; color:rgba(60,40,10,0.45); font-size:0.85rem;">Always open to the right conversation.</div>
@@ -1454,7 +1491,7 @@
   <div class="parchment-window" style="width:min(720px,92vw);">
     <div class="parchment-header">
       <span class="parchment-title">About</span>
-      <span class="parchment-close" onclick="closeModal('modal-about')">close ×</span>
+      <span class="parchment-close" onclick="closeModal('modal-about'); openMac()">close ×</span>
     </div>
     <div class="parchment-body">
       <!-- Top: photo + intro side by side -->
@@ -1500,7 +1537,7 @@
   <div class="parchment-window" style="width:min(820px,96vw); max-height:90vh;">
     <div class="parchment-header">
       <span class="parchment-title">Experiences</span>
-      <span class="parchment-close" onclick="closeModal('modal-exp')">close ×</span>
+      <span class="parchment-close" onclick="closeModal('modal-exp'); openMac()">close ×</span>
     </div>
     <div class="parchment-body">
       <div class="journal-tabs">
@@ -1548,7 +1585,7 @@
 <div class="modal-backdrop" id="modal-journals">
   <div class="mac-window" style="background:linear-gradient(135deg,#f5eed8,#ede5cc,#f2ebd6); border:1px solid rgba(100,70,20,0.2);">
     <div class="mac-titlebar" style="background:#e8dfc0; border-bottom:1px solid rgba(100,70,20,0.15);">
-      <div class="mac-dot red" onclick="closeModal('modal-journals')"></div>
+      <div class="mac-dot red" onclick="closeModal('modal-journals'); openMac()"></div>
       <div class="mac-dot yellow"></div>
       <div class="mac-dot green"></div>
       <span class="mac-title" style="color:rgba(80,55,20,0.5);">Journals</span>
@@ -1707,9 +1744,11 @@
     <div style="text-align:center; margin-bottom:2.5rem; max-width:520px;">
       <div style="font-family:'Courier Prime',monospace; font-size:0.62rem; color:rgba(200,150,46,0.45); letter-spacing:0.35em; text-transform:uppercase; margin-bottom:0.8rem;">— restricted access —</div>
       <div style="font-family:'EB Garamond',serif; font-size:clamp(1.4rem,3vw,2rem); color:rgba(245,234,214,0.85); letter-spacing:0.08em; font-style:italic; margin-bottom:0.6rem;">Hidden Library</div>
-      <div style="font-family:'EB Garamond',serif; font-size:0.95rem; color:rgba(245,234,214,0.4); line-height:1.7;">
-        The shelves are locked. Prove you think like a scholar.<br>
-        <span style="font-size:0.8rem; color:rgba(200,150,46,0.5);">Execute the Scholar's Mate to enter.</span>
+      <div style="font-family:'EB Garamond',serif; font-size:0.95rem; color:rgba(245,234,214,0.5); line-height:1.8; max-width:480px; text-align:center;">
+        To enter, you must execute the <span style="color:rgba(200,150,46,0.85); font-style:normal;">Scholar's Mate</span> —<br>
+        a four-move checkmate first recorded in<br>
+        <span style="font-size:0.82rem; color:rgba(200,150,46,0.55); font-style:normal; letter-spacing:0.03em;">Francis Beale's <em>The Royall Game of Chesse-Play</em>, 1656.</span><br>
+        <span style="font-size:0.85rem; color:rgba(245,234,214,0.3);">You are White. Play these four moves in order.</span>
       </div>
     </div>
 
@@ -1757,17 +1796,31 @@
 
       <!-- Move guide -->
       <div style="
-        background:rgba(200,150,46,0.06); border:1px solid rgba(200,150,46,0.15);
-        border-radius:4px; padding:0.9rem 1.4rem; max-width:400px; width:100%;
+        background:rgba(200,150,46,0.07); border:1px solid rgba(200,150,46,0.2);
+        border-radius:4px; padding:1.1rem 1.6rem; max-width:440px; width:100%;
       ">
-        <div style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(200,150,46,0.5);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.7rem;text-align:center;">Scholar's Mate — 4 moves</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem 1.5rem;">
-          <div style="font-family:'EB Garamond',serif;font-size:0.88rem;color:rgba(245,234,214,0.65);">1. Pawn <span style="color:rgba(200,150,46,0.8);">e2 → e4</span></div>
-          <div style="font-family:'EB Garamond',serif;font-size:0.88rem;color:rgba(245,234,214,0.65);">2. Bishop <span style="color:rgba(200,150,46,0.8);">f1 → c4</span></div>
-          <div style="font-family:'EB Garamond',serif;font-size:0.88rem;color:rgba(245,234,214,0.65);">3. Queen <span style="color:rgba(200,150,46,0.8);">d1 → h5</span></div>
-          <div style="font-family:'EB Garamond',serif;font-size:0.88rem;color:rgba(245,234,214,0.65);">4. Queen <span style="color:rgba(200,150,46,0.8);">h5 → f7</span> ✦</div>
+        <div style="font-family:'Courier Prime',monospace;font-size:0.62rem;color:rgba(200,150,46,0.6);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;text-align:center;">Your four moves</div>
+        <div style="display:flex;flex-direction:column;gap:0.55rem;">
+          <div style="font-family:'EB Garamond',serif;font-size:0.98rem;color:rgba(245,234,214,0.8);">
+            <span style="color:rgba(200,150,46,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">01 ·</span>
+            Move your <strong style="color:rgba(245,234,214,0.9);">Pawn</strong> from <span style="color:rgba(200,150,46,0.9);font-family:'Courier Prime',monospace;">e2 → e4</span>
+          </div>
+          <div style="font-family:'EB Garamond',serif;font-size:0.98rem;color:rgba(245,234,214,0.8);">
+            <span style="color:rgba(200,150,46,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">02 ·</span>
+            Move your <strong style="color:rgba(245,234,214,0.9);">Bishop</strong> from <span style="color:rgba(200,150,46,0.9);font-family:'Courier Prime',monospace;">f1 → c4</span>
+          </div>
+          <div style="font-family:'EB Garamond',serif;font-size:0.98rem;color:rgba(245,234,214,0.8);">
+            <span style="color:rgba(200,150,46,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">03 ·</span>
+            Move your <strong style="color:rgba(245,234,214,0.9);">Queen</strong> from <span style="color:rgba(200,150,46,0.9);font-family:'Courier Prime',monospace;">d1 → h5</span>
+          </div>
+          <div style="font-family:'EB Garamond',serif;font-size:0.98rem;color:rgba(245,234,214,0.8);">
+            <span style="color:rgba(200,150,46,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">04 ·</span>
+            Move your <strong style="color:rgba(245,234,214,0.9);">Queen</strong> from <span style="color:rgba(200,150,46,0.9);font-family:'Courier Prime',monospace;">h5 → f7</span> — checkmate ✦
+          </div>
         </div>
-        <div style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(245,234,214,0.2);margin-top:0.7rem;text-align:center;letter-spacing:0.08em;">click piece · click destination · black responds automatically</div>
+        <div style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(245,234,214,0.2);margin-top:1rem;text-align:center;letter-spacing:0.08em;border-top:1px solid rgba(200,150,46,0.08);padding-top:0.7rem;">
+          tap a piece to select it · tap the destination square · black responds automatically
+        </div>
       </div>
     </div>
 
@@ -1816,7 +1869,7 @@
   <div class="mindmap-window">
     <div class="mindmap-header">
       <span class="mindmap-title">Connections — Skills & Interests</span>
-      <span class="mindmap-close" onclick="closeModal('modal-mindmap')">close ×</span>
+      <span class="mindmap-close" onclick="closeModal('modal-mindmap'); openMac()">close ×</span>
     </div>
     <div id="mindmap-container" style="flex:1;overflow:hidden;position:relative;min-height:480px;cursor:grab;">
   <svg id="mindmap-svg" viewBox="0 0 820 480" xmlns="http://www.w3.org/2000/svg"
@@ -1877,7 +1930,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Three.js loader with fallback
 window.__threeLoaded = false;
 function loadThree(cb) {
@@ -1942,55 +1995,54 @@ function toggleDebug() {
 }
 const dictData = {
   fr: {
-    title: 'Dictionnaire', subtitle: 'Français · Italiano · English',
+    title: 'Dictionnaire', subtitle: 'Français · English',
     spine: 'fr',
     entries: [
       { word: 'flâner', phonetic: '[flɑ.ne]', pos: 'v.intr.',
-        def: 'Se promener sans but précis, en savourant l\'instant. To wander slowly, with no destination in mind.',
+        def: 'To wander without purpose, savouring the moment. The art of going nowhere in particular — and arriving somewhere essential.',
         example: '« Elle aimait flâner sous les arcades de Bologne, les mains dans les poches, les yeux ouverts. »' },
       { word: 'dépaysement', phonetic: '[de.pɛ.iz.mɑ̃]', pos: 'n.m.',
-        def: 'La sensation de se trouver dans un environnement étranger — ni nostalgie, ni peur, mais quelque chose entre les deux. The feeling of being somewhere unfamiliar, unmoored from the familiar.',
-        example: '« Le dépaysement de Genève lui avait appris à se regarder de l\'extérieur. »' },
+        def: 'The disorientation of finding oneself somewhere foreign — neither nostalgia nor fear, but something suspended between the two. English has no word for it.',
+        example: '« Le dépaysement de Genève lui avait appris à se regarder de l&#39;extérieur. »' },
       { word: 'douceur', phonetic: '[du.sœʁ]', pos: 'n.f.',
-        def: 'Qualité de ce qui est agréable sans être intense. Gentleness, softness — of light, of manner, of character.',
-        example: '« La douceur d\'une soirée de pluie, d\'un livre ouvert, d\'une lampe allumée. »' },
+        def: 'Gentleness, softness — of light, of manner, of character. The quality of things that are pleasant without being intense.',
+        example: '« La douceur d&#39;une soirée de pluie, d&#39;un livre ouvert, d&#39;une lampe allumée. »' },
       { word: 'patrimoine', phonetic: '[pa.tʁi.mwan]', pos: 'n.m.',
-        def: 'L\'héritage culturel, artistique ou historique transmis de génération en génération. Heritage — what is passed down, what must be protected.',
-        example: '« Elle comprit que le patrimoine n\'a de valeur que s\'il est raconté. »' },
+        def: 'Cultural, artistic, or historical heritage passed from one generation to the next. What is handed down, what must be protected — and above all, what must be told.',
+        example: '« Elle comprit que le patrimoine n&#39;a de valeur que s&#39;il est raconté. »' },
       { word: 'se souvenir', phonetic: '[sə su.və.niʁ]', pos: 'v.pron.',
-        def: 'Garder en mémoire. To remember — but in French, the self is always implicated: one remembers oneself remembering.',
+        def: 'To remember — but in French, the self is always implicated. One does not simply remember: one remembers oneself in the act of remembering.',
         example: '« Je me souviens de tout, même de ce que je préférerais oublier. »' },
       { word: 'éphémère', phonetic: '[e.fe.mɛʁ]', pos: 'adj.',
-        def: 'Qui dure très peu de temps. Fleeting — the quality of things that pass before they can be named.',
+        def: 'Fleeting — the quality of things that pass before they can be named. Not tragic, just brief. The French accept this more gracefully than most.',
         example: '« Un séjour éphémère à Paris, mais suffisant pour tout changer. »' },
     ]
   },
   es: {
-    title: 'Diccionario', subtitle: 'Español · Italiano · English',
+    title: 'Diccionario', subtitle: 'Español · English',
     spine: 'es',
     entries: [
       { word: 'madrugada', phonetic: '[ma.ðɾu.ˈɣa.ða]', pos: 'n.f.',
-        def: 'Las horas entre la medianoche y el amanecer. The early hours — that particular quality of time that belongs to no one.',
+        def: 'The hours between midnight and dawn — a distinct stretch of time that belongs to no one. Not night, not yet morning. The hour when things become honest.',
         example: '« A la madrugada, los pensamientos se vuelven más honestos. »' },
       { word: 'añoranza', phonetic: '[a.ɲo.ˈɾan.θa]', pos: 'n.f.',
-        def: 'Nostalgia mezclada con deseo. A longing that is also a form of love — for a place, a time, a version of yourself.',
+        def: 'A longing that is also a form of love — for a place, a time, a version of yourself. Closer to ache than to nostalgia. It arrived, unexpectedly, at an airport.',
         example: '« La añoranza de Nueva Orleans la sorprendió en el aeropuerto. »' },
       { word: 'trasnochar', phonetic: '[tɾaz.no.ˈtʃaɾ]', pos: 'v.intr.',
-        def: 'Pasar la noche despierto, ya sea por trabajo, por placer, o por los pensamientos que no se callan. To stay up all night.',
+        def: 'To stay up through the night — whether for work, for pleasure, or for the thoughts that refuse to be quiet. Always with the lamp still on.',
         example: '« Trasnochaba leyendo, sin culpa, con la lámpara encendida. »' },
       { word: 'duende', phonetic: '[ˈdwen.de]', pos: 'n.m.',
-        def: 'Qualità misteriosa che rende un\'opera d\'arte capace di muovere l\'anima. The inexplicable power that art has to move us — Lorca&#39;s word for it.',
+        def: 'The inexplicable power that certain works of art have to move us — Lorca&#39;s word for the dark, irrational force behind genuine expression. It cannot be taught. Only recognised.',
         example: '« El duende no se explica, se siente. »' },
       { word: 'sobremesa', phonetic: '[so.βɾe.ˈme.sa]', pos: 'n.f.',
-        def: 'Il tempo che si passa a tavola dopo aver finito di mangiare, in conversazione. The time spent lingering at the table after a meal — no equivalent in English.',
+        def: 'The time spent lingering at the table after a meal — in conversation, in no hurry to be anywhere else. English has no word for this either. Perhaps that says something.',
         example: '« La sobremesa duró más que la cena misma. »' },
       { word: 'aprender', phonetic: '[a.pɾen.ˈdeɾ]', pos: 'v.tr.',
-        def: 'Adquirir conocimiento o habilidad. To learn — but in Spanish it carries the root of aprehender, to grasp, to seize. Knowledge is something you take hold of.',
+        def: 'To learn — but rooted in aprehender: to grasp, to seize. In Spanish, knowledge is not received passively. It is something you take hold of.',
         example: '« Siempre hay algo nuevo que aprender, en cualquier idioma. »' },
     ]
   }
 };
-
 let currentDict = 'fr';
 
 function openBooks() {
@@ -2369,21 +2421,21 @@ function downloadCV() {
 let sudokuSolved = false;
 
 const sol6 = [
-  [4,1,2, 3,6,5],
-  [6,5,3, 4,2,1],
-  [2,6,5, 1,3,4],
-  [3,4,1, 6,5,2],
-  [5,3,4, 2,1,6],
-  [1,2,6, 5,4,3],
+  [4,1,5, 6,2,3],
+  [3,6,2, 4,5,1],
+  [1,4,6, 5,3,2],
+  [5,2,3, 1,6,4],
+  [6,3,1, 2,4,5],
+  [2,5,4, 3,1,6],
 ];
 
 const puz6 = [
-  [4,1,2, 3,6,0],
-  [6,5,3, 0,2,0],
-  [0,0,5, 1,3,4],
-  [0,0,0, 6,5,0],
-  [5,0,0, 2,1,0],
-  [0,2,0, 0,4,0],
+  [0,1,5, 6,2,0],
+  [0,6,0, 0,0,0],
+  [1,0,6, 0,0,2],
+  [5,0,0, 1,0,4],
+  [0,0,0, 0,4,0],
+  [0,5,4, 3,1,0],
 ];
 
 function buildSudoku() {
@@ -2504,6 +2556,69 @@ function openContact() {
   document.getElementById('modal-contact').classList.add('open');
   fadeDot('dot-notepad');
 }
+
+// ---- DEBUG COORDINATE MODE ----
+let dbgOn = false, dbgDragging = false, dbgStart = null;
+
+function toggleDebugCoords() {
+  dbgOn = !dbgOn;
+  document.getElementById('debug-overlay').style.display = dbgOn ? 'block' : 'none';
+  document.getElementById('dbg-toggle').style.color = dbgOn ? 'rgba(255,80,80,0.9)' : 'rgba(200,150,46,0.25)';
+  document.getElementById('dbg-toggle').style.borderColor = dbgOn ? 'rgba(255,80,80,0.5)' : 'rgba(200,150,46,0.12)';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'd' || e.key === 'D') toggleDebugCoords(); });
+
+function getImgCoords(clientX, clientY) {
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const isPortrait = vh > vw;
+  let imgSize, imgLeft, imgTop;
+  if (isPortrait) { imgSize = vw; imgLeft = 0; imgTop = (vh - imgSize) / 2; }
+  else { imgSize = vh; imgLeft = (vw - imgSize) / 2; imgTop = 0; }
+  const ix = ((clientX - imgLeft) / imgSize);
+  const iy = ((clientY - imgTop) / imgSize);
+  return { ix: Math.max(0, Math.min(1, ix)), iy: Math.max(0, Math.min(1, iy)), imgLeft, imgTop, imgSize };
+}
+
+document.addEventListener('mousemove', e => {
+  if (!dbgOn) return;
+  const { ix, iy, imgLeft, imgTop, imgSize } = getImgCoords(e.clientX, e.clientY);
+  document.getElementById('dbg-hline').style.top = e.clientY + 'px';
+  document.getElementById('dbg-vline').style.left = e.clientX + 'px';
+  const lbl = document.getElementById('dbg-label');
+  lbl.style.left = (e.clientX + 14) + 'px';
+  lbl.style.top = (e.clientY - 28) + 'px';
+  lbl.textContent = `x:${(ix*100).toFixed(1)}%  y:${(iy*100).toFixed(1)}%`;
+
+  if (dbgDragging && dbgStart) {
+    const box = document.getElementById('dbg-box');
+    box.style.display = 'block';
+    const x1 = Math.min(dbgStart.px, e.clientX), y1 = Math.min(dbgStart.py, e.clientY);
+    const x2 = Math.max(dbgStart.px, e.clientX), y2 = Math.max(dbgStart.py, e.clientY);
+    box.style.left = x1 + 'px'; box.style.top = y1 + 'px';
+    box.style.width = (x2-x1) + 'px'; box.style.height = (y2-y1) + 'px';
+    const c2 = getImgCoords(x2, y2);
+    lbl.textContent = `x:${(dbgStart.ix*100).toFixed(1)}% y:${(dbgStart.iy*100).toFixed(1)}%  →  w:${((c2.ix-dbgStart.ix)*100).toFixed(1)}% h:${((c2.iy-dbgStart.iy)*100).toFixed(1)}%`;
+  }
+});
+
+document.addEventListener('mousedown', e => {
+  if (!dbgOn) return;
+  const { ix, iy } = getImgCoords(e.clientX, e.clientY);
+  dbgDragging = true;
+  dbgStart = { ix, iy, px: e.clientX, py: e.clientY };
+  document.getElementById('dbg-box').style.display = 'none';
+});
+
+document.addEventListener('mouseup', e => {
+  if (!dbgOn || !dbgDragging) return;
+  dbgDragging = false;
+  const { ix, iy } = getImgCoords(e.clientX, e.clientY);
+  const iw = ix - dbgStart.ix, ih = iy - dbgStart.iy;
+  const msg = `posHS: ix=${dbgStart.ix.toFixed(3)} iy=${dbgStart.iy.toFixed(3)} w=${iw.toFixed(3)} h=${ih.toFixed(3)}`;
+  console.log(msg);
+  document.getElementById('dbg-label').textContent = msg;
+});
 
 // Hint bar recall
 function showHints() {
@@ -2815,11 +2930,71 @@ function buildMindMap() {
 
 
 // Hint bar auto-hide after 5s
+function repositionHotspots() {
+  // Recalculate hotspot positions based on actual image render bounds
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const isPortrait = vh > vw;
+  
+  // Room image is 1:1, displayed as contain in viewport
+  let imgSize, imgLeft, imgTop;
+  if (isPortrait) {
+    // Image fills width, centered vertically
+    imgSize = vw;
+    imgLeft = 0;
+    imgTop = (vh - imgSize) / 2;
+  } else {
+    // Image fills height, centered horizontally
+    imgSize = vh;
+    imgLeft = (vw - imgSize) / 2;
+    imgTop = 0;
+  }
+
+  // Helper: position a hotspot given image-relative coords (0-1)
+  function posHS(id, ix, iy, iw, ih) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.left   = (imgLeft + ix * imgSize) + 'px';
+    el.style.top    = (imgTop  + iy * imgSize) + 'px';
+    el.style.width  = (iw * imgSize) + 'px';
+    el.style.height = (ih * imgSize) + 'px';
+  }
+
+  posHS('hs-library',  0.04, 0.05, 0.16, 0.90);
+  posHS('hs-imac',     0.39, 0.51, 0.24, 0.22);
+  posHS('hs-lamp',     0.75, 0.54, 0.11, 0.20);
+  posHS('hs-books',    0.68, 0.70, 0.09, 0.12);
+  posHS('hs-ipod',     0.15, 0.79, 0.08, 0.08);
+  posHS('hs-notepad',  0.24, 0.78, 0.09, 0.08);
+  posHS('hs-drawer1',  0.16, 0.88, 0.12, 0.08);
+  posHS('hs-drawer2',  0.77, 0.88, 0.10, 0.08);
+  
+  // Dots
+  const dotMap = {
+    'dot-library': [0.160, 0.465],
+    'dot-imac':    [0.512, 0.621],
+    'dot-lamp':    [0.803, 0.603],
+    'dot-books':   [0.728, 0.755],
+    'dot-ipod':    [0.195, 0.842],
+    'dot-notepad': [0.270, 0.830],
+    'dot-drawer1': [0.218, 0.924],
+    'dot-drawer2': [0.819, 0.924],
+  };
+  Object.entries(dotMap).forEach(([id, [ix, iy]]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.left = (imgLeft + ix * imgSize - 3) + 'px';
+    el.style.top  = (imgTop  + iy * imgSize - 3) + 'px';
+  });
+}
+
+window.addEventListener('resize', repositionHotspots);
+
 function enterRoom() {
   document.getElementById('curtain').classList.add('fade-out');
   document.getElementById('room').classList.add('entered');
   setTimeout(() => document.getElementById('curtain').style.display = 'none', 1500);
   initRain();
+  repositionHotspots();
   // One-time zone flash to reveal clickable areas
   setTimeout(() => {
     const zones = ['hs-imac','hs-lamp','hs-drawer1','hs-drawer2','hs-ipod','hs-books','hs-notepad','hs-library'];
@@ -3360,9 +3535,9 @@ function renderBoard() {
       cell.style.cssText = `
         display:flex; align-items:center; justify-content:center;
         position:relative; cursor:pointer;
-        background:${isSelected ? 'rgba(200,150,46,0.72)' :
-          isTargetHint ? (isLight ? 'rgba(200,150,46,0.22)' : 'rgba(200,150,46,0.18)') :
-          isLight ? '#c8a97a' : '#3a2410'};
+        background:${isSelected ? 'rgba(246,212,100,0.85)' :
+          isTargetHint ? (isLight ? 'rgba(200,150,46,0.4)' : 'rgba(200,150,46,0.3)') :
+          isLight ? '#f0d9b5' : '#b58863'};
         transition:background 0.15s;
         font-size:min(32px, 7.5vw);
         line-height:1;
@@ -3372,7 +3547,7 @@ function renderBoard() {
       // Target dot hint
       if (isTargetHint && !hlBoard[sq]) {
         const dot = document.createElement('div');
-        dot.style.cssText = 'width:38%; height:38%; border-radius:50%; background:rgba(200,150,46,0.65); box-shadow:0 0 8px rgba(200,150,46,0.4); pointer-events:none;';
+        dot.style.cssText = 'width:26%; height:26%; border-radius:50%; background:rgba(60,40,10,0.35); pointer-events:none;';
         cell.appendChild(dot);
       }
 
@@ -3382,9 +3557,10 @@ function renderBoard() {
         span.textContent = PIECE_UNICODE[piece.color][piece.piece];
         span.style.cssText = `
           filter:${piece.color === 'w' ?
-            'drop-shadow(0 1px 2px rgba(0,0,0,0.8))' :
-            'drop-shadow(0 1px 2px rgba(0,0,0,0.9))'};
+            'drop-shadow(0 0 1px rgba(0,0,0,1)) drop-shadow(0 1px 3px rgba(0,0,0,0.9))' :
+            'drop-shadow(0 0 2px rgba(255,255,255,0.6)) drop-shadow(0 0 1px rgba(255,255,255,0.4))'};
           pointer-events:none;
+          font-size: min(30px, 6.8vw);
         `;
         cell.appendChild(span);
       }
