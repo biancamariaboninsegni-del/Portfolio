@@ -224,8 +224,7 @@
     padding: 0;
     box-shadow: 0 20px 60px rgba(0,0,0,0.7), 2px 3px 0 rgba(180,160,80,0.3);
     animation: modalIn 0.3s ease;
-    overflow: hidden;
-  }
+    }
   .note-lines {
     background: repeating-linear-gradient(
       to bottom,
@@ -942,8 +941,7 @@
     text-orientation: mixed;
     transform: rotate(180deg);
     max-height: 110px;
-    overflow: hidden;
-  }
+    }
   .book-author {
     font-family: 'Courier Prime', monospace;
     font-size: 0.52rem;
@@ -1373,17 +1371,17 @@
   
   #cat-container {
     position: absolute;
-    bottom: 24%;
+    bottom: 28%;
     left: -15%;
-    width: 6%;
+    width: 8%;
+    max-height: 12%;
     pointer-events: none;
     z-index: 5;
-    overflow: hidden;
-  }
+    }
   #cat-img { width: 100%; height: auto; display: block; }
   #cat-sprite-img { display: none; }
   @keyframes cat-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
-  #cat-img { width: 100%; height: auto; display: block; animation: cat-bob 0.4s ease-in-out infinite; }
+  #cat-img { width: auto; height: 100%; max-height: 10vh; display: block; animation: cat-bob 0.4s ease-in-out infinite; }
 
   </style>
 </head>
