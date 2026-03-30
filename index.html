@@ -1381,7 +1381,9 @@
     overflow: hidden;
   }
   #cat-img { width: 100%; height: auto; display: block; }
-  #cat-sprite-img { width: 200%; height: auto; display: none; max-width: none; }
+  #cat-sprite-img { display: none; }
+  @keyframes cat-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+  #cat-img { width: 100%; height: auto; display: block; animation: cat-bob 0.4s ease-in-out infinite; }
 
   </style>
 </head>
