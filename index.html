@@ -62,7 +62,7 @@
   @keyframes fadeInText { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
 
   /* ROOM */
-  #room {
+  #room { overflow: visible !important; /* cat */ 
     position: fixed; inset: 0;
     background-image: var(--room-bg);
     background-size: cover;
@@ -4037,10 +4037,13 @@ function startFLThree() {
   const canvas = document.getElementById('cat-canvas');
   const ctx = canvas.getContext('2d');
   const video = document.getElementById('cat-video');
+  canvas.width = 640;
+  canvas.height = 360;
   video.addEventListener('loadedmetadata', function() {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
   });
+  video.play().catch(e => console.log('video error:', e));
   function drawFrame() {
     if (!video.paused && !video.ended) {
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
