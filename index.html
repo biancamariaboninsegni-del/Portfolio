@@ -1379,7 +1379,7 @@
 
 
   
-  #schrodinger{position:absolute;bottom:28%;left:-15%;height:8vh;width:auto;pointer-events:none;z-index:5;object-fit:none;}
+  #schrodinger{position:absolute;bottom:28%;left:-15%;height:8vh;width:calc(8vh * 1366 / 768);pointer-events:none;z-index:5;background-image:url('cat_sprite_walk.png');background-size:700% 100%;background-position:0% 0%;background-repeat:no-repeat;}
 
   </style>
 </head>
@@ -1393,7 +1393,7 @@
 
 <!-- ROOM -->
 <div id="room">
-  <img id="schrodinger" src="cat_sprite_walk.png" style="height:8vh;width:auto;object-fit:none;" />
+  <div id="schrodinger"></div>
   <img id="parallax-img" alt="" /></div>
 <div id="mood-overlay"></div>
 <div id="lightning-flash"></div>
@@ -4053,7 +4053,7 @@ function startFLThree() {
   requestAnimationFrame(u);
 })();
 
-(function(){var cat=document.getElementById("schrodinger");if(!cat)return;var pos=-15,dir=1,phase="walking",frame=0,ft=0,pt=0,lt=0,fw=1366,nf=7;function sf(f){cat.style.objectPosition=(-f*fw)+"px 0px";}function sw(){cat.src="cat_sprite_walk.png";cat.style.objectFit="none";}function sp(s){cat.src=s;cat.style.objectFit="";}function tick(ts){var dt=Math.min(ts-lt,50);lt=ts;pt+=dt;if(phase==="walking"){pos+=dir*0.007*dt;cat.style.left=pos+"%";cat.style.transform=dir===-1?"scaleX(-1)":"scaleX(1)";ft+=dt;if(ft>120){frame=(frame+1)%nf;sf(frame);ft=0;}if(dir===1&&pos>72){phase="sitting";pt=0;sp("scat_sit.png");}else if(dir===-1&&pos<3){phase="resting";pt=0;sp("scat_rest.png");}}else if(phase==="sitting"&&pt>5000){phase="walking";pt=0;dir=-1;sw();}else if(phase==="resting"&&pt>6000){phase="sleeping";pt=0;sp("scat_sleep.png");}else if(phase==="sleeping"&&pt>9000){phase="walking";pt=0;dir=1;pos=-15;cat.style.left=pos+"%";sw();}requestAnimationFrame(tick);}requestAnimationFrame(tick);})();
+(function(){var cat=document.getElementById("schrodinger");if(!cat)return;var pos=-15,dir=1,phase="walking",frame=0,ft=0,pt=0,lt=0,nf=7;function sf(f){cat.style.backgroundPosition=(f/6*100).toFixed(4)+"% 0%";}function sw(){cat.style.backgroundImage="url('cat_sprite_walk.png')";cat.style.backgroundSize="700% 100%";sf(frame);}function sp(s){cat.style.backgroundImage="url('"+s+"')";cat.style.backgroundSize="100% 100%";cat.style.backgroundPosition="0% 0%";}function tick(ts){var dt=Math.min(ts-lt,50);lt=ts;pt+=dt;if(phase==="walking"){pos+=dir*0.007*dt;cat.style.left=pos+"%";cat.style.transform=dir===-1?"scaleX(-1)":"scaleX(1)";ft+=dt;if(ft>120){frame=(frame+1)%nf;sf(frame);ft=0;}if(dir===1&&pos>72){phase="sitting";pt=0;sp("scat_sit.png");}else if(dir===-1&&pos<3){phase="resting";pt=0;sp("scat_rest.png");}}else if(phase==="sitting"&&pt>5000){phase="walking";pt=0;dir=-1;sw();}else if(phase==="resting"&&pt>6000){phase="sleeping";pt=0;sp("scat_sleep.png");}else if(phase==="sleeping"&&pt>9000){phase="walking";pt=0;dir=1;pos=-15;cat.style.left=pos+"%";sw();}requestAnimationFrame(tick);}requestAnimationFrame(tick);})();
 </script>
 </body>
 </html>
