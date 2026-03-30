@@ -1369,19 +1369,14 @@
   }
 
   
-  #cat-container {
-    position: absolute;
-    bottom: 28%;
-    left: -15%;
-    width: 8%;
-    max-height: 12%;
-    pointer-events: none;
-    z-index: 5;
-    }
-  #cat-img { width: 100%; height: auto; display: block; }
-  #cat-sprite-img { display: none; }
-  @keyframes cat-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
-  #cat-img { width: auto; height: 100%; max-height: 10vh; display: block; animation: cat-bob 0.4s ease-in-out infinite; }
+
+
+
+
+
+
+  
+  #cat{position:absolute;bottom:26%;left:-12%;height:9%;width:auto;pointer-events:none;z-index:5;}
 
   </style>
 </head>
@@ -1395,7 +1390,8 @@
 
 <!-- ROOM -->
 <div id="room">
-  <div id="cat-container"><img id="cat-sprite-img" src="cat_sprite.png" /><img id="cat-img" src="cat_walk.png" /></div><img id="parallax-img" alt="" /></div>
+  <img id="cat" src="cat_walk.png" />
+  <img id="parallax-img" alt="" /></div>
 <div id="mood-overlay"></div>
 <div id="lightning-flash"></div>
 <div id="lamp-glow"></div>
@@ -4031,7 +4027,28 @@ function startFLThree() {
 })();
 
 
-(function(){const c=document.getElementById("cat-container"),ci=document.getElementById("cat-img"),si=document.getElementById("cat-sprite-img");let pos=-15,state="walking",dir=1,frame=0,ft=0,st=0;function sp(){si.style.marginLeft=(-( frame%2)*100)+"%";si.style.marginTop=(-(Math.floor(frame/2))*25)+"%";}function ss(s){state=s;st=0;if(s==="walking"){si.style.display="block";ci.style.display="none";}else{si.style.display="none";ci.style.display="block";ci.src={sitting:"cat_sit.png",resting:"cat_rest.png",sleeping:"cat_sleep.png"}[s];}c.style.transform=dir===-1?"scaleX(-1)":"scaleX(1)";}function tick(){st++;if(state==="walking"){pos+=dir*0.12;c.style.left=pos+"%";if(++ft>7){frame=(frame+1)%8;sp();ft=0;}if(dir===1&&pos>65&&st>100)ss("sitting");else if(dir===-1&&pos<5&&st>100)ss("resting");}else if(state==="sitting"&&st>280){dir=-1;ss("walking");}else if(state==="resting"&&st>350){ss("sleeping");}else if(state==="sleeping"&&st>500){dir=1;pos=-15;c.style.left=pos+"%";ss("walking");}requestAnimationFrame(tick);}ss("walking");tick();})();
+
+
+(function(){
+  var cat=document.getElementById("cat");
+  if(!cat)return;
+  var pos=-12,dir=1,phase="walking",pt=0,lt=0;
+  var poses={walking:"cat_walk.png",sitting:"cat_sit.png",resting:"cat_rest.png",sleeping:"cat_sleep.png"};
+  function u(ts){
+    var dt=Math.min(ts-lt,50);lt=ts;pt+=dt;
+    if(phase==="walking"){
+      pos+=dir*0.008*dt;
+      cat.style.left=pos+"%";
+      cat.style.transform=dir===-1?"scaleX(-1)":"scaleX(1)";
+      if(dir===1&&pos>70){phase="sitting";pt=0;cat.src=poses.sitting;}
+      else if(dir===-1&&pos<5){phase="resting";pt=0;cat.src=poses.resting;}
+    }else if(phase==="sitting"&&pt>4000){phase="walking";pt=0;dir=-1;cat.src=poses.walking;}
+    else if(phase==="resting"&&pt>5000){phase="sleeping";pt=0;cat.src=poses.sleeping;}
+    else if(phase==="sleeping"&&pt>8000){phase="walking";pt=0;dir=1;pos=-12;cat.style.left=pos+"%";cat.src=poses.walking;}
+    requestAnimationFrame(u);
+  }
+  requestAnimationFrame(u);
+})();
 </script>
 </body>
 </html>
