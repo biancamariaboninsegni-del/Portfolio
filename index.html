@@ -1453,21 +1453,7 @@
 
 <!-- ROOM -->
 <div id="room">
-  <div id="gatto-wrapper"><div id="gatto-tooltip">Schrödinger — Curator of this room.<br>&quot;I may or may not be here. Do not disturb. I was once worshipped.&quot;</div><audio id="meow-audio" src="meow.mp3" preload="auto"></audio>
-      <video id="gatto-video" autoplay loop muted playsinline onclick="document.getElementById('meow-audio').currentTime=0;document.getElementById('meow-audio').play();"><source src="gatto_final.webm" type="video/webm"><source src="gatto_final.mp4" type="video/mp4"></video></div>
-
-  <div id="schrodinger"></div>
-  <img id="parallax-img" alt="" /></div>
-<div id="mood-overlay"></div>
-  <canvas id="rain-canvas"></canvas>
-<div id="lightning-flash"></div>
-<div id="lamp-glow"></div>
-
-<!-- HEADER -->
-<div id="header">
-  <div id="clock"></div>
-  <div id="name-title">Bianca Maria Boninsegni<br>Marketing & Communications Specialist</div>
-</div>
+  <div id="gatto-wrapper"><div id="gatto-tooltip">Schrödinger — Curator of this room.<br>&quot;I may or may not be here. Do not disturb. I was once worshipped.&quot;</div><canvas id="gatto-canvas" width="220" height="124"></canvas><audio id="meow-audio" src="meow.mp3" preload="auto"></audio></div>
 
 <!-- HOTSPOTS -->
 <div class="hotspot" id="hs-imac" data-label="Open desktop" onclick="openMac()"></div>
@@ -4170,5 +4156,33 @@ function startFLThree() {
 })();
 </script>
 
+
+<script>
+(function() {
+  var canvas = document.getElementById('gatto-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var img = new Image();
+  img.src = 'cat_sprite_final.png';
+  var totalFrames = 80;
+  var cols = 10;
+  var fw = 220;
+  var fh = 124;
+  var frame = 0;
+  img.onload = function() {
+    setInterval(function() {
+      var col = frame % cols;
+      var row = Math.floor(frame / cols);
+      ctx.clearRect(0, 0, fw, fh);
+      ctx.drawImage(img, col * fw, row * fh, fw, fh, 0, 0, fw, fh);
+      frame = (frame + 1) % totalFrames;
+    }, 1000 / 30);
+  };
+  canvas.addEventListener('click', function() {
+    var a = document.getElementById('meow-audio');
+    if (a) { a.currentTime = 0; a.play(); }
+  });
+})();
+</script>
 </body>
 </html>
