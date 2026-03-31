@@ -4176,7 +4176,7 @@ function startFLThree() {
       ctx.clearRect(0, 0, fw, fh);
       ctx.drawImage(img, col * fw, row * fh, fw, fh, 0, 0, fw, fh);
       frame = (frame + 1) % totalFrames;
-    }, 1000 / 12);
+    }, 1000 / 8);
   };
   canvas.addEventListener('click', function() {
     var a = document.getElementById('meow-audio');
