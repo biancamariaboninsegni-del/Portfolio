@@ -2678,17 +2678,42 @@ function openReadingNow() {
 
 // ---- LIBRARY ----
 const BOOK_NOTES = {
-  'Il senso delle cose': { author: 'Feynman', note: '"I can live with doubt and uncertainty and not knowing. I think it is much more interesting to live not knowing than to have answers that might be wrong." Feynman teaches you that uncertainty is not weakness, it is the only honest position.' },
-  'La favola di Amore e Psiche': { author: 'Apuleius', note: '"Night fell, and after love&#39;s skirmishes and struggles he dropped into deep slumber." The elegance and softness of Apuleius will never cease to enchant me.' },
-  'The Great Gatsby': { author: 'Fitzgerald', note: 'The green light. The parties nobody remembers attending. The beautiful shirts. Fitzgerald understood that longing is more vivid than possession.' },
-  'Norwegian Wood': { author: 'Murakami', note: 'Murakami taught me that loss does not resolve, it becomes part of the furniture of who you are. Quiet, devastating, perfect.' },
-  'Ithaca': { author: 'Cavafy', note: 'The poem that opens this portfolio. Keep Ithaca always in your mind. The journey itself is the point.' },
-  'Il deserto dei Tartari': { author: 'Buzzati', note: 'The book I keep returning to during periods of waiting. Drogo waits his whole life for the enemy. I understand him more every year.' },
-  'The Order of Time': { author: 'Rovelli', note: 'Physics written like poetry. Changed how I think about the present moment as the only thing that actually exists.' },
-  'Flatland': { author: 'Abbott', note: 'The square lifted into three dimensions weeps, not from fear but recognition. The whole time, there was more. That sentence lives in me.' },
-  'Non per profitto': { author: 'Nussbaum', note: 'The book my thesis was in conversation with. What happens to culture when we measure it only by what it produces?' },
-  'A Room of One&#39;s Own': { author: 'Woolf', note: '&quot;A woman must have money and a room of her own if she is to write fiction." Still true. Still urgent.' },
-  'My Brilliant Friend': { author: 'Ferrante', note: 'Ferrante writes female friendship as it actually is, fierce, ambivalent, necessary, impossible to escape.' },
+  'Brave New World': { author: 'Aldous Huxley', note: 'Reassuring proof that things could be worse.' },
+  'Amore e Psiche': { author: 'Apuleius', note: '"Night fell, and after love\'s skirmishes and struggles he dropped into deep slumber." Apuleius wrote this in 150 AD. Nobody has done it better since.' },
+  'A Room of One\'s Own': { author: 'Virginia Woolf', note: 'Virginia Woolf said what she said.' },
+  'A Room of One&#39;s Own': { author: 'Virginia Woolf', note: 'Virginia Woolf said what she said.' },
+  'The Great Gatsby': { author: 'F. Scott Fitzgerald', note: 'Five stars for the prose. Zero stars for the decision-making.' },
+  'The Lion, the Witch and the Wardrobe': { author: 'C.S. Lewis', note: 'Not a teenager anymore but I will always love this.' },
+  'The Neverending Story': { author: 'Michael Ende', note: 'A reader, reading a book, where a reader is reading. Story in the story. Never-ending. Still indecisive about the princess name.' },
+  'Orlando Furioso': { author: 'Ludovico Ariosto', note: 'An epic poem about a knight who loses his mind over a woman. The rest is details.' },
+  'Inferno': { author: 'Dante Alighieri', note: 'Dante spent eternity ranking people he didn\'t like. Relatable.' },
+  'Perfume': { author: 'Patrick Süskind', note: 'A serial killer with an extraordinary gift. Somehow you root for him anyway.' },
+  'Norwegian Wood': { author: 'Haruki Murakami', note: 'The Japanese cure for reader\'s block. Side effects include existential crisis.' },
+  'The Screwtape Letters': { author: 'C.S. Lewis', note: 'My decision-making process, distilled. One choice, two hundred scenarios. Louis CK called it \'Of Course But Maybe\'. C.S. Lewis did it first.' },
+  'La voce a te dovuta': { author: 'Pedro Salinas', note: 'The one Salinas book that doesn\'t want to hurt you.' },
+  'Not for Profit': { author: 'Martha C. Nussbaum', note: 'Nussbaum makes a case for the humanities. Filed under: things I should have sent to people who ask why I studied arts.' },
+  'Othello': { author: 'William Shakespeare', note: 'Hands down the worst pillow fight in history.' },
+  'The Celebrated Jumping Frog of Calaveras County': { author: 'Mark Twain', note: '\'Good little girls should always show marked deference for the aged. Unless they sass you first.\' Mark Twain, 1865.' },
+  'The Man Who Mistook His Wife for a Hat': { author: 'Oliver Sacks', note: 'Oliver Sacks made neurology the most fascinating thing you\'ve never studied. The title alone deserved a Nobel.' },
+  'The Metamorphoses': { author: 'Ovid', note: 'Ovid spent his exile writing about people turning into things. Productive response to a bad situation.' },
+  'Animal Farm / 1984': { author: 'George Orwell', note: 'Sooner or later, you recognise the farm. And your role in it.' },
+  'The Iliad / The Odyssey': { author: 'Homer', note: 'Two books. One war, one journey home. Homer understood that these are the only two stories that exist.' },
+  'The Witches': { author: 'Roald Dahl', note: 'Still afraid of people wearing gloves.' },
+  'La boutique del mistero': { author: 'Dino Buzzati', note: 'Buzzati writes dread the way light enters a room at the wrong angle. You cannot say exactly what is wrong. And that is everything.' },
+  'The Tartar Steppe': { author: 'Dino Buzzati', note: 'Buzzati wrote this bored at his desk, watching time refuse to pass. The opposite is a conversation where hours disappear. I think about this often.' },
+  'Spoon River Anthology': { author: 'Edgar Lee Masters', note: 'An entire town, dead, finally honest. Edgar Lee Masters invented the tell-all memoir before it was a genre.' },
+  'Flatland': { author: 'Edwin A. Abbott', note: 'A Victorian novella about geometry that is actually about everything else. (Further notes in the right drawer.)' },
+  'Confusione di stelle': { author: 'Alda Merini', note: 'Alda Merini. To be read in small doses, like something very strong.' },
+  'Of Mice and Men': { author: 'John Steinbeck', note: 'So many tears. No further comment.' },
+  'The Stranger': { author: 'Albert Camus', note: 'Unlocks certain thoughts you didn\'t know you were having.' },
+  'Ci vediamo in agosto': { author: 'Gabriel García Márquez', note: 'To be read on a train, in summer, slowly.' },
+  'My Brilliant Friend': { author: 'Elena Ferrante', note: 'Still confused about who I\'m rooting for. Four books in.' },
+  'Ithaca': { author: 'Constantinos Cavafy', note: 'For us Bolognesi, Ithaca is San Luca. When it appears between the hills on the way back from a journey, you know you\'re home.' },
+  'Chronicle of a Death Foretold': { author: 'Gabriel García Márquez', note: 'A good study in how small towns work. And don\'t.' },
+  'Nella notte più buia': { author: 'Han Kang', note: 'I could read everything she\'s ever written. Han Kang never wastes a word.' },
+  'Carrie': { author: 'Stephen King', note: 'Stephen King\'s real gift isn\'t horror. It\'s the psychology of people who hurt and people who get hurt.' },
+  'Six Memos for the Next Millennium': { author: 'Italo Calvino', note: 'Calvino\'s last lectures. A must. No negotiation.' },
+  'The Order of Time': { author: 'Carlo Rovelli', note: 'Physics written like poetry. Changed how I think about the present moment as the only thing that actually exists.' },
 };
 
 const BOOKS = [
@@ -2766,10 +2791,12 @@ function buildLibrary(grid) {
 
 function openBookNote(title) {
   const note = BOOK_NOTES[title];
-  if (!note) return;
+  const bookData = (typeof hiddenBooks !== 'undefined' ? hiddenBooks : []).find(b => b.title === title);
+  if (!note && !bookData) return;
+  const displayNote = note || { author: bookData ? bookData.author : '', note: bookData ? bookData.review : '' };
   document.getElementById('bnote-title').textContent = title;
-  document.getElementById('bnote-author').textContent = note.author;
-  document.getElementById('bnote-text').textContent = note.note;
+  document.getElementById('bnote-author').textContent = displayNote.author;
+  document.getElementById('bnote-text').textContent = displayNote.note;
   document.getElementById('modal-book-note').classList.add('open');
 }
 
