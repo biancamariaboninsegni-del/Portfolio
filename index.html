@@ -2260,7 +2260,10 @@ function openBooks() {
       content.style.opacity = '1';
       content.style.transform = 'translateY(0)';
       content.style.pointerEvents = 'auto';
+      const grid = document.getElementById('hl-books-grid');
+      if (grid) grid.innerHTML = '';
       buildHiddenLibrary();
+      setTimeout(() => { document.querySelectorAll('#hl-books-grid > div').forEach(c => { c.style.opacity='1'; c.style.transform='translateY(0)'; }); }, 100);
     }
   }
   switchDict('fr');
