@@ -4300,7 +4300,7 @@ function initRainCanvas() {
   window.enterRoom = function() {
     if (originalEnterRoom) originalEnterRoom.apply(this, arguments);
     setTimeout(function() {
-      checkReturnVisit();
+      localStorage.setItem('lastCatHour','-1'); checkReturnVisit();
       setTimeout(checkHourlyMessage, visitCount > 0 ? 10000 : 3000);
     }, 2000);
   };
