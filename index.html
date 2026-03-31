@@ -2363,6 +2363,7 @@ function initRain() {
       }, 160);
     }).catch(() => {});
   } catch(e) {}
+  initRainCanvas();
 }
 
 function stopRain() {
@@ -4142,7 +4143,7 @@ function startFLThree() {
 })();
 </script>
 <script>
-function initRain() {
+function initRainCanvas() {
   var canvas = document.getElementById('rain-canvas');
   if (!canvas) return;
   var ctx = canvas.getContext('2d');
