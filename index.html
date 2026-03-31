@@ -3759,6 +3759,7 @@ function triggerCheckmateReveal() {
     setTimeout(() => {
       if (gate) gate.style.display = 'none';
       // Reveal library
+      chessPhase = 'unlocked'; localStorage.setItem('hiddenLibraryUnlocked','1');
       const content = document.getElementById('hl-library-content');
       if (content) {
         content.style.display = 'block';
