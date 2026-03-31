@@ -4298,10 +4298,9 @@ function initRainCanvas() {
 
   // Wait for room to be entered
   window.addEventListener('roomEntered', function() {
-    setTimeout(function() {
-      localStorage.setItem('lastCatHour','-1'); checkReturnVisit();
-      setTimeout(checkHourlyMessage, visitCount > 0 ? 10000 : 3000);
-    }, 2000);
+    localStorage.setItem('lastCatHour','-1');
+    setTimeout(function() { checkReturnVisit(); }, 3000);
+    setTimeout(function() { checkHourlyMessage(); }, 8000);
   });
 
   // Check every minute
