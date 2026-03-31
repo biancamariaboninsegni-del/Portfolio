@@ -125,66 +125,6 @@
     text-align: right;
   }
 
-
-  
-  
-
-  /* PIOGGIA */
-  #rain-canvas {
-    position: absolute;
-    top: 13%;
-    left: 41.5%;
-    width: 17%;
-    height: 33%;
-    z-index: 4;
-    pointer-events: none;
-    opacity: 0.35;
-    clip-path: ellipse(50% 55% at 50% 45%);
-  }
-  /* SCHRODINGER */
-  #gatto-wrapper {
-    position: absolute;
-    bottom: 9%;
-    right: 24%;
-    width: 14%;
-    z-index: 6;
-    pointer-events: auto;
-  }
-  #gatto-wrapper canvas {
-    width: 100%;
-    filter: drop-shadow(2px 6px 8px rgba(0,0,0,0.55));
-    cursor: pointer;
-  }
-  #gatto-tooltip {
-    display: none;
-    position: absolute;
-    bottom: 110%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(10,8,5,0.88);
-    color: #e8d5a3;
-    font-family: 'Courier New', monospace;
-    font-size: 0.72em;
-    padding: 10px 16px;
-    border: 1px solid rgba(200,150,46,0.4);
-    white-space: nowrap;
-    text-align: center;
-    line-height: 1.6;
-    pointer-events: none;
-  }
-  #gatto-tooltip::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 6px solid transparent;
-    border-top-color: rgba(200,150,46,0.4);
-  }
-  #gatto-wrapper:hover #gatto-tooltip { display: block; }
-
-
-
   /* HOTSPOTS, invisible clickable areas over room objects */
   .hotspot {
     position: fixed;
@@ -1453,7 +1393,17 @@
 
 <!-- ROOM -->
 <div id="room">
-  <div id="gatto-wrapper"><div id="gatto-tooltip">Schrödinger — Curator of this room.<br>&quot;I may or may not be here. Do not disturb. I was once worshipped.&quot;</div><canvas id="gatto-canvas" width="220" height="124"></canvas><audio id="meow-audio" src="meow.mp3" preload="auto"></audio></div>
+  <div id="schrodinger"></div>
+  <img id="parallax-img" alt="" /></div>
+<div id="mood-overlay"></div>
+<div id="lightning-flash"></div>
+<div id="lamp-glow"></div>
+
+<!-- HEADER -->
+<div id="header">
+  <div id="clock"></div>
+  <div id="name-title">Bianca Maria Boninsegni<br>Marketing & Communications Specialist</div>
+</div>
 
 <!-- HOTSPOTS -->
 <div class="hotspot" id="hs-imac" data-label="Open desktop" onclick="openMac()"></div>
@@ -4104,85 +4054,6 @@ function startFLThree() {
 })();
 
 (function(){var cat=document.getElementById("schrodinger");if(!cat)return;var pos=-15,dir=1,phase="walking",frame=0,ft=0,pt=0,lt=0,nf=7;function sf(f){cat.style.backgroundPosition=(f/6*100).toFixed(4)+"% 0%";}function sw(){cat.style.backgroundImage="url('cat_sprite_walk.png')";cat.style.backgroundSize="700% 100%";sf(frame);}function sp(s){cat.style.backgroundImage="url('"+s+"')";cat.style.backgroundSize="100% 100%";cat.style.backgroundPosition="0% 0%";}function tick(ts){var dt=Math.min(ts-lt,50);lt=ts;pt+=dt;if(phase==="walking"){pos+=dir*0.007*dt;cat.style.left=pos+"%";cat.style.transform=dir===-1?"scaleX(-1)":"scaleX(1)";ft+=dt;if(ft>120){frame=(frame+1)%nf;sf(frame);ft=0;}if(dir===1&&pos>72){phase="sitting";pt=0;sp("scat_sit.png");}else if(dir===-1&&pos<3){phase="resting";pt=0;sp("scat_rest.png");}}else if(phase==="sitting"&&pt>5000){phase="walking";pt=0;dir=-1;sw();}else if(phase==="resting"&&pt>6000){phase="sleeping";pt=0;sp("scat_sleep.png");}else if(phase==="sleeping"&&pt>9000){phase="walking";pt=0;dir=1;pos=-15;cat.style.left=pos+"%";sw();}requestAnimationFrame(tick);}requestAnimationFrame(tick);})();
-</script>
-
-<script>
-(function() {
-  const canvas = document.getElementById('rain-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let drops = [];
-
-  function resize() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-
-  function initDrops() {
-    drops = [];
-    for (let i = 0; i < 80; i++) {
-      drops.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        len: Math.random() * 15 + 8,
-        speed: Math.random() * 3 + 2,
-        opacity: Math.random() * 0.4 + 0.1
-      });
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drops.forEach(d => {
-      ctx.beginPath();
-      ctx.moveTo(d.x, d.y);
-      ctx.lineTo(d.x - 1, d.y + d.len);
-      ctx.strokeStyle = 'rgba(180, 200, 255, ' + d.opacity + ')';
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-      d.y += d.speed;
-      if (d.y > canvas.height) {
-        d.y = -d.len;
-        d.x = Math.random() * canvas.width;
-      }
-    });
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', function() { resize(); initDrops(); });
-  resize();
-  initDrops();
-  draw();
-})();
-</script>
-
-
-<script>
-(function() {
-  var canvas = document.getElementById('gatto-canvas');
-  if (!canvas) return;
-  var ctx = canvas.getContext('2d');
-  var img = new Image();
-  img.src = 'cat_sprite_final.png';
-  var totalFrames = 80;
-  var cols = 10;
-  var fw = 220;
-  var fh = 124;
-  var frame = 0;
-  img.onload = function() {
-    setInterval(function() {
-      var col = frame % cols;
-      var row = Math.floor(frame / cols);
-      ctx.clearRect(0, 0, fw, fh);
-      ctx.drawImage(img, col * fw, row * fh, fw, fh, 0, 0, fw, fh);
-      frame = (frame + 1) % totalFrames;
-    }, 1000 / 20);
-  };
-  canvas.addEventListener('click', function() {
-    var a = document.getElementById('meow-audio');
-    if (a) { a.currentTime = 0; a.play(); }
-  });
-})();
 </script>
 </body>
 </html>
