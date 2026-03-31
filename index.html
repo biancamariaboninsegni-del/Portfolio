@@ -2246,6 +2246,9 @@ const dictData = {
 let currentDict = 'fr';
 
 function openBooks() {
+  if (localStorage.getItem('hiddenLibraryUnlocked') === '1') {
+    chessPhase = 'unlocked';
+  }
   switchDict('fr');
   document.getElementById('modal-books').classList.add('open');
   fadeDot('dot-books');
@@ -3450,7 +3453,7 @@ const HL_BOOKS = [
   { title: 'Othello', author: 'William Shakespeare', color: '#1a1a1a', text: '#e8e8e8',
     review: 'Hands down the worst pillow fight in history.' },
   { title: 'The Celebrated Jumping Frog of Calaveras County', author: 'Mark Twain', color: '#5a3a1a', text: '#f5e0c8',
-    review: '\'Good little girls should always show marked deference for the aged. Unless they sass you first.\' Mark Twain, 1865.' },
+    review: "'Good little girls should always show marked deference for the aged. Unless they sass you first.' Mark Twain, 1865." },
   { title: 'Six Memos for the Next Millennium', author: 'Italo Calvino', color: '#1a3a2a', text: '#c8f0d8',
     review: 'Calvino\'s last lectures. A must. No negotiation.' },
 ];
