@@ -4224,5 +4224,90 @@ function initRainCanvas() {
   resize();init();draw();
 }
 </script>
+
+<script>
+(function() {
+  // Schrödinger hourly messages
+  var hourlyMessages = {0: "Still awake? Same.", 1: "Fun fact: honey never expires. Archaeologists found 3,000-year-old honey in Egyptian tombs. Still edible.", 2: "A group of cats is called a clowder. Completely unrelated to the hour. You"re welcome.", 3: "3am. We don"t talk about 3am.", 4: "Fun fact: the human eye can distinguish approximately 10 million different colours.", 5: "Early. Suspiciously early. Fun fact: Napoleon was not actually short — he was 5"7, average for his time.", 6: "Fun fact: a cat"s purr vibrates between 25 and 150 Hz — a frequency shown to promote bone healing.", 7: "The day hasn"t gone wrong yet. Fun fact: Oxford University is older than the Aztec Empire.", 8: "Fun fact: the shortest war in history was between Britain and Zanzibar in 1896. It lasted 38 minutes.", 9: "Have you had coffee? Fun fact: coffee is the second most traded commodity in the world after oil.", 10: "Fun fact: Shakespeare invented over 1,700 words we still use today, including "lonely", "bedroom" and "generous".", 11: "Still going. Fun fact: the Eiffel Tower grows about 15cm taller in summer due to thermal expansion.", 12: "Noon. Fun fact: a single cloud can weigh over a million pounds. The sky is full of very heavy things.", 13: "Fun fact: Cleopatra lived closer in time to the Moon landing than to the construction of the Great Pyramid.", 14: "The longest hour. Fun fact: there are more possible chess games than atoms in the observable universe.", 15: "Fun fact: the average person walks about 100,000 miles in their lifetime. That"s four times around the Earth.", 16: "Fun fact: cats can jump up to six times their body length. I choose not to, for aesthetic reasons.", 17: "The light changes. Fun fact: the light you see from the sun is about 8 minutes old when it reaches you.", 18: "Still at that desk? Fun fact: the word "salary" comes from the Latin "salarium" — Roman soldiers were partly paid in salt.", 19: "Fun fact: it rains diamonds on Neptune and Uranus. The universe has priorities.", 20: "Still here? Fun fact: the dot over the letters i and j has a name. It"s called a tittle.", 21: "Fun fact: the shortest complete sentence in English is "I am." Two words. Descartes needed more.", 22: "Send the email. Fun fact: the average person spends 6 years of their life dreaming. Don"t waste the other 18.", 23: "Almost midnight. Fun fact: cats are crepuscular — most active at dawn and dusk. This is neither. Yet here I am."};
+
+  var visitCount = parseInt(localStorage.getItem('portfolioVisits') || '0');
+  localStorage.setItem('portfolioVisits', visitCount + 1);
+
+  function showCatMessage(msg, duration) {
+    duration = duration || 6000;
+    var wrapper = document.getElementById('gatto-wrapper');
+    if (!wrapper) return;
+    
+    // Remove existing bubble
+    var existing = document.getElementById('cat-bubble');
+    if (existing) existing.remove();
+    
+    var bubble = document.createElement('div');
+    bubble.id = 'cat-bubble';
+    bubble.style.cssText = [
+      'position:absolute',
+      'bottom:110%',
+      'right:0',
+      'background:rgba(10,8,5,0.92)',
+      'color:#e8d5a3',
+      'font-family:\'Courier New\',monospace',
+      'font-size:0.68em',
+      'padding:10px 14px',
+      'border:1px solid rgba(200,150,46,0.4)',
+      'max-width:280px',
+      'line-height:1.6',
+      'pointer-events:none',
+      'z-index:20',
+      'opacity:0',
+      'transition:opacity 0.5s ease',
+      'text-align:left',
+    ].join(';');
+    bubble.textContent = msg;
+    wrapper.appendChild(bubble);
+    
+    setTimeout(function() { bubble.style.opacity = '1'; }, 50);
+    setTimeout(function() {
+      bubble.style.opacity = '0';
+      setTimeout(function() { if (bubble.parentNode) bubble.remove(); }, 500);
+    }, duration);
+  }
+
+  function checkHourlyMessage() {
+    var now = new Date();
+    var hour = now.getHours();
+    var lastHour = parseInt(localStorage.getItem('lastCatHour') || '-1');
+    
+    if (hour !== lastHour) {
+      localStorage.setItem('lastCatHour', hour);
+      var msg = hourlyMessages[hour];
+      if (msg) {
+        setTimeout(function() { showCatMessage(msg, 8000); }, 2000);
+      }
+    }
+  }
+
+  function checkReturnVisit() {
+    if (visitCount > 0) {
+      setTimeout(function() {
+        showCatMessage("You again. I was expecting you. I'm always expecting you.", 6000);
+      }, 3000);
+    }
+  }
+
+  // Wait for room to be entered
+  var originalEnterRoom = window.enterRoom;
+  window.enterRoom = function() {
+    if (originalEnterRoom) originalEnterRoom.apply(this, arguments);
+    setTimeout(function() {
+      checkReturnVisit();
+      setTimeout(checkHourlyMessage, visitCount > 0 ? 10000 : 3000);
+    }, 2000);
+  };
+
+  // Check every minute
+  setInterval(checkHourlyMessage, 60000);
+})();
+</script>
+
 </body>
 </html>
