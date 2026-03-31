@@ -2251,7 +2251,17 @@ let currentDict = 'fr';
 
 function openBooks() {
   if (localStorage.getItem('hiddenLibraryUnlocked') === '1') {
-    chessPhase = 'unlocked'; localStorage.setItem('hiddenLibraryUnlocked','1');
+    chessPhase = 'unlocked';
+    const gate = document.getElementById('hl-chess-gate');
+    if (gate) gate.style.display = 'none';
+    const content = document.getElementById('hl-library-content');
+    if (content) {
+      content.style.display = 'block';
+      content.style.opacity = '1';
+      content.style.transform = 'translateY(0)';
+      content.style.pointerEvents = 'auto';
+      buildHiddenLibrary();
+    }
   }
   switchDict('fr');
   document.getElementById('modal-books').classList.add('open');
