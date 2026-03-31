@@ -4283,7 +4283,9 @@ function initRainCanvas() {
       localStorage.setItem('lastCatHour', hour);
       var msg = hourlyMessages[hour];
       if (msg) {
-        setTimeout(function() { showCatMessage(msg, 8000); }, 2000);
+        var chime=document.getElementById('chime-audio');
+        if(chime){chime.currentTime=0;chime.volume=0.4;chime.play().catch(function(){});}
+        setTimeout(function() { showCatMessage(msg, 8000); }, 3000);
       }
     }
   }
