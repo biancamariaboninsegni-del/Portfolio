@@ -2247,7 +2247,7 @@ let currentDict = 'fr';
 
 function openBooks() {
   if (localStorage.getItem('hiddenLibraryUnlocked') === '1') {
-    chessPhase = 'unlocked';
+    chessPhase = 'unlocked'; localStorage.setItem('hiddenLibraryUnlocked','1');
   }
   switchDict('fr');
   document.getElementById('modal-books').classList.add('open');
@@ -3407,7 +3407,7 @@ const HL_BOOKS = [
   { title: 'The Screwtape Letters', author: 'C.S. Lewis', color: '#4a2060', text: '#dfc8f5',
     review: 'Basically my decision-making process. One choice, two hundred scenarios. C.S. Lewis\' \'Of Course But Maybe\', before Louis CK coined it.' },
   { title: 'La voce a te dovuta', author: 'Pedro Salinas', color: '#1a4a3a', text: '#c8f0e0',
-    review: 'The one Pavese book that doesn\'t want to hurt you.' },
+    review: 'The one Salinas book that doesn\'t want to hurt you.' },
   { title: 'Not for Profit', author: 'Martha C. Nussbaum', color: '#3a3a1a', text: '#f0f0c8',
     review: 'Martha Nussbaum makes a case for the humanities. Filed under: things I should have sent to people who ask why I studied arts and humanities.' },
   { title: 'The Man Who Mistook His Wife for a Hat', author: 'Oliver Sacks', color: '#2a1a4a', text: '#d0c8f5',
