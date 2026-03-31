@@ -3045,6 +3045,7 @@ function repositionHotspots() {
 window.addEventListener('resize', repositionHotspots);
 
 function enterRoom() {
+  window.dispatchEvent(new Event('roomEntered'));
   document.getElementById('curtain').classList.add('fade-out');
   document.getElementById('room').classList.add('entered');
   setTimeout(() => document.getElementById('curtain').style.display = 'none', 1500);
@@ -4296,14 +4297,12 @@ function initRainCanvas() {
   }
 
   // Wait for room to be entered
-  var originalEnterRoom = window.enterRoom;
-  window.enterRoom = function() {
-    if (originalEnterRoom) originalEnterRoom.apply(this, arguments);
+  window.addEventListener('roomEntered', function() {
     setTimeout(function() {
       localStorage.setItem('lastCatHour','-1'); checkReturnVisit();
       setTimeout(checkHourlyMessage, visitCount > 0 ? 10000 : 3000);
     }, 2000);
-  };
+  });
 
   // Check every minute
   setInterval(checkHourlyMessage, 60000);
