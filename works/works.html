@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Works — Bianca Maria Boninsegni</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root { --parchment: #f5ead6; --gold: #c8962e; --dark: #0a0805; --mid: #888; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--dark); font-family: "EB Garamond", serif; color: var(--parchment); min-height: 100vh; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2.5rem; border-bottom: 1px solid rgba(200,150,46,0.2); position: sticky; top: 0; background: var(--dark); z-index: 50; }
+  .nav-back { font-family: "Courier Prime", monospace; font-size: 0.7rem; color: rgba(200,150,46,0.6); text-decoration: none; letter-spacing: 0.2em; text-transform: uppercase; transition: color 0.3s; }
+  .nav-back:hover { color: var(--gold); }
+  .nav-title { font-size: 0.85rem; color: rgba(245,234,214,0.5); font-style: italic; }
+  .section { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem 2rem; }
+  .section + .section { border-top: 1px solid rgba(200,150,46,0.12); }
+  .section-label { font-family: "Courier Prime", monospace; font-size: 0.65rem; color: var(--gold); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .section-title { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 400; line-height: 1.2; margin-bottom: 0.8rem; }
+  .section-desc { font-size: 1rem; color: rgba(245,234,214,0.6); line-height: 1.75; max-width: 640px; margin-bottom: 0.8rem; }
+  .meta { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .meta-label { font-family: "Courier Prime", monospace; font-size: 0.58rem; color: rgba(200,150,46,0.5); letter-spacing: 0.2em; text-transform: uppercase; }
+  .meta-value { font-size: 0.85rem; color: rgba(245,234,214,0.7); }
+  .gallery { columns: 2; column-gap: 1.2rem; margin-bottom: 3rem; }
+  .gallery-item { break-inside: avoid; margin-bottom: 1.2rem; overflow: hidden; cursor: zoom-in; }
+  .gallery-item img { width: 100%; display: block; transition: transform 0.5s ease, filter 0.4s ease; filter: brightness(0.92) saturate(0.95); }
+  .gallery-item:hover img { transform: scale(1.02); filter: brightness(1) saturate(1.05); }
+  .ext-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: "Courier Prime", monospace; font-size: 0.7rem; color: rgba(200,150,46,0.6); text-decoration: none; border: 1px solid rgba(200,150,46,0.2); padding: 0.5rem 1rem; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s; margin-bottom: 3rem; }
+  .ext-link:hover { color: var(--gold); border-color: rgba(200,150,46,0.5); }
+  #lightbox { display: none; position: fixed; inset: 0; background: rgba(5,3,2,0.96); z-index: 100; align-items: center; justify-content: center; cursor: zoom-out; flex-direction: column; gap: 1rem; }
+  #lightbox.open { display: flex; }
+  #lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; }
+  #lightbox-close { position: absolute; top: 1.5rem; right: 2rem; font-family: "Courier Prime", monospace; font-size: 0.7rem; color: rgba(200,150,46,0.6); letter-spacing: 0.2em; cursor: pointer; }
+  #lightbox-close:hover { color: var(--gold); }
+  #lightbox-credit { font-family: "Courier Prime", monospace; font-size: 0.6rem; color: rgba(200,150,46,0.3); letter-spacing: 0.12em; }
+  @media (max-width: 640px) { .gallery { columns: 1; } .meta { gap: 1rem; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-back">← back to portfolio</a>
+  <span class="nav-title">Bianca Maria Boninsegni</span>
+</nav>
+
+<!-- CAMPARI -->
+<div class="section">
+  <div class="section-label">Case Study · 2025</div>
+  <h2 class="section-title">Campari Heritage & Communications</h2>
+  <p class="section-desc">A visual and editorial project for Galleria Campari — tracing the brand's Futurist artistic legacy from Depero and Divulgheroff to the Art Déco period. The moodboard served as strategic reference for digital content, newsletter storytelling, and editorial direction.</p>
+  <div class="meta">
+    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Digital Media & Communications Specialist</span></div>
+    <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">Campari Group, Milan</span></div>
+    <div class="meta-item"><span class="meta-label">Year</span><span class="meta-value">2025</span></div>
+  </div>
+  <div class="gallery">
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/1.png" alt="Campari 1"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/2.png" alt="Campari 2"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/3.png" alt="Campari 3"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/4.png" alt="Campari 4"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/5.png" alt="Campari 5"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/6.png" alt="Campari 6"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/7.png" alt="Campari 7"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/8.png" alt="Campari 8"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/13.png" alt="Campari 13"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/18.png" alt="Campari 18"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/19.png" alt="Campari 19"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Galleria Campari')"><img src="campari/20.png" alt="Campari 20"></div>
+  </div>
+</div>
+
+<!-- HOMO FABER -->
+<div class="section">
+  <div class="section-label">Case Study · 2024</div>
+  <h2 class="section-title">Homo Faber 2024 — The Journey of Life</h2>
+  <p class="section-desc">A month-long biennial of contemporary craftsmanship at the Fondazione Giorgio Cini in Venice, directed by Luca Guadagnino. As Brand & Communications Coordinator for the Michelangelo Foundation, I managed operational workflows, produced digital content, and supported PR activities across 70+ countries for an event welcoming 50,000+ visitors.</p>
+  <div class="meta">
+    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Brand & Communications Coordinator</span></div>
+    <div class="meta-item"><span class="meta-label">Organisation</span><span class="meta-value">Richemont · Michelangelo Foundation</span></div>
+    <div class="meta-item"><span class="meta-label">Location</span><span class="meta-value">Venice · Geneva</span></div>
+    <div class="meta-item"><span class="meta-label">Scale</span><span class="meta-value">50,000+ visitors · 70+ countries</span></div>
+  </div>
+  <div class="gallery">
+    <div class="gallery-item" onclick="openLightbox(this, '© Alessandra Chemollo / Michelangelo Foundation')"><img src="homofaber/mfo-childhood.jpg" alt="Homo Faber — Childhood"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Alessandra Chemollo / Michelangelo Foundation')"><img src="homofaber/mfo-celebration.jpg" alt="Homo Faber — Celebration"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Alessandra Chemollo / Michelangelo Foundation')"><img src="homofaber/mfo-love-union.jpg" alt="Homo Faber — Love Union"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Carsten Nilsson / Michelangelo Foundation')"><img src="homofaber/mfo-circus.jpg" alt="Homo Faber — Circus"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Alessandra Chemollo / Michelangelo Foundation')"><img src="homofaber/mfo-birth.jpg" alt="Homo Faber — Birth"></div>
+    <div class="gallery-item" onclick="openLightbox(this, '© Alessandra Chemollo / Michelangelo Foundation')"><img src="homofaber/mfo-via-arno.jpg" alt="Homo Faber — Via Arno Salon"></div>
+  </div>
+</div>
+
+<!-- CHRISTIES -->
+<div class="section">
+  <div class="section-label">Case Study · 2022</div>
+  <h2 class="section-title">Jewels & Watches: La Dolce Vita — Christie's</h2>
+  <p class="section-desc">Supported the communications and digital asset production for this online auction hosted by Christie's Milan Jewellery Department, contributing to a total sales result of €1.77M. The auction also formed the basis of my MSc dissertation on HNWI consumer behaviour and luxury market dynamics.</p>
+  <div class="meta">
+    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-value">Auction & Communications Support</span></div>
+    <div class="meta-item"><span class="meta-label">Company</span><span class="meta-value">Christie's Milan</span></div>
+    <div class="meta-item"><span class="meta-label">Result</span><span class="meta-value">€1.77M total sales</span></div>
+    <div class="meta-item"><span class="meta-label">Year</span><span class="meta-value">2022</span></div>
+  </div>
+  <a href="https://onlineonly.christies.com/s/jewels-watches-online-la-dolce-vita/lots/2152" target="_blank" class="ext-link">View auction at Christie's ↗</a>
+</div>
+
+<div id="lightbox" onclick="closeLightbox()">
+  <span id="lightbox-close">close ×</span>
+  <img id="lightbox-img" src="" alt="">
+  <span id="lightbox-credit"></span>
+</div>
+
+<script>
+  function openLightbox(el, credit) {
+    document.getElementById("lightbox-img").src = el.querySelector("img").src;
+    document.getElementById("lightbox-credit").textContent = credit || "";
+    document.getElementById("lightbox").classList.add("open");
+  }
+  function closeLightbox() {
+    document.getElementById("lightbox").classList.remove("open");
+  }
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+</script>
+</body>
+</html>
