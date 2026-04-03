@@ -4174,6 +4174,7 @@ function startFLThree() {
   });
   obs.observe(room,{attributes:true,attributeFilter:["style"]});
   document.addEventListener("mousemove",e=>{
+    if(window._isDayMode) return;
     cx=(e.clientX/window.innerWidth-0.5);
     cy=(e.clientY/window.innerHeight-0.5);
   });
@@ -4476,6 +4477,7 @@ function initRainCanvas() {
     var room = document.getElementById('room');
 
     if (isDay) {
+      window._isDayMode = true;
       toggle.textContent = '🌙';
       
       var pimg = document.getElementById("parallax-img"); if(pimg) pimg.src = "BACKGROUND_DAYLIGHT.png";
@@ -4498,6 +4500,7 @@ function initRainCanvas() {
       setTimeout(function(){ showBubble(msg); }, 800);
 
     } else {
+      window._isDayMode = false;
       toggle.textContent = '☀';
       
       var pimg = document.getElementById("parallax-img"); if(pimg) pimg.src = "room.png";
