@@ -4600,7 +4600,7 @@ function initRainCanvas() {
 
 <script>
 // ── BROWNIAN MOTION ──────────────────────────────────────────
-function openBrownian() {
+window.openBrownian = function() {
   document.getElementById('modal-brownian').style.display = 'flex';
   document.getElementById('brownian-enigma').style.display = 'block';
   document.getElementById('brownian-music').style.display = 'none';
@@ -4610,12 +4610,12 @@ function openBrownian() {
   drawMusicCanvas(null);
 }
 
-function closeBrownian() {
+window.closeBrownian = function() {
   document.getElementById('modal-brownian').style.display = 'none';
   stopBrownianSim();
 }
 
-function brownianAnswer(type) {
+window.brownianAnswer = function(type) {
   const fb = document.getElementById('brownian-feedback');
   if (type === 'right') {
     fb.textContent = '✓ Esatto. Sono gli atomi. La polvere non danza — è trascinata.';
@@ -4699,7 +4699,7 @@ function playNote(freq, duration) {
 // Frequencies for glissando (starting from C4)
 const FREQS = { 'C':261.6,'C#':277.2,'D':293.7,'Eb':311.1,'E':329.6,'F':349.2,'F#':370,'G':392,'Ab':415.3,'A':440,'Bb':466.2,'B':493.9,'C2':523.3 };
 
-function checkNote(note) {
+window.checkNote = function(note) {
   const fb = document.getElementById('note-feedback');
   drawMusicCanvas(note);
   playNote(FREQS[note] || 311.1, 0.8);
