@@ -4546,259 +4546,240 @@ function initRainCanvas() {
 
 
 <!-- BROWNIAN MOTION MODAL -->
-<div class="modal-backdrop" id="modal-brownian" style="z-index:160;">
-  <div style="background:linear-gradient(135deg,#0d0a06,#1a1208);border:1px solid rgba(200,150,46,0.2);border-radius:4px;max-width:680px;width:90%;padding:2.5rem;position:relative;font-family:'EB Garamond',serif;color:#e8d5a0;">
-    <span onclick="closeBrownian()" style="position:absolute;top:1.2rem;right:1.5rem;font-family:'Courier Prime',monospace;font-size:0.7rem;color:rgba(200,150,46,0.6);cursor:pointer;letter-spacing:0.2em;">close ×</span>
+<div class="modal-backdrop" id="modal-brownian" style="z-index:160;backdrop-filter:blur(2px);">
+  <div style="background:linear-gradient(160deg,#0a0705 0%,#130e08 100%);border:1px solid rgba(200,150,46,0.18);border-radius:6px;max-width:700px;width:92%;padding:2.8rem 2.8rem 2.2rem;position:relative;font-family:'EB Garamond',serif;color:#e8d5a0;max-height:90vh;overflow-y:auto;">
+    
+    <span onclick="window.closeBrownian()" style="position:absolute;top:1rem;right:1.5rem;font-size:1.4rem;color:rgba(200,150,46,0.5);cursor:pointer;line-height:1;font-family:serif;" onmouseover="this.style.color='rgba(200,150,46,1)'" onmouseout="this.style.color='rgba(200,150,46,0.5)'">&#x2715;</span>
 
-    <!-- ENIGMA PHASE -->
-    <div id="brownian-enigma">
-      <div style="font-size:0.65rem;letter-spacing:0.3em;color:rgba(200,150,46,0.5);margin-bottom:1.5rem;font-family:'Courier Prime',monospace;">ENIGMA</div>
-      <p style="font-size:1.15rem;line-height:1.8;font-style:italic;margin-bottom:2rem;">
-        "Guarda la luce che entra dalla finestra.<br>
-        Vedi qualcosa muoversi?<br><br>
-        Quello che vedi non è il movimento di ciò che cerchi —<br>
-        è solo la sua firma.<br>
-        Come un'impronta senza piede.<br><br>
-        Cosa lascia quella traccia?"
-      </p>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-        <button onclick="brownianAnswer('wrong')" style="flex:1;padding:0.6rem 1rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.15em;cursor:pointer;">IL VENTO</button>
-        <button onclick="brownianAnswer('right')" style="flex:1;padding:0.6rem 1rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.15em;cursor:pointer;">GLI ATOMI</button>
-        <button onclick="brownianAnswer('wrong')" style="flex:1;padding:0.6rem 1rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.15em;cursor:pointer;">LA GRAVITÀ</button>
-        <button onclick="brownianAnswer('wrong')" style="flex:1;padding:0.6rem 1rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.15em;cursor:pointer;">LA LUCE</button>
+    <div style="font-size:0.6rem;letter-spacing:0.35em;color:rgba(200,150,46,0.4);margin-bottom:2rem;font-family:'Courier Prime',monospace;text-transform:uppercase;">The Swan &middot; Saint-Sa&euml;ns &middot; 1886</div>
+
+    <canvas id="swan-staff" width="620" height="160" style="width:100%;border-radius:3px;display:block;cursor:pointer;"></canvas>
+    <div style="font-size:0.62rem;letter-spacing:0.2em;color:rgba(200,150,46,0.3);text-align:center;margin-top:0.5rem;font-family:'Courier Prime',monospace;">click to replay</div>
+
+    <div style="margin-top:1.8rem;text-align:center;">
+      <p style="font-size:1.05rem;font-style:italic;letter-spacing:0.03em;margin-bottom:1.4rem;color:rgba(232,213,160,0.85);">Which note is missing?</p>
+      <div style="display:flex;gap:0.8rem;justify-content:center;" id="swan-note-btns">
+        <button onclick="window.checkSwanNote('G')" style="padding:0.55rem 1.4rem;background:transparent;border:1px solid rgba(200,150,46,0.3);color:rgba(232,213,160,0.8);font-family:'EB Garamond',serif;font-size:1rem;cursor:pointer;border-radius:3px;transition:all 0.2s;">G</button>
+        <button onclick="window.checkSwanNote('A')" style="padding:0.55rem 1.4rem;background:transparent;border:1px solid rgba(200,150,46,0.3);color:rgba(232,213,160,0.8);font-family:'EB Garamond',serif;font-size:1rem;cursor:pointer;border-radius:3px;transition:all 0.2s;">A</button>
+        <button onclick="window.checkSwanNote('B')" style="padding:0.55rem 1.4rem;background:transparent;border:1px solid rgba(200,150,46,0.3);color:rgba(232,213,160,0.8);font-family:'EB Garamond',serif;font-size:1rem;cursor:pointer;border-radius:3px;transition:all 0.2s;">B</button>
+        <button onclick="window.checkSwanNote('C')" style="padding:0.55rem 1.4rem;background:transparent;border:1px solid rgba(200,150,46,0.3);color:rgba(232,213,160,0.8);font-family:'EB Garamond',serif;font-size:1rem;cursor:pointer;border-radius:3px;transition:all 0.2s;">C</button>
       </div>
-      <div id="brownian-feedback" style="margin-top:1.2rem;font-size:0.85rem;color:rgba(200,150,46,0.7);font-style:italic;min-height:1.5rem;"></div>
+      <div id="swan-feedback" style="margin-top:1rem;font-size:0.85rem;font-style:italic;color:rgba(200,150,46,0.7);min-height:1.4rem;"></div>
     </div>
 
-    <!-- MUSIC PHASE (hidden initially) -->
-    <div id="brownian-music" style="display:none;">
-      <div style="font-size:0.65rem;letter-spacing:0.3em;color:rgba(200,150,46,0.5);margin-bottom:1rem;font-family:'Courier Prime',monospace;">RHAPSODY IN BLUE — GERSHWIN, 1924</div>
-      <p style="font-size:0.9rem;line-height:1.7;margin-bottom:1.5rem;color:rgba(232,213,160,0.8);">
-        Il glissando iniziale del clarinetto sale cromaticamente — note consecutive, nessuna prevedibile, nessuna casuale. Come una particella di polvere che segue gli atomi invisibili.<br><br>
-        <em>Una nota manca. Quale?</em>
-      </p>
-      <canvas id="brownian-canvas" width="600" height="120" style="width:100%;border:1px solid rgba(200,150,46,0.15);border-radius:2px;margin-bottom:1.2rem;background:#080604;cursor:pointer;"></canvas>
-      <div style="display:flex;gap:0.8rem;justify-content:center;margin-bottom:1.2rem;" id="note-buttons">
-        <button onclick="checkNote('D')" class="note-btn" style="padding:0.5rem 1.2rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.75rem;cursor:pointer;">D</button>
-        <button onclick="checkNote('E')" class="note-btn" style="padding:0.5rem 1.2rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.75rem;cursor:pointer;">E♭</button>
-        <button onclick="checkNote('F')" class="note-btn" style="padding:0.5rem 1.2rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.75rem;cursor:pointer;">F</button>
-        <button onclick="checkNote('G')" class="note-btn" style="padding:0.5rem 1.2rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.75rem;cursor:pointer;">G</button>
-      </div>
-      <div id="note-feedback" style="font-size:0.85rem;color:rgba(200,150,46,0.7);font-style:italic;min-height:1.5rem;text-align:center;"></div>
-      <div id="brownian-explanation" style="display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(200,150,46,0.15);">
-        <p style="font-size:0.85rem;line-height:1.8;color:rgba(232,213,160,0.75);">
-          Il glissando di Gershwin sale cromaticamente: ogni nota è prevedibile nel tipo (semitoni consecutivi) ma imprevedibile nel momento. Esattamente come il moto browniano — ogni colpo di un atomo segue leggi fisiche, ma il risultato sembra casuale.<br><br>
-          Einstein lo capì nel 1905. La polvere che balla nella luce non è poesia. È la firma degli atomi.
-        </p>
-        <canvas id="brownian-sim" width="560" height="160" style="width:100%;margin-top:1.2rem;border-radius:2px;background:#080604;"></canvas>
-        <div style="font-size:0.6rem;letter-spacing:0.2em;color:rgba(200,150,46,0.3);text-align:center;margin-top:0.5rem;font-family:'Courier Prime',monospace;">SIMULAZIONE — MOTO BROWNIANO</div>
+    <div id="brownian-reveal" style="display:none;margin-top:2rem;padding-top:1.8rem;border-top:1px solid rgba(200,150,46,0.12);">
+      <canvas id="brownian-sim" width="620" height="180" style="width:100%;border-radius:3px;display:block;background:#070503;"></canvas>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:0.8rem;">
+        <span style="font-size:0.75rem;font-style:italic;color:rgba(232,213,160,0.5);">Music and atoms obey the same law.</span>
+        <span style="font-size:0.58rem;letter-spacing:0.2em;color:rgba(200,150,46,0.3);font-family:'Courier Prime',monospace;">Voss &amp; Clarke &middot; Nature &middot; 1975</span>
       </div>
     </div>
   </div>
 </div>
 
-
 <script>
-// ── BROWNIAN MOTION ──────────────────────────────────────────
-window.openBrownian = function() {
-  document.getElementById('modal-brownian').style.display = 'flex';
-  document.getElementById('brownian-enigma').style.display = 'block';
-  document.getElementById('brownian-music').style.display = 'none';
-  document.getElementById('brownian-explanation').style.display = 'none';
-  document.getElementById('brownian-feedback').textContent = '';
-  document.getElementById('note-feedback').textContent = '';
-  drawMusicCanvas(null);
-}
+(function(){
+  var SWAN = [
+    {note:'G4',freq:392.0,dur:0.6,beat:0},
+    {note:'A4',freq:440.0,dur:0.6,beat:1},
+    {note:'B4',freq:493.9,dur:0.6,beat:2},
+    {note:'C5',freq:523.3,dur:0.8,beat:3},
+    {note:'B4',freq:493.9,dur:0.4,beat:4},
+    {note:'A4',freq:440.0,dur:0.4,beat:4.5},
+    {note:'G4',freq:392.0,dur:1.0,beat:5}
+  ];
+  var MISSING_IDX = 2;
+  var CORRECT = 'B';
+  var audioCtx = null;
+  var brownAnim = null;
+  var staffAnim = null;
+  var playhead = -1;
+  var solved = false;
 
-window.closeBrownian = function() {
-  document.getElementById('modal-brownian').style.display = 'none';
-  stopBrownianSim();
-}
-
-window.brownianAnswer = function(type) {
-  const fb = document.getElementById('brownian-feedback');
-  if (type === 'right') {
-    fb.textContent = '✓ Esatto. Sono gli atomi. La polvere non danza — è trascinata.';
-    fb.style.color = 'rgba(150,200,150,0.8)';
-    setTimeout(() => {
-      document.getElementById('brownian-enigma').style.display = 'none';
-      document.getElementById('brownian-music').style.display = 'block';
-      drawMusicCanvas(null);
-    }, 1200);
-  } else {
-    fb.textContent = '— Guarda ancora la luce. La risposta è lì.';
-    fb.style.color = 'rgba(200,150,46,0.6)';
+  function getAudio(){
+    if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+    return audioCtx;
   }
-}
 
-// Music canvas — glissando visualization
-const NOTES = ['C','C#','D','Eb','E','F','F#','G','Ab','A','Bb','B','C2'];
-const MISSING = 'Eb'; // the missing note index 3
-const MISSING_IDX = 3;
+  function playNote(freq,start,dur){
+    var ctx=getAudio();
+    var osc=ctx.createOscillator();
+    var gain=ctx.createGain();
+    osc.connect(gain);gain.connect(ctx.destination);
+    osc.type='triangle';
+    osc.frequency.value=freq;
+    gain.gain.setValueAtTime(0,ctx.currentTime+start);
+    gain.gain.linearRampToValueAtTime(0.25,ctx.currentTime+start+0.03);
+    gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+start+dur);
+    osc.start(ctx.currentTime+start);
+    osc.stop(ctx.currentTime+start+dur+0.05);
+  }
 
-function drawMusicCanvas(highlight) {
-  const canvas = document.getElementById('brownian-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const w = canvas.width, h = canvas.height;
-  ctx.clearRect(0, 0, w, h);
-  ctx.fillStyle = '#080604';
-  ctx.fillRect(0, 0, w, h);
+  function playSwan(skipMissing){
+    SWAN.forEach(function(n,i){
+      if(skipMissing && i===MISSING_IDX) return;
+      playNote(n.freq, n.beat*0.55, n.dur*0.55);
+    });
+    playhead=0;
+    var total=7*0.55*1000;
+    var t0=performance.now();
+    (function animPH(){
+      playhead=(performance.now()-t0)/total;
+      if(playhead<1.0) requestAnimationFrame(animPH);
+      else playhead=-1;
+    })();
+  }
 
-  const n = NOTES.length;
-  const barW = w / n;
+  var noteY={'G4':95,'A4':83,'B4':71,'C5':59};
 
-  NOTES.forEach((note, i) => {
-    const x = i * barW;
-    const noteH = (h - 20) * (i + 1) / n;
-    const y = h - 10 - noteH;
-    const isMissing = (i === MISSING_IDX);
-    const isHighlight = (highlight === note);
+  function drawStaff(highlighted){
+    var canvas=document.getElementById('swan-staff');
+    if(!canvas) return;
+    var ctx=canvas.getContext('2d');
+    var W=canvas.width,H=canvas.height;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#070503';
+    ctx.fillRect(0,0,W,H);
 
-    if (isMissing) {
-      // Gap — draw dashed outline
-      ctx.strokeStyle = 'rgba(200,150,46,0.5)';
-      ctx.setLineDash([4, 4]);
-      ctx.lineWidth = 1;
-      ctx.strokeRect(x + 2, y, barW - 4, noteH);
-      ctx.setLineDash([]);
-      ctx.fillStyle = 'rgba(200,150,46,0.08)';
-      ctx.fillRect(x + 2, y, barW - 4, noteH);
-      ctx.fillStyle = 'rgba(200,150,46,0.4)';
-      ctx.font = '10px Courier Prime';
-      ctx.textAlign = 'center';
-      ctx.fillText('?', x + barW/2, h - 4);
-    } else {
-      ctx.fillStyle = isHighlight
-        ? 'rgba(150,200,150,0.7)'
-        : 'rgba(200,150,46,0.55)';
-      ctx.fillRect(x + 2, y, barW - 4, noteH);
-      ctx.fillStyle = 'rgba(232,213,160,0.6)';
-      ctx.font = '9px Courier Prime';
-      ctx.textAlign = 'center';
-      ctx.fillText(note, x + barW/2, h - 4);
+    // Staff lines
+    ctx.strokeStyle='rgba(200,150,46,0.2)';
+    ctx.lineWidth=1;
+    for(var i=0;i<5;i++){
+      var y=35+i*16;
+      ctx.beginPath();ctx.moveTo(30,y);ctx.lineTo(W-30,y);ctx.stroke();
     }
-  });
-}
 
-// Play a note via Web Audio API
-function playNote(freq, duration) {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.type = 'triangle';
-  osc.frequency.setValueAtTime(freq, ctx.currentTime);
-  gain.gain.setValueAtTime(0.3, ctx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
-  osc.start(ctx.currentTime);
-  osc.stop(ctx.currentTime + duration);
-}
+    // Treble clef
+    ctx.fillStyle='rgba(200,150,46,0.45)';
+    ctx.font='72px Georgia,serif';
+    ctx.textAlign='left';
+    ctx.fillText('𝄞',2,H-10);
 
-// Frequencies for glissando (starting from C4)
-const FREQS = { 'C':261.6,'C#':277.2,'D':293.7,'Eb':311.1,'E':329.6,'F':349.2,'F#':370,'G':392,'Ab':415.3,'A':440,'Bb':466.2,'B':493.9,'C2':523.3 };
+    var xStart=80,xEnd=W-40,totalBeats=6.0;
 
-window.checkNote = function(note) {
-  const fb = document.getElementById('note-feedback');
-  drawMusicCanvas(note);
-  playNote(FREQS[note] || 311.1, 0.8);
+    SWAN.forEach(function(n,i){
+      var x=xStart+(n.beat/totalBeats)*(xEnd-xStart);
+      var y=noteY[n.note]||71;
+      var isMissing=(i===MISSING_IDX);
+      var isHL=(highlighted && n.note===highlighted && i===MISSING_IDX);
 
-  if (note === 'E' || note === 'Eb') { // accept Eb
-    fb.textContent = '✓ Esatto. Mi bemolle — la quarta nota del glissando.';
-    fb.style.color = 'rgba(150,200,150,0.8)';
-    document.getElementById('brownian-explanation').style.display = 'block';
-    startBrownianSim();
-  } else {
-    fb.textContent = "— Ascolta il salto. C'è qualcosa che manca tra D e E.";
-    fb.style.color = 'rgba(200,150,46,0.6)';
-  }
-}
-
-// Brownian simulation
-let brownSim = null;
-function startBrownianSim() {
-  const canvas = document.getElementById('brownian-sim');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const w = canvas.width, h = canvas.height;
-
-  // Particles (atoms) — many small
-  const atoms = Array.from({length: 80}, () => ({
-    x: Math.random() * w, y: Math.random() * h,
-    vx: (Math.random()-0.5)*3, vy: (Math.random()-0.5)*3,
-    r: 2
-  }));
-
-  // One large particle — dust
-  const dust = { x: w/2, y: h/2, vx: 0, vy: 0, trail: [] };
-
-  function tick() {
-    ctx.fillStyle = 'rgba(8,6,4,0.25)';
-    ctx.fillRect(0, 0, w, h);
-
-    // Move atoms
-    atoms.forEach(a => {
-      a.x += a.vx; a.y += a.vy;
-      if (a.x < 0 || a.x > w) a.vx *= -1;
-      if (a.y < 0 || a.y > h) a.vy *= -1;
-      // Collide with dust
-      const dx = dust.x - a.x, dy = dust.y - a.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < 12) {
-        dust.vx += dx/dist * 0.3;
-        dust.vy += dy/dist * 0.3;
+      if(isMissing && !solved){
+        var pulse=0.5+0.5*Math.sin(performance.now()*0.004);
+        ctx.fillStyle='rgba(200,150,46,'+(0.4+0.4*pulse)+')';
+        ctx.font='bold 20px EB Garamond,serif';
+        ctx.textAlign='center';
+        ctx.fillText('?',x,y+7);
+        ctx.strokeStyle='rgba(200,150,46,'+(0.3+0.3*pulse)+')';
+        ctx.lineWidth=1;
+        ctx.setLineDash([3,3]);
+        ctx.beginPath();ctx.arc(x,y,11,0,Math.PI*2);ctx.stroke();
+        ctx.setLineDash([]);
+      } else {
+        ctx.fillStyle=isHL?'rgba(150,210,150,0.9)':'rgba(200,150,46,0.75)';
+        ctx.beginPath();ctx.ellipse(x,y,9,6.5,-0.3,0,Math.PI*2);ctx.fill();
+        ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=1.5;
+        ctx.beginPath();ctx.moveTo(x+9,y);ctx.lineTo(x+9,y-34);ctx.stroke();
       }
-      ctx.beginPath();
-      ctx.arc(a.x, a.y, a.r, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(200,150,46,0.3)';
-      ctx.fill();
+
+      ctx.fillStyle='rgba(200,150,46,0.28)';
+      ctx.font='9px Courier Prime,monospace';
+      ctx.textAlign='center';
+      ctx.fillText(isMissing&&!solved?'?':n.note.replace(/[0-9]/g,''),x,H-8);
     });
 
-    // Move dust
-    dust.vx *= 0.95;
-    dust.vy *= 0.95;
-    dust.x += dust.vx;
-    dust.y += dust.vy;
-    dust.x = Math.max(8, Math.min(w-8, dust.x));
-    dust.y = Math.max(8, Math.min(h-8, dust.y));
-    dust.trail.push({x: dust.x, y: dust.y});
-    if (dust.trail.length > 60) dust.trail.shift();
-
-    // Draw trail
-    if (dust.trail.length > 1) {
-      ctx.beginPath();
-      ctx.moveTo(dust.trail[0].x, dust.trail[0].y);
-      dust.trail.forEach(p => ctx.lineTo(p.x, p.y));
-      ctx.strokeStyle = 'rgba(200,150,46,0.25)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
+    if(playhead>0){
+      var px=xStart+playhead*(xEnd-xStart);
+      ctx.strokeStyle='rgba(232,213,160,0.25)';
+      ctx.lineWidth=1;ctx.setLineDash([]);
+      ctx.beginPath();ctx.moveTo(px,25);ctx.lineTo(px,115);ctx.stroke();
     }
 
-    // Draw dust particle
-    ctx.beginPath();
-    ctx.arc(dust.x, dust.y, 8, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba(232,213,160,0.9)';
-    ctx.fill();
-
-    brownSim = requestAnimationFrame(tick);
+    staffAnim=requestAnimationFrame(function(){drawStaff(highlighted);});
   }
-  tick();
-}
 
-function stopBrownianSim() {
-  if (brownSim) { cancelAnimationFrame(brownSim); brownSim = null; }
-}
+  function startBrownianSim(){
+    var canvas=document.getElementById('brownian-sim');
+    if(!canvas) return;
+    var ctx=canvas.getContext('2d');
+    var W=canvas.width,H=canvas.height;
+    var atoms=[];
+    for(var i=0;i<120;i++) atoms.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*2.5,vy:(Math.random()-0.5)*2.5});
+    var dust={x:W/2,y:H/2,vx:0,vy:0,trail:[]};
 
-// Play glissando on canvas click
-document.addEventListener('DOMContentLoaded', () => {
-  const c = document.getElementById('brownian-canvas');
-  if (c) c.addEventListener('click', () => {
-    const notes = ['C','C#','D','E','F','F#','G','Ab','A','Bb','B','C2'];
-    notes.forEach((n, i) => setTimeout(() => playNote(FREQS[n], 0.3), i * 150));
+    function tick(){
+      ctx.fillStyle='rgba(7,5,3,0.18)';
+      ctx.fillRect(0,0,W,H);
+      atoms.forEach(function(a){
+        a.x+=a.vx;a.y+=a.vy;
+        if(a.x<0||a.x>W)a.vx*=-1;
+        if(a.y<0||a.y>H)a.vy*=-1;
+        var dx=dust.x-a.x,dy=dust.y-a.y;
+        var d=Math.sqrt(dx*dx+dy*dy);
+        if(d<16){dust.vx+=dx/d*0.25;dust.vy+=dy/d*0.25;}
+        ctx.beginPath();ctx.arc(a.x,a.y,1.5,0,Math.PI*2);
+        ctx.fillStyle='rgba(200,150,46,0.25)';ctx.fill();
+      });
+      dust.vx*=0.94;dust.vy*=0.94;
+      dust.x+=dust.vx;dust.y+=dust.vy;
+      dust.x=Math.max(10,Math.min(W-10,dust.x));
+      dust.y=Math.max(10,Math.min(H-10,dust.y));
+      dust.trail.push({x:dust.x,y:dust.y});
+      if(dust.trail.length>80)dust.trail.shift();
+      if(dust.trail.length>1){
+        ctx.beginPath();ctx.moveTo(dust.trail[0].x,dust.trail[0].y);
+        dust.trail.forEach(function(p){ctx.lineTo(p.x,p.y);});
+        ctx.strokeStyle='rgba(200,150,46,0.2)';ctx.lineWidth=1;ctx.stroke();
+      }
+      ctx.beginPath();ctx.arc(dust.x,dust.y,7,0,Math.PI*2);
+      ctx.fillStyle='rgba(232,213,160,0.92)';ctx.fill();
+      brownAnim=requestAnimationFrame(tick);
+    }
+    tick();
+  }
+
+  window.openBrownian=function(){
+    solved=false;
+    document.getElementById('modal-brownian').style.display='flex';
+    document.getElementById('brownian-reveal').style.display='none';
+    document.getElementById('swan-feedback').textContent='';
+    document.getElementById('swan-note-btns').style.display='flex';
+    if(staffAnim)cancelAnimationFrame(staffAnim);
+    drawStaff(null);
+    setTimeout(function(){playSwan(true);},600);
+  };
+
+  window.closeBrownian=function(){
+    document.getElementById('modal-brownian').style.display='none';
+    if(brownAnim){cancelAnimationFrame(brownAnim);brownAnim=null;}
+    if(staffAnim){cancelAnimationFrame(staffAnim);staffAnim=null;}
+    playhead=-1;
+  };
+
+  window.checkSwanNote=function(note){
+    var fb=document.getElementById('swan-feedback');
+    if(note===CORRECT){
+      solved=true;
+      fb.textContent='';
+      if(staffAnim)cancelAnimationFrame(staffAnim);
+      drawStaff('B4');
+      playSwan(false);
+      setTimeout(function(){
+        document.getElementById('brownian-reveal').style.display='block';
+        document.getElementById('swan-note-btns').style.display='none';
+        startBrownianSim();
+      },1400);
+    } else {
+      fb.textContent='—';
+      fb.style.color='rgba(200,100,100,0.6)';
+      setTimeout(function(){fb.textContent='';},800);
+    }
+  };
+
+  document.addEventListener('click',function(e){
+    var c=document.getElementById('swan-staff');
+    if(c&&e.target===c) playSwan(!solved);
   });
-});
+})();
 </script>
-
 </body>
 </html>
