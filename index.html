@@ -88,7 +88,7 @@
   
   /* OVERLAY mood */
   #mood-overlay {
-    position: fixed; inset: 0; z-index: 1;
+    position: fixed; inset: 0; z-index: 2;
     background: var(--overlay);
     transition: background 1.2s ease;
     pointer-events: none;
@@ -574,7 +574,7 @@
     top: 58%;
     width: 180px; height: 180px;
     background: radial-gradient(circle, rgba(255,180,60,0.3) 0%, transparent 70%);
-    pointer-events: none; z-index: 2;
+    pointer-events: none; z-index: 15;
     transition: opacity 1s;
     border-radius: 50%;
     transform: translate(-50%, -30%);
@@ -1385,7 +1385,7 @@
 
 
   
-  #schrodinger{position:fixed;bottom:28%;left:-15%;height:8vh;width:calc(8vh * 1366 / 768);pointer-events:auto;z-index:20;cursor:pointer;background-image:url('cat_sprite_walk.png');background-size:700% 100%;background-position:0% 0%;background-repeat:no-repeat;}
+  #schrodinger{position:fixed;bottom:28%;left:-15%;height:8vh;width:calc(8vh * 1366 / 768);pointer-events:auto;z-index:15;cursor:pointer;background-image:url('cat_sprite_walk.png');background-size:700% 100%;background-position:0% 0%;background-repeat:no-repeat;}
 
   
   /* PIOGGIA */
@@ -1401,7 +1401,7 @@
     clip-path: ellipse(50% 55% at 50% 45%);
   }
   /* SCHRODINGER */
-  #gatto-wrapper { z-index:25; position:relative; isolation:isolate;
+  #gatto-wrapper { z-index:15; position:relative; isolation:isolate;
     position: absolute;
     bottom: 9%;
     right: 24%;
@@ -4163,7 +4163,7 @@ function startFLThree() {
 <script>
 (function(){
   const img = document.getElementById("parallax-img");
-  let tx=0,ty=0,cx=0,cy=0;
+  window._px={cx:0,cy:0,tx:0,ty:0}; let tx=0,ty=0,cx=0,cy=0; window._pxReset=function(){cx=0;cy=0;tx=0;ty=0;};
   const orig = Object.getOwnPropertyDescriptor(HTMLElement.prototype,"style");
   const room = document.getElementById("room");
   const obs = new MutationObserver(()=>{
@@ -4175,7 +4175,7 @@ function startFLThree() {
   });
   obs.observe(room,{attributes:true,attributeFilter:["style"]});
   document.addEventListener("mousemove",e=>{
-    if(window._isDayMode) return;
+    if(window._isDayMode){cx=0;cy=0;return;}
     cx=(e.clientX/window.innerWidth-0.5);
     cy=(e.clientY/window.innerHeight-0.5);
   });
@@ -4183,7 +4183,7 @@ function startFLThree() {
   (function tick(){
     tx+=(cx-tx)*0.05;
     ty+=(cy-ty)*0.05;
-    if(window._isDayMode){img.style.transform="translate(0px,0px)";}else{img.style.transform="translate("+(-tx*28).toFixed(2)+"px,"+(-ty*18).toFixed(2)+"px)";}
+    if(window._isDayMode){tx=0;ty=0;img.style.transform="translate(0px,0px)";}else{img.style.transform="translate("+(-tx*28).toFixed(2)+"px,"+(-ty*18).toFixed(2)+"px)";}
     requestAnimationFrame(tick);
   })();
 })();
