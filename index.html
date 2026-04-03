@@ -62,7 +62,7 @@
   @keyframes fadeInText { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
 
   /* ROOM */
-  #room {
+  #room { transition: background-image 0.3s ease;
     z-index:0; isolation:auto;
     transition: background-image 0.01s; background-color: #0a0805;
     position: fixed; inset: 0;
@@ -129,6 +129,7 @@
 
   /* HOTSPOTS, invisible clickable areas over room objects */
   .hotspot {
+    z-index: 15;
     position: fixed;
     cursor: pointer;
     z-index: 5;
@@ -1496,7 +1497,6 @@
   <div id="clock"></div>
   <div id="name-title">Bianca Maria Boninsegni<br>Marketing & Communications Specialist</div>
 </div>
-<div id="room-day" style="position:fixed;inset:0;z-index:1;background-image:url('BACKGROUND_DAYLIGHT.png');background-size:cover;background-position:center;opacity:0;transition:opacity 0.6s ease;pointer-events:none;"></div>
 <div id="room">
   <canvas id="rain-canvas"></canvas>
   
@@ -1948,7 +1948,7 @@
 
 
 <!-- HELP BUTTON -->
-
+<div id="help-btn" onclick="openHelpModal()" title="help">?</div>
 
 <!-- DISCOVERY DOTS, pulsing pointers to clickable areas -->
 <div class="hotspot-dot" id="dot-library" style="left:9%;top:42%;animation-delay:0s;"></div>
@@ -4477,7 +4477,7 @@ function initRainCanvas() {
     if (isDay) {
       toggle.textContent = '🌙';
       
-      var roomDay = document.getElementById('room-day'); if (roomDay) roomDay.style.opacity = '1';
+      if (room) room.style.backgroundImage = "url('BACKGROUND_DAYLIGHT.png')";
       var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'brightness(1.35) sepia(0.25) saturate(1.2)';
 
@@ -4499,7 +4499,7 @@ function initRainCanvas() {
     } else {
       toggle.textContent = '☀';
       
-      var roomDay = document.getElementById('room-day'); if (roomDay) roomDay.style.opacity = '0';
+      if (room) room.style.backgroundImage = "url('room.png')";
       var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'none';
 
@@ -4518,6 +4518,5 @@ function initRainCanvas() {
 })();
 </script>
 
-<div id="help-btn" onclick="openHelpModal()" style="z-index:999999!important">?</div>
 </body>
 </html>
