@@ -64,6 +64,7 @@
   /* ROOM */
   #room {
     isolation:auto;
+    position: relative;
     transition: background-image 0.01s; background-color: #0a0805;
     position: fixed; inset: 0;
     background-image: var(--room-bg);
@@ -1440,6 +1441,7 @@
   }
   #gatto-wrapper:hover #gatto-tooltip { display: block; }
 
+  #curtain ~ #day-night-toggle, body:not(.entered-room) #day-night-toggle { display: none; }
   #day-night-toggle {
     position: fixed;
     top: 60px;
@@ -3081,6 +3083,7 @@ function enterRoom() {
   window.dispatchEvent(new Event('roomEntered'));
   document.getElementById('curtain').classList.add('fade-out');
   document.getElementById('room').classList.add('entered');
+  document.getElementById('day-night-toggle').style.display = 'flex';
   setTimeout(() => document.getElementById('curtain').style.display = 'none', 1500);
   initRain();
   repositionHotspots();
@@ -4384,6 +4387,7 @@ function initRainCanvas() {
 (function(){
   var isDay = false;
   var toggle = document.getElementById('day-night-toggle');
+  toggle.style.display = 'none';
   // Preload day image
   var _preload = new Image(); _preload.src = 'BACKGROUND_DAYLIGHT.png';
 
