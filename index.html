@@ -318,6 +318,27 @@
     height: 11%;
   }
 
+
+  /* Dust/Brownian hotspot */
+  #hs-dust {
+    left: 32%;
+    top: 58%;
+    width: 12%;
+    height: 20%;
+    cursor: pointer;
+  }
+  #hs-dust::after {
+    content: 'la polvere';
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: rgba(200,150,46,0.7);
+    bottom: -1.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  #hs-dust:hover::after { opacity: 1; }
   /* MODALS */
   .modal-backdrop {
     position: fixed; inset: 0; z-index: 100;
@@ -1503,6 +1524,7 @@
   
 
 <!-- HOTSPOTS -->
+<div class="hotspot" id="hs-dust" onclick="openBrownian()"></div>
 <div class="hotspot" id="hs-imac" data-label="Open desktop" onclick="openMac()"></div>
 <div class="hotspot" id="hs-lamp" data-label="Toggle light" onclick="toggleLamp()"></div>
 <div class="hotspot" id="hs-drawer1" data-label="White Holes ✦ solve sudoku first" onclick="tryDrawer(1)"></div>
@@ -4516,6 +4538,262 @@ function initRainCanvas() {
     }
   });
 })();
+</script>
+
+
+<!-- BROWNIAN MOTION MODAL -->
+<div class="modal-backdrop" id="modal-brownian" style="z-index:160;">
+  <div style="background:linear-gradient(135deg,#0d0a06,#1a1208);border:1px solid rgba(200,150,46,0.2);border-radius:4px;max-width:680px;width:90%;padding:2.5rem;position:relative;font-family:'EB Garamond',serif;color:#e8d5a0;">
+    <span onclick="closeBrownian()" style="position:absolute;top:1.2rem;right:1.5rem;font-family:'Courier Prime',monospace;font-size:0.7rem;color:rgba(200,150,46,0.6);cursor:pointer;letter-spacing:0.2em;">close ×</span>
+
+    <!-- ENIGMA PHASE -->
+    <div id="brownian-enigma">
+      <div style="font-size:0.65rem;letter-spacing:0.3em;color:rgba(200,150,46,0.5);margin-bottom:1.5rem;font-family:'Courier Prime',monospace;">ENIGMA</div>
+      <p style="font-size:1.15rem;line-height:1.8;font-style:italic;margin-bottom:2rem;">
+        "Guarda la luce che entra dalla finestra.<br>
+        Vedi qualcosa muoversi?<br><br>
+        Quello che vedi non è il movimento di ciò che cerchi —<br>
+        è solo la sua firma.<br>
+        Come un'impronta senza piede.<br><br>
+        Cosa lascia quella traccia?"
+      </p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <button onclick="brownianAnswer('wrong')" style="flex:1;padding:0.6rem 1rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.15em;cursor:pointer;">IL VENTO</button>
+        <button onclick="brownianAnswer('right')" style="flex:1;padding:0.6rem 1rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.15em;cursor:pointer;">GLI ATOMI</button>
+        <button onclick="brownianAnswer('wrong')" style="flex:1;padding:0.6rem 1rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.15em;cursor:pointer;">LA GRAVITÀ</button>
+        <button onclick="brownianAnswer('wrong')" style="flex:1;padding:0.6rem 1rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.15em;cursor:pointer;">LA LUCE</button>
+      </div>
+      <div id="brownian-feedback" style="margin-top:1.2rem;font-size:0.85rem;color:rgba(200,150,46,0.7);font-style:italic;min-height:1.5rem;"></div>
+    </div>
+
+    <!-- MUSIC PHASE (hidden initially) -->
+    <div id="brownian-music" style="display:none;">
+      <div style="font-size:0.65rem;letter-spacing:0.3em;color:rgba(200,150,46,0.5);margin-bottom:1rem;font-family:'Courier Prime',monospace;">RHAPSODY IN BLUE — GERSHWIN, 1924</div>
+      <p style="font-size:0.9rem;line-height:1.7;margin-bottom:1.5rem;color:rgba(232,213,160,0.8);">
+        Il glissando iniziale del clarinetto sale cromaticamente — note consecutive, nessuna prevedibile, nessuna casuale. Come una particella di polvere che segue gli atomi invisibili.<br><br>
+        <em>Una nota manca. Quale?</em>
+      </p>
+      <canvas id="brownian-canvas" width="600" height="120" style="width:100%;border:1px solid rgba(200,150,46,0.15);border-radius:2px;margin-bottom:1.2rem;background:#080604;cursor:pointer;"></canvas>
+      <div style="display:flex;gap:0.8rem;justify-content:center;margin-bottom:1.2rem;" id="note-buttons">
+        <button onclick="checkNote('D')" class="note-btn" style="padding:0.5rem 1.2rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.75rem;cursor:pointer;">D</button>
+        <button onclick="checkNote('E')" class="note-btn" style="padding:0.5rem 1.2rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.75rem;cursor:pointer;">E♭</button>
+        <button onclick="checkNote('F')" class="note-btn" style="padding:0.5rem 1.2rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.75rem;cursor:pointer;">F</button>
+        <button onclick="checkNote('G')" class="note-btn" style="padding:0.5rem 1.2rem;background:rgba(200,150,46,0.05);border:1px solid rgba(200,150,46,0.25);color:#e8d5a0;font-family:'Courier Prime',monospace;font-size:0.75rem;cursor:pointer;">G</button>
+      </div>
+      <div id="note-feedback" style="font-size:0.85rem;color:rgba(200,150,46,0.7);font-style:italic;min-height:1.5rem;text-align:center;"></div>
+      <div id="brownian-explanation" style="display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(200,150,46,0.15);">
+        <p style="font-size:0.85rem;line-height:1.8;color:rgba(232,213,160,0.75);">
+          Il glissando di Gershwin sale cromaticamente: ogni nota è prevedibile nel tipo (semitoni consecutivi) ma imprevedibile nel momento. Esattamente come il moto browniano — ogni colpo di un atomo segue leggi fisiche, ma il risultato sembra casuale.<br><br>
+          Einstein lo capì nel 1905. La polvere che balla nella luce non è poesia. È la firma degli atomi.
+        </p>
+        <canvas id="brownian-sim" width="560" height="160" style="width:100%;margin-top:1.2rem;border-radius:2px;background:#080604;"></canvas>
+        <div style="font-size:0.6rem;letter-spacing:0.2em;color:rgba(200,150,46,0.3);text-align:center;margin-top:0.5rem;font-family:'Courier Prime',monospace;">SIMULAZIONE — MOTO BROWNIANO</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ── BROWNIAN MOTION ──────────────────────────────────────────
+function openBrownian() {
+  document.getElementById('modal-brownian').style.display = 'flex';
+  document.getElementById('brownian-enigma').style.display = 'block';
+  document.getElementById('brownian-music').style.display = 'none';
+  document.getElementById('brownian-explanation').style.display = 'none';
+  document.getElementById('brownian-feedback').textContent = '';
+  document.getElementById('note-feedback').textContent = '';
+  drawMusicCanvas(null);
+}
+
+function closeBrownian() {
+  document.getElementById('modal-brownian').style.display = 'none';
+  stopBrownianSim();
+}
+
+function brownianAnswer(type) {
+  const fb = document.getElementById('brownian-feedback');
+  if (type === 'right') {
+    fb.textContent = '✓ Esatto. Sono gli atomi. La polvere non danza — è trascinata.';
+    fb.style.color = 'rgba(150,200,150,0.8)';
+    setTimeout(() => {
+      document.getElementById('brownian-enigma').style.display = 'none';
+      document.getElementById('brownian-music').style.display = 'block';
+      drawMusicCanvas(null);
+    }, 1200);
+  } else {
+    fb.textContent = '— Guarda ancora la luce. La risposta è lì.';
+    fb.style.color = 'rgba(200,150,46,0.6)';
+  }
+}
+
+// Music canvas — glissando visualization
+const NOTES = ['C','C#','D','Eb','E','F','F#','G','Ab','A','Bb','B','C2'];
+const MISSING = 'Eb'; // the missing note index 3
+const MISSING_IDX = 3;
+
+function drawMusicCanvas(highlight) {
+  const canvas = document.getElementById('brownian-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = '#080604';
+  ctx.fillRect(0, 0, w, h);
+
+  const n = NOTES.length;
+  const barW = w / n;
+
+  NOTES.forEach((note, i) => {
+    const x = i * barW;
+    const noteH = (h - 20) * (i + 1) / n;
+    const y = h - 10 - noteH;
+    const isMissing = (i === MISSING_IDX);
+    const isHighlight = (highlight === note);
+
+    if (isMissing) {
+      // Gap — draw dashed outline
+      ctx.strokeStyle = 'rgba(200,150,46,0.5)';
+      ctx.setLineDash([4, 4]);
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x + 2, y, barW - 4, noteH);
+      ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(200,150,46,0.08)';
+      ctx.fillRect(x + 2, y, barW - 4, noteH);
+      ctx.fillStyle = 'rgba(200,150,46,0.4)';
+      ctx.font = '10px Courier Prime';
+      ctx.textAlign = 'center';
+      ctx.fillText('?', x + barW/2, h - 4);
+    } else {
+      ctx.fillStyle = isHighlight
+        ? 'rgba(150,200,150,0.7)'
+        : 'rgba(200,150,46,0.55)';
+      ctx.fillRect(x + 2, y, barW - 4, noteH);
+      ctx.fillStyle = 'rgba(232,213,160,0.6)';
+      ctx.font = '9px Courier Prime';
+      ctx.textAlign = 'center';
+      ctx.fillText(note, x + barW/2, h - 4);
+    }
+  });
+}
+
+// Play a note via Web Audio API
+function playNote(freq, duration) {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.type = 'triangle';
+  osc.frequency.setValueAtTime(freq, ctx.currentTime);
+  gain.gain.setValueAtTime(0.3, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+  osc.start(ctx.currentTime);
+  osc.stop(ctx.currentTime + duration);
+}
+
+// Frequencies for glissando (starting from C4)
+const FREQS = { 'C':261.6,'C#':277.2,'D':293.7,'Eb':311.1,'E':329.6,'F':349.2,'F#':370,'G':392,'Ab':415.3,'A':440,'Bb':466.2,'B':493.9,'C2':523.3 };
+
+function checkNote(note) {
+  const fb = document.getElementById('note-feedback');
+  drawMusicCanvas(note);
+  playNote(FREQS[note] || 311.1, 0.8);
+
+  if (note === 'E' || note === 'Eb') { // accept Eb
+    fb.textContent = '✓ Esatto. Mi bemolle — la quarta nota del glissando.';
+    fb.style.color = 'rgba(150,200,150,0.8)';
+    document.getElementById('brownian-explanation').style.display = 'block';
+    startBrownianSim();
+  } else {
+    fb.textContent = '— Ascolta il salto. C'è qualcosa che manca tra D e E.';
+    fb.style.color = 'rgba(200,150,46,0.6)';
+  }
+}
+
+// Brownian simulation
+let brownSim = null;
+function startBrownianSim() {
+  const canvas = document.getElementById('brownian-sim');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+
+  // Particles (atoms) — many small
+  const atoms = Array.from({length: 80}, () => ({
+    x: Math.random() * w, y: Math.random() * h,
+    vx: (Math.random()-0.5)*3, vy: (Math.random()-0.5)*3,
+    r: 2
+  }));
+
+  // One large particle — dust
+  const dust = { x: w/2, y: h/2, vx: 0, vy: 0, trail: [] };
+
+  function tick() {
+    ctx.fillStyle = 'rgba(8,6,4,0.25)';
+    ctx.fillRect(0, 0, w, h);
+
+    // Move atoms
+    atoms.forEach(a => {
+      a.x += a.vx; a.y += a.vy;
+      if (a.x < 0 || a.x > w) a.vx *= -1;
+      if (a.y < 0 || a.y > h) a.vy *= -1;
+      // Collide with dust
+      const dx = dust.x - a.x, dy = dust.y - a.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 12) {
+        dust.vx += dx/dist * 0.3;
+        dust.vy += dy/dist * 0.3;
+      }
+      ctx.beginPath();
+      ctx.arc(a.x, a.y, a.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(200,150,46,0.3)';
+      ctx.fill();
+    });
+
+    // Move dust
+    dust.vx *= 0.95;
+    dust.vy *= 0.95;
+    dust.x += dust.vx;
+    dust.y += dust.vy;
+    dust.x = Math.max(8, Math.min(w-8, dust.x));
+    dust.y = Math.max(8, Math.min(h-8, dust.y));
+    dust.trail.push({x: dust.x, y: dust.y});
+    if (dust.trail.length > 60) dust.trail.shift();
+
+    // Draw trail
+    if (dust.trail.length > 1) {
+      ctx.beginPath();
+      ctx.moveTo(dust.trail[0].x, dust.trail[0].y);
+      dust.trail.forEach(p => ctx.lineTo(p.x, p.y));
+      ctx.strokeStyle = 'rgba(200,150,46,0.25)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Draw dust particle
+    ctx.beginPath();
+    ctx.arc(dust.x, dust.y, 8, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(232,213,160,0.9)';
+    ctx.fill();
+
+    brownSim = requestAnimationFrame(tick);
+  }
+  tick();
+}
+
+function stopBrownianSim() {
+  if (brownSim) { cancelAnimationFrame(brownSim); brownSim = null; }
+}
+
+// Play glissando on canvas click
+document.addEventListener('DOMContentLoaded', () => {
+  const c = document.getElementById('brownian-canvas');
+  if (c) c.addEventListener('click', () => {
+    const notes = ['C','C#','D','E','F','F#','G','Ab','A','Bb','B','C2'];
+    notes.forEach((n, i) => setTimeout(() => playNote(FREQS[n], 0.3), i * 150));
+  });
+});
 </script>
 
 </body>
