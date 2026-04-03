@@ -4169,7 +4169,7 @@ function startFLThree() {
     const bg = room.style.backgroundImage;
     if(bg && bg!=="none" && !img.src){
       const m=bg.match(/url(["']?([^"')]+)["']?)/);
-      if(m){img.src=m[1];room.style.backgroundImage="none";}
+      if(m && !m[1].includes("BACKGROUND_DAYLIGHT")){img.src=m[1];room.style.backgroundImage="none";}
     }
   });
   obs.observe(room,{attributes:true,attributeFilter:["style"]});
