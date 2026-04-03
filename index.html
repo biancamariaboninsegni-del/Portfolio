@@ -4183,7 +4183,7 @@ function startFLThree() {
   (function tick(){
     tx+=(cx-tx)*0.05;
     ty+=(cy-ty)*0.05;
-    img.style.transform="translate("+(-tx*28).toFixed(2)+"px,"+(-ty*18).toFixed(2)+"px)";
+    if(window._isDayMode){img.style.transform="translate(0px,0px)";}else{img.style.transform="translate("+(-tx*28).toFixed(2)+"px,"+(-ty*18).toFixed(2)+"px)";}
     requestAnimationFrame(tick);
   })();
 })();
@@ -4478,7 +4478,7 @@ function initRainCanvas() {
     var room = document.getElementById('room');
 
     if (isDay) {
-      window._isDayMode = true;
+      window._isDayMode = true; cx=0; cy=0; tx=0; ty=0;
       toggle.textContent = '🌙';
       
       var pimg = document.getElementById("parallax-img"); if(pimg){ pimg.src = "BACKGROUND_DAYLIGHT.png"; pimg.style.transform='none'; pimg.style.transition='none'; } window._isDayMode=true;
