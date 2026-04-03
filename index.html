@@ -4549,107 +4549,63 @@ function initRainCanvas() {
 <div class="modal-backdrop" id="modal-brownian" style="z-index:160;backdrop-filter:blur(3px);">
   <div style="background:linear-gradient(160deg,#080604 0%,#110c07 100%);border:1px solid rgba(200,150,46,0.15);border-radius:6px;max-width:720px;width:92%;padding:3rem 3rem 2.5rem;position:relative;font-family:'EB Garamond',serif;color:#e8d5a0;max-height:92vh;overflow-y:auto;">
     <span onclick="window.closeBrownian()" style="position:absolute;top:1.2rem;right:1.5rem;font-size:1.3rem;color:rgba(200,150,46,0.4);cursor:pointer;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='rgba(200,150,46,0.9)'" onmouseout="this.style.color='rgba(200,150,46,0.4)'">&times;</span>
-    <div id="brownian-poetry" style="margin-bottom:2.5rem;">
-      <p style="font-size:1.05rem;line-height:2;font-style:italic;color:rgba(232,213,160,0.8);margin:0 0 1.5rem;">
-        Look at the light coming through the window.<br>
-        See the dust dancing?<br><br>
-        That is not the dust moving.<br>
-        Those are atoms &mdash; invisible, billions of them &mdash;<br>
-        colliding against a single particle<br>
-        from every direction, every instant.<br><br>
-        <em style="color:rgba(200,150,46,0.6);font-size:0.95rem;">What you are watching is the signature of the invisible.</em>
-      </p>
-      <div style="border-left:1px solid rgba(200,150,46,0.2);padding-left:1.2rem;margin-top:1.5rem;">
-        <p style="font-size:0.9rem;line-height:1.9;font-style:italic;color:rgba(232,213,160,0.6);margin:0;">
-          Beethoven tore the dedication when he saw the truth.<br>
-          Einstein rewrote physics when he saw the dust.<br><br>
-          Both were watching the same thing:<br>
-          the moment when the invisible<br>
-          becomes impossible to ignore.
-        </p>
-      </div>
-      <button onclick="window.startEroica()" style="margin-top:2rem;display:block;width:100%;padding:0.8rem;background:transparent;border:1px solid rgba(200,150,46,0.25);color:rgba(232,213,160,0.7);font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.3em;cursor:pointer;text-transform:uppercase;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(200,150,46,0.6)';this.style.color='rgba(232,213,160,1)'" onmouseout="this.style.borderColor='rgba(200,150,46,0.25)';this.style.color='rgba(232,213,160,0.7)'">Listen</button>
+
+    <p style="font-size:1.05rem;line-height:2;font-style:italic;color:rgba(232,213,160,0.8);margin:0 0 1.5rem;">
+      Look at the light coming through the window.<br>
+      See the dust dancing?<br><br>
+      That is not the dust moving.<br>
+      Those are atoms &mdash; invisible, billions of them &mdash;<br>
+      colliding against a single particle<br>
+      from every direction, every instant.<br><br>
+      <em style="color:rgba(200,150,46,0.6);font-size:0.95rem;">What you are watching is the signature of the invisible.</em>
+    </p>
+
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:3px;margin-bottom:1.5rem;">
+      <iframe id="eroica-yt" src="https://www.youtube.com/embed/8AunZS44Fbw?start=0&rel=0&modestbranding=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
-    <div id="brownian-anim-section" style="display:none;">
-      <div style="font-size:0.58rem;letter-spacing:0.3em;color:rgba(200,150,46,0.35);margin-bottom:1rem;font-family:'Courier Prime',monospace;text-transform:uppercase;">Symphony No. 3 &ldquo;Eroica&rdquo; &mdash; Beethoven &mdash; 1804</div>
-      <canvas id="eroica-canvas" width="640" height="220" style="width:100%;border-radius:4px;display:block;background:#050403;"></canvas>
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:0.6rem;">
-        <span style="font-size:0.62rem;letter-spacing:0.15em;color:rgba(200,150,46,0.3);font-family:'Courier Prime',monospace;">atoms &amp; dust</span>
-        <span style="font-size:0.62rem;letter-spacing:0.15em;color:rgba(200,150,46,0.3);font-family:'Courier Prime',monospace;">Voss &amp; Clarke &middot; Nature &middot; 1975</span>
-      </div>
-      <div id="note-question" style="margin-top:2rem;text-align:center;">
-        <p style="font-size:0.95rem;font-style:italic;color:rgba(232,213,160,0.75);margin-bottom:1.2rem;">The Eroica opens in E&flat; major. Which note begins the main theme?</p>
-        <div style="display:flex;gap:0.8rem;justify-content:center;" id="eroica-note-btns">
-          <button onclick="window.checkEroicaNote('D')" style="padding:0.5rem 1.3rem;background:transparent;border:1px solid rgba(200,150,46,0.28);color:rgba(232,213,160,0.75);font-family:'EB Garamond',serif;font-size:1rem;cursor:pointer;border-radius:3px;transition:all 0.2s;">D</button>
-          <button onclick="window.checkEroicaNote('Eb')" style="padding:0.5rem 1.3rem;background:transparent;border:1px solid rgba(200,150,46,0.28);color:rgba(232,213,160,0.75);font-family:'EB Garamond',serif;font-size:1rem;cursor:pointer;border-radius:3px;transition:all 0.2s;">E&flat;</button>
-          <button onclick="window.checkEroicaNote('F')" style="padding:0.5rem 1.3rem;background:transparent;border:1px solid rgba(200,150,46,0.28);color:rgba(232,213,160,0.75);font-family:'EB Garamond',serif;font-size:1rem;cursor:pointer;border-radius:3px;transition:all 0.2s;">F</button>
-          <button onclick="window.checkEroicaNote('G')" style="padding:0.5rem 1.3rem;background:transparent;border:1px solid rgba(200,150,46,0.28);color:rgba(232,213,160,0.75);font-family:'EB Garamond',serif;font-size:1rem;cursor:pointer;border-radius:3px;transition:all 0.2s;">G</button>
-        </div>
-        <div id="eroica-feedback" style="margin-top:0.9rem;font-size:0.85rem;font-style:italic;color:rgba(200,150,46,0.7);min-height:1.3rem;"></div>
-      </div>
-      <div id="eroica-final" style="display:none;margin-top:1.5rem;text-align:center;padding:1.2rem;border:1px solid rgba(200,150,46,0.12);border-radius:3px;">
-        <p style="font-size:0.85rem;font-style:italic;color:rgba(232,213,160,0.55);margin:0;line-height:1.8;">
-          &ldquo;Music and speech show 1/f fluctuations characteristic of Brownian motion.&rdquo;<br>
-          <span style="font-size:0.7rem;letter-spacing:0.15em;font-style:normal;color:rgba(200,150,46,0.35);font-family:'Courier Prime',monospace;">Voss &amp; Clarke, 1975</span>
-        </p>
-      </div>
+
+    <canvas id="eroica-canvas" width="640" height="160" style="width:100%;border-radius:4px;display:block;background:#050403;"></canvas>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:0.6rem;">
+      <span style="font-size:0.6rem;letter-spacing:0.15em;color:rgba(200,150,46,0.28);font-family:'Courier Prime',monospace;">atoms &amp; dust</span>
+      <span style="font-size:0.6rem;letter-spacing:0.15em;color:rgba(200,150,46,0.28);font-family:'Courier Prime',monospace;">Voss &amp; Clarke &middot; Nature &middot; 1975</span>
     </div>
   </div>
 </div>
+
 <script>
 (function(){
-  var audioCtx=null,eroicaAnim=null,intensity=0,solved=false,initialized=false;
-  var atoms=[],dust={x:320,y:110,vx:0,vy:0,trail:[]};
-  var EROICA=[
-    {freq:311.1,start:0,dur:0.15,amp:0.4},{freq:392.0,start:0,dur:0.15,amp:0.3},{freq:466.2,start:0,dur:0.15,amp:0.3},
-    {freq:311.1,start:0.18,dur:0.15,amp:0.4},{freq:392.0,start:0.18,dur:0.15,amp:0.3},{freq:466.2,start:0.18,dur:0.15,amp:0.3},
-    {freq:622.3,start:0.55,dur:0.5,amp:0.35},{freq:587.3,start:1.15,dur:0.3,amp:0.3},
-    {freq:523.3,start:1.55,dur:0.3,amp:0.3},{freq:466.2,start:1.95,dur:0.4,amp:0.28},
-    {freq:392.0,start:2.45,dur:0.3,amp:0.25},{freq:466.2,start:2.85,dur:0.3,amp:0.28},
-    {freq:523.3,start:3.25,dur:0.6,amp:0.3},{freq:587.3,start:4.05,dur:0.4,amp:0.3},
-    {freq:622.3,start:4.55,dur:0.9,amp:0.35}
-  ];
-  function getAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
-  function playNote(freq,start,dur,amp){
-    var ctx=getAudio(),osc=ctx.createOscillator(),gain=ctx.createGain();
-    osc.connect(gain);gain.connect(ctx.destination);
-    osc.type='sawtooth';osc.frequency.value=freq;
-    gain.gain.setValueAtTime(0,ctx.currentTime+start);
-    gain.gain.linearRampToValueAtTime(amp,ctx.currentTime+start+0.02);
-    gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+start+dur+0.08);
-    osc.start(ctx.currentTime+start);osc.stop(ctx.currentTime+start+dur+0.12);
-  }
-  function playEroica(){
-    EROICA.forEach(function(n){playNote(n.freq,n.start,n.dur,n.amp);});
-    setTimeout(function(){intensity=1.0;},0);
-    setTimeout(function(){intensity=0.5;},180);
-    setTimeout(function(){intensity=1.0;},360);
-    setTimeout(function(){intensity=0.3;},540);
-  }
+  var eroicaAnim=null,initialized=false;
+  var atoms=[],dust={x:320,y:80,vx:0,vy:0,trail:[]};
+
   function initP(W,H){
     atoms=[];
-    for(var i=0;i<150;i++)atoms.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:0.8+Math.random()*1.5});
-    dust={x:W/2,y:H/2,vx:0,vy:0,trail:[]};initialized=true;
+    for(var i=0;i<150;i++) atoms.push({
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-0.5)*1.8, vy:(Math.random()-0.5)*1.8,
+      r:0.8+Math.random()*1.5
+    });
+    dust={x:W/2,y:H/2,vx:0,vy:0,trail:[]};
+    initialized=true;
   }
+
   function tick(){
     var canvas=document.getElementById('eroica-canvas');
     if(!canvas){eroicaAnim=null;return;}
     var ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;
     if(!initialized)initP(W,H);
-    intensity*=0.97;
     ctx.fillStyle='rgba(5,4,3,0.15)';ctx.fillRect(0,0,W,H);
-    var spd=1.0+intensity*4.0;
     atoms.forEach(function(a){
-      a.x+=a.vx*spd;a.y+=a.vy*spd;
+      a.x+=a.vx;a.y+=a.vy;
       if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
       var dx=dust.x-a.x,dy=dust.y-a.y,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<20){dust.vx+=dx/d*(0.3+intensity*0.8);dust.vy+=dy/d*(0.3+intensity*0.8);}
+      if(d<20){dust.vx+=dx/d*0.3;dust.vy+=dy/d*0.3;}
       ctx.beginPath();ctx.arc(a.x,a.y,a.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(200,150,46,'+(0.15+intensity*0.4)+')';ctx.fill();
+      ctx.fillStyle='rgba(200,150,46,0.2)';ctx.fill();
     });
     dust.vx*=0.93;dust.vy*=0.93;
     dust.x+=dust.vx;dust.y+=dust.vy;
-    dust.x=Math.max(12,Math.min(W-12,dust.x));dust.y=Math.max(12,Math.min(H-12,dust.y));
+    dust.x=Math.max(12,Math.min(W-12,dust.x));
+    dust.y=Math.max(12,Math.min(H-12,dust.y));
     dust.trail.push({x:dust.x,y:dust.y});
     if(dust.trail.length>100)dust.trail.shift();
     if(dust.trail.length>1){
@@ -4657,51 +4613,27 @@ function initRainCanvas() {
       dust.trail.forEach(function(p){ctx.lineTo(p.x,p.y);});
       ctx.strokeStyle='rgba(200,150,46,0.18)';ctx.lineWidth=1;ctx.stroke();
     }
-    var g=ctx.createRadialGradient(dust.x,dust.y,0,dust.x,dust.y,16+intensity*8);
-    g.addColorStop(0,'rgba(232,213,160,0.95)');g.addColorStop(0.4,'rgba(200,150,46,0.4)');g.addColorStop(1,'rgba(200,150,46,0)');
-    ctx.beginPath();ctx.arc(dust.x,dust.y,16+intensity*8,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+    var g=ctx.createRadialGradient(dust.x,dust.y,0,dust.x,dust.y,14);
+    g.addColorStop(0,'rgba(232,213,160,0.95)');
+    g.addColorStop(0.4,'rgba(200,150,46,0.4)');
+    g.addColorStop(1,'rgba(200,150,46,0)');
+    ctx.beginPath();ctx.arc(dust.x,dust.y,14,0,Math.PI*2);
+    ctx.fillStyle=g;ctx.fill();
     eroicaAnim=requestAnimationFrame(tick);
   }
-  window.startEroica=function(){
-    document.getElementById('brownian-poetry').style.display='none';
-    document.getElementById('brownian-anim-section').style.display='block';
-    initialized=false;tick();playEroica();
-    if(window._ei)clearInterval(window._ei);
-    window._ei=setInterval(function(){if(!solved)playEroica();},6500);
-  };
-  window.checkEroicaNote=function(note){
-    var fb=document.getElementById('eroica-feedback');
-    if(note==='Eb'){
-      solved=true;if(window._ei)clearInterval(window._ei);
-      fb.innerHTML='&#x2713; E&flat; &mdash; two fortissimo chords, then the theme descends and climbs back.';
-      fb.style.color='rgba(150,210,150,0.85)';
-      document.getElementById('eroica-note-btns').style.opacity='0.4';
-      document.getElementById('eroica-note-btns').style.pointerEvents='none';
-      setTimeout(function(){document.getElementById('eroica-final').style.display='block';},1000);
-      playEroica();
-    } else {
-      fb.textContent='--';fb.style.color='rgba(200,100,100,0.6)';
-      setTimeout(function(){fb.textContent='';},800);
-    }
-  };
+
   window.openBrownian=function(){
-    solved=false;
     document.getElementById('modal-brownian').style.display='flex';
-    document.getElementById('brownian-poetry').style.display='block';
-    document.getElementById('brownian-anim-section').style.display='none';
-    document.getElementById('eroica-feedback').textContent='';
-    document.getElementById('eroica-note-btns').style.opacity='1';
-    document.getElementById('eroica-note-btns').style.pointerEvents='auto';
-    document.getElementById('eroica-final').style.display='none';
     initialized=false;
     if(eroicaAnim){cancelAnimationFrame(eroicaAnim);eroicaAnim=null;}
-    if(window._ei){clearInterval(window._ei);}
+    tick();
   };
+
   window.closeBrownian=function(){
     document.getElementById('modal-brownian').style.display='none';
     if(eroicaAnim){cancelAnimationFrame(eroicaAnim);eroicaAnim=null;}
-    if(window._ei){clearInterval(window._ei);}
-    intensity=0;
+    var iframe=document.getElementById('eroica-yt');
+    if(iframe) iframe.src=iframe.src;
   };
 })();
 </script>
