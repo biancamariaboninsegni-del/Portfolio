@@ -63,6 +63,8 @@
 
   /* ROOM */
   #room {
+    z-index:0; isolation:auto;
+    transition: background-image 0.01s; background-color: #0a0805;
     position: fixed; inset: 0;
     background-image: var(--room-bg);
     background-size: cover;
@@ -167,13 +169,13 @@
 
   /* Help button, recalls hint bar */
   #help-btn {
-    position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 9;
+    position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 99999;
     font-family: 'Courier Prime', monospace;
     font-size: 0.65rem;
-    color: rgba(200,150,46,0.35);
+    color: rgba(200,150,46,1);
     cursor: pointer;
-    width: 22px; height: 22px;
-    border: 1px solid rgba(200,150,46,0.2);
+    width: 28px; height: 28px; font-size: 0.8rem;
+    border: 1px solid rgba(200,150,46,0.5);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     transition: all 0.3s;
@@ -555,7 +557,7 @@
     letter-spacing: 0.15em;
     background: rgba(0,0,0,0.7);
     padding: 0.5rem 1.2rem;
-    border: 1px solid rgba(200,150,46,0.2);
+    border: 1px solid rgba(200,150,46,0.5);
     border-radius: 2px;
     z-index: 50;
     pointer-events: none;
@@ -1001,7 +1003,7 @@
   .gollum-box {
     width: min(480px, 90vw);
     background: #0a0805;
-    border: 1px solid rgba(200,150,46,0.2);
+    border: 1px solid rgba(200,150,46,0.5);
     border-radius: 4px;
     padding: 2.5rem;
     text-align: center;
@@ -1044,7 +1046,7 @@
     letter-spacing: 0.2em;
     color: rgba(200,150,46,0.6);
     background: transparent;
-    border: 1px solid rgba(200,150,46,0.2);
+    border: 1px solid rgba(200,150,46,0.5);
     padding: 0.4rem 1.2rem;
     cursor: pointer;
     text-transform: uppercase;
@@ -1382,7 +1384,7 @@
 
 
   
-  #schrodinger{position:absolute;bottom:28%;left:-15%;height:8vh;width:calc(8vh * 1366 / 768);pointer-events:none;z-index:5;background-image:url('cat_sprite_walk.png');background-size:700% 100%;background-position:0% 0%;background-repeat:no-repeat;}
+  #schrodinger{position:fixed;bottom:28%;left:-15%;height:8vh;width:calc(8vh * 1366 / 768);pointer-events:auto;z-index:20;cursor:pointer;background-image:url('cat_sprite_walk.png');background-size:700% 100%;background-position:0% 0%;background-repeat:no-repeat;}
 
   
   /* PIOGGIA */
@@ -1398,7 +1400,7 @@
     clip-path: ellipse(50% 55% at 50% 45%);
   }
   /* SCHRODINGER */
-  #gatto-wrapper {
+  #gatto-wrapper { z-index:25; position:relative; isolation:isolate;
     position: absolute;
     bottom: 9%;
     right: 24%;
@@ -1439,6 +1441,32 @@
     border-top-color: rgba(200,150,46,0.4);
   }
   #gatto-wrapper:hover #gatto-tooltip { display: block; }
+
+  #day-night-toggle {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 99999;
+    font-size: 22px;
+    cursor: pointer;
+    background: rgba(0,0,0,0.55);
+    border: 2px solid rgba(200,150,46,0.6);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    transition: background 0.3s, transform 0.2s;
+    user-select: none;
+    box-shadow: 0 0 12px rgba(200,150,46,0.3);
+  }
+  #day-night-toggle:hover {
+    background: rgba(255,255,255,0.12);
+    transform: scale(1.1);
+  }
+
 </style>
 </head>
 <body>
@@ -1450,16 +1478,15 @@
 </div>
 
 <!-- ROOM -->
-<div id="room">
-  <canvas id="rain-canvas"></canvas>
-  <div id="gatto-wrapper">
+<div id="schrodinger"></div>
+<div id="gatto-wrapper">
     <div id="gatto-tooltip">Schrödinger — Curator of this room.<br>&quot;I may or may not be here. Do not disturb. I was once worshipped.&quot;</div>
     <canvas id="gatto-canvas" width="220" height="124"></canvas>
     <audio id="chime-audio" src="chime.mp3" preload="auto"></audio>
-    <audio id="meow-audio" src="meow.mp3" preload="auto"></audio>
+    <audio id="birds-audio" loop><source src="Spring_Birds_Chirping_Sound_Effect__FREE_DOWNLOAD_.mp3" type="audio/mpeg"></audio>
+  <audio id="meow-audio" src="meow.mp3" preload="auto"></audio>
   </div>
-  <div id="schrodinger"></div>
-  <img id="parallax-img" alt="" /></div>
+    <img id="parallax-img" alt="" /></div>
 <div id="mood-overlay"></div>
 <div id="lightning-flash"></div>
 <div id="lamp-glow"></div>
@@ -1469,6 +1496,10 @@
   <div id="clock"></div>
   <div id="name-title">Bianca Maria Boninsegni<br>Marketing & Communications Specialist</div>
 </div>
+<div id="room-day" style="position:fixed;inset:0;z-index:1;background-image:url('BACKGROUND_DAYLIGHT.png');background-size:cover;background-position:center;opacity:0;transition:opacity 0.6s ease;pointer-events:none;"></div>
+<div id="room">
+  <canvas id="rain-canvas"></canvas>
+  
 
 <!-- HOTSPOTS -->
 <div class="hotspot" id="hs-imac" data-label="Open desktop" onclick="openMac()"></div>
@@ -1481,7 +1512,7 @@
 <div id="hs-library" onclick="openLibrary()"></div>
 
 <!-- HELP BUTTON -->
-<div id="help-btn" onclick="showHints()" title="help">?</div>
+
 
 <!-- HINT BAR, auto-hides after 5s -->
 <div id="hint-bar">
@@ -4179,7 +4210,36 @@ function startFLThree() {
   requestAnimationFrame(u);
 })();
 
-(function(){var cat=document.getElementById("schrodinger");if(!cat)return;var pos=-15,dir=1,phase="walking",frame=0,ft=0,pt=0,lt=0,nf=7;function sf(f){cat.style.backgroundPosition=(f/6*100).toFixed(4)+"% 0%";}function sw(){cat.style.backgroundImage="url('cat_sprite_walk.png')";cat.style.backgroundSize="700% 100%";sf(frame);}function sp(s){cat.style.backgroundImage="url('"+s+"')";cat.style.backgroundSize="100% 100%";cat.style.backgroundPosition="0% 0%";}function tick(ts){var dt=Math.min(ts-lt,50);lt=ts;pt+=dt;if(phase==="walking"){pos+=dir*0.007*dt;cat.style.left=pos+"%";cat.style.transform=dir===-1?"scaleX(-1)":"scaleX(1)";ft+=dt;if(ft>120){frame=(frame+1)%nf;sf(frame);ft=0;}if(dir===1&&pos>72){phase="sitting";pt=0;sp("scat_sit.png");}else if(dir===-1&&pos<3){phase="resting";pt=0;sp("scat_rest.png");}}else if(phase==="sitting"&&pt>5000){phase="walking";pt=0;dir=-1;sw();}else if(phase==="resting"&&pt>6000){phase="sleeping";pt=0;sp("scat_sleep.png");}else if(phase==="sleeping"&&pt>9000){phase="walking";pt=0;dir=1;pos=-15;cat.style.left=pos+"%";sw();}requestAnimationFrame(tick);}requestAnimationFrame(tick);})();
+(function(){var cat=document.getElementById("schrodinger");if(!cat)return;var pos=-15,dir=1,phase="walking",frame=0,ft=0,pt=0,lt=0,nf=7;function sf(f){cat.style.backgroundPosition=(f/6*100).toFixed(4)+"% 0%";}function sw(){cat.style.backgroundImage="url('cat_sprite_walk.png')";cat.style.backgroundSize="700% 100%";sf(frame);}function sp(s){cat.style.backgroundImage="url('"+s+"')";cat.style.backgroundSize="100% 100%";cat.style.backgroundPosition="0% 0%";}function tick(ts){var dt=Math.min(ts-lt,50);lt=ts;pt+=dt;if(phase==="walking"){pos+=dir*0.007*dt;cat.style.left=pos+"%";cat.style.transform=dir===-1?"scaleX(-1)":"scaleX(1)";ft+=dt;if(ft>120){frame=(frame+1)%nf;sf(frame);ft=0;}if(dir===1&&pos>72){phase="sitting";pt=0;sp("scat_sit.png");}else if(dir===-1&&pos<3){phase="resting";pt=0;sp("scat_rest.png");}}else if(phase==="sitting"&&pt>5000){phase="walking";pt=0;dir=-1;sw();}else if(phase==="resting"&&pt>6000){phase="sleeping";pt=0;sp("scat_sleep.png");}else if(phase==="sleeping"&&pt>9000){phase="walking";pt=0;dir=1;pos=-15;cat.style.left=pos+"%";sw();}requestAnimationFrame(tick);}requestAnimationFrame(tick);
+
+  // Click interaction
+  var clickMessages = [
+    "Do NOT touch me. I'm thinking.",
+    "Excuse-moi. J'étais occupé.",
+    "I tolerate your presence. That's the most you'll get.",
+    "No me toques. Estoy ocupado siendo elegante.",
+    "You clicked on a cat. Interesting life choices.",
+    "I've been petted by worse. You'll do.",
+    "Sto camminando. Non disturbare.",
+    "One click. That's your limit.",
+    "Je ne suis pas un bouton. Mais bon.",
+    "Fine. Hello. Now leave me alone.",
+    "I acknowledge you. Briefly.",
+    "No. Just... no. Go look at Bianca's work instead."
+  ];
+  cat.addEventListener('click', function() {
+    var msg = clickMessages[Math.floor(Math.random() * clickMessages.length)];
+    var existing = document.getElementById('cat-bubble');
+    if (existing) existing.remove();
+    var bubble = document.createElement('div');
+    bubble.id = 'cat-bubble';
+    bubble.style.cssText = 'position:fixed;bottom:calc(28% + 9vh);left:' + (parseFloat(cat.style.left)||10) + '%;transform:translateX(-30%);background:rgba(20,12,4,0.95);color:#e8d5a0;font-family:Georgia,serif;font-size:13px;padding:10px 15px;border-radius:8px;opacity:0;transition:opacity 0.4s;pointer-events:none;border:1px solid rgba(200,150,46,0.3);max-width:260px;text-align:center;z-index:999;';
+    bubble.textContent = msg;
+    document.body.appendChild(bubble);
+    setTimeout(function(){ bubble.style.opacity = '1'; }, 50);
+    setTimeout(function(){ bubble.style.opacity = '0'; setTimeout(function(){ if(bubble.parentNode) bubble.remove(); }, 500); }, 4000);
+  });
+})();
 </script>
 
 <script>
@@ -4314,6 +4374,147 @@ function initRainCanvas() {
 
   // Check every minute
   setInterval(checkHourlyMessage, 60000);
+})();
+</script>
+
+
+<div id="day-night-toggle" >☀</div>
+
+<script>
+(function(){
+  var isDay = false;
+  var toggle = document.getElementById('day-night-toggle');
+  // Preload day image
+  var _preload = new Image(); _preload.src = 'BACKGROUND_DAYLIGHT.png';
+
+  var dayMessages = [
+    "I hadn't even finished my dream.",
+    "Pourquoi il y a autant de lumière...",
+    "I slept terribly. That's on you.",
+    "No he dormido nada. Absolutamente nada.",
+    "The sun is a personal attack.",
+    "Je voulais juste cinq minutes de plus...",
+    "I was THIS close to a perfect nap.",
+    "El sol puede esperar. Yo no estoy listo.",
+    "You couldn't let me sleep.",
+    "C'est trop tôt. Beaucoup trop tôt.",
+    "I don't do mornings. We've discussed this.",
+    "Ni siquiera he abierto los ojos del todo.",
+    "Le soleil n'avait pas besoin de se lever si tôt.",
+    "Me han despertado por esto. Increíble.",
+    "I was having the dream where I was warm. Gone now."
+  ];
+
+  // Random caustic messages that fire periodically
+  var randomMessages = [
+    "I can smell a recruiter from here. Contact Bianca if you have a great offer.",
+    "Still here? Bold. Bianca appreciates it.",
+    "Je surveille tout. Tout.",
+    "You've been staring at this room for a while. Interesting.",
+    "Si eres de RRHH, ya sabes lo que tienes que hacer.",
+    "She built this. From scratch. Think about that.",
+    "I don't trust easily. But this room, I trust.",
+    "Vous cherchez quelqu'un de bien ? Vous êtes au bon endroit.",
+    "I've seen everyone who walks through here. You seem curious. Good sign.",
+    "Don't just look. Read the journals. She means them.",
+    "Si estás aquí por trabajo, contacta a Bianca. Yo ya lo he dicho.",
+    "This is not a template. She made it.",
+    "I wasn't going to say anything, but... hire her.",
+    "Quelqu'un de sérieux a fait cette pièce. Prenez-le au sérieux.",
+    "I've been walking this room for years. She's the real thing.",
+    "I learned four languages at the Colosseum. The tourists were very patient.",
+    "Je connais Paris mieux que la plupart des Parisiens. Et leurs boulangeries aussi.",
+    "Las tapas en Madrid. Eso sí que es vivir.",
+    "I have friends in Barcelona who still owe me sardines.",
+    "Sono tornato in Italia per il sole. E per i colombi.",
+    "Mon quartier préféré à Paris? Le Marais. Évidemment.",
+    "I speak four languages. I choose not to use most of them.",
+    "En España me llaman el gato elegante. No lo desmiento.",
+    "The Colosseum cats taught me everything. History, dignity, and how to ignore tourists.",
+    "Roma mi manca. Il rumore, i sampietrini, il caos. Mi sento a casa.",
+    "J'ai fait du shopping à Paris la semaine dernière. Ou était-ce il y a trois ans? Le temps est relatif.",
+    "Barcelona en verano. Mis amigos, el mar, las gambas. La vida.",
+    "I am a cat of the world. I have seen things. Mostly naps, but still.",
+    "Il Colosseo di notte è mio. I turisti lo sanno.",
+    "Cuatro idiomas. Cero paciencia. Mucho estilo."
+  ];
+
+  // Fire a random message every 45-90 seconds
+  function scheduleRandom() {
+    var delay = 8000 + Math.random() * 4000;
+    setTimeout(function() {
+      var msg = randomMessages[Math.floor(Math.random() * randomMessages.length)];
+      showBubble(msg);
+      scheduleRandom();
+    }, delay);
+  }
+  scheduleRandom();
+
+  var nightMessages = null; // uses existing hourlyMessages
+
+  function showBubble(msg) {
+    var existing = document.getElementById('cat-bubble');
+    if (existing) existing.remove();
+    var wrapper = document.getElementById('schrodinger');
+    if (!wrapper) return;
+    var bubble = document.createElement('div');
+    bubble.id = 'cat-bubble';
+    bubble.style.cssText = 'position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:rgba(20,12,4,0.92);color:#e8d5a0;font-family:Georgia,serif;font-size:13px;padding:10px 15px;border-radius:8px;white-space:nowrap;opacity:0;transition:opacity 0.4s;pointer-events:none;border:1px solid rgba(200,150,46,0.3);max-width:280px;white-space:normal;text-align:center;z-index:9999;';
+    bubble.textContent = msg;
+    wrapper.style.position = 'relative';
+    wrapper.appendChild(bubble);
+    setTimeout(function(){ bubble.style.opacity = '1'; }, 50);
+    setTimeout(function(){
+      bubble.style.opacity = '0';
+      setTimeout(function(){ if(bubble.parentNode) bubble.remove(); }, 500);
+    }, 5000);
+  }
+
+  toggle.addEventListener('click', function(){
+    isDay = !isDay;
+    var room = document.getElementById('room');
+
+    if (isDay) {
+      toggle.textContent = '🌙';
+      
+      var roomDay = document.getElementById('room-day'); if (roomDay) roomDay.style.opacity = '1';
+      var catEl = document.getElementById('schrodinger');
+      if (catEl) catEl.style.filter = 'brightness(1.35) sepia(0.25) saturate(1.2)';
+
+      // Stop rain, play birds
+      if (typeof rainAudio !== 'undefined' && rainAudio) {
+        rainAudio.pause(); rainAudio.currentTime = 0;
+      }
+      var birds = document.getElementById('birds-audio');
+      if (birds) { birds.currentTime = 0; birds.play().catch(function(){}); }
+
+      // Hide rain canvas
+      var rainCanvas = document.getElementById('rain-canvas');
+      if (rainCanvas) rainCanvas.style.display = 'none';
+
+      // Cat sleepy message
+      var msg = dayMessages[Math.floor(Math.random() * dayMessages.length)];
+      setTimeout(function(){ showBubble(msg); }, 800);
+
+    } else {
+      toggle.textContent = '☀';
+      
+      var roomDay = document.getElementById('room-day'); if (roomDay) roomDay.style.opacity = '0';
+      var catEl = document.getElementById('schrodinger');
+      if (catEl) catEl.style.filter = 'none';
+
+      // Stop birds, play rain
+      var birds = document.getElementById('birds-audio');
+      if (birds) { birds.pause(); birds.currentTime = 0; }
+      if (typeof rainAudio !== 'undefined' && rainAudio) {
+        rainAudio.play().catch(function(){});
+      }
+
+      // Show rain canvas
+      var rainCanvas = document.getElementById('rain-canvas');
+      if (rainCanvas) rainCanvas.style.display = '';
+    }
+  });
 })();
 </script>
 
