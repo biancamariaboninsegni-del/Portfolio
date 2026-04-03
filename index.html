@@ -1443,8 +1443,10 @@
   #gatto-wrapper:hover #gatto-tooltip { display: block; }
 
   #curtain ~ #day-night-toggle, body:not(.entered-room) #day-night-toggle {
+    display: none !important;
     display: none; display: none; }
   #day-night-toggle {
+    display: none !important;
     display: none !important;
     position: fixed;
     top: 60px;
@@ -4178,13 +4180,11 @@ function startFLThree() {
     }
   });
   obs.observe(room,{attributes:true,attributeFilter:["style"]});
-  document.addEventListener("mousemove",e=>{ cx=0; cy=0; });
+  document.addEventListener("mousemove",e=>{ cx=0; cy=0; }); // parallax disabled
   document.addEventListener("mouseleave",()=>{cx=0;cy=0;});
   (function tick(){
-    if(window._isDay){tx=0;ty=0;}
-    tx+=(cx-tx)*0.05;
-    ty+=(cy-ty)*0.05;
-    img.style.transform="translate("+(-tx*28).toFixed(2)+"px,"+(-ty*18).toFixed(2)+"px)";
+    tx=0;ty=0;
+    img.style.transform="translate(0px,0px)";
     requestAnimationFrame(tick);
   })();
 })();
