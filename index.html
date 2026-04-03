@@ -321,12 +321,16 @@
 
   /* Dust/Brownian hotspot */
   #hs-dust {
+    position: absolute;
     left: 32%;
     top: 58%;
     width: 12%;
     height: 20%;
     cursor: pointer;
+    z-index: 10;
+    display: none;
   }
+  body.day-mode #hs-dust { display: block; }
   #hs-dust::after {
     content: 'la polvere';
     font-family: 'Courier Prime', monospace;
@@ -4499,7 +4503,7 @@ function initRainCanvas() {
     if (isDay) {
       toggle.textContent = '🌙';
       
-      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='BACKGROUND_DAYLIGHT.png';window._isDay=true;
+      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='BACKGROUND_DAYLIGHT.png';window._isDay=true; document.body.classList.add('day-mode');
       var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'brightness(1.35) sepia(0.25) saturate(1.2)';
 
@@ -4521,7 +4525,7 @@ function initRainCanvas() {
     } else {
       toggle.textContent = '☀';
       
-      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='room.png';window._isDay=false;
+      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='room.png';window._isDay=false; document.body.classList.remove('day-mode');
       var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'none';
 
