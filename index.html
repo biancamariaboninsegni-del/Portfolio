@@ -4169,7 +4169,7 @@ function startFLThree() {
     const bg = room.style.backgroundImage;
     if(bg && bg!=="none" && !img.src){
       const m=bg.match(/url(["']?([^"')]+)["']?)/);
-      if(m && !m[1].includes("BACKGROUND_DAYLIGHT")){img.src=m[1];room.style.backgroundImage="none";}
+      if(m && !m[1].includes("BACKGROUND_DAYLIGHT") && !m[1].includes("room.png")){img.src=m[1];room.style.backgroundImage="none";}
     }
   });
   obs.observe(room,{attributes:true,attributeFilter:["style"]});
@@ -4386,6 +4386,7 @@ function initRainCanvas() {
   var toggle = document.getElementById('day-night-toggle');
   // Preload day image
   var _preload = new Image(); _preload.src = 'BACKGROUND_DAYLIGHT.png';
+  var _preload2 = new Image(); _preload2.src = 'room.png';
 
   var dayMessages = [
     "I hadn't even finished my dream.",
