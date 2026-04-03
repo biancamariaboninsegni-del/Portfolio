@@ -4169,7 +4169,7 @@ function startFLThree() {
     const bg = room.style.backgroundImage;
     if(bg && bg!=="none" && !img.src){
       const m=bg.match(/url(["']?([^"')]+)["']?)/);
-      if(m && !m[1].includes("BACKGROUND_DAYLIGHT") && !m[1].includes("room.png")){img.src=m[1];room.style.backgroundImage="none";}
+      if(m && !m[1].includes("BACKGROUND_DAYLIGHT")){img.src=m[1];room.style.backgroundImage="none";}
     }
   });
   obs.observe(room,{attributes:true,attributeFilter:["style"]});
@@ -4478,7 +4478,7 @@ function initRainCanvas() {
     if (isDay) {
       toggle.textContent = '🌙';
       
-      if (room) room.style.backgroundImage = "url('BACKGROUND_DAYLIGHT.png')";
+      var pimg = document.getElementById("parallax-img"); if(pimg) pimg.src = "BACKGROUND_DAYLIGHT.png";
       var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'brightness(1.35) sepia(0.25) saturate(1.2)';
 
@@ -4500,7 +4500,7 @@ function initRainCanvas() {
     } else {
       toggle.textContent = '☀';
       
-      if (room) room.style.backgroundImage = "url('room.png')";
+      var pimg = document.getElementById("parallax-img"); if(pimg) pimg.src = "room.png";
       var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'none';
 
