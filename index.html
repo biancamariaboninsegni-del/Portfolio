@@ -168,6 +168,7 @@
 
   /* Help button, recalls hint bar */
   #help-btn {
+    display: none;
     position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 99999;
     font-family: 'Courier Prime', monospace;
     font-size: 0.65rem;
@@ -1444,7 +1445,7 @@
   #curtain ~ #day-night-toggle, body:not(.entered-room) #day-night-toggle {
     display: none; display: none; }
   #day-night-toggle {
-    display: none;
+    display: none !important;
     position: fixed;
     top: 60px;
     right: 24px;
@@ -3085,7 +3086,8 @@ function enterRoom() {
   window.dispatchEvent(new Event('roomEntered'));
   document.getElementById('curtain').classList.add('fade-out');
   document.getElementById('room').classList.add('entered');
-  document.getElementById('day-night-toggle').style.display = 'flex';
+  document.getElementById('day-night-toggle').style.removeProperty('display'); document.getElementById('day-night-toggle').style.display = 'flex';
+  var hb = document.getElementById('help-btn'); if(hb) hb.style.display = 'flex';
   setTimeout(() => document.getElementById('curtain').style.display = 'none', 1500);
   initRain();
   repositionHotspots();
@@ -4176,11 +4178,7 @@ function startFLThree() {
     }
   });
   obs.observe(room,{attributes:true,attributeFilter:["style"]});
-  document.addEventListener("mousemove",e=>{
-    if(window._isDay){cx=0;cy=0;return;}
-    cx=(e.clientX/window.innerWidth-0.5);
-    cy=(e.clientY/window.innerHeight-0.5);
-  });
+  document.addEventListener("mousemove",e=>{ cx=0; cy=0; });
   document.addEventListener("mouseleave",()=>{cx=0;cy=0;});
   (function tick(){
     if(window._isDay){tx=0;ty=0;}
