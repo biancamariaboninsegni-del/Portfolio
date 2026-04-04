@@ -2499,14 +2499,21 @@ function bbLoop(){
   bbRaf=requestAnimationFrame(bbLoop);
 }
 
-window.openDrawer3=function(){
-  document.getElementById('modal-drawer3').classList.add('open');
+window.startBaseballAnim=function(){
+  document.getElementById('bb-drawer-view').style.display='none';
+  var av=document.getElementById('bb-anim-view');
+  av.style.display='flex';
   var cv=document.getElementById('baseball-canvas');
   bbCtx=cv.getContext('2d');bbW=cv.width;bbH=cv.height;
   bbScene=0;bbT=0;
   runScenes();
   cancelAnimationFrame(bbRaf);bbLoop();
   initAudio();
+};
+window.openDrawer3=function(){
+  document.getElementById('modal-drawer3').classList.add('open');
+  document.getElementById('bb-drawer-view').style.display='block';
+  document.getElementById('bb-anim-view').style.display='none';
 };
 window.stopBaseball=function(){cancelAnimationFrame(bbRaf);if(bbAudio){bbAudio.close();bbAudio=null;}};
 window.resetBaseball=function(){bbScene=0;bbT=0;};
@@ -3381,7 +3388,7 @@ function repositionHotspots() {
   posHS('hs-notepad',  0.4182, 0.5621, 0.03, 0.04);
   posHS('hs-drawer1',  0.3995, 0.6409, 0.07, 0.07);
   posHS('hs-drawer2',  0.5656, 0.6510, 0.07, 0.07);
-  posHS('hs-drawer3',  0.3900, 0.9200, 0.07, 0.07);
+  posHS('hs-drawer3',  0.3900, 0.8600, 0.07, 0.07);
   
   // Dots
   const dotMap = {
@@ -4938,10 +4945,38 @@ function initRainCanvas() {
 
 <!-- ===== DRAWER 3: BASEBALL ===== -->
 <div class="modal-backdrop" id="modal-drawer3">
-  <div style="background:#0a1a0a;border:1px solid rgba(200,150,46,0.2);border-radius:8px;width:min(700px,92vw);max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px rgba(0,0,0,0.9);">
-    <div style="background:#0f220f;border-bottom:1px solid rgba(200,150,46,0.15);padding:0.7rem 1.2rem;display:flex;align-items:center;gap:0.5rem;">
+  <div id="bb-drawer-view" style="background:linear-gradient(180deg,#2a1f14 0%,#1a1208 100%);border:2px solid #6b4c2a;border-radius:4px 4px 0 0;width:min(560px,88vw);box-shadow:0 -4px 40px rgba(0,0,0,0.9),inset 0 2px 8px rgba(0,0,0,0.5);position:relative;overflow:hidden;">
+    <!-- cassetto: bordo superiore -->
+    <div style="height:18px;background:linear-gradient(180deg,#8b6340,#5a3d20);border-bottom:2px solid #3a2510;"></div>
+    <!-- interno cassetto -->
+    <div style="padding:2.5rem 2rem 2rem;min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;">
+      <!-- texture legno interno -->
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(0,0,0,0.04) 40px,rgba(0,0,0,0.04) 41px);pointer-events:none;"></div>
+      <!-- pallina da baseball cliccabile -->
+      <div id="bb-ball" onclick="startBaseballAnim()" style="cursor:pointer;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff 0%,#f0ece4 60%,#d4c9b8 100%);box-shadow:3px 6px 18px rgba(0,0,0,0.6),inset -3px -3px 8px rgba(0,0,0,0.15);position:relative;transition:transform 0.15s;margin-bottom:1.2rem;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+        <!-- cuciture baseball -->
+        <svg viewBox="0 0 90 90" style="position:absolute;inset:0;width:100%;height:100%;">
+          <path d="M28,20 Q20,45 28,70" fill="none" stroke="#cc3333" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M62,20 Q70,45 62,70" fill="none" stroke="#cc3333" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M28,30 Q45,24 62,30" fill="none" stroke="#cc3333" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M28,60 Q45,66 62,60" fill="none" stroke="#cc3333" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M28,36 Q45,28 62,36" fill="none" stroke="#cc3333" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+          <path d="M28,54 Q45,62 62,54" fill="none" stroke="#cc3333" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+      </div>
+      <div style="font-family:'Courier Prime',monospace;font-size:0.65rem;letter-spacing:0.25em;color:rgba(200,150,46,0.55);text-transform:uppercase;">click to play</div>
+      <div style="font-family:'Courier Prime',monospace;font-size:0.55rem;letter-spacing:0.18em;color:rgba(200,150,46,0.28);margin-top:0.3rem;">New Orleans, 2023</div>
+    </div>
+    <!-- maniglia cassetto -->
+    <div style="display:flex;justify-content:center;padding:0.6rem 0 1rem;background:linear-gradient(180deg,#1a1208,#0f0b05);">
+      <div style="width:60px;height:10px;border-radius:5px;background:linear-gradient(180deg,#8b6340,#5a3d20);box-shadow:0 2px 6px rgba(0,0,0,0.5);cursor:pointer;" onclick="closeModal('modal-drawer3');stopBaseball()" title="close"></div>
+    </div>
+  </div>
+  <!-- modal animazione (nascosto inizialmente) -->
+  <div id="bb-anim-view" style="display:none;background:#0a1a0a;border:1px solid rgba(200,150,46,0.2);border-radius:8px;width:min(700px,92vw);max-height:88vh;overflow:hidden;flex-direction:column;box-shadow:0 40px 80px rgba(0,0,0,0.9);">
+    <div style="background:#0f220f;border-bottom:1px solid rgba(200,150,46,0.15);padding:0.7rem 1.2rem;display:flex;align-items:center;">
       <span class="mac-title" style="flex:1;">BOTTOM OF THE NINTH</span>
-      <span class="cosmic-close" onclick="closeModal('modal-drawer3');stopBaseball()">close ×</span>
+      <span class="cosmic-close" onclick="document.getElementById('bb-anim-view').style.display='none';document.getElementById('bb-drawer-view').style.display='block';stopBaseball()">close ×</span>
     </div>
     <div style="padding:1.5rem;overflow-y:auto;">
       <canvas id="baseball-canvas" width="620" height="400" style="width:100%;border-radius:4px;background:#1a3a1a;display:block;"></canvas>
