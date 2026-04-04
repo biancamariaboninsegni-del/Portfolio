@@ -2248,282 +2248,262 @@ window.__threeLoaded = true;
 function loadThree(cb) { cb(); }
 
 
-// ── BASEBALL ────────────────────────────────────────────────────────────────
-var bbAnimId=null, bbAudioCtx=null, bbNotes=[], bbNoteIdx=0, bbNoteTimer=null;
-var bbState={balls:0,strikes:0,outs:0,inning:9,bases:[false,false,false],phase:'idle',
-             ballX:0,ballY:0,ballVx:0,ballVy:0,batAngle:0,animFrame:0,runners:[]};
+// init msg
 
-// Take Me Out to the Ball Game — melodia sintetizzata
+
+// ── BASEBALL CINEMATIC ───────────────────────────────────────────────────────
+(function(){
+var bbCtx=null,bbW=620,bbH=400,bbRaf=null,bbAudio=null;
+var bbScene=0,bbT=0,bbScenes=[];
 var SONG=[
   [392,0.35],[392,0.18],[523,0.35],[392,0.35],[523,0.18],[659,0.7],
   [392,0.35],[392,0.18],[523,0.35],[392,0.35],[587,0.18],[523,0.7],
   [392,0.35],[392,0.18],[784,0.35],[659,0.35],[523,0.18],[392,0.35],[330,0.35],
-  [330,0.35],[330,0.18],[523,0.35],[523,0.18],[587,0.35],[523,0.7],
-  [659,0.35],[523,0.18],[392,0.35],[659,0.7],[659,0.35],[523,0.18],[392,0.35],[659,0.7]
+  [330,0.35],[330,0.18],[523,0.35],[523,0.18],[587,0.35],[523,0.7]
 ];
 
-function initBBAudio(){
-  if(!bbAudioCtx) bbAudioCtx=new(window.AudioContext||window.webkitAudioContext)();
-}
-function playNote(freq,dur){
-  if(!bbAudioCtx) return;
-  var o=bbAudioCtx.createOscillator(),g=bbAudioCtx.createGain();
-  o.connect(g); g.connect(bbAudioCtx.destination);
-  o.type='triangle'; o.frequency.value=freq;
-  g.gain.setValueAtTime(0.18,bbAudioCtx.currentTime);
-  g.gain.exponentialRampToValueAtTime(0.001,bbAudioCtx.currentTime+dur*0.9);
-  o.start(); o.stop(bbAudioCtx.currentTime+dur);
-}
-function playSong(){
-  var t=0;
-  SONG.forEach(function(n){ setTimeout(function(){playNote(n[0],n[1]);},t*1000); t+=n[1]+0.05; });
-}
-function playHit(){ initBBAudio(); playNote(440,0.08); setTimeout(function(){playNote(660,0.15);},80); }
-function playCrowd(){ initBBAudio(); [300,350,280,320].forEach(function(f,i){setTimeout(function(){playNote(f,0.3);},i*80);}); }
-
-function openDrawer3(){
-  document.getElementById('modal-drawer3').style.display='flex';
-  initBBAudio(); playSong(); drawBaseball();
-}
-function stopBaseball(){ cancelAnimationFrame(bbAnimId); }
-
-function setMsg(t){ document.getElementById('baseball-msg').textContent=t; }
-
-function resetBaseball(){
-  bbState={balls:0,strikes:0,outs:0,inning:9,bases:[false,false,false],phase:'idle',
-           ballX:0,ballY:0,ballVx:0,ballVy:0,batAngle:0,animFrame:0,runners:[]};
-  document.getElementById('pitch-btn').disabled=false;
-  setMsg('Bottom of the 9th. Your turn.');
-  drawBaseball();
-}
-
-function pitchBall(){
-  if(bbState.phase!=='idle') return;
-  bbState.phase='pitching';
-  var cv=document.getElementById('baseball-canvas');
-  bbState.ballX=cv.width/2; bbState.ballY=60;
-  bbState.ballVx=(Math.random()-0.5)*2; bbState.ballVy=5;
-  document.getElementById('pitch-btn').disabled=true;
-  setMsg('');
-  animatePitch();
-}
-
-function animatePitch(){
-  var cv=document.getElementById('baseball-canvas');
-  bbState.ballX+=bbState.ballVx; bbState.ballY+=bbState.ballVy;
-  drawBaseball();
-  if(bbState.ballY < cv.height*0.72){
-    bbAnimId=requestAnimationFrame(animatePitch);
-  } else {
-    // auto-swing: hit se non troppo laterale
-    var cx=cv.width/2, off=Math.abs(bbState.ballX-cx);
-    if(off<55){
-      playHit(); bbState.phase='hit';
-      bbState.batAngle=0; animateSwing(true);
-    } else {
-      var r=Math.random();
-      if(r<0.55){ setMsg('Strike!'); bbState.strikes++; }
-      else { setMsg('Ball.'); bbState.balls++; }
-      checkCount();
-    }
-  }
-}
-
-function animateSwing(hit){
-  bbState.batAngle+=12;
-  drawBaseball();
-  if(bbState.batAngle<90){ bbAnimId=requestAnimationFrame(function(){animateSwing(hit);}); }
-  else {
-    if(hit){ launchBall(); } else { checkCount(); }
-  }
-}
-
-function launchBall(){
-  var cv=document.getElementById('baseball-canvas');
-  bbState.ballVx=(Math.random()-0.5)*6; bbState.ballVy=-10;
-  bbState.phase='flying';
-  animateFly();
-}
-
-function animateFly(){
-  bbState.ballX+=bbState.ballVx; bbState.ballY+=bbState.ballVy; bbState.ballVy+=0.35;
-  drawBaseball();
-  var cv=document.getElementById('baseball-canvas');
-  if(bbState.ballY<cv.height && bbState.ballX>0 && bbState.ballX<cv.width){
-    bbAnimId=requestAnimationFrame(animateFly);
-  } else {
-    // Homerun se esce in alto
-    if(bbState.ballY<0){ homeRun(); }
-    else { singleHit(); }
-  }
-}
-
-function homeRun(){
-  playCrowd(); setMsg('HOME RUN! ⚾🎉');
-  bbState.bases=[false,false,false];
-  bbState.runners=[{base:1,progress:0},{base:2,progress:25},{base:3,progress:50},{base:4,progress:75}];
-  animateRunners();
-}
-
-function singleHit(){
-  playNote(330,0.2); setMsg('Base hit!');
-  // avanza runners esistenti
-  var newRunners=[];
-  bbState.runners.forEach(function(r){ newRunners.push({base:r.base+1,progress:r.progress}); });
-  newRunners.push({base:1,progress:0});
-  bbState.runners=newRunners;
-  animateRunners();
-}
-
-function animateRunners(){
-  var done=true;
-  bbState.runners.forEach(function(r){ if(r.progress<100) done=false; r.progress+=3; });
-  // rimuovi chi ha superato home
-  bbState.runners=bbState.runners.filter(function(r){ return r.progress<120; });
-  drawBaseball();
-  if(!done){ bbAnimId=requestAnimationFrame(animateRunners); }
-  else {
-    bbState.phase='idle';
-    document.getElementById('pitch-btn').disabled=false;
-    updateBases();
-  }
-}
-
-function updateBases(){
-  bbState.bases=[false,false,false];
-  bbState.runners.forEach(function(r){
-    if(r.base>=1&&r.base<=3) bbState.bases[r.base-1]=true;
+function initAudio(){
+  if(bbAudio) return;
+  bbAudio=new(window.AudioContext||window.webkitAudioContext)();
+  var t=bbAudio.currentTime+0.1;
+  SONG.forEach(function(n){
+    var o=bbAudio.createOscillator(),g=bbAudio.createGain();
+    o.connect(g);g.connect(bbAudio.destination);
+    o.type='triangle';o.frequency.value=n[0];
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(0.13,t+0.02);
+    g.gain.exponentialRampToValueAtTime(0.001,t+n[1]*0.85);
+    o.start(t);o.stop(t+n[1]);
+    t+=n[1]+0.04;
   });
 }
 
-function checkCount(){
-  if(bbState.balls>=4){ setMsg('Walk! Take your base.'); advanceWalk(); }
-  else if(bbState.strikes>=3){
-    bbState.outs++;
-    if(bbState.outs>=3){ setMsg('Three outs. Inning over.'); endInning(); return; }
-    else { setMsg('Strike three. Out #'+bbState.outs+'.'); bbState.strikes=0; }
-  }
-  bbState.phase='idle';
-  document.getElementById('pitch-btn').disabled=false;
-}
+function cx(){return bbW/2;}
+function cy(){return bbH*0.65;}
+var BL=88;
+function bases(){return{
+  home:{x:cx(),y:cy()},
+  first:{x:cx()+BL,y:cy()-BL},
+  second:{x:cx(),y:cy()-BL*2},
+  third:{x:cx()-BL,y:cy()-BL}
+};}
 
-function advanceWalk(){
-  bbState.runners.push({base:1,progress:0}); animateRunners();
-  bbState.balls=0;
-}
-
-function endInning(){
-  bbState.outs=0; bbState.balls=0; bbState.strikes=0;
-  bbState.bases=[false,false,false]; bbState.runners=[];
-  bbState.phase='idle';
-  setTimeout(function(){ setMsg('New inning. Play ball!'); document.getElementById('pitch-btn').disabled=false; drawBaseball(); },1500);
-}
-
-function drawBaseball(){
-  var cv=document.getElementById('baseball-canvas');
-  var ctx=cv.getContext('2d');
-  var W=cv.width, H=cv.height;
-  ctx.clearRect(0,0,W,H);
-
-  // Campo — outfield
-  ctx.fillStyle='#1a3a1a'; ctx.fillRect(0,0,W,H);
-
-  // Diamante
-  var cx=W/2, cy=H*0.68;
-  var blen=90;
-  var bases={
-    home:{x:cx,y:cy},
-    first:{x:cx+blen,y:cy-blen},
-    second:{x:cx,y:cy-blen*2},
-    third:{x:cx-blen,y:cy-blen}
-  };
-
-  // Erba diamante
+function drawField(ctx){
+  ctx.fillStyle='#1a3a1a';ctx.fillRect(0,0,bbW,bbH);
+  // outfield arc
+  ctx.beginPath();ctx.arc(cx(),cy()-BL,BL*2.5,Math.PI,0);
+  ctx.fillStyle='#22472a';ctx.fill();
+  var b=bases();
+  // infield diamond
   ctx.beginPath();
-  ctx.moveTo(bases.home.x,bases.home.y);
-  ctx.lineTo(bases.first.x,bases.first.y);
-  ctx.lineTo(bases.second.x,bases.second.y);
-  ctx.lineTo(bases.third.x,bases.third.y);
-  ctx.closePath();
-  ctx.fillStyle='#2a5a2a'; ctx.fill();
-  ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=1.5; ctx.stroke();
-
-  // Pitcher mound
-  ctx.beginPath(); ctx.arc(cx,cy-blen,12,0,Math.PI*2);
-  ctx.fillStyle='#4a3a2a'; ctx.fill();
-
-  // Basi
-  var baseCoords=[bases.first,bases.second,bases.third];
-  baseCoords.forEach(function(b,i){
-    ctx.fillStyle=bbState.bases[i]?'#ffdd44':'#f5f0e0';
-    ctx.fillRect(b.x-8,b.y-8,16,16);
-    ctx.strokeStyle='rgba(0,0,0,0.4)'; ctx.lineWidth=1; ctx.strokeRect(b.x-8,b.y-8,16,16);
+  ctx.moveTo(b.home.x,b.home.y);ctx.lineTo(b.first.x,b.first.y);
+  ctx.lineTo(b.second.x,b.second.y);ctx.lineTo(b.third.x,b.third.y);
+  ctx.closePath();ctx.fillStyle='#2a5a2a';ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=1.5;ctx.stroke();
+  // foul lines
+  ctx.strokeStyle='rgba(255,255,255,0.12)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(b.home.x,b.home.y);ctx.lineTo(b.home.x-BL*3,b.home.y-BL*3);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(b.home.x,b.home.y);ctx.lineTo(b.home.x+BL*3,b.home.y-BL*3);ctx.stroke();
+  // pitcher mound
+  ctx.beginPath();ctx.arc(cx(),cy()-BL,10,0,Math.PI*2);
+  ctx.fillStyle='#4a3a2a';ctx.fill();
+  // bases
+  [b.first,b.second,b.third].forEach(function(bp){
+    ctx.fillStyle='#f5f0e0';ctx.fillRect(bp.x-7,bp.y-7,14,14);
   });
-  // Home plate
+  // home plate
   ctx.fillStyle='#f5f0e0';
-  ctx.beginPath();
-  ctx.moveTo(bases.home.x,bases.home.y-10);
-  ctx.lineTo(bases.home.x+9,bases.home.y-4);
-  ctx.lineTo(bases.home.x+9,bases.home.y+6);
-  ctx.lineTo(bases.home.x-9,bases.home.y+6);
-  ctx.lineTo(bases.home.x-9,bases.home.y-4);
-  ctx.closePath(); ctx.fill();
-
-  // Batter (stilizzato)
-  var bx=bases.home.x-22, by=bases.home.y-5;
-  ctx.fillStyle='#3a6a9a';
-  ctx.fillRect(bx-6,by-22,12,20); // corpo
-  ctx.beginPath(); ctx.arc(bx,by-28,8,0,Math.PI*2);
-  ctx.fillStyle='#3a6a9a'; ctx.fill(); // testa-elmetto
-  // Mazza
-  var ang=(bbState.batAngle||0)*Math.PI/180;
-  ctx.save(); ctx.translate(bx+4,by-12);
-  ctx.rotate(-Math.PI/4+ang);
-  ctx.fillStyle='#8B4513';
-  ctx.fillRect(-2,-28,4,28);
-  ctx.restore();
-
-  // Runners in movimento
-  bbState.runners.forEach(function(r){
-    var p=Math.min(r.progress,100)/100;
-    var from,to;
-    if(r.base===1){from=bases.home;to=bases.first;}
-    else if(r.base===2){from=bases.first;to=bases.second;}
-    else if(r.base===3){from=bases.second;to=bases.third;}
-    else{from=bases.third;to=bases.home;}
-    if(!from||!to) return;
-    var rx=from.x+(to.x-from.x)*p;
-    var ry=from.y+(to.y-from.y)*p;
-    ctx.beginPath(); ctx.arc(rx,ry,7,0,Math.PI*2);
-    ctx.fillStyle='#ffdd44'; ctx.fill();
-    ctx.fillStyle='#222'; ctx.font='8px sans-serif';
-    ctx.textAlign='center'; ctx.fillText('🏃',rx,ry+3);
-  });
-
-  // Pallina
-  if(bbState.phase==='pitching'||bbState.phase==='flying'){
-    ctx.beginPath(); ctx.arc(bbState.ballX,bbState.ballY,7,0,Math.PI*2);
-    ctx.fillStyle='#fff'; ctx.fill();
-    ctx.strokeStyle='#cc4444'; ctx.lineWidth=1.5; ctx.stroke();
-  }
-
-  // Scoreboard
-  ctx.fillStyle='rgba(0,0,0,0.6)';
-  ctx.fillRect(8,8,200,58);
-  ctx.fillStyle='rgba(200,150,46,0.8)';
-  ctx.font='bold 11px "Courier Prime",monospace';
-  ctx.textAlign='left';
-  ctx.fillText('INNING: BOTTOM 9th',16,24);
-  ctx.fillText('BALLS: '+bbState.balls+'  STRIKES: '+bbState.strikes+'  OUTS: '+bbState.outs,16,40);
-  var baseTxt=(bbState.bases[0]?'1st ':'  ')+(bbState.bases[1]?'2nd ':'    ')+(bbState.bases[2]?'3rd':'');
-  ctx.fillText('ON BASE: '+(baseTxt.trim()||'—'),16,56);
+  ctx.beginPath();ctx.moveTo(b.home.x,b.home.y-9);
+  ctx.lineTo(b.home.x+8,b.home.y-3);ctx.lineTo(b.home.x+8,b.home.y+5);
+  ctx.lineTo(b.home.x-8,b.home.y+5);ctx.lineTo(b.home.x-8,b.home.y-3);
+  ctx.closePath();ctx.fill();
 }
 
-window.openDrawer3=openDrawer3;
-window.stopBaseball=stopBaseball;
-window.resetBaseball=resetBaseball;
-window.pitchBall=pitchBall;
-// init msg
+function drawStickman(ctx,x,y,col,scale){
+  scale=scale||1;col=col||'#ffdd44';
+  ctx.fillStyle=col;ctx.strokeStyle=col;ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.arc(x,y-14*scale,5*scale,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.moveTo(x,y-9*scale);ctx.lineTo(x,y+4*scale);
+  ctx.moveTo(x-7*scale,y-4*scale);ctx.lineTo(x+7*scale,y-4*scale);
+  ctx.moveTo(x,y+4*scale);ctx.lineTo(x-5*scale,y+14*scale);
+  ctx.moveTo(x,y+4*scale);ctx.lineTo(x+5*scale,y+14*scale);
+  ctx.stroke();
+}
+
+function drawBatter(ctx,swingPct){
+  var b=bases();var bx=b.home.x-20,by=b.home.y-8;
+  drawStickman(ctx,bx,by,'#5a9ade',1);
+  // mazza
+  ctx.save();ctx.translate(bx+4,by-8);
+  ctx.rotate((-0.8+swingPct*1.6));
+  ctx.fillStyle='#8B4513';ctx.fillRect(-2,-22,4,22);ctx.restore();
+}
+
+function drawPitcher(ctx){
+  var b=bases();
+  drawStickman(ctx,b.second.x,b.second.y+BL,'#de5a5a',0.9);
+}
+
+function caption(ctx,text){
+  document.getElementById('baseball-caption').textContent=text;
+}
+
+// Scene definitions
+function runScenes(){
+  bbScenes=[
+    // 0: intro — campo vuoto, titolo
+    {dur:90,draw:function(t){
+      drawField(bbCtx);drawPitcher(bbCtx);drawBatter(bbCtx,0);
+      bbCtx.fillStyle='rgba(0,0,0,0.45)';bbCtx.fillRect(0,bbH*0.35,bbW,60);
+      bbCtx.fillStyle='rgba(200,150,46,0.9)';bbCtx.font='bold 18px "Courier Prime",monospace';
+      bbCtx.textAlign='center';bbCtx.fillText('BASEBALL',cx(),bbH*0.35+28);
+      bbCtx.fillStyle='rgba(200,150,46,0.5)';bbCtx.font='11px "Courier Prime",monospace';
+      bbCtx.fillText('New Orleans, 2023',cx(),bbH*0.35+50);
+      caption(bbCtx,'Nine innings. Three outs per side. The most elegant sport ever invented.');
+    }},
+    // 1: pitcher wind-up
+    {dur:80,draw:function(t){
+      drawField(bbCtx);drawPitcher(bbCtx);drawBatter(bbCtx,0);
+      // pitcher raising arm
+      var b=bases();var px=b.second.x,py=b.second.y+BL;
+      bbCtx.strokeStyle='#de5a5a';bbCtx.lineWidth=2;
+      bbCtx.beginPath();bbCtx.moveTo(px,py-8);
+      bbCtx.lineTo(px+10*Math.sin(t/80*Math.PI),py-8-12*Math.sin(t/80*Math.PI));
+      bbCtx.stroke();
+      caption(bbCtx,'The pitcher winds up — 60 feet, 6 inches from home plate.');
+    }},
+    // 2: ball in flight
+    {dur:60,draw:function(t){
+      drawField(bbCtx);drawPitcher(bbCtx);drawBatter(bbCtx,0);
+      var b=bases();
+      var prog=t/60;
+      var bx=cx()+(b.second.x-cx())*prog;
+      // arc: ball drops as it flies
+      var by=(b.second.y+BL)+(b.home.y-(b.second.y+BL))*prog - 30*Math.sin(prog*Math.PI);
+      bbCtx.beginPath();bbCtx.arc(bx,by,6,0,Math.PI*2);
+      bbCtx.fillStyle='#fff';bbCtx.fill();
+      bbCtx.strokeStyle='#cc4444';bbCtx.lineWidth=1.2;bbCtx.stroke();
+      caption(bbCtx,'The pitch travels at 90+ mph — the batter has 0.4 seconds to decide.');
+    }},
+    // 3: swing + hit
+    {dur:50,draw:function(t){
+      drawField(bbCtx);drawPitcher(bbCtx);
+      var swing=Math.min(t/30,1);drawBatter(bbCtx,swing);
+      if(t>25){
+        var b=bases();
+        bbCtx.beginPath();bbCtx.arc(b.home.x-5,b.home.y-10,6,0,Math.PI*2);
+        bbCtx.fillStyle='#fff';bbCtx.fill();
+        // impact flash
+        bbCtx.beginPath();bbCtx.arc(b.home.x-5,b.home.y-10,12*(t-25)/25,0,Math.PI*2);
+        bbCtx.strokeStyle='rgba(255,220,80,'+(1-(t-25)/25)+')';bbCtx.lineWidth=3;bbCtx.stroke();
+      }
+      caption(bbCtx,'CRACK — the bat makes contact. Everything changes in that instant.');
+    }},
+    // 4: ball flying to outfield
+    {dur:80,draw:function(t){
+      drawField(bbCtx);drawPitcher(bbCtx);drawBatter(bbCtx,1);
+      var b=bases();var prog=t/80;
+      var bx=b.home.x+BL*2.2*prog;
+      var by=b.home.y-BL*2.8*Math.sin(prog*Math.PI);
+      bbCtx.beginPath();bbCtx.arc(bx,by,6,0,Math.PI*2);
+      bbCtx.fillStyle='#fff';bbCtx.fill();
+      bbCtx.strokeStyle='#cc4444';bbCtx.lineWidth=1.2;bbCtx.stroke();
+      caption(bbCtx,'The ball arcs into the outfield — every runner must read the play.');
+    }},
+    // 5: runner from home to first
+    {dur:70,draw:function(t){
+      drawField(bbCtx);drawPitcher(bbCtx);drawBatter(bbCtx,1);
+      var b=bases();var prog=Math.min(t/65,1);
+      var rx=b.home.x+(b.first.x-b.home.x)*prog;
+      var ry=b.home.y+(b.first.y-b.home.y)*prog;
+      drawStickman(bbCtx,rx,ry,'#ffdd44',1);
+      // first base highlight if arrived
+      if(prog>0.95){bbCtx.fillStyle='#ffdd44';bbCtx.fillRect(b.first.x-7,b.first.y-7,14,14);}
+      caption(bbCtx,'The batter becomes a runner — sprinting toward first base.');
+    }},
+    // 6: runner rounds bases
+    {dur:120,draw:function(t){
+      drawField(bbCtx);drawBatter(bbCtx,1);
+      var b=bases();
+      // runner does 1st → 2nd → 3rd
+      var prog=t/120;
+      var path=[b.first,b.second,b.third];
+      var total=prog*2; // spans 2 base segments
+      var seg=Math.min(Math.floor(total),1);
+      var segProg=total-seg;if(segProg>1)segProg=1;
+      if(seg<path.length-1){
+        var rx=path[seg].x+(path[seg+1].x-path[seg].x)*segProg;
+        var ry=path[seg].y+(path[seg+1].y-path[seg].y)*segProg;
+        drawStickman(bbCtx,rx,ry,'#ffdd44',1);
+      }
+      // highlight bases reached
+      [b.first,b.second].slice(0,Math.floor(total)+1).forEach(function(bp){
+        bbCtx.fillStyle='rgba(255,220,80,0.6)';bbCtx.fillRect(bp.x-7,bp.y-7,14,14);
+      });
+      caption(bbCtx,'Round the bases — first, second, third — reading the fielders every step.');
+    }},
+    // 7: sliding home
+    {dur:70,draw:function(t){
+      drawField(bbCtx);
+      var b=bases();var prog=Math.min(t/60,1);
+      var rx=b.third.x+(b.home.x-b.third.x)*prog;
+      var ry=b.third.y+(b.home.y-b.third.y)*prog;
+      // slide effect near home
+      if(prog>0.85){
+        bbCtx.fillStyle='rgba(180,120,60,0.3)';
+        bbCtx.fillRect(rx-15,ry-4,30,8);
+      }
+      drawStickman(bbCtx,rx,ry,'#ffdd44',1);
+      if(prog>0.97){
+        bbCtx.fillStyle='rgba(200,150,46,0.9)';bbCtx.font='bold 22px "Courier Prime",monospace';
+        bbCtx.textAlign='center';bbCtx.fillText('SAFE!',cx(),cy()-BL*2.5);
+      }
+      caption(bbCtx,prog>0.9?'SAFE at home — one run scores.':'Sliding into home plate — the most dramatic moment in sport.');
+    }},
+    // 8: scoreboard finale
+    {dur:100,draw:function(t){
+      drawField(bbCtx);
+      // crowd shimmer
+      for(var i=0;i<18;i++){
+        drawStickman(bbCtx,40+i*32,(i%2===0?30:45),'rgba(200,150,46,'+(0.2+0.1*Math.sin(t*0.1+i))+')',0.55);
+      }
+      bbCtx.fillStyle='rgba(0,0,0,0.65)';bbCtx.fillRect(cx()-140,cy()-BL*2.8,280,90);
+      bbCtx.strokeStyle='rgba(200,150,46,0.4)';bbCtx.lineWidth=1;bbCtx.strokeRect(cx()-140,cy()-BL*2.8,280,90);
+      bbCtx.textAlign='center';
+      bbCtx.fillStyle='rgba(200,150,46,0.9)';bbCtx.font='bold 13px "Courier Prime",monospace';
+      bbCtx.fillText('BOTTOM 9TH · 2 OUTS · FULL COUNT',cx(),cy()-BL*2.8+22);
+      bbCtx.fillStyle='rgba(245,234,214,0.8)';bbCtx.font='11px "Courier Prime",monospace';
+      bbCtx.fillText('Nine players. Nine innings. Infinite geometry.',cx(),cy()-BL*2.8+44);
+      bbCtx.fillStyle='rgba(200,150,46,0.5)';bbCtx.font='10px "Courier Prime",monospace';
+      bbCtx.fillText('— New Orleans converted me. I never looked back.',cx(),cy()-BL*2.8+64);
+      caption(bbCtx,'The only sport with no clock. It ends when it ends.');
+    }}
+  ];
+}
+
+function bbLoop(){
+  if(!bbCtx) return;
+  var sc=bbScenes[bbScene];
+  if(!sc){bbScene=0;bbT=0;bbLoop();return;}
+  bbCtx.clearRect(0,0,bbW,bbH);
+  sc.draw(bbT);
+  bbT++;
+  if(bbT>=sc.dur){bbScene=(bbScene+1)%bbScenes.length;bbT=0;}
+  bbRaf=requestAnimationFrame(bbLoop);
+}
+
+window.openDrawer3=function(){
+  document.getElementById('modal-drawer3').style.display='flex';
+  var cv=document.getElementById('baseball-canvas');
+  bbCtx=cv.getContext('2d');bbW=cv.width;bbH=cv.height;
+  bbScene=0;bbT=0;
+  runScenes();
+  cancelAnimationFrame(bbRaf);bbLoop();
+  initAudio();
+};
+window.stopBaseball=function(){cancelAnimationFrame(bbRaf);if(bbAudio){bbAudio.close();bbAudio=null;}};
+window.resetBaseball=function(){bbScene=0;bbT=0;};
+})();
 
 </script>
 <script>
@@ -4959,12 +4939,9 @@ function initRainCanvas() {
       <span style="margin-left:0.8rem;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.2em;color:rgba(200,150,46,0.5);">BOTTOM OF THE NINTH</span>
     </div>
     <div style="padding:1.5rem;overflow-y:auto;">
-      <canvas id="baseball-canvas" width="620" height="420" style="width:100%;border-radius:4px;background:#1a3a1a;display:block;"></canvas>
-      <div style="display:flex;gap:0.8rem;margin-top:1rem;justify-content:center;">
-        <button onclick="pitchBall()" id="pitch-btn" style="font-family:'Courier Prime',monospace;font-size:0.75rem;letter-spacing:0.2em;background:rgba(200,150,46,0.15);border:1px solid rgba(200,150,46,0.4);color:#c8962e;padding:0.5rem 1.2rem;cursor:pointer;border-radius:3px;">⚾ PITCH</button>
-        <button onclick="resetBaseball()" style="font-family:'Courier Prime',monospace;font-size:0.75rem;letter-spacing:0.2em;background:rgba(60,20,20,0.3);border:1px solid rgba(200,80,80,0.3);color:rgba(200,120,120,0.7);padding:0.5rem 1.2rem;cursor:pointer;border-radius:3px;">↺ RESET</button>
-      </div>
-      <div id="baseball-msg" style="text-align:center;margin-top:0.8rem;font-family:'Courier Prime',monospace;font-size:0.8rem;color:rgba(200,150,46,0.7);letter-spacing:0.1em;min-height:1.2em;"></div>
+      <canvas id="baseball-canvas" width="620" height="400" style="width:100%;border-radius:4px;background:#1a3a1a;display:block;"></canvas>
+      <div id="baseball-caption" style="text-align:center;margin-top:0.8rem;font-family:'Courier Prime',monospace;font-size:0.8rem;color:rgba(200,150,46,0.8);letter-spacing:0.12em;min-height:1.4em;"></div>
+      <p style="text-align:center;margin-top:0.6rem;font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(200,150,46,0.3);letter-spacing:0.2em;">NEW ORLEANS, 2023</p>
     </div>
   </div>
 </div>
