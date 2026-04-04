@@ -4940,10 +4940,8 @@ function initRainCanvas() {
 <div class="modal-backdrop" id="modal-drawer3">
   <div style="background:#0a1a0a;border:1px solid rgba(200,150,46,0.2);border-radius:8px;width:min(700px,92vw);max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px rgba(0,0,0,0.9);">
     <div style="background:#0f220f;border-bottom:1px solid rgba(200,150,46,0.15);padding:0.7rem 1.2rem;display:flex;align-items:center;gap:0.5rem;">
-      <div onclick="closeModal('modal-drawer3');stopBaseball()" style="width:12px;height:12px;border-radius:50%;background:#ff5f57;cursor:pointer;"></div>
-      <div style="width:12px;height:12px;border-radius:50%;background:#febc2e;"></div>
-      <div style="width:12px;height:12px;border-radius:50%;background:#28c840;"></div>
-      <span style="margin-left:0.8rem;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.2em;color:rgba(200,150,46,0.5);">BOTTOM OF THE NINTH</span>
+      <span class="mac-title" style="flex:1;">BOTTOM OF THE NINTH</span>
+      <span class="cosmic-close" onclick="closeModal('modal-drawer3');stopBaseball()">close ×</span>
     </div>
     <div style="padding:1.5rem;overflow-y:auto;">
       <canvas id="baseball-canvas" width="620" height="400" style="width:100%;border-radius:4px;background:#1a3a1a;display:block;"></canvas>
