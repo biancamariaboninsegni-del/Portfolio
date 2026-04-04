@@ -1493,6 +1493,31 @@
     transform: scale(1.1);
   }
 
+
+  #hs-drawer3 {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+  }
+  #hs-drawer3::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10,8,5,0.85);
+    color: #c8962e;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    padding: 4px 10px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  #hs-drawer3:hover::after { opacity: 1; }
+
 </style>
 </head>
 <body>
@@ -1531,6 +1556,7 @@
 <div class="hotspot" id="hs-dust" onclick="openBrownian()"></div>
 <div class="hotspot" id="hs-imac" data-label="Open desktop" onclick="openMac()"></div>
 <div class="hotspot" id="hs-lamp" data-label="Toggle light" onclick="toggleLamp()"></div>
+<div class="hotspot" id="hs-drawer3" data-label="⚾ bottom of the ninth" onclick="openDrawer3()"></div>
 <div class="hotspot" id="hs-drawer1" data-label="White Holes ✦ solve sudoku first" onclick="tryDrawer(1)"></div>
 <div class="hotspot" id="hs-drawer2" data-label="Flatland ✦ solve sudoku first" onclick="tryDrawer(2)"></div>
 <div class="hotspot" id="hs-ipod" onclick="tryIPod()"></div>
@@ -1723,6 +1749,12 @@
           </a>
         </p>
         <div id="exp-richemont-gallery" class="exp-gallery"></div>
+        <div style="margin-top:1.5rem;">
+          <div style="font-family:'Courier Prime',monospace;font-size:0.65rem;letter-spacing:0.25em;color:rgba(200,150,46,0.55);text-transform:uppercase;margin-bottom:0.6rem;">Van Cleef &amp; Arpels · L'Automate Fée Ondine · Homo Faber 2024</div>
+          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;">
+            <iframe id="vancleef-yt-exp" src="https://www.youtube.com/embed/7B9RltuQiJg?rel=0&modestbranding=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
       </div>
       <div id="exp-christies" class="journal-entry">
         <div class="journal-date">09/2022, 12/2022 · Milan, Italy</div>
@@ -2214,6 +2246,284 @@
 
 window.__threeLoaded = true;
 function loadThree(cb) { cb(); }
+
+
+// ── BASEBALL ────────────────────────────────────────────────────────────────
+var bbAnimId=null, bbAudioCtx=null, bbNotes=[], bbNoteIdx=0, bbNoteTimer=null;
+var bbState={balls:0,strikes:0,outs:0,inning:9,bases:[false,false,false],phase:'idle',
+             ballX:0,ballY:0,ballVx:0,ballVy:0,batAngle:0,animFrame:0,runners:[]};
+
+// Take Me Out to the Ball Game — melodia sintetizzata
+var SONG=[
+  [392,0.35],[392,0.18],[523,0.35],[392,0.35],[523,0.18],[659,0.7],
+  [392,0.35],[392,0.18],[523,0.35],[392,0.35],[587,0.18],[523,0.7],
+  [392,0.35],[392,0.18],[784,0.35],[659,0.35],[523,0.18],[392,0.35],[330,0.35],
+  [330,0.35],[330,0.18],[523,0.35],[523,0.18],[587,0.35],[523,0.7],
+  [659,0.35],[523,0.18],[392,0.35],[659,0.7],[659,0.35],[523,0.18],[392,0.35],[659,0.7]
+];
+
+function initBBAudio(){
+  if(!bbAudioCtx) bbAudioCtx=new(window.AudioContext||window.webkitAudioContext)();
+}
+function playNote(freq,dur){
+  if(!bbAudioCtx) return;
+  var o=bbAudioCtx.createOscillator(),g=bbAudioCtx.createGain();
+  o.connect(g); g.connect(bbAudioCtx.destination);
+  o.type='triangle'; o.frequency.value=freq;
+  g.gain.setValueAtTime(0.18,bbAudioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001,bbAudioCtx.currentTime+dur*0.9);
+  o.start(); o.stop(bbAudioCtx.currentTime+dur);
+}
+function playSong(){
+  var t=0;
+  SONG.forEach(function(n){ setTimeout(function(){playNote(n[0],n[1]);},t*1000); t+=n[1]+0.05; });
+}
+function playHit(){ initBBAudio(); playNote(440,0.08); setTimeout(function(){playNote(660,0.15);},80); }
+function playCrowd(){ initBBAudio(); [300,350,280,320].forEach(function(f,i){setTimeout(function(){playNote(f,0.3);},i*80);}); }
+
+function openDrawer3(){
+  document.getElementById('modal-drawer3').style.display='flex';
+  initBBAudio(); playSong(); drawBaseball();
+}
+function stopBaseball(){ cancelAnimationFrame(bbAnimId); }
+
+function setMsg(t){ document.getElementById('baseball-msg').textContent=t; }
+
+function resetBaseball(){
+  bbState={balls:0,strikes:0,outs:0,inning:9,bases:[false,false,false],phase:'idle',
+           ballX:0,ballY:0,ballVx:0,ballVy:0,batAngle:0,animFrame:0,runners:[]};
+  document.getElementById('pitch-btn').disabled=false;
+  setMsg('Bottom of the 9th. Your turn.');
+  drawBaseball();
+}
+
+function pitchBall(){
+  if(bbState.phase!=='idle') return;
+  bbState.phase='pitching';
+  var cv=document.getElementById('baseball-canvas');
+  bbState.ballX=cv.width/2; bbState.ballY=60;
+  bbState.ballVx=(Math.random()-0.5)*2; bbState.ballVy=5;
+  document.getElementById('pitch-btn').disabled=true;
+  setMsg('');
+  animatePitch();
+}
+
+function animatePitch(){
+  var cv=document.getElementById('baseball-canvas');
+  bbState.ballX+=bbState.ballVx; bbState.ballY+=bbState.ballVy;
+  drawBaseball();
+  if(bbState.ballY < cv.height*0.72){
+    bbAnimId=requestAnimationFrame(animatePitch);
+  } else {
+    // auto-swing: hit se non troppo laterale
+    var cx=cv.width/2, off=Math.abs(bbState.ballX-cx);
+    if(off<55){
+      playHit(); bbState.phase='hit';
+      bbState.batAngle=0; animateSwing(true);
+    } else {
+      var r=Math.random();
+      if(r<0.55){ setMsg('Strike!'); bbState.strikes++; }
+      else { setMsg('Ball.'); bbState.balls++; }
+      checkCount();
+    }
+  }
+}
+
+function animateSwing(hit){
+  bbState.batAngle+=12;
+  drawBaseball();
+  if(bbState.batAngle<90){ bbAnimId=requestAnimationFrame(function(){animateSwing(hit);}); }
+  else {
+    if(hit){ launchBall(); } else { checkCount(); }
+  }
+}
+
+function launchBall(){
+  var cv=document.getElementById('baseball-canvas');
+  bbState.ballVx=(Math.random()-0.5)*6; bbState.ballVy=-10;
+  bbState.phase='flying';
+  animateFly();
+}
+
+function animateFly(){
+  bbState.ballX+=bbState.ballVx; bbState.ballY+=bbState.ballVy; bbState.ballVy+=0.35;
+  drawBaseball();
+  var cv=document.getElementById('baseball-canvas');
+  if(bbState.ballY<cv.height && bbState.ballX>0 && bbState.ballX<cv.width){
+    bbAnimId=requestAnimationFrame(animateFly);
+  } else {
+    // Homerun se esce in alto
+    if(bbState.ballY<0){ homeRun(); }
+    else { singleHit(); }
+  }
+}
+
+function homeRun(){
+  playCrowd(); setMsg('HOME RUN! ⚾🎉');
+  bbState.bases=[false,false,false];
+  bbState.runners=[{base:1,progress:0},{base:2,progress:25},{base:3,progress:50},{base:4,progress:75}];
+  animateRunners();
+}
+
+function singleHit(){
+  playNote(330,0.2); setMsg('Base hit!');
+  // avanza runners esistenti
+  var newRunners=[];
+  bbState.runners.forEach(function(r){ newRunners.push({base:r.base+1,progress:r.progress}); });
+  newRunners.push({base:1,progress:0});
+  bbState.runners=newRunners;
+  animateRunners();
+}
+
+function animateRunners(){
+  var done=true;
+  bbState.runners.forEach(function(r){ if(r.progress<100) done=false; r.progress+=3; });
+  // rimuovi chi ha superato home
+  bbState.runners=bbState.runners.filter(function(r){ return r.progress<120; });
+  drawBaseball();
+  if(!done){ bbAnimId=requestAnimationFrame(animateRunners); }
+  else {
+    bbState.phase='idle';
+    document.getElementById('pitch-btn').disabled=false;
+    updateBases();
+  }
+}
+
+function updateBases(){
+  bbState.bases=[false,false,false];
+  bbState.runners.forEach(function(r){
+    if(r.base>=1&&r.base<=3) bbState.bases[r.base-1]=true;
+  });
+}
+
+function checkCount(){
+  if(bbState.balls>=4){ setMsg('Walk! Take your base.'); advanceWalk(); }
+  else if(bbState.strikes>=3){
+    bbState.outs++;
+    if(bbState.outs>=3){ setMsg('Three outs. Inning over.'); endInning(); return; }
+    else { setMsg('Strike three. Out #'+bbState.outs+'.'); bbState.strikes=0; }
+  }
+  bbState.phase='idle';
+  document.getElementById('pitch-btn').disabled=false;
+}
+
+function advanceWalk(){
+  bbState.runners.push({base:1,progress:0}); animateRunners();
+  bbState.balls=0;
+}
+
+function endInning(){
+  bbState.outs=0; bbState.balls=0; bbState.strikes=0;
+  bbState.bases=[false,false,false]; bbState.runners=[];
+  bbState.phase='idle';
+  setTimeout(function(){ setMsg('New inning. Play ball!'); document.getElementById('pitch-btn').disabled=false; drawBaseball(); },1500);
+}
+
+function drawBaseball(){
+  var cv=document.getElementById('baseball-canvas');
+  var ctx=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  ctx.clearRect(0,0,W,H);
+
+  // Campo — outfield
+  ctx.fillStyle='#1a3a1a'; ctx.fillRect(0,0,W,H);
+
+  // Diamante
+  var cx=W/2, cy=H*0.68;
+  var blen=90;
+  var bases={
+    home:{x:cx,y:cy},
+    first:{x:cx+blen,y:cy-blen},
+    second:{x:cx,y:cy-blen*2},
+    third:{x:cx-blen,y:cy-blen}
+  };
+
+  // Erba diamante
+  ctx.beginPath();
+  ctx.moveTo(bases.home.x,bases.home.y);
+  ctx.lineTo(bases.first.x,bases.first.y);
+  ctx.lineTo(bases.second.x,bases.second.y);
+  ctx.lineTo(bases.third.x,bases.third.y);
+  ctx.closePath();
+  ctx.fillStyle='#2a5a2a'; ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=1.5; ctx.stroke();
+
+  // Pitcher mound
+  ctx.beginPath(); ctx.arc(cx,cy-blen,12,0,Math.PI*2);
+  ctx.fillStyle='#4a3a2a'; ctx.fill();
+
+  // Basi
+  var baseCoords=[bases.first,bases.second,bases.third];
+  baseCoords.forEach(function(b,i){
+    ctx.fillStyle=bbState.bases[i]?'#ffdd44':'#f5f0e0';
+    ctx.fillRect(b.x-8,b.y-8,16,16);
+    ctx.strokeStyle='rgba(0,0,0,0.4)'; ctx.lineWidth=1; ctx.strokeRect(b.x-8,b.y-8,16,16);
+  });
+  // Home plate
+  ctx.fillStyle='#f5f0e0';
+  ctx.beginPath();
+  ctx.moveTo(bases.home.x,bases.home.y-10);
+  ctx.lineTo(bases.home.x+9,bases.home.y-4);
+  ctx.lineTo(bases.home.x+9,bases.home.y+6);
+  ctx.lineTo(bases.home.x-9,bases.home.y+6);
+  ctx.lineTo(bases.home.x-9,bases.home.y-4);
+  ctx.closePath(); ctx.fill();
+
+  // Batter (stilizzato)
+  var bx=bases.home.x-22, by=bases.home.y-5;
+  ctx.fillStyle='#3a6a9a';
+  ctx.fillRect(bx-6,by-22,12,20); // corpo
+  ctx.beginPath(); ctx.arc(bx,by-28,8,0,Math.PI*2);
+  ctx.fillStyle='#3a6a9a'; ctx.fill(); // testa-elmetto
+  // Mazza
+  var ang=(bbState.batAngle||0)*Math.PI/180;
+  ctx.save(); ctx.translate(bx+4,by-12);
+  ctx.rotate(-Math.PI/4+ang);
+  ctx.fillStyle='#8B4513';
+  ctx.fillRect(-2,-28,4,28);
+  ctx.restore();
+
+  // Runners in movimento
+  bbState.runners.forEach(function(r){
+    var p=Math.min(r.progress,100)/100;
+    var from,to;
+    if(r.base===1){from=bases.home;to=bases.first;}
+    else if(r.base===2){from=bases.first;to=bases.second;}
+    else if(r.base===3){from=bases.second;to=bases.third;}
+    else{from=bases.third;to=bases.home;}
+    if(!from||!to) return;
+    var rx=from.x+(to.x-from.x)*p;
+    var ry=from.y+(to.y-from.y)*p;
+    ctx.beginPath(); ctx.arc(rx,ry,7,0,Math.PI*2);
+    ctx.fillStyle='#ffdd44'; ctx.fill();
+    ctx.fillStyle='#222'; ctx.font='8px sans-serif';
+    ctx.textAlign='center'; ctx.fillText('🏃',rx,ry+3);
+  });
+
+  // Pallina
+  if(bbState.phase==='pitching'||bbState.phase==='flying'){
+    ctx.beginPath(); ctx.arc(bbState.ballX,bbState.ballY,7,0,Math.PI*2);
+    ctx.fillStyle='#fff'; ctx.fill();
+    ctx.strokeStyle='#cc4444'; ctx.lineWidth=1.5; ctx.stroke();
+  }
+
+  // Scoreboard
+  ctx.fillStyle='rgba(0,0,0,0.6)';
+  ctx.fillRect(8,8,200,58);
+  ctx.fillStyle='rgba(200,150,46,0.8)';
+  ctx.font='bold 11px "Courier Prime",monospace';
+  ctx.textAlign='left';
+  ctx.fillText('INNING: BOTTOM 9th',16,24);
+  ctx.fillText('BALLS: '+bbState.balls+'  STRIKES: '+bbState.strikes+'  OUTS: '+bbState.outs,16,40);
+  var baseTxt=(bbState.bases[0]?'1st ':'  ')+(bbState.bases[1]?'2nd ':'    ')+(bbState.bases[2]?'3rd':'');
+  ctx.fillText('ON BASE: '+(baseTxt.trim()||'—'),16,56);
+}
+
+window.openDrawer3=openDrawer3;
+window.stopBaseball=stopBaseball;
+window.resetBaseball=resetBaseball;
+window.pitchBall=pitchBall;
+// init msg
 
 </script>
 <script>
@@ -3084,6 +3394,7 @@ function repositionHotspots() {
   posHS('hs-notepad',  0.4182, 0.5621, 0.03, 0.04);
   posHS('hs-drawer1',  0.3995, 0.6409, 0.07, 0.07);
   posHS('hs-drawer2',  0.5656, 0.6510, 0.07, 0.07);
+  posHS('hs-drawer3',  0.3900, 0.6510, 0.07, 0.07);
   
   // Dots
   const dotMap = {
@@ -3117,7 +3428,7 @@ function enterRoom() {
   repositionHotspots();
   // One-time zone flash to reveal clickable areas
   setTimeout(() => {
-    const zones = ['hs-imac','hs-lamp','hs-drawer1','hs-drawer2','hs-ipod','hs-books','hs-notepad','hs-library'];
+    const zones = ['hs-imac','hs-lamp','hs-drawer1','hs-drawer2','hs-drawer3','hs-ipod','hs-books','hs-notepad','hs-library'];
     zones.forEach((id, i) => {
       const el = document.getElementById(id);
       if (el) {
@@ -4637,5 +4948,26 @@ function initRainCanvas() {
   };
 })();
 </script>
+
+<!-- ===== DRAWER 3: BASEBALL ===== -->
+<div class="modal-backdrop" id="modal-drawer3">
+  <div style="background:#0a1a0a;border:1px solid rgba(200,150,46,0.2);border-radius:8px;width:min(700px,92vw);max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px rgba(0,0,0,0.9);">
+    <div style="background:#0f220f;border-bottom:1px solid rgba(200,150,46,0.15);padding:0.7rem 1.2rem;display:flex;align-items:center;gap:0.5rem;">
+      <div onclick="closeModal('modal-drawer3');stopBaseball()" style="width:12px;height:12px;border-radius:50%;background:#ff5f57;cursor:pointer;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#febc2e;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#28c840;"></div>
+      <span style="margin-left:0.8rem;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.2em;color:rgba(200,150,46,0.5);">BOTTOM OF THE NINTH</span>
+    </div>
+    <div style="padding:1.5rem;overflow-y:auto;">
+      <canvas id="baseball-canvas" width="620" height="420" style="width:100%;border-radius:4px;background:#1a3a1a;display:block;"></canvas>
+      <div style="display:flex;gap:0.8rem;margin-top:1rem;justify-content:center;">
+        <button onclick="pitchBall()" id="pitch-btn" style="font-family:'Courier Prime',monospace;font-size:0.75rem;letter-spacing:0.2em;background:rgba(200,150,46,0.15);border:1px solid rgba(200,150,46,0.4);color:#c8962e;padding:0.5rem 1.2rem;cursor:pointer;border-radius:3px;">⚾ PITCH</button>
+        <button onclick="resetBaseball()" style="font-family:'Courier Prime',monospace;font-size:0.75rem;letter-spacing:0.2em;background:rgba(60,20,20,0.3);border:1px solid rgba(200,80,80,0.3);color:rgba(200,120,120,0.7);padding:0.5rem 1.2rem;cursor:pointer;border-radius:3px;">↺ RESET</button>
+      </div>
+      <div id="baseball-msg" style="text-align:center;margin-top:0.8rem;font-family:'Courier Prime',monospace;font-size:0.8rem;color:rgba(200,150,46,0.7);letter-spacing:0.1em;min-height:1.2em;"></div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
