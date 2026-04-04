@@ -4594,24 +4594,25 @@ function initRainCanvas() {
   <div style="background:linear-gradient(160deg,#080604 0%,#110c07 100%);border:1px solid rgba(200,150,46,0.15);border-radius:6px;max-width:720px;width:92%;padding:3rem 3rem 2.5rem;position:relative;font-family:'EB Garamond',serif;color:#e8d5a0;max-height:92vh;overflow-y:auto;">
     <span onclick="window.closeBrownian()" style="position:absolute;top:1.2rem;right:1.5rem;font-size:1.3rem;color:rgba(200,150,46,0.4);cursor:pointer;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='rgba(200,150,46,0.9)'" onmouseout="this.style.color='rgba(200,150,46,0.4)'">&times;</span>
 
-    <p style="font-size:1.05rem;line-height:2;font-style:italic;color:rgba(232,213,160,0.8);margin:0 0 1.5rem;">
-      Look at the light coming through the window.<br>
-      <span style="font-family:'Courier Prime',monospace;font-size:0.65rem;letter-spacing:0.3em;color:rgba(200,150,46,0.55);text-transform:uppercase;display:block;margin-bottom:1.2rem;">Brownian Motion</span>
+    <div style="font-style:normal;margin:0 0 1.8rem;">
+      <p style="font-family:'Courier Prime',monospace;font-size:0.65rem;letter-spacing:0.3em;color:rgba(200,150,46,0.7);text-transform:uppercase;margin-bottom:1.4rem;">Brownian Motion</p>
 
-      <span style="color:rgba(245,234,214,0.92);font-style:normal;line-height:1.85;">If we observe very small particles — a fleck of dust, a grain of pollen — suspended in air or in a liquid, we see them tremble. Driven by this trembling, they move at random, zigzagging, drifting slowly and steadily away from where they began.</span><br><br>
+      <p style="font-size:1.05rem;line-height:1.9;color:#f0e8d5;font-style:normal;margin-bottom:1.1rem;">If we observe very small particles — a fleck of dust, a grain of pollen — suspended in air or in a liquid, we see them tremble. Driven by this trembling, they move at random, zigzagging, drifting slowly and steadily away from where they began.</p>
 
-      <span style="color:rgba(245,234,214,0.92);font-style:normal;line-height:1.85;">This zigzagging motion was called Brownian motion. It is as though the particles were being kicked at random — now this way, now that. They tremble because they are struck by individual air molecules, sometimes from the right, sometimes from the left.</span><br><br>
+      <p style="font-size:1.05rem;line-height:1.9;color:#f0e8d5;font-style:normal;margin-bottom:1.1rem;">This zigzagging motion was called Brownian motion. It is as though the particles were being kicked at random — now this way, now that. They tremble because they are struck by individual air molecules, sometimes from the right, sometimes from the left.</p>
 
-      <span style="color:rgba(245,234,214,0.92);font-style:normal;line-height:1.85;">Those are atoms — invisible, billions of them — colliding against a single particle from every direction, every instant.</span><br><br>
+      <p style="font-size:1.05rem;line-height:1.9;color:#f0e8d5;font-style:normal;margin-bottom:1.4rem;">Those are atoms — invisible, billions of them — colliding against a single particle from every direction, every instant.</p>
 
-      <span style="display:block;border-left:2px solid rgba(200,150,46,0.35);padding-left:1rem;margin:1.2rem 0;color:rgba(245,234,214,0.75);font-style:normal;line-height:1.85;font-size:0.92em;">And what of the Eroica? In 1975, Richard Voss and John Clarke published a paper in <em>Nature</em> demonstrating that the structure of great classical compositions — Beethoven among them — follows the same statistical distribution as Brownian motion: neither wholly random nor wholly predictable, but poised exactly between the two. The dust particle and the symphony obey the same hidden mathematics. What you are watching is the signature of the invisible.</span>
-    </p>
+      <div style="border-left:2px solid rgba(200,150,46,0.4);padding-left:1.1rem;margin-top:1.4rem;">
+        <p style="font-size:0.98rem;line-height:1.85;color:#d4c49a;font-style:normal;">And what of the Eroica? In 1975, Richard Voss and John Clarke published a paper in <em style="font-style:italic;">Nature</em> demonstrating that the structure of great classical compositions — Beethoven among them — follows the same statistical distribution as Brownian motion: neither wholly random nor wholly predictable, but poised exactly between the two. The dust particle and the symphony obey the same hidden mathematics. What you are watching is the signature of the invisible.</p>
+      </div>
+    </div>
 
     <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:3px;margin-bottom:1.5rem;">
       <iframe id="eroica-yt" src="https://www.youtube.com/embed/8AunZS44Fbw?start=0&rel=0&modestbranding=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 
-    <canvas id="eroica-canvas" width="640" height="160" style="width:100%;border-radius:4px;display:block;background:#050403;"></canvas>
+    <canvas id="eroica-canvas" width="640" height="260" style="width:100%;border-radius:4px;display:block;background:#050403;"></canvas>
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:0.6rem;">
       <span style="font-size:0.6rem;letter-spacing:0.15em;color:rgba(200,150,46,0.28);font-family:'Courier Prime',monospace;">atoms &amp; dust</span>
       <span style="font-size:0.6rem;letter-spacing:0.15em;color:rgba(200,150,46,0.28);font-family:'Courier Prime',monospace;">Voss &amp; Clarke &middot; Nature &middot; 1975</span>
