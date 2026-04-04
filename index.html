@@ -2263,10 +2263,26 @@ function loadThree(cb) { cb(); }
 var bbCtx=null,bbW=620,bbH=400,bbRaf=null,bbAudio=null;
 var bbScene=0,bbT=0,bbScenes=[];
 var SONG=[
-  [392,0.35],[392,0.18],[523,0.35],[392,0.35],[523,0.18],[659,0.7],
-  [392,0.35],[392,0.18],[523,0.35],[392,0.35],[587,0.18],[523,0.7],
-  [392,0.35],[392,0.18],[784,0.35],[659,0.35],[523,0.18],[392,0.35],[330,0.35],
-  [330,0.35],[330,0.18],[523,0.35],[523,0.18],[587,0.35],[523,0.7]
+  // "Take me out to the ball game"
+  [392,0.4],[523,0.2],[659,0.6],[523,0.2],[659,0.4],[784,0.8],
+  [740,0.4],[659,0.4],[587,0.4],[523,0.8],[0,0.2],
+  // "take me out with the crowd"
+  [392,0.4],[523,0.2],[659,0.6],[523,0.2],[659,0.4],[784,0.8],
+  [880,0.6],[784,0.6],[659,1.0],[0,0.2],
+  // "buy me some peanuts and cracker jack"
+  [784,0.3],[784,0.3],[784,0.3],[880,0.6],[784,0.6],
+  [740,0.3],[659,0.3],[587,0.3],[523,0.9],[0,0.2],
+  // "I don't care if I never get back"
+  [659,0.3],[659,0.3],[659,0.3],[784,0.6],[659,0.6],
+  [587,0.3],[523,0.3],[494,0.3],[392,0.9],[0,0.3],
+  // "for it's root root root for the home team"
+  [523,0.4],[523,0.2],[523,0.4],[659,0.6],[587,0.4],[523,0.4],[494,0.4],[392,0.6],[0,0.2],
+  // "if they don't win it's a shame"
+  [330,0.4],[392,0.4],[440,0.4],[494,0.4],[523,0.6],[0,0.2],
+  // "for it's one two three strikes you're out"
+  [523,0.3],[494,0.3],[440,0.3],[523,0.6],[587,0.4],[523,0.4],[494,0.4],[440,0.4],
+  // "at the old ball game"
+  [523,0.4],[392,0.4],[440,0.4],[523,1.2]
 ];
 
 function initAudio(){
@@ -4976,7 +4992,7 @@ function initRainCanvas() {
   <div id="bb-anim-view" style="display:none;background:#0a1a0a;border:1px solid rgba(200,150,46,0.2);border-radius:8px;width:min(700px,92vw);max-height:88vh;overflow:hidden;flex-direction:column;box-shadow:0 40px 80px rgba(0,0,0,0.9);">
     <div style="background:#0f220f;border-bottom:1px solid rgba(200,150,46,0.15);padding:0.7rem 1.2rem;display:flex;align-items:center;">
       <span class="mac-title" style="flex:1;">BOTTOM OF THE NINTH</span>
-      <span class="cosmic-close" onclick="document.getElementById('bb-anim-view').style.display='none';document.getElementById('bb-drawer-view').style.display='block';stopBaseball()">close ×</span>
+      <span class="cosmic-close" onclick="closeModal('modal-drawer3');stopBaseball();document.getElementById('bb-anim-view').style.display='none';document.getElementById('bb-drawer-view').style.display='block'">close ×</span>
     </div>
     <div style="padding:1.5rem;overflow-y:auto;">
       <canvas id="baseball-canvas" width="620" height="400" style="width:100%;border-radius:4px;background:#1a3a1a;display:block;"></canvas>
