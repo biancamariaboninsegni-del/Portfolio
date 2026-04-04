@@ -1499,6 +1499,11 @@
 <body>
 
 <!-- CURTAIN -->
+
+<!-- INTRO VIDEO -->
+<div id="intro-video-wrap" style="display:none;position:fixed;inset:0;z-index:150;background:#000;">
+  <video id="intro-video" src="room_intro.mp4" playsinline style="width:100%;height:100%;object-fit:cover;"></video>
+</div>
 <div id="curtain">
   <p id="curtain-text">Bianca Maria Boninsegni<br><span style="font-style:normal; letter-spacing:0.35em; font-size:0.75em; opacity:0.6;">Portfolio</span></p>
   <div id="curtain-enter" onclick="enterRoom()">Enter</div>
@@ -3125,12 +3130,26 @@ function repositionHotspots() {
 window.addEventListener('resize', repositionHotspots);
 
 function enterRoom() {
+  // Mostra video intro
+  var wrap = document.getElementById('intro-video-wrap');
+  var vid = document.getElementById('intro-video');
+  wrap.style.display = 'block';
+  vid.play();
+  vid.onended = function() {
+    wrap.style.display = 'none';
+    _doEnterRoom();
+  };
+  // Nascondi curtain subito
+  document.getElementById('curtain').classList.add('fade-out');
+  setTimeout(() => document.getElementById('curtain').style.display = 'none', 800);
+}
+function _doEnterRoom() {
   window.dispatchEvent(new Event('roomEntered'));
   document.getElementById('curtain').classList.add('fade-out');
   document.getElementById('room').classList.add('entered');
   document.getElementById('day-night-toggle').style.removeProperty('display'); document.getElementById('day-night-toggle').style.display = 'flex';
   var hb = document.getElementById('help-btn'); if(hb) hb.style.display = 'flex';
-  setTimeout(() => document.getElementById('curtain').style.display = 'none', 1500);
+  // (moved to _doEnterRoom)
   initRain();
   repositionHotspots();
   // One-time zone flash to reveal clickable areas
