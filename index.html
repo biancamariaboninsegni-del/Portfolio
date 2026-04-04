@@ -3381,7 +3381,7 @@ function repositionHotspots() {
   posHS('hs-notepad',  0.4182, 0.5621, 0.03, 0.04);
   posHS('hs-drawer1',  0.3995, 0.6409, 0.07, 0.07);
   posHS('hs-drawer2',  0.5656, 0.6510, 0.07, 0.07);
-  posHS('hs-drawer3',  0.3900, 0.6510, 0.07, 0.07);
+  posHS('hs-drawer3',  0.3900, 0.8200, 0.07, 0.07);
   
   // Dots
   const dotMap = {
@@ -4940,7 +4940,7 @@ function initRainCanvas() {
 <div class="modal-backdrop" id="modal-drawer3">
   <div style="background:#0a1a0a;border:1px solid rgba(200,150,46,0.2);border-radius:8px;width:min(700px,92vw);max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px rgba(0,0,0,0.9);">
     <div style="background:#0f220f;border-bottom:1px solid rgba(200,150,46,0.15);padding:0.7rem 1.2rem;display:flex;align-items:center;gap:0.5rem;">
-      <div onclick="closeModal('modal-drawer3');stopBaseball()" style="width:12px;height:12px;border-radius:50%;background:#ff5f57;cursor:pointer;"></div>
+      <div onclick="document.getElementById('modal-drawer3').style.display='none';stopBaseball()" style="width:12px;height:12px;border-radius:50%;background:#ff5f57;cursor:pointer;"></div>
       <div style="width:12px;height:12px;border-radius:50%;background:#febc2e;"></div>
       <div style="width:12px;height:12px;border-radius:50%;background:#28c840;"></div>
       <span style="margin-left:0.8rem;font-family:'Courier Prime',monospace;font-size:0.7rem;letter-spacing:0.2em;color:rgba(200,150,46,0.5);">BOTTOM OF THE NINTH</span>
