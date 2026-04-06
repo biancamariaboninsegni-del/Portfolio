@@ -1658,7 +1658,6 @@
 
 <div id="room">
   <canvas id="rain-canvas"></canvas>
-<div id="schrodinger" style="outline: 2px solid yellow; background: rgba(255,255,0,0.2); cursor:pointer;"></div>
 <div id="gatto-wrapper">
     <div id="gatto-tooltip">Schrödinger — Curator of this room.<br>&quot;I may or may not be here. Do not disturb. I was once worshipped.&quot;</div>
     <canvas id="gatto-canvas" width="220" height="124"></canvas>
@@ -1686,8 +1685,6 @@
 <div class="hotspot" id="hs-drawer2" data-label="Flatland ✦ solve sudoku first" onclick="tryDrawer(2)"></div>
 <div class="hotspot" id="hs-ipod" onclick="tryIPod()"></div>
   <div id="hs-luna" onclick="document.getElementById('modal-perfume').classList.add('open');document.body.style.overflow='hidden';">
-<div id="schrodinger" style="outline: 2px solid yellow; background: rgba(255,255,0,0.2); cursor:pointer;" style="cursor:pointer" onclick="checkHourlyMessage()"></div>
-<div id="schrodinger" style="outline: 2px solid yellow; background: rgba(255,255,0,0.2); cursor:pointer;" onclick="showRandomMessage()"></div>
     <img src="img/perfume-luna.png" alt="Luna by Penhaligon's" />
   </div>
 <div class="hotspot" id="hs-books" onclick="openBooks()"></div>
@@ -3255,7 +3252,6 @@ function repositionHotspots() {
   posHS('hs-drawer1',  0.3995, 0.6409, 0.07, 0.07);
   posHS('hs-drawer2',  0.5656, 0.6510, 0.07, 0.07);
   posHS('hs-luna', 0.555, 0.585, 0.022, 0.065);
-posHS('schrodinger', 0.585, 0.505, 0.05, 0.08);
   
   // Dots
   const dotMap = {
@@ -4693,7 +4689,6 @@ function initRainCanvas() {
   function showBubble(msg) {
     var existing = document.getElementById('cat-bubble');
     if (existing) existing.remove();
-    var wrapper = document.getElementById('schrodinger');
     if (!wrapper) return;
     var bubble = document.createElement('div');
     bubble.id = 'cat-bubble';
@@ -4716,7 +4711,6 @@ function initRainCanvas() {
       toggle.textContent = '🌙';
       
       var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='BACKGROUND_DAYLIGHT.png';window._isDay=true; document.body.classList.add('day-mode'); setTimeout(repositionHotspots, 100);
-      var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'brightness(1.35) sepia(0.25) saturate(1.2)';
 
       // Stop rain, play birds
@@ -4738,7 +4732,6 @@ function initRainCanvas() {
       toggle.textContent = '☀';
       
       var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='room.png';window._isDay=false; document.body.classList.remove('day-mode'); setTimeout(repositionHotspots, 100);
-      var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'none';
 
       // Stop birds, play rain
