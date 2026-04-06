@@ -1701,6 +1701,7 @@
 <div id="hint-bar">
   <span class="hint-item">🖥 click the screen</span>
   <span class="hint-item">💡 lamp = light toggle</span>
+    <span class="hint-item">🌸 perfume bottle = the art of scent</span>
   <span class="hint-item">✉ notepad = contact</span>
   <span class="hint-item">🔒 drawers unlock after sudoku</span>
 </div>
@@ -4428,21 +4429,29 @@ function startFLThree() {
 
   // Click interaction
   var clickMessages = [
-    "Do NOT touch me. I'm thinking.",
-    "Excuse-moi. J'étais occupé.",
+    "You again. I was expecting you.",
+    "Excuse-moi. J'étais occupé à exister.",
     "I tolerate your presence. That's the most you'll get.",
-    "No me toques. Estoy ocupado siendo elegante.",
     "You clicked on a cat. Interesting life choices.",
     "I've been petted by worse. You'll do.",
-    "Sto camminando. Non disturbare.",
-    "One click. That's your limit.",
     "Je ne suis pas un bouton. Mais bon.",
+    "One click. That's your limit.",
     "Fine. Hello. Now leave me alone.",
     "I acknowledge you. Briefly.",
+    "Je connais Paris mieux que la plupart des Parisiens. Et leurs boulangeries aussi.",
+    "I have seen things in this room that would make you reconsider your career choices.",
+    "Schrödinger was a physicist. I am the conclusion.",
+    "La pluie me convient. Vous, moins.",
+    "I was here before the books. I will be here after.",
+    "You seem lost. The work is to your left.",
+    "Do NOT touch me. I'm thinking.",
+    "I may or may not be here. The uncertainty is deliberate.",
     "No. Just... no. Go look at Bianca's work instead."
   ];
+  var _catClickIdx = 0;
   cat.addEventListener('click', function() {
-    var msg = clickMessages[Math.floor(Math.random() * clickMessages.length)];
+    var msg = clickMessages[_catClickIdx % clickMessages.length];
+    _catClickIdx++;
     var existing = document.getElementById('cat-bubble');
     if (existing) existing.remove();
     var bubble = document.createElement('div');
