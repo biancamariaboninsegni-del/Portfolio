@@ -3253,7 +3253,7 @@ function repositionHotspots() {
   posHS('hs-notepad',  0.4182, 0.5621, 0.03, 0.04);
   posHS('hs-drawer1',  0.3995, 0.6409, 0.07, 0.07);
   posHS('hs-drawer2',  0.5656, 0.6510, 0.07, 0.07);
-  posHS('hs-luna',     0.555,  0.585,  0.022, 0.065);
+  posHS('hs-luna', 0.555, 0.585, 0.022, 0.065);
   
   // Dots
   const dotMap = {
@@ -3304,7 +3304,7 @@ function _doEnterRoom() {
   var hb = document.getElementById('help-btn'); if(hb) hb.style.display = 'flex';
   // (moved to _doEnterRoom)
   initRain();
-  repositionHotspots();
+  setTimeout(repositionHotspots, 100);
   // One-time zone flash to reveal clickable areas
   setTimeout(() => {
     const zones = ['hs-imac','hs-lamp','hs-drawer1','hs-drawer2','hs-ipod','hs-books','hs-notepad','hs-library'];
@@ -4714,7 +4714,7 @@ function initRainCanvas() {
     if (isDay) {
       toggle.textContent = '🌙';
       
-      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='BACKGROUND_DAYLIGHT.png';window._isDay=true; document.body.classList.add('day-mode'); repositionHotspots();
+      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='BACKGROUND_DAYLIGHT.png';window._isDay=true; document.body.classList.add('day-mode'); setTimeout(repositionHotspots, 100);
       var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'brightness(1.35) sepia(0.25) saturate(1.2)';
 
@@ -4736,7 +4736,7 @@ function initRainCanvas() {
     } else {
       toggle.textContent = '☀';
       
-      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='room.png';window._isDay=false; document.body.classList.remove('day-mode'); repositionHotspots();
+      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='room.png';window._isDay=false; document.body.classList.remove('day-mode'); setTimeout(repositionHotspots, 100);
       var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'none';
 
