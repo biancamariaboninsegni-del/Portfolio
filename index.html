@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bianca Maria Boninsegni, Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
     --warm: rgba(255, 210, 140, 0.18);
@@ -1503,6 +1506,11 @@
     width: 3.2%;
     cursor: pointer;
     z-index: 10;
+  }
+
+  body:not(.day-mode) #hs-luna {
+    left: 59.8%;
+    top: 60.5%;
   }
   #hs-luna img {
     width: 100%;
@@ -4826,7 +4834,7 @@ function initRainCanvas() {
 
 <div id="modal-perfume">
   <div class="pm-wrap">
-    <h2 style="font-family:'EB Garamond',Georgia,serif;font-size:1.6rem;font-weight:400;text-align:center;letter-spacing:0.18em;font-variant:small-caps;color:#B8942A;margin:0 0 1.8rem;line-height:1.4;">The Art of the Invisible</h2>
+    <h2 style="font-family:'Cormorant Garant',Georgia,serif;font-size:2rem;font-weight:300;text-align:center;letter-spacing:0.12em;color:#6B2737;margin:0 0 1.8rem;line-height:1.2;font-style:italic;">The Art of the Invisible</h2>
     <button class="pm-close" onclick="document.getElementById('modal-perfume').classList.remove('open');document.body.style.overflow='';">close &times;</button>
     <div class="pm-body">
 
@@ -4915,7 +4923,8 @@ function initRainCanvas() {
 
       <p>What fine perfumery understands, and what mainstream fragrance rarely does, is that a perfume is not a product. It is a composition with a temporal structure. And it never stays equal to itself: the pH of the skin decides its transformation, just as the different contexts of life bring out distinct sides of our personality.</p>
 
-      <div class="pm-sec"><span>a personal note</span></div>
+      <img src="img/banner-floral.png" class="pm-banner" alt="">
+    <div class="pm-sec"><span>a personal note</span></div>
 
       <p>I think of when we want to feel more elegant and turn to fragrances like <span class="pm-hl">Luna by Penhaligon&rsquo;s</span>, a citrus with delicate rose and a sensual trail of grey amber. Or of when, as in Japanese culture, we wish to wear scent without invading another&rsquo;s space -- choosing the quiet discretion of <span class="pm-hl">Paper Soap by J-Scent</span>. Often, when trying a fragrance, we are told to wait: <em>&ldquo;the linden will come in a moment, now you smell the tuberose.&rdquo;</em> I wonder how many times we too need time to open up -- how many parts of ourselves require patience before reaching the surface and becoming visible to others.</p>
 
@@ -5003,6 +5012,28 @@ function initRainCanvas() {
   audioToggle.addEventListener('click', function(){
     setAudioMute(!muted);
   });
+
+  // Hook into dynamic rain audio
+  var _origAudio = window.Audio;
+  window._audioInstances = window._audioInstances || [];
+  window.Audio = function(src) {
+    var a = new _origAudio(src);
+    window._audioInstances.push(a);
+    if(muted) a.muted = true;
+    return a;
+  };
+
+  function setAudioMute(m) {
+    muted = m;
+    // Static audio tags
+    document.querySelectorAll('audio').forEach(function(a){ a.muted = m; });
+    // Dynamic audio instances (rain)
+    (window._audioInstances || []).forEach(function(a){ a.muted = m; });
+    // Direct reference to rain if exists
+    if(typeof rainAudio !== 'undefined' && rainAudio) rainAudio.muted = m;
+    audioToggle.textContent = m ? '\uD83D\uDD07' : '\uD83D\uDD0A';
+    localStorage.setItem('audio-muted', m ? '1' : '0');
+  }
 
   // Show after room enters
   var observer = new MutationObserver(function(){
