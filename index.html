@@ -1413,6 +1413,7 @@
 
 
   
+  #schrodinger{position:fixed;bottom:28%;left:-15%;height:8vh;width:calc(8vh * 1366 / 768);pointer-events:auto;z-index:30;cursor:pointer;background-image:url('cat_sprite_walk.png');background-size:700% 100%;background-position:0% 0%;background-repeat:no-repeat;}
 
   
   /* PIOGGIA */
@@ -1658,6 +1659,7 @@
 
 <div id="room">
   <canvas id="rain-canvas"></canvas>
+<div id="schrodinger"></div>
 <div id="gatto-wrapper">
     <div id="gatto-tooltip">Schrödinger — Curator of this room.<br>&quot;I may or may not be here. Do not disturb. I was once worshipped.&quot;</div>
     <canvas id="gatto-canvas" width="220" height="124"></canvas>
@@ -3302,7 +3304,7 @@ function _doEnterRoom() {
   var hb = document.getElementById('help-btn'); if(hb) hb.style.display = 'flex';
   // (moved to _doEnterRoom)
   initRain();
-  setTimeout(repositionHotspots, 100);
+  setTimeout(() => { repositionHotspots(); }, 150);
   // One-time zone flash to reveal clickable areas
   setTimeout(() => {
     const zones = ['hs-imac','hs-lamp','hs-drawer1','hs-drawer2','hs-ipod','hs-books','hs-notepad','hs-library'];
@@ -4423,6 +4425,7 @@ function startFLThree() {
   requestAnimationFrame(u);
 })();
 
+(function(){var cat=document.getElementById("schrodinger");if(!cat)return;var pos=-15,dir=1,phase="walking",frame=0,ft=0,pt=0,lt=0,nf=7;function sf(f){cat.style.backgroundPosition=(f/6*100).toFixed(4)+"% 0%";}function sw(){cat.style.backgroundImage="url('cat_sprite_walk.png')";cat.style.backgroundSize="700% 100%";sf(frame);}function sp(s){cat.style.backgroundImage="url('"+s+"')";cat.style.backgroundSize="100% 100%";cat.style.backgroundPosition="0% 0%";}function tick(ts){var dt=Math.min(ts-lt,50);lt=ts;pt+=dt;if(phase==="walking"){pos+=dir*0.007*dt;cat.style.left=pos+"%";cat.style.transform=dir===-1?"scaleX(-1)":"scaleX(1)";ft+=dt;if(ft>120){frame=(frame+1)%nf;sf(frame);ft=0;}if(dir===1&&pos>72){phase="sitting";pt=0;sp("scat_sit.png");}else if(dir===-1&&pos<3){phase="resting";pt=0;sp("scat_rest.png");}}else if(phase==="sitting"&&pt>5000){phase="walking";pt=0;dir=-1;sw();}else if(phase==="resting"&&pt>6000){phase="sleeping";pt=0;sp("scat_sleep.png");}else if(phase==="sleeping"&&pt>9000){phase="walking";pt=0;dir=1;pos=-15;cat.style.left=pos+"%";sw();}requestAnimationFrame(tick);}requestAnimationFrame(tick);
 
   // Click interaction
   var clickMessages = [
@@ -4644,7 +4647,7 @@ function initRainCanvas() {
     "Si eres de RRHH, ya sabes lo que tienes que hacer.",
     "She built this. From scratch. Think about that.",
     "I don't trust easily. But this room, I trust.",
-    "Ho conosciuto i gatti del Colosseo. Daje. Totti è l'ottavo re di Roma.", "Vous cherchez Vous êtes au bon endroit.",
+    "Vous cherchez quelqu'un de bien ? Vous êtes au bon endroit.",
     "I've seen everyone who walks through here. You seem curious. Good sign.",
     "Don't just look. Read the journals. She means them.",
     "Si estás aquí por trabajo, contacta a Bianca. Yo ya lo he dicho.",
@@ -4689,6 +4692,7 @@ function initRainCanvas() {
   function showBubble(msg) {
     var existing = document.getElementById('cat-bubble');
     if (existing) existing.remove();
+    var wrapper = document.getElementById('schrodinger');
     if (!wrapper) return;
     var bubble = document.createElement('div');
     bubble.id = 'cat-bubble';
@@ -4710,7 +4714,8 @@ function initRainCanvas() {
     if (isDay) {
       toggle.textContent = '🌙';
       
-      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='BACKGROUND_DAYLIGHT.png';window._isDay=true; document.body.classList.add('day-mode'); setTimeout(repositionHotspots, 100);
+      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='BACKGROUND_DAYLIGHT.png';window._isDay=true; document.body.classList.add('day-mode'); setTimeout(() => { repositionHotspots(); }, 150);
+      var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'brightness(1.35) sepia(0.25) saturate(1.2)';
 
       // Stop rain, play birds
@@ -4731,7 +4736,8 @@ function initRainCanvas() {
     } else {
       toggle.textContent = '☀';
       
-      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='room.png';window._isDay=false; document.body.classList.remove('day-mode'); setTimeout(repositionHotspots, 100);
+      var pimg=document.getElementById('parallax-img');if(pimg)pimg.src='room.png';window._isDay=false; document.body.classList.remove('day-mode'); setTimeout(() => { repositionHotspots(); }, 150);
+      var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'none';
 
       // Stop birds, play rain
