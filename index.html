@@ -1604,6 +1604,32 @@
   path.pm-ws { cursor: pointer; transition: opacity 0.12s; }
   path.pm-ws:hover { opacity: 0.82; }
 
+
+  #audio-toggle {
+    display: none;
+    position: fixed;
+    top: 116px;
+    right: 24px;
+    z-index: 99999;
+    font-size: 20px;
+    cursor: pointer;
+    background: rgba(0,0,0,0.55);
+    border: 2px solid rgba(200,150,46,0.6);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    transition: background 0.3s, transform 0.2s;
+    user-select: none;
+    box-shadow: 0 0 12px rgba(200,150,46,0.3);
+  }
+  #audio-toggle:hover {
+    background: rgba(255,255,255,0.12);
+    transform: scale(1.1);
+  }
+
 </style>
 </head>
 <body>
@@ -4557,6 +4583,7 @@ function initRainCanvas() {
 
 
 <div id="day-night-toggle" >☀</div>
+<div id="audio-toggle">🔊</div>
 
 <script>
 (function(){
@@ -4799,12 +4826,14 @@ function initRainCanvas() {
 
 <div id="modal-perfume">
   <div class="pm-wrap">
+    <h2 style="font-family:'EB Garamond',Georgia,serif;font-size:1.6rem;font-weight:400;text-align:center;letter-spacing:0.18em;font-variant:small-caps;color:#B8942A;margin:0 0 1.8rem;line-height:1.4;">The Art of the Invisible</h2>
     <button class="pm-close" onclick="document.getElementById('modal-perfume').classList.remove('open');document.body.style.overflow='';">close &times;</button>
     <div class="pm-body">
 
       <p>Smell is the most mysterious of our senses: a direct link to emotion and guardian of our primordial instincts, yet capable of becoming the most sophisticated and aristocratic of instruments. It is our implacable chemical signature, something that lives on the skin but above all lingers in the memory of those who have encountered it. Situated at the boundary between material and immaterial, between the physical and the abstract, scent enters us with surprising speed, carrying the mind far away.</p>
 
-      <div class="pm-quote">
+      <img src="img/banner-floral.png" class="pm-banner" alt="">
+    <div class="pm-quote">
         <p>&ldquo;He who controls the scent controls the hearts of people.&rdquo;</p>
         <span class="pm-attr">Patrick S&uuml;skind &nbsp;&middot;&nbsp; Das Parfum</span>
       </div>
@@ -4869,28 +4898,6 @@ function initRainCanvas() {
             <line x1="262" y1="140" x2="190" y2="140" stroke="white" stroke-width="1.8"/>
             <line x1="140" y1="262" x2="140" y2="190" stroke="white" stroke-width="1.8"/>
             <line x1="18"  y1="140" x2="90"  y2="140" stroke="white" stroke-width="1.8"/>
-            <g transform="translate(185,38)" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.2" stroke-linecap="round">
-              <line x1="0" y1="18" x2="0" y2="0"/><line x1="0" y1="10" x2="-7" y2="4"/><line x1="0" y1="6" x2="7" y2="1"/>
-              <circle cx="0" cy="22" r="5" fill="rgba(255,255,255,0.4)" stroke="rgba(255,255,255,0.65)"/>
-              <circle cx="-10" cy="16" r="4" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.55)"/>
-            </g>
-            <g transform="translate(196,196)" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.1" stroke-linecap="round">
-              <path d="M0,0 Q4,-6 0,-10 Q-4,-6 0,0"/><path d="M0,0 Q8,-2 8,-7 Q4,-10 0,0"/>
-              <path d="M0,0 Q8,4 6,9 Q2,10 0,0"/><path d="M0,0 Q-8,4 -6,9 Q-2,10 0,0"/>
-              <path d="M0,0 Q-8,-2 -8,-7 Q-4,-10 0,0"/>
-              <circle cx="0" cy="-1" r="2.5" fill="rgba(255,255,255,0.55)" stroke="none"/>
-              <line x1="0" y1="10" x2="0" y2="20"/><path d="M0,16 Q5,13 6,10"/>
-            </g>
-            <g transform="translate(56,196)" fill="rgba(255,255,255,0.48)" stroke="rgba(255,255,255,0.68)" stroke-width="1.1">
-              <path d="M0,-14 Q8,0 5,8 Q2,14 0,14 Q-2,14 -5,8 Q-8,0 0,-14 Z"/>
-            </g>
-            <g transform="translate(68,52)" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1.1" stroke-linecap="round">
-              <ellipse cx="0" cy="0" rx="10" ry="6" fill="rgba(255,255,255,0.28)"/>
-              <line x1="-10" y1="0" x2="-10" y2="10"/><line x1="10" y1="0" x2="10" y2="10"/>
-              <path d="M-10,10 Q0,16 10,10"/>
-              <path d="M-4,-5 Q-8,-12 -4,-16 Q0,-12 -4,-5" fill="rgba(255,255,255,0.32)"/>
-              <path d="M4,-5 Q9,-11 6,-16 Q2,-11 4,-5" fill="rgba(255,255,255,0.28)"/>
-            </g>
             <circle cx="140" cy="140" r="46" fill="#faf9f6" stroke="rgba(200,150,46,0.4)" stroke-width="0.8"/>
             <text x="204" y="82"  text-anchor="middle" fill="white" font-size="10.5" font-family="'Courier Prime',monospace" letter-spacing="0.5">FRESH</text>
             <text x="204" y="206" text-anchor="middle" fill="white" font-size="10.5" font-family="'Courier Prime',monospace" letter-spacing="0.5">FLORAL</text>
@@ -4976,6 +4983,42 @@ function initRainCanvas() {
       });
     }
   });
+})();
+</script>
+
+
+<script>
+(function(){
+  var audioToggle = document.getElementById('audio-toggle');
+  var muted = false;
+
+  function setAudioMute(m) {
+    muted = m;
+    var audios = document.querySelectorAll('audio');
+    audios.forEach(function(a){ a.muted = m; });
+    audioToggle.textContent = m ? '🔇' : '🔊';
+    localStorage.setItem('audio-muted', m ? '1' : '0');
+  }
+
+  audioToggle.addEventListener('click', function(){
+    setAudioMute(!muted);
+  });
+
+  // Show after room enters
+  var observer = new MutationObserver(function(){
+    var room = document.getElementById('room');
+    if(room && room.classList.contains('entered')){
+      audioToggle.style.display = 'flex';
+      observer.disconnect();
+    }
+  });
+  var room = document.getElementById('room');
+  if(room) observer.observe(room, {attributes: true, attributeFilter: ['class']});
+
+  // Restore mute state
+  if(localStorage.getItem('audio-muted') === '1') {
+    setTimeout(function(){ setAudioMute(true); }, 500);
+  }
 })();
 </script>
 
