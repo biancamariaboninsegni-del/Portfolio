@@ -334,7 +334,7 @@
     display: none;
   }
   body.day-mode #hs-dust { display: block; }
-  body.day-mode #hs-luna { outline: 2px solid red; background: rgba(255,0,0,0.2); display: block; }
+  body.day-mode #hs-luna { display: block; }
   #hs-dust::after {
     content: 'la polvere';
     font-family: 'Courier Prime', monospace;
@@ -1500,7 +1500,7 @@
 
 
 
-  #hs-luna { outline: 2px solid red; background: rgba(255,0,0,0.2);
+  #hs-luna {
     position: absolute;
 
     width: 3.2%;
@@ -1508,7 +1508,7 @@
     z-index: 10;
   }
 
-  body:not(.day-mode) #hs-luna { outline: 2px solid red; background: rgba(255,0,0,0.2);
+  body:not(.day-mode) #hs-luna {
 
     left: 59.8%;
     top: 57.89%;
@@ -3253,7 +3253,7 @@ function repositionHotspots() {
   posHS('hs-notepad',  0.4182, 0.5621, 0.03, 0.04);
   posHS('hs-drawer1',  0.3995, 0.6409, 0.07, 0.07);
   posHS('hs-drawer2',  0.5656, 0.6510, 0.07, 0.07);
-  posHS('hs-luna',     0.612,  0.605,  0.022, 0.065);
+  posHS('hs-luna',     0.555,  0.585,  0.022, 0.065);
   
   // Dots
   const dotMap = {
