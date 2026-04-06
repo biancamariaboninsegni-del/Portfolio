@@ -1659,7 +1659,7 @@
 
 <div id="room">
   <canvas id="rain-canvas"></canvas>
-<div id="schrodinger"></div>
+<div id="schrodinger" style="outline: 2px solid yellow; background: rgba(255,255,0,0.2); cursor:pointer;"></div>
 <div id="gatto-wrapper">
     <div id="gatto-tooltip">Schrödinger — Curator of this room.<br>&quot;I may or may not be here. Do not disturb. I was once worshipped.&quot;</div>
     <canvas id="gatto-canvas" width="220" height="124"></canvas>
@@ -1687,8 +1687,8 @@
 <div class="hotspot" id="hs-drawer2" data-label="Flatland ✦ solve sudoku first" onclick="tryDrawer(2)"></div>
 <div class="hotspot" id="hs-ipod" onclick="tryIPod()"></div>
   <div id="hs-luna" onclick="document.getElementById('modal-perfume').classList.add('open');document.body.style.overflow='hidden';">
-<div id="schrodinger" style="cursor:pointer" onclick="checkHourlyMessage()"></div>
-<div id="schrodinger" onclick="showRandomMessage()"></div>
+<div id="schrodinger" style="outline: 2px solid yellow; background: rgba(255,255,0,0.2); cursor:pointer;" style="cursor:pointer" onclick="checkHourlyMessage()"></div>
+<div id="schrodinger" style="outline: 2px solid yellow; background: rgba(255,255,0,0.2); cursor:pointer;" onclick="showRandomMessage()"></div>
     <img src="img/perfume-luna.png" alt="Luna by Penhaligon's" />
   </div>
 <div class="hotspot" id="hs-books" onclick="openBooks()"></div>
@@ -4428,7 +4428,7 @@ function startFLThree() {
   requestAnimationFrame(u);
 })();
 
-(function(){var cat=document.getElementById("schrodinger");if(!cat)return;var pos=-15,dir=1,phase="walking",frame=0,ft=0,pt=0,lt=0,nf=7;function sf(f){cat.style.backgroundPosition=(f/6*100).toFixed(4)+"% 0%";}function sw(){cat.style.backgroundImage="url('cat_sprite_walk.png')";cat.style.backgroundSize="700% 100%";sf(frame);}function sp(s){cat.style.backgroundImage="url('"+s+"')";cat.style.backgroundSize="100% 100%";cat.style.backgroundPosition="0% 0%";}function tick(ts){var dt=Math.min(ts-lt,50);lt=ts;pt+=dt;if(phase==="walking"){pos+=dir*0.007*dt;cat.style.left=pos+"%";cat.style.transform=dir===-1?"scaleX(-1)":"scaleX(1)";ft+=dt;if(ft>120){frame=(frame+1)%nf;sf(frame);ft=0;}if(dir===1&&pos>72){phase="sitting";pt=0;sp("scat_sit.png");}else if(dir===-1&&pos<3){phase="resting";pt=0;sp("scat_rest.png");}}else if(phase==="sitting"&&pt>5000){phase="walking";pt=0;dir=-1;sw();}else if(phase==="resting"&&pt>6000){phase="sleeping";pt=0;sp("scat_sleep.png");}else if(phase==="sleeping"&&pt>9000){phase="walking";pt=0;dir=1;pos=-15;cat.style.left=pos+"%";sw();}requestAnimationFrame(tick);}requestAnimationFrame(tick);
+(function(){var cat=document.getElementById("schrodinger"); if(cat) cat.onclick = function(){ checkHourlyMessage(); };if(!cat)return;var pos=-15,dir=1,phase="walking",frame=0,ft=0,pt=0,lt=0,nf=7;function sf(f){cat.style.backgroundPosition=(f/6*100).toFixed(4)+"% 0%";}function sw(){cat.style.backgroundImage="url('cat_sprite_walk.png')";cat.style.backgroundSize="700% 100%";sf(frame);}function sp(s){cat.style.backgroundImage="url('"+s+"')";cat.style.backgroundSize="100% 100%";cat.style.backgroundPosition="0% 0%";}function tick(ts){var dt=Math.min(ts-lt,50);lt=ts;pt+=dt;if(phase==="walking"){pos+=dir*0.007*dt;cat.style.left=pos+"%";cat.style.transform=dir===-1?"scaleX(-1)":"scaleX(1)";ft+=dt;if(ft>120){frame=(frame+1)%nf;sf(frame);ft=0;}if(dir===1&&pos>72){phase="sitting";pt=0;sp("scat_sit.png");}else if(dir===-1&&pos<3){phase="resting";pt=0;sp("scat_rest.png");}}else if(phase==="sitting"&&pt>5000){phase="walking";pt=0;dir=-1;sw();}else if(phase==="resting"&&pt>6000){phase="sleeping";pt=0;sp("scat_sleep.png");}else if(phase==="sleeping"&&pt>9000){phase="walking";pt=0;dir=1;pos=-15;cat.style.left=pos+"%";sw();}requestAnimationFrame(tick);}requestAnimationFrame(tick);
 
   // Click interaction
   var clickMessages = [
