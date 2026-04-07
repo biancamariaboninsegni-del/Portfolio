@@ -3253,7 +3253,7 @@ function repositionHotspots() {
   posHS('hs-notepad',  0.4182, 0.5621, 0.03, 0.04);
   posHS('hs-drawer1',  0.3995, 0.6409, 0.07, 0.07);
   posHS('hs-drawer2',  0.5656, 0.6510, 0.07, 0.07);
-  if(window._isDay){ posHS('hs-luna', 0.5704, 0.5997, 0.022, 0.065); } else { posHS('hs-luna', 0.5653, 0.658, 0.022, 0.065); }
+  if(window._isDay){ posHS('hs-luna', 0.5704, 0.5997, 0.022, 0.065); } else { posHS('hs-luna', 0.5653, 0.678, 0.022, 0.065); }
   
   // Dots
   const dotMap = {
@@ -4570,32 +4570,46 @@ function initRainCanvas() {
     var wrapper = document.getElementById('gatto-wrapper');
     if (!wrapper) return;
     
-    // Remove existing bubble
     var existing = document.getElementById('cat-bubble');
     if (existing) existing.remove();
     
     var bubble = document.createElement('div');
     bubble.id = 'cat-bubble';
     bubble.style.cssText = [
-      'position:absolute',
-      'bottom:110%',
-      'right:0',
-      'background:rgba(10,8,5,0.92)',
-      'color:#e8d5a3',
-      'font-family:\'Courier New\',monospace',
-      'font-size:0.68em',
-      'padding:10px 14px',
-      'border:1px solid rgba(200,150,46,0.4)',
-      'max-width:280px',
-      'line-height:1.6',
-      'pointer-events:none',
-      'z-index:20',
+      'position:fixed',
+      'bottom:calc(28% + 10vh)',
+      'right:3%',
+      'background:rgba(12,8,4,0.96)',
+      'color:#e8d5a0',
+      'font-family:Georgia,serif',
+      'font-size:14px',
+      'line-height:1.7',
+      'padding:0',
+      'border-radius:6px',
+      'border:1px solid rgba(200,150,46,0.5)',
+      'max-width:300px',
+      'min-width:220px',
       'opacity:0',
-      'transition:opacity 0.5s ease',
-      'text-align:left',
+      'transition:opacity 0.4s',
+      'pointer-events:auto',
+      'z-index:9999',
+      'box-shadow:0 4px 24px rgba(0,0,0,0.6)'
     ].join(';');
-    bubble.textContent = msg;
-    wrapper.appendChild(bubble);
+    var header = document.createElement('div');
+    header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(200,150,46,0.25);';
+    var name = document.createElement('span');
+    name.textContent = 'Schrödinger';
+    name.style.cssText = 'font-family:\"Courier New\",monospace;font-size:11px;letter-spacing:0.15em;color:rgba(200,150,46,0.9);text-transform:uppercase;';
+    var closeBtn = document.createElement('button');
+    closeBtn.textContent = '✕';
+    closeBtn.style.cssText = 'background:none;border:none;color:rgba(200,150,46,0.6);cursor:pointer;font-size:12px;padding:0;line-height:1;';
+    closeBtn.onclick = function(){ bubble.style.opacity='0'; setTimeout(function(){ if(bubble.parentNode) bubble.remove(); },400); };
+    header.appendChild(name); header.appendChild(closeBtn);
+    var body = document.createElement('div');
+    body.style.cssText = 'padding:12px 14px 14px;';
+    body.textContent = msg;
+    bubble.appendChild(header); bubble.appendChild(body);
+    document.body.appendChild(bubble);
     
     setTimeout(function() { bubble.style.opacity = '1'; }, 50);
     setTimeout(function() {
