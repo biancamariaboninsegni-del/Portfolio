@@ -1639,6 +1639,103 @@
     transform: scale(1.1);
   }
 
+
+/* ============ MOBILE ============ */
+@media (max-width: 768px) {
+
+  /* Nascondi hint bar e toggle desktop */
+  #hint-bar, .day-toggle, .audio-toggle { display: none !important; }
+
+  /* Nascondi hotspot - sostituiti dal menu */
+  .hotspot { display: none !important; }
+
+  /* Nascondi gatto-wrapper statico, mostra solo sprite */
+  #gatto-wrapper { display: none !important; }
+
+  /* Stanza come sfondo a schermo intero */
+  #room {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Nome e titolo più piccoli */
+  #name-overlay {
+    font-size: 0.7rem !important;
+    top: 12px !important;
+    right: 12px !important;
+  }
+
+  /* Orologio più piccolo */
+  #clock {
+    font-size: 0.6rem !important;
+    top: 12px !important;
+    left: 12px !important;
+  }
+
+  /* Dialogo Schrödinger su mobile */
+  #cat-bubble {
+    bottom: 90px !important;
+    right: 8px !important;
+    left: 8px !important;
+    max-width: calc(100vw - 16px) !important;
+    font-size: 13px !important;
+  }
+
+  /* Menu mobile in basso */
+  #mobile-nav {
+    display: flex !important;
+  }
+
+  /* Modal a schermo intero su mobile */
+  .modal-backdrop > div,
+  .library-window {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* Menu mobile - nascosto su desktop */
+#mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: rgba(8,5,2,0.95);
+  border-top: 1px solid rgba(200,150,46,0.3);
+  z-index: 9000;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+}
+
+#mobile-nav button {
+  background: none;
+  border: none;
+  color: rgba(200,150,46,0.8);
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  flex: 1;
+}
+
+#mobile-nav button span.icon { font-size: 18px; }
+#mobile-nav button:active { color: rgba(200,150,46,1); }
 </style>
 </head>
 <body>
@@ -5138,5 +5235,27 @@ function initRainCanvas() {
 })();
 </script>
 
+
+<!-- MOBILE NAV -->
+<div id="mobile-nav">
+  <button onclick="openModal('modal-works')">
+    <span class="icon">🖥</span>works
+  </button>
+  <button onclick="openModal('modal-journals')">
+    <span class="icon">📖</span>journals
+  </button>
+  <button onclick="openModal('modal-mindmap')">
+    <span class="icon">🧠</span>mind map
+  </button>
+  <button onclick="openLibrary()">
+    <span class="icon">📚</span>library
+  </button>
+  <button onclick="openModal('modal-perfume')">
+    <span class="icon">🌸</span>scent
+  </button>
+  <button onclick="document.getElementById('schrodinger').click()">
+    <span class="icon">🐈</span>cat
+  </button>
+</div>
 </body>
 </html>
