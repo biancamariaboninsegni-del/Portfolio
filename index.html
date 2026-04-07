@@ -2660,7 +2660,15 @@ function openLibrary() { openHiddenLibrary(); }
 function openHiddenLibrary() {
   document.getElementById('modal-hidden-library').classList.add('open');
   setTitle('Library');
-  initChessboard();
+  if (localStorage.getItem('hiddenLibraryUnlocked') === '1') {
+    chessPhase = 'unlocked';
+    const gate = document.getElementById('hl-chess-gate');
+    if (gate) gate.style.display = 'none';
+    const content = document.getElementById('hl-content');
+    if (content) content.style.display = '';
+  } else {
+    initChessboard();
+  }
   fadeDot('dot-library');
 }
 function openMindMap() { document.getElementById('modal-mindmap').classList.add('open'); setTitle('Mind Map'); setTimeout(buildMindMap,80); }
