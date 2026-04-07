@@ -4457,6 +4457,8 @@ function startFLThree() {
     "Los gatos de la Alhambra y yo nos reunimos cada año. Tapas, Rioja, conversaciones. Este año vimos juntos el show de Bad Bunny en el medio tiempo. Nos gustó mucho. No lo repetiremos a nadie."
   ];
   var _catClickIdx = 0;
+  var wrapper = document.getElementById('gatto-wrapper');
+  if(wrapper){ wrapper.addEventListener('click', function(){ cat.click(); }); }
   cat.addEventListener('click', function() {
     var msg = clickMessages[_catClickIdx % clickMessages.length];
     _catClickIdx++;
