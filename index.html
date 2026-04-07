@@ -2667,7 +2667,7 @@ function openHiddenLibrary() {
     const content = document.getElementById('hl-content');
     if (content) content.style.display = '';
   } else {
-    initChessboard();
+    setTimeout(initChessboard, 50);
   }
   fadeDot('dot-library');
 }
