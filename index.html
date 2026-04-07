@@ -1644,7 +1644,7 @@
 @media (max-width: 768px) {
 
   /* Nascondi hint bar e toggle desktop */
-  #hint-bar, .day-toggle, .audio-toggle, #gatto-tooltip, .toggle-btn { display: none !important; }
+  #hint-bar, .day-toggle, .audio-toggle, #gatto-tooltip, .toggle-btn, #day-toggle, #audio-toggle, [id*="toggle"] { display: none !important; }
 
   /* Nascondi hotspot - sostituiti dal menu */
   .hotspot { display: none !important; }
@@ -5318,9 +5318,11 @@ function initRainCanvas() {
 <!-- MOBILE NAV -->
 
 <!-- MOBILE CONTACT -->
-<a id="mobile-contact" href="mailto:bianca.boninsegni@gmail.com">
-  ✉ contact
-</a>
+<div id="mobile-contact">
+  <a href="mailto:biancamariaboninsegni@gmail.com" style="color:rgba(200,150,46,0.9);text-decoration:none;">✉ email</a>
+  <span style="color:rgba(200,150,46,0.3);">|</span>
+  <a href="https://www.linkedin.com/in/bianca-maria-boninsegni/" target="_blank" style="color:rgba(200,150,46,0.9);text-decoration:none;">in linkedin</a>
+</div>
 <div id="mobile-nav">
   <button onclick="openAbout()">
     <span class="icon">👤</span>about
