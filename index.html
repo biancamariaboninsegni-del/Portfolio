@@ -4466,11 +4466,44 @@ function startFLThree() {
     if (existing) existing.remove();
     var bubble = document.createElement('div');
     bubble.id = 'cat-bubble';
-    bubble.style.cssText = 'position:fixed;bottom:calc(28% + 9vh);left:' + (parseFloat(cat.style.left)||10) + '%;transform:translateX(-30%);background:rgba(20,12,4,0.95);color:#e8d5a0;font-family:Georgia,serif;font-size:13px;padding:10px 15px;border-radius:8px;opacity:0;transition:opacity 0.4s;pointer-events:none;border:1px solid rgba(200,150,46,0.3);max-width:260px;text-align:center;z-index:999;';
-    bubble.textContent = msg;
+    bubble.style.cssText = [
+      'position:fixed',
+      'bottom:calc(28% + 10vh)',
+      'right:3%',
+      'background:rgba(12,8,4,0.96)',
+      'color:#e8d5a0',
+      'font-family:Georgia,serif',
+      'font-size:14px',
+      'line-height:1.7',
+      'padding:0',
+      'border-radius:6px',
+      'border:1px solid rgba(200,150,46,0.5)',
+      'max-width:300px',
+      'min-width:220px',
+      'opacity:0',
+      'transition:opacity 0.4s',
+      'pointer-events:auto',
+      'z-index:9999',
+      'box-shadow:0 4px 24px rgba(0,0,0,0.6)'
+    ].join(';');
+    var header = document.createElement('div');
+    header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(200,150,46,0.25);';
+    var name = document.createElement('span');
+    name.textContent = 'Schrödinger';
+    name.style.cssText = 'font-family:\'Courier New\',monospace;font-size:11px;letter-spacing:0.15em;color:rgba(200,150,46,0.9);text-transform:uppercase;';
+    var close = document.createElement('button');
+    close.textContent = '✕';
+    close.style.cssText = 'background:none;border:none;color:rgba(200,150,46,0.6);cursor:pointer;font-size:12px;padding:0;line-height:1;';
+    close.onclick = function(){ bubble.style.opacity='0'; setTimeout(function(){ if(bubble.parentNode) bubble.remove(); }, 400); };
+    header.appendChild(name);
+    header.appendChild(close);
+    var body = document.createElement('div');
+    body.style.cssText = 'padding:12px 14px 14px;';
+    body.textContent = msg;
+    bubble.appendChild(header);
+    bubble.appendChild(body);
     document.body.appendChild(bubble);
     setTimeout(function(){ bubble.style.opacity = '1'; }, 50);
-    setTimeout(function(){ bubble.style.opacity = '0'; setTimeout(function(){ if(bubble.parentNode) bubble.remove(); }, 500); }, 4000);
   });
 })();
 </script>
