@@ -3253,7 +3253,7 @@ function repositionHotspots() {
   posHS('hs-notepad',  0.4182, 0.5621, 0.03, 0.04);
   posHS('hs-drawer1',  0.3995, 0.6409, 0.07, 0.07);
   posHS('hs-drawer2',  0.5656, 0.6510, 0.07, 0.07);
-  posHS('hs-luna', 0.565, 0.615, 0.022, 0.065);
+  if(window._isDay){ posHS('hs-luna', 0.570, 0.600, 0.022, 0.065); } else { posHS('hs-luna', 0.565, 0.615, 0.022, 0.065); }
   
   // Dots
   const dotMap = {
@@ -4431,9 +4431,9 @@ function startFLThree() {
   var clickMessages = [
     "Ho conosciuto i gatti del Colosseo. Daje. Mi hanno confermato quello che già sapevo: Totti è l'ottavo re di Roma. Come si dice da queste parti: nun c'è trippa pe' gatti. Per noi, però, un'eccezione si fa sempre.",
     "Los gatos de la Alhambra y yo nos reunimos cada año. Tapas, Rioja, conversaciones. Este año vimos juntos el show de Bad Bunny en el medio tiempo. Nos gustó mucho. No lo repetiremos a nadie.",
-    "You again. I was expecting you.",
-    "Les chats de la Bibliothèque nationale lisent par osmose — c'est plus efficace. Ce sont eux qui m'ont parlé de Camus, entre deux Baudelaire. Ils écoutent aussi du rap français. On ne juge pas. Charger c'est ma chanson préférée.",
     "Larry of Downing Street is a dear friend. It was he who introduced me to Prince of Wales tea. He takes it without milk. So do I. We have standards.",
+    "Les chats de la Bibliothèque nationale lisent par osmose — c'est plus efficace. Ce sont eux qui m'ont parlé de Camus, entre deux Baudelaire. Ils écoutent aussi du rap français. On ne juge pas. Charger c'est ma chanson préférée.",
+    "You again. I was expecting you.",
     "Excuse-moi. J'étais occupé à exister.",
     "I tolerate your presence. That's the most you'll get.",
     "You clicked on a cat. Interesting life choices.",
