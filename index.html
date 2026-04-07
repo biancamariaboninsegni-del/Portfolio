@@ -1736,6 +1736,85 @@
 
 #mobile-nav button span.icon { font-size: 18px; }
 #mobile-nav button:active { color: rgba(200,150,46,1); }
+
+@media (max-width: 768px) {
+
+  /* Zoom sulla scrivania - centra la stanza */
+  #parallax-img {
+    transform-origin: 55% 55% !important;
+    transform: scale(1.8) !important;
+  }
+
+  /* Nome più piccolo e compatto */
+  #name-overlay {
+    font-size: 0.65rem !important;
+    line-height: 1.3 !important;
+    top: 10px !important;
+    right: 10px !important;
+  }
+
+  /* Modal a schermo intero con scroll */
+  .modal-backdrop {
+    align-items: flex-end !important;
+  }
+
+  .modal-backdrop > div:not(.library-window) {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    max-height: 90vh !important;
+    border-radius: 16px 16px 0 0 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Font size più leggibile su mobile */
+  .modal-backdrop p,
+  .modal-backdrop li {
+    font-size: 1rem !important;
+    line-height: 1.7 !important;
+  }
+
+  /* Padding bottom per non coprire il menu */
+  .modal-backdrop > div {
+    padding-bottom: 80px !important;
+  }
+
+  /* Schrodinger dialogue */
+  #cat-bubble {
+    bottom: 80px !important;
+    right: 8px !important;
+    left: 8px !important;
+    max-width: calc(100vw - 16px) !important;
+  }
+
+  /* Contact button mobile */
+  #mobile-contact {
+    display: flex !important;
+  }
+}
+
+/* Contact button - nascosto su desktop */
+#mobile-contact {
+  display: none;
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9001;
+  background: rgba(8,5,2,0.85);
+  border: 1px solid rgba(200,150,46,0.5);
+  border-radius: 20px;
+  padding: 6px 16px;
+  color: rgba(200,150,46,0.9);
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  gap: 8px;
+  align-items: center;
+  text-decoration: none;
+}
 </style>
 </head>
 <body>
@@ -5237,6 +5316,11 @@ function initRainCanvas() {
 
 
 <!-- MOBILE NAV -->
+
+<!-- MOBILE CONTACT -->
+<a id="mobile-contact" href="mailto:bianca.boninsegni@gmail.com">
+  ✉ contact
+</a>
 <div id="mobile-nav">
   <button onclick="openAbout()">
     <span class="icon">👤</span>about
