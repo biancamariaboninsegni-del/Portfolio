@@ -4612,10 +4612,6 @@ function initRainCanvas() {
     document.body.appendChild(bubble);
     
     setTimeout(function() { bubble.style.opacity = '1'; }, 50);
-    setTimeout(function() {
-      bubble.style.opacity = '0';
-      setTimeout(function() { if (bubble.parentNode) bubble.remove(); }, 500);
-    }, duration);
   }
 
   function checkHourlyMessage() {
