@@ -4437,24 +4437,20 @@ function startFLThree() {
     "Excuse-moi. J'étais occupé à exister.",
     "I tolerate your presence. That's the most you'll get.",
     "You clicked on a cat. Interesting life choices.",
-    "I've been petted by worse. You'll do.",
+    "Ho visto gente con meno stile. Tu sei appena sufficiente.",
     "Je ne suis pas un bouton. Mais bon.",
     "One click. That's your limit.",
     "Fine. Hello. Now leave me alone.",
     "I acknowledge you. Briefly.",
     "Je connais Paris mieux que la plupart des Parisiens. Et leurs boulangeries aussi.",
-    "I have seen things in this room that would make you reconsider your career choices.",
+    "Osservo tutto. Valuto tutti. I miei standard sono molto alti.",
     "Schrödinger was a physicist. I am the conclusion.",
-    "La pluie me convient. Vous, moins.",
-    "I was here before the books. I will be here after.",
+    "Piove. È la mia condizione preferita. Per ovvie ragioni.",
+    "Sono qui da prima che tu capissi il significato della parola 'biblioteca'.",
     "You seem lost. The work is to your left.",
     "Do NOT touch me. I'm thinking.",
     "I may or may not be here. The uncertainty is deliberate.",
-    "No. Just... no. Go look at Bianca's work instead.",
-    "Ho conosciuto i gatti del Colosseo. Daje. Mi hanno confermato quello che già sapevo: Totti è l'ottavo re di Roma. Come si dice da queste parti: nun c'è trippa pe' gatti. Per noi, però, un'eccezione si fa sempre.",
-    "Larry of Downing Street is a dear friend. It was he who introduced me to Prince of Wales tea. He takes it without milk. So do I. We have standards.",
-    "Les chats de la Bibliothèque nationale lisent par osmose — c'est plus efficace. Ce sont eux qui m'ont parlé de Camus, entre deux Baudelaire. Ils écoutent aussi du rap français. On ne juge pas. Charger c'est ma chanson préférée.",
-    "Los gatos de la Alhambra y yo nos reunimos cada año. Tapas, Rioja, conversaciones. Este año vimos juntos el show de Bad Bunny en el medio tiempo. Nos gustó mucho. No lo repetiremos a nadie."
+    "No. Just... no. Go look at Bianca's work instead."
   ];
   var _catClickIdx = 0;
   var wrapper = document.getElementById('gatto-wrapper');
@@ -4741,15 +4737,16 @@ function initRainCanvas() {
     if (!wrapper) return;
     var bubble = document.createElement('div');
     bubble.id = 'cat-bubble';
-    bubble.style.cssText = 'position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:rgba(20,12,4,0.92);color:#e8d5a0;font-family:Georgia,serif;font-size:13px;padding:10px 15px;border-radius:8px;white-space:nowrap;opacity:0;transition:opacity 0.4s;pointer-events:none;border:1px solid rgba(200,150,46,0.3);max-width:280px;white-space:normal;text-align:center;z-index:9999;';
-    bubble.textContent = msg;
-    wrapper.style.position = 'relative';
-    wrapper.appendChild(bubble);
+    bubble.style.cssText = 'position:fixed;bottom:calc(28% + 10vh);right:3%;background:rgba(12,8,4,0.96);color:#e8d5a0;font-family:Georgia,serif;font-size:14px;line-height:1.7;padding:0;border-radius:6px;border:1px solid rgba(200,150,46,0.5);max-width:300px;min-width:220px;opacity:0;transition:opacity 0.4s;pointer-events:auto;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.6)';
+    var hdr=document.createElement('div');hdr.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(200,150,46,0.25);';
+    var nm=document.createElement('span');nm.textContent='Schrödinger';nm.style.cssText='font-family:"Courier New",monospace;font-size:11px;letter-spacing:0.15em;color:rgba(200,150,46,0.9);text-transform:uppercase;';
+    var cl=document.createElement('button');cl.textContent='✕';cl.style.cssText='background:none;border:none;color:rgba(200,150,46,0.6);cursor:pointer;font-size:12px;padding:0;line-height:1;';
+    cl.onclick=function(){bubble.style.opacity='0';setTimeout(function(){if(bubble.parentNode)bubble.remove();},400);};
+    hdr.appendChild(nm);hdr.appendChild(cl);
+    var bd=document.createElement('div');bd.style.cssText='padding:12px 14px 14px;';bd.textContent=msg;
+    bubble.appendChild(hdr);bubble.appendChild(bd);
+    document.body.appendChild(bubble);
     setTimeout(function(){ bubble.style.opacity = '1'; }, 50);
-    setTimeout(function(){
-      bubble.style.opacity = '0';
-      setTimeout(function(){ if(bubble.parentNode) bubble.remove(); }, 500);
-    }, 5000);
   }
 
   toggle.addEventListener('click', function(){
