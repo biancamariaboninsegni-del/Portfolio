@@ -2664,8 +2664,17 @@ function openHiddenLibrary() {
     chessPhase = 'unlocked';
     const gate = document.getElementById('hl-chess-gate');
     if (gate) gate.style.display = 'none';
-    const content = document.getElementById('hl-content');
-    if (content) content.style.display = '';
+    const content = document.getElementById('hl-library-content');
+    if (content) {
+      content.style.display = 'block';
+      content.style.opacity = '1';
+      content.style.transform = 'translateY(0)';
+      content.style.pointerEvents = 'auto';
+      const grid = document.getElementById('hl-books-grid');
+      if (grid) grid.innerHTML = '';
+      buildHiddenLibrary();
+      setTimeout(() => { document.querySelectorAll('#hl-books-grid > div').forEach(c => { c.style.opacity='1'; c.style.transform='translateY(0)'; }); }, 100);
+    }
   } else {
     setTimeout(initChessboard, 50);
   }
