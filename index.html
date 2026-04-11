@@ -1880,7 +1880,7 @@
     <img id="curtain-snake" src="img/ouroboros.png" alt="auryn">
     <div id="curtain-outer-ring"></div>
   </div>
-  <div id="curtain-enter">click to enter</div>
+  <div id="curtain-enter" onclick="enterRoom()" style="cursor:pointer;">click to enter</div>
   <audio id="clockwork-audio" src="audio/clockwork.mp3" loop></audio>
 </div>
 
@@ -3571,7 +3571,8 @@ function enterRoom() {
   _startGearAnimation();
   var enterBtn = document.getElementById('curtain-enter');
   if (enterBtn) { enterBtn.style.display = 'none'; }
-  // Mostra video intro
+  return;
+  // VIDEO INTRO — ora viene chiamato da enterRoomGear via _doEnterRoom
   var wrap = document.getElementById('intro-video-wrap');
   var vid = document.getElementById('intro-video');
   wrap.style.display = 'block';
