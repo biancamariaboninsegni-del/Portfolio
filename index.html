@@ -422,6 +422,9 @@
     padding: 2rem 2.5rem !important;
     background: #faf7f2 !important;
     color: #1a1a1a !important;
+    font-family: 'EB Garamond', serif !important;
+    font-size: 1.05rem !important;
+    line-height: 1.85 !important;
   }
   .mac-body p, .mac-body li, .mac-body span, .mac-body div {
     color: #1a1a1a !important;
@@ -4602,7 +4605,7 @@ function startFLThree() {
     const bg = room.style.backgroundImage;
     if(bg && bg!=="none" && !img.src){
       const m=bg.match(/url(["']?([^"')]+)["']?)/);
-      if(m){img.src=m[1];room.style.backgroundImage="none";img.onload=function(){repositionHotspots();};}
+      if(m){img.src=m[1];room.style.backgroundImage="none";img.onload=function(){repositionHotspots();};if(img.complete){repositionHotspots();}}
     }
   });
   obs.observe(room,{attributes:true,attributeFilter:["style"]});
