@@ -1875,13 +1875,11 @@
   <video id="intro-video" src="room_intro.mp4" playsinline style="width:100%;height:100%;object-fit:cover;"></video>
 </div>
 
-<div id="welcome-screen" style="position:fixed;inset:0;z-index:999;background:#0a0805;display:none;opacity:0;transition:opacity 0.8s ease;align-items:center;justify-content:center;padding:3rem 2rem;">
-  <p style="font-family:'EB Garamond',Georgia,serif;font-size:clamp(1.2rem,2.5vw,1.9rem);color:rgba(255,255,255,0.55);line-height:2;text-align:left;max-width:680px;">
-    Welcome to my portfolio.<br>
-    Read about my <strong style="color:rgba(255,255,255,0.92);font-weight:600;">experiences</strong> <img src="img/img_experiences.jpg" style="width:60px;height:60px;object-fit:cover;vertical-align:middle;margin:0 5px;border-radius:2px;position:relative;top:-2px;"> in luxury, marketing &amp; communications,
-    <strong style="color:rgba(255,255,255,0.92);font-weight:600;">studies</strong> <img src="img/img_studies.jpg" style="width:60px;height:60px;object-fit:cover;vertical-align:middle;margin:0 5px;border-radius:2px;position:relative;top:-2px;"> between Milan and New Orleans,
-    and <strong style="color:rgba(255,255,255,0.92);font-weight:600;">passions</strong> <img src="img/img_passions.jpg" style="width:60px;height:60px;object-fit:cover;vertical-align:middle;margin:0 5px;border-radius:2px;position:relative;top:-2px;"> that shape the way I think.
+<div id="welcome-screen" style="position:fixed;inset:0;z-index:999;background:#0a0805;display:none;opacity:0;transition:opacity 0.8s ease;flex-direction:column;align-items:center;justify-content:center;padding:4rem 6rem;">
+  <p style="font-family:'EB Garamond',Georgia,serif;font-size:clamp(1.4rem,2.8vw,2.1rem);color:rgba(255,255,255,0.55);line-height:2.2;text-align:left;max-width:900px;margin-bottom:3rem;">
+    Welcome to my portfolio. Read about my <strong style="color:rgba(255,255,255,0.92);font-weight:600;">experiences</strong><img src="img/img_experiences.jpg" style="width:68px;height:68px;object-fit:cover;vertical-align:middle;margin:0 8px;border-radius:2px;position:relative;top:-3px;"> in luxury, marketing &amp; communications, <strong style="color:rgba(255,255,255,0.92);font-weight:600;">studies</strong><img src="img/img_studies.jpg" style="width:68px;height:68px;object-fit:cover;vertical-align:middle;margin:0 8px;border-radius:2px;position:relative;top:-3px;"> between Milan and New Orleans, and <strong style="color:rgba(255,255,255,0.92);font-weight:600;">passions</strong><img src="img/img_passions.jpg" style="width:68px;height:68px;object-fit:cover;vertical-align:middle;margin:0 8px;border-radius:2px;position:relative;top:-3px;"> that shape the way I think.
   </p>
+  <div onclick="_enterFromWelcome()" style="font-family:'Courier Prime',monospace;font-size:0.6rem;letter-spacing:0.35em;color:rgba(255,255,255,0.3);text-transform:uppercase;cursor:pointer;border:1px solid rgba(255,255,255,0.15);padding:0.6rem 1.8rem;transition:all 0.3s;" onmouseover="this.style.color='rgba(255,255,255,0.7)';this.style.borderColor='rgba(255,255,255,0.4)'" onmouseout="this.style.color='rgba(255,255,255,0.3)';this.style.borderColor='rgba(255,255,255,0.15)'">enter the room</div>
 </div>
 
 <div id="curtain">
@@ -3568,13 +3566,14 @@ function _showWelcomeScreen() {
   if (!ws) { _doEnterRoom(); return; }
   ws.style.display = 'flex';
   requestAnimationFrame(function(){ ws.style.opacity = '1'; });
-  setTimeout(function() {
+}
+
+function _enterFromWelcome() {
+  var ws = document.getElementById('welcome-screen');
+  if (ws) {
     ws.style.opacity = '0';
-    setTimeout(function() {
-      ws.style.display = 'none';
-      _doEnterRoom();
-    }, 800);
-  }, 4000);
+    setTimeout(function() { ws.style.display = 'none'; _doEnterRoom(); }, 800);
+  }
 }
 
 function enterRoom() {
