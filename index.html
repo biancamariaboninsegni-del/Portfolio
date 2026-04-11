@@ -2969,6 +2969,7 @@ function openHiddenLibrary() {
 }
 function openMindMap() { document.getElementById('modal-mindmap').classList.add('open'); setTitle('Mind Map'); setTimeout(buildMindMap,80); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); setTitle(null); }
+function openModal(id) { document.getElementById(id).classList.add('open'); }
 
 document.querySelectorAll('.modal-backdrop').forEach(el => {
   el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
