@@ -3518,7 +3518,7 @@ function _doEnterRoom() {
   var hb = document.getElementById('help-btn'); if(hb) hb.style.display = 'flex';
   // (moved to _doEnterRoom)
   initRain();
-  setTimeout(() => { repositionHotspots(); }, 150);
+  var pimg = document.getElementById("parallax-img"); if(pimg && pimg.complete){ repositionHotspots(); } else if(pimg){ pimg.onload = function(){ repositionHotspots(); }; } else { setTimeout(repositionHotspots, 150); }
   // One-time zone flash to reveal clickable areas
   setTimeout(() => {
     const zones = ['hs-imac','hs-lamp','hs-drawer1','hs-drawer2','hs-ipod','hs-books','hs-notepad','hs-library'];
