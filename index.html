@@ -3573,6 +3573,7 @@ function enterRoom() {
   _startGearAnimation();
   var enterBtn = document.getElementById('curtain-enter');
   if (enterBtn) { enterBtn.style.display = 'none'; }
+  setTimeout(function() { enterRoomGear(); }, 2000);
   return;
   // VIDEO INTRO — ora viene chiamato da enterRoomGear via _doEnterRoom
   var wrap = document.getElementById('intro-video-wrap');
