@@ -1874,6 +1874,16 @@
 <div id="intro-video-wrap" style="display:none;position:fixed;inset:0;z-index:150;background:#000;">
   <video id="intro-video" src="room_intro.mp4" playsinline style="width:100%;height:100%;object-fit:cover;"></video>
 </div>
+
+<div id="welcome-screen" style="position:fixed;inset:0;z-index:999;background:#0a0805;display:none;opacity:0;transition:opacity 0.8s ease;align-items:center;justify-content:center;padding:3rem 2rem;">
+  <p style="font-family:'EB Garamond',Georgia,serif;font-size:clamp(1.2rem,2.5vw,1.9rem);color:rgba(255,255,255,0.55);line-height:2;text-align:left;max-width:680px;">
+    Welcome to my portfolio.<br>
+    Read about my <strong style="color:rgba(255,255,255,0.92);font-weight:600;">experiences</strong> <img src="img/img_experiences.jpg" style="width:60px;height:60px;object-fit:cover;vertical-align:middle;margin:0 5px;border-radius:2px;position:relative;top:-2px;"> in luxury, marketing &amp; communications,
+    <strong style="color:rgba(255,255,255,0.92);font-weight:600;">studies</strong> <img src="img/img_studies.jpg" style="width:60px;height:60px;object-fit:cover;vertical-align:middle;margin:0 5px;border-radius:2px;position:relative;top:-2px;"> between Milan and New Orleans,
+    and <strong style="color:rgba(255,255,255,0.92);font-weight:600;">passions</strong> <img src="img/img_passions.jpg" style="width:60px;height:60px;object-fit:cover;vertical-align:middle;margin:0 5px;border-radius:2px;position:relative;top:-2px;"> that shape the way I think.
+  </p>
+</div>
+
 <div id="curtain">
   <p id="curtain-text">Bianca Maria Boninsegni</p>
   <div id="curtain-gear-wrap" onclick="enterRoomGear()">
@@ -3549,24 +3559,22 @@ function enterRoomGear() {
   setTimeout(function() {
     var curtain = document.getElementById('curtain');
     if (curtain) curtain.style.display = 'none';
-    var wrap = document.getElementById('intro-video-wrap');
-    var vid = document.getElementById('intro-video');
-    if (wrap && vid) {
-      wrap.style.display = 'block';
-      vid.play();
-      vid.onended = function() {
-        var fade = document.getElementById('intro-fade');
-        if (fade) { fade.style.display='block'; requestAnimationFrame(function(){ fade.style.opacity='1'; }); }
-        setTimeout(function(){
-          wrap.style.display='none';
-          _doEnterRoom();
-          setTimeout(function(){ if(fade){fade.style.opacity='0'; setTimeout(function(){fade.style.display='none';},600);} },100);
-        }, 650);
-      };
-    } else {
-      _doEnterRoom();
-    }
+    _showWelcomeScreen();
   }, 900);
+}
+
+function _showWelcomeScreen() {
+  var ws = document.getElementById('welcome-screen');
+  if (!ws) { _doEnterRoom(); return; }
+  ws.style.display = 'flex';
+  requestAnimationFrame(function(){ ws.style.opacity = '1'; });
+  setTimeout(function() {
+    ws.style.opacity = '0';
+    setTimeout(function() {
+      ws.style.display = 'none';
+      _doEnterRoom();
+    }, 800);
+  }, 4000);
 }
 
 function enterRoom() {
