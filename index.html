@@ -3540,30 +3540,12 @@ function repositionHotspots() {
 window.addEventListener('resize', repositionHotspots);
 
 function enterRoomGear() {
-  var gear = document.getElementById('curtain-gear-wrap');
-  if (gear.classList.contains('opening')) return;
   var audio = document.getElementById('clockwork-audio');
   if (audio) { audio.pause(); }
-  gear.classList.add('opening');
   var snake = document.getElementById('curtain-snake');
   var ring = document.getElementById('curtain-outer-ring');
-  if (snake) { snake.classList.remove('spinning'); snake.style.animation = 'snakeDissolve 1.6s ease-in-out forwards'; }
-  if (ring) { ring.classList.remove('spinning'); ring.style.animation = 'ringOut 1s ease-out forwards'; }
-  var ctx = window._cwAudioCtx;
-  if (ctx) {
-    var interval = 180; var count = 0;
-    function accel() {
-      var buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate*0.05), ctx.sampleRate);
-      var d = buf.getChannelData(0);
-      for(var i=0;i<d.length;i++){var t=i/ctx.sampleRate;d[i]=Math.exp(-t*80)*(Math.random()*2-1)*0.35;}
-      var src=ctx.createBufferSource(); src.buffer=buf;
-      var g=ctx.createGain(); g.gain.value=0.6;
-      src.connect(g); g.connect(ctx.destination); src.start();
-      count++; interval=Math.max(25,interval-14);
-      if(count<14) setTimeout(accel,interval);
-    }
-    accel();
-  }
+  if (snake) { snake.style.animation = 'snakeDissolve 0.8s ease-in-out forwards'; }
+  if (ring) { ring.style.animation = 'ringOut 0.6s ease-out forwards'; }
   setTimeout(function() {
     var curtain = document.getElementById('curtain');
     if (curtain) curtain.style.display = 'none';
@@ -3584,7 +3566,7 @@ function enterRoomGear() {
     } else {
       _doEnterRoom();
     }
-  }, 1600);
+  }, 900);
 }
 
 function enterRoom() {
