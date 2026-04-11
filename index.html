@@ -2003,6 +2003,15 @@
           <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(232,146,74,0.15)" stroke="rgba(232,146,74,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(232,146,74,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(232,146,74,0.25)" stroke="rgba(232,146,74,0.4)" stroke-width="1"/></svg>
           <span class="folder-label">Works</span>
         </div>
+        <!-- Baseball -->
+        <div class="folder-icon" onclick="openModal('modal-baseball')">
+          <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="26" cy="26" r="20" fill="rgba(245,242,235,0.12)" stroke="rgba(245,242,235,0.5)" stroke-width="1.5"/>
+            <path d="M10 26 Q16 20 22 26 Q28 32 34 26 Q40 20 42 26" stroke="rgba(200,80,80,0.7)" stroke-width="1.2" fill="none"/>
+            <path d="M10 26 Q16 32 22 26 Q28 20 34 26 Q40 32 42 26" stroke="rgba(200,80,80,0.7)" stroke-width="1.2" fill="none"/>
+          </svg>
+          <span class="folder-label">Games</span>
+        </div>
         <!-- Folder: Mind Map -->
         <div class="folder-icon" onclick="closeModal('modal-mac'); openMindMap()">
           <svg viewBox="0 0 52 52" fill="none">
@@ -2218,6 +2227,24 @@
           </div>
         </div>
 </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BASEBALL MODAL ===== -->
+<div class="modal-backdrop" id="modal-baseball">
+  <div class="parchment-window" style="max-width:600px;">
+    <div class="parchment-header">
+      <span class="parchment-title">Games I love</span>
+      <span class="parchment-close" onclick="closeModal('modal-baseball')">close ×</span>
+    </div>
+    <div class="parchment-body">
+      <img src="img/baseball.jpg" style="width:100%;border-radius:4px;margin-bottom:1.8rem;object-fit:cover;max-height:220px;" />
+      <p><strong>Baseball</strong> — discovered it in New Orleans. An extraordinarily intelligent sport: every game is a duel between pitcher and batter, a psychological negotiation played in fractions of a second. I became completely obsessed. The only baseball I had ever seen before was the scene in Twilight — the one played during a thunderstorm, with Supermassive Black Hole by Muse. Which, in retrospect, is a perfectly reasonable introduction to the sport.</p>
+      <p>What strikes me most about baseball is something a sports psychologist once noted: it is unique among major sports in that the same player must master both offensive and defensive skills. You cannot specialize into just one role. Patience, too, is structural — you wait for the right pitch, and rushing the decision is always a mistake. It is, in that sense, a sport that rewards the same qualities that make people interesting off the field.</p>
+      <p><strong>Wordle</strong> — six attempts, one word. The constraint is the game.</p>
+      <p><strong>Contexto</strong> — semantic proximity as a puzzle. You navigate meaning to find the hidden word. The most interesting of the four.</p>
+      <p><strong>Sudoku</strong> — already in the room. Solve it first.</p>
     </div>
   </div>
 </div>
