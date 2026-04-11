@@ -17,7 +17,7 @@
     --dark: rgba(10, 8, 5, 0.72);
     --parchment: #f5ead6;
     --ink: #2a1f0e;
-    --gold: #c8962e;
+    --gold: #8B3A3A;
     --teal: #3d7a6e;
     --overlay: rgba(10, 6, 2, 0.18);
   }
@@ -181,7 +181,7 @@
     z-index: 5;
     border-radius: 4px;
   }
-  .hotspot:hover { background: rgba(200,150,46,0.12); outline: 1px solid rgba(200,150,46,0.25); }
+  .hotspot:hover { background: rgba(139,58,58,0.12); outline: 1px solid rgba(139,58,58,0.25); }
   .hotspot::after {
     content: attr(data-label);
     position: absolute;
@@ -190,7 +190,7 @@
     transform: translateX(-50%);
     font-family: 'Courier Prime', monospace;
     font-size: 0.62rem;
-    color: rgba(200,150,46,0.9);
+    color: rgba(139,58,58,0.9);
     letter-spacing: 0.12em;
     white-space: nowrap;
     opacity: 0;
@@ -220,20 +220,20 @@
     position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 99999;
     font-family: 'Courier Prime', monospace;
     font-size: 0.65rem;
-    color: rgba(200,150,46,1);
+    color: rgba(139,58,58,1);
     cursor: pointer;
     width: 28px; height: 28px; font-size: 0.8rem;
-    border: 1px solid rgba(200,150,46,0.5);
+    border: 1px solid rgba(139,58,58,0.5);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     transition: all 0.3s;
     background: rgba(0,0,0,0.4);
   }
-  #help-btn:hover { color: rgba(200,150,46,0.9); border-color: rgba(200,150,46,0.5); background: rgba(0,0,0,0.6); }
+  #help-btn:hover { color: rgba(139,58,58,0.9); border-color: rgba(139,58,58,0.5); background: rgba(0,0,0,0.6); }
   .hint-item {
     font-family: 'Courier Prime', monospace;
     font-size: 0.58rem;
-    color: rgba(200,150,46,0.45);
+    color: rgba(139,58,58,0.45);
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
@@ -246,7 +246,7 @@
     height: 12%;
     cursor: pointer;
   }
-  #hs-notepad:hover { background: rgba(200,150,46,0.06); outline: 1px solid rgba(200,150,46,0.15); }
+  #hs-notepad:hover { background: rgba(139,58,58,0.06); outline: 1px solid rgba(139,58,58,0.15); }
   #hs-notepad::after {
     content: '✉ contact';
     position: absolute;
@@ -254,7 +254,7 @@
     transform: translateX(-50%);
     font-family: 'Courier Prime', monospace;
     font-size: 0.62rem;
-    color: rgba(200,150,46,0.9);
+    color: rgba(139,58,58,0.9);
     letter-spacing: 0.12em;
     white-space: nowrap;
     opacity: 0;
@@ -295,7 +295,7 @@
   .note-title {
     font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
-    color: #2a1a08;
+    color: #2c2c2c;
     margin-bottom: 1.2rem;
     font-style: italic;
     line-height: 28px;
@@ -303,7 +303,7 @@
   .note-line {
     font-family: 'Inter', sans-serif;
     font-size: 0.95rem;
-    color: #3a2a10;
+    color: #2c2c2c;
     line-height: 28px;
     display: flex; align-items: center; gap: 0.5rem;
   }
@@ -385,7 +385,7 @@
     font-family: 'Courier Prime', monospace;
     font-size: 0.6rem;
     letter-spacing: 0.15em;
-    color: rgba(200,150,46,0.7);
+    color: rgba(139,58,58,0.7);
     bottom: -1.4rem;
     left: 50%;
     transform: translateX(-50%);
@@ -483,7 +483,7 @@
     line-height: 1.75;
   }
   .mac-body::-webkit-scrollbar { width: 4px; }
-  .mac-body::-webkit-scrollbar-thumb { background: rgba(200,150,46,0.3); border-radius: 2px; }
+  .mac-body::-webkit-scrollbar-thumb { background: rgba(139,58,58,0.3); border-radius: 2px; }
 
   /* Mac desktop screen (folder icons) */
   #mac-desktop {
@@ -502,7 +502,7 @@
     border-radius: 8px;
     transition: background 0.2s;
   }
-  .folder-icon:hover { background: rgba(200,150,46,0.1); }
+  .folder-icon:hover { background: rgba(139,58,58,0.1); }
   .folder-icon svg { width: 52px; height: 52px; }
   .folder-label {
     font-family: 'Courier Prime', monospace;
@@ -514,8 +514,8 @@
   .cv-btn {
     grid-column: 1 / -1;
     margin-top: 1rem;
-    background: linear-gradient(135deg, rgba(200,150,46,0.15), rgba(200,150,46,0.05));
-    border: 1px solid rgba(200,150,46,0.3);
+    background: linear-gradient(135deg, rgba(139,58,58,0.15), rgba(139,58,58,0.05));
+    border: 1px solid rgba(139,58,58,0.3);
     color: var(--gold);
     font-family: 'Courier Prime', monospace;
     font-size: 0.7rem;
@@ -526,7 +526,7 @@
     transition: all 0.3s;
     text-transform: uppercase;
   }
-  .cv-btn:hover { background: rgba(200,150,46,0.2); }
+  .cv-btn:hover { background: rgba(139,58,58,0.2); }
 
   /* Sudoku */
   #sudoku-container { grid-column: 1 / -1; }
@@ -546,21 +546,21 @@
     outline: none;
     transition: background 0.2s;
   }
-  .sudoku-cell:focus { background: rgba(200,150,46,0.12); border-color: var(--gold); }
-  .sudoku-cell.given { color: rgba(200,150,46,0.9); pointer-events: none; background: rgba(200,150,46,0.05); }
+  .sudoku-cell:focus { background: rgba(139,58,58,0.12); border-color: var(--gold); }
+  .sudoku-cell.given { color: rgba(139,58,58,0.9); pointer-events: none; background: rgba(139,58,58,0.05); }
   .sudoku-cell.wrong { background: rgba(255,80,60,0.15); border-color: rgba(255,80,60,0.5); }
   .sudoku-cell.correct { background: rgba(40,200,64,0.1); }
   /* 6x6 box borders, 2x3 boxes */
-  .sudoku-cell[data-c="2"] { border-right: 2px solid rgba(200,150,46,0.5); }
-  .sudoku-cell[data-c="3"] { border-left: 2px solid rgba(200,150,46,0.5); }
-  .sudoku-cell[data-r="1"] { border-bottom: 2px solid rgba(200,150,46,0.5); }
-  .sudoku-cell[data-r="2"] { border-top: 2px solid rgba(200,150,46,0.5); }
-  .sudoku-cell[data-r="3"] { border-bottom: 2px solid rgba(200,150,46,0.5); }
-  .sudoku-cell[data-r="4"] { border-top: 2px solid rgba(200,150,46,0.5); }
+  .sudoku-cell[data-c="2"] { border-right: 2px solid rgba(139,58,58,0.5); }
+  .sudoku-cell[data-c="3"] { border-left: 2px solid rgba(139,58,58,0.5); }
+  .sudoku-cell[data-r="1"] { border-bottom: 2px solid rgba(139,58,58,0.5); }
+  .sudoku-cell[data-r="2"] { border-top: 2px solid rgba(139,58,58,0.5); }
+  .sudoku-cell[data-r="3"] { border-bottom: 2px solid rgba(139,58,58,0.5); }
+  .sudoku-cell[data-r="4"] { border-top: 2px solid rgba(139,58,58,0.5); }
   #sudoku-msg {
     font-family: 'Courier Prime', monospace;
     font-size: 0.7rem;
-    color: rgba(200,150,46,0.8);
+    color: rgba(139,58,58,0.8);
     text-align: center;
     margin-top: 0.6rem;
     letter-spacing: 0.1em;
@@ -632,11 +632,11 @@
     position: fixed; bottom: 4rem; left: 50%; transform: translateX(-50%);
     font-family: 'Courier Prime', monospace;
     font-size: 0.65rem;
-    color: rgba(200,150,46,0.7);
+    color: rgba(139,58,58,0.7);
     letter-spacing: 0.15em;
     background: rgba(0,0,0,0.7);
     padding: 0.5rem 1.2rem;
-    border: 1px solid rgba(200,150,46,0.5);
+    border: 1px solid rgba(139,58,58,0.5);
     border-radius: 2px;
     z-index: 50;
     pointer-events: none;
@@ -679,10 +679,10 @@
     transition: all 0.2s;
     text-transform: uppercase;
   }
-  .journal-tab:hover, .journal-tab.active { color: var(--gold); border-color: rgba(200,150,46,0.4); background: rgba(200,150,46,0.06); }
+  .journal-tab:hover, .journal-tab.active { color: var(--gold); border-color: rgba(139,58,58,0.4); background: rgba(139,58,58,0.06); }
   .journal-entry { display: none; }
   .journal-entry.active { display: block; }
-  .journal-date { font-family: 'Courier Prime', monospace; font-size: 0.7rem; color: rgba(200,150,46,0.6); letter-spacing: 0.15em; margin-bottom: 1rem; }
+  .journal-date { font-family: 'Courier Prime', monospace; font-size: 0.7rem; color: rgba(139,58,58,0.6); letter-spacing: 0.15em; margin-bottom: 1rem; }
 
   /* Experience image gallery */
   /* Experience photo, full bleed, cinematic */
@@ -762,14 +762,14 @@
   #lightbox-close {
     position: absolute; top: 1.2rem; right: 1.5rem;
     font-family: 'Courier Prime', monospace;
-    font-size: 0.7rem; color: rgba(200,150,46,0.6);
+    font-size: 0.7rem; color: rgba(139,58,58,0.6);
     letter-spacing: 0.15em; cursor: pointer;
-    border: 1px solid rgba(200,150,46,0.25);
+    border: 1px solid rgba(139,58,58,0.25);
     padding: 0.3rem 0.8rem;
     background: rgba(0,0,0,0.5);
     transition: color 0.2s;
   }
-  #lightbox-close:hover { color: rgba(200,150,46,1); }
+  #lightbox-close:hover { color: rgba(139,58,58,1); }
 
   /* Exp tabs */
   .exp-tab { color: rgba(60,35,10,0.5); border-color: rgba(100,70,20,0.2); }
@@ -820,7 +820,7 @@
     height: 9%;
     cursor: pointer;
   }
-  #hs-ipod:hover { background: rgba(200,150,46,0.08); outline: 1px solid rgba(200,150,46,0.2); }
+  #hs-ipod:hover { background: rgba(139,58,58,0.08); outline: 1px solid rgba(139,58,58,0.2); }
   #hs-ipod::after {
     content: '▶ play';
     position: absolute;
@@ -828,7 +828,7 @@
     transform: translateX(-50%);
     font-family: 'Courier Prime', monospace;
     font-size: 0.62rem;
-    color: rgba(200,150,46,0.9);
+    color: rgba(139,58,58,0.9);
     letter-spacing: 0.12em;
     white-space: nowrap;
     opacity: 0;
@@ -848,7 +848,7 @@
     height: 21%;
     cursor: pointer;
   }
-  #hs-books:hover { background: rgba(200,150,46,0.08); outline: 1px solid rgba(200,150,46,0.2); }
+  #hs-books:hover { background: rgba(139,58,58,0.08); outline: 1px solid rgba(139,58,58,0.2); }
   #hs-books::after {
     content: 'Dictionaries';
     position: absolute;
@@ -856,7 +856,7 @@
     transform: translateX(-50%);
     font-family: 'Courier Prime', monospace;
     font-size: 0.62rem;
-    color: rgba(200,150,46,0.9);
+    color: rgba(139,58,58,0.9);
     letter-spacing: 0.12em;
     white-space: nowrap;
     opacity: 0;
@@ -879,7 +879,7 @@
     cursor: pointer;
     z-index: 5;
   }
-  #hs-library:hover { background: rgba(200,150,46,0.06); outline: 1px solid rgba(200,150,46,0.15); }
+  #hs-library:hover { background: rgba(139,58,58,0.06); outline: 1px solid rgba(139,58,58,0.15); }
   #hs-library::after {
     content: '📚 hidden library';
     position: absolute;
@@ -887,7 +887,7 @@
     transform: translate(-50%,-50%);
     font-family: 'Courier Prime', monospace;
     font-size: 0.62rem;
-    color: rgba(200,150,46,0.9);
+    color: rgba(139,58,58,0.9);
     letter-spacing: 0.12em;
     white-space: nowrap;
     opacity: 0;
@@ -903,7 +903,7 @@
   /* Library modal */
   .library-window {
     background: #1a120a;
-    border: 1px solid rgba(200,150,46,0.15);
+    border: 1px solid rgba(139,58,58,0.15);
     border-radius: 4px;
     width: min(700px, 92vw);
     max-height: 85vh;
@@ -914,7 +914,7 @@
   }
   .library-header {
     padding: 1rem 1.5rem;
-    border-bottom: 1px solid rgba(200,150,46,0.1);
+    border-bottom: 1px solid rgba(139,58,58,0.1);
     display: flex; justify-content: space-between; align-items: center;
     background: rgba(0,0,0,0.3);
     flex-shrink: 0;
@@ -930,12 +930,12 @@
     cursor: pointer;
     font-family: 'Courier Prime', monospace;
     font-size: 0.65rem;
-    color: rgba(200,150,46,0.4);
-    border: 1px solid rgba(200,150,46,0.15);
+    color: rgba(139,58,58,0.4);
+    border: 1px solid rgba(139,58,58,0.15);
     padding: 0.2rem 0.6rem;
     transition: all 0.2s;
   }
-  .library-close:hover { color: var(--gold); border-color: rgba(200,150,46,0.4); }
+  .library-close:hover { color: var(--gold); border-color: rgba(139,58,58,0.4); }
   .library-grid {
     overflow-y: auto;
     padding: 1.5rem;
@@ -944,7 +944,7 @@
     gap: 1rem;
   }
   .library-grid::-webkit-scrollbar { width: 4px; }
-  .library-grid::-webkit-scrollbar-thumb { background: rgba(200,150,46,0.2); }
+  .library-grid::-webkit-scrollbar-thumb { background: rgba(139,58,58,0.2); }
   .book-card {
     display: flex; flex-direction: column; gap: 0.4rem;
     cursor: pointer;
@@ -966,7 +966,7 @@
     max-height: 70vh;
     overflow-y: scroll;
     background: linear-gradient(150deg, #1a120a, #120d06);
-    border: 1px solid rgba(200,150,46,0.25);
+    border: 1px solid rgba(139,58,58,0.25);
     border-radius: 4px;
     width: min(520px, 92vw);
     padding: 1.5rem 1.5rem 2rem;
@@ -984,7 +984,7 @@
   .book-note-author {
     font-family: 'Courier Prime', monospace;
     font-size: 0.62rem;
-    color: rgba(200,150,46,0.5);
+    color: rgba(139,58,58,0.5);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 1.2rem;
@@ -994,7 +994,7 @@
     font-size: 0.82rem;
     color: rgba(220,205,180,0.8);
     line-height: 1.8;
-    border-left: 2px solid rgba(200,150,46,0.2);
+    border-left: 2px solid rgba(139,58,58,0.2);
     padding-left: 1rem;
     font-style: italic;
   }
@@ -1002,11 +1002,11 @@
     position: absolute; top: 0.8rem; right: 1rem;
     font-family: 'Courier Prime', monospace;
     font-size: 0.65rem;
-    color: rgba(200,150,46,0.3);
+    color: rgba(139,58,58,0.3);
     cursor: pointer;
     transition: color 0.2s;
   }
-  .book-note-close:hover { color: rgba(200,150,46,0.8); }
+  .book-note-close:hover { color: rgba(139,58,58,0.8); }
   .book-spine {
     height: 130px;
     border-radius: 2px;
@@ -1029,7 +1029,7 @@
   .book-author {
     font-family: 'Courier Prime', monospace;
     font-size: 0.52rem;
-    color: rgba(200,150,46,0.5);
+    color: rgba(139,58,58,0.5);
     letter-spacing: 0.05em;
     text-align: center;
     line-height: 1.3;
@@ -1082,7 +1082,7 @@
   .gollum-box {
     width: min(480px, 90vw);
     background: #0a0805;
-    border: 1px solid rgba(200,150,46,0.5);
+    border: 1px solid rgba(139,58,58,0.5);
     border-radius: 4px;
     padding: 2.5rem;
     text-align: center;
@@ -1098,12 +1098,12 @@
     margin-bottom: 2rem;
   }
   .gollum-text em {
-    color: rgba(200,150,46,0.9);
+    color: rgba(139,58,58,0.9);
     font-style: normal;
   }
   .gollum-input {
     background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(200,150,46,0.25);
+    border: 1px solid rgba(139,58,58,0.25);
     border-radius: 2px;
     color: rgba(245,234,214,0.85);
     font-family: 'Courier Prime', monospace;
@@ -1115,7 +1115,7 @@
     outline: none;
     transition: border-color 0.3s;
   }
-  .gollum-input:focus { border-color: rgba(200,150,46,0.6); }
+  .gollum-input:focus { border-color: rgba(139,58,58,0.6); }
   .gollum-input.wrong { border-color: rgba(255,80,60,0.5); animation: shake 0.3s ease; }
   .gollum-input.right { border-color: rgba(40,200,64,0.6); }
   .gollum-submit {
@@ -1123,15 +1123,15 @@
     font-family: 'Courier Prime', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.2em;
-    color: rgba(200,150,46,0.6);
+    color: rgba(139,58,58,0.6);
     background: transparent;
-    border: 1px solid rgba(200,150,46,0.5);
+    border: 1px solid rgba(139,58,58,0.5);
     padding: 0.4rem 1.2rem;
     cursor: pointer;
     text-transform: uppercase;
     transition: all 0.2s;
   }
-  .gollum-submit:hover { color: var(--gold); border-color: rgba(200,150,46,0.5); }
+  .gollum-submit:hover { color: var(--gold); border-color: rgba(139,58,58,0.5); }
   .gollum-error {
     font-family: 'Courier Prime', monospace;
     font-size: 0.65rem;
@@ -1313,7 +1313,7 @@
   .dict-title {
     font-family: 'Inter', sans-serif;
     font-size: 1.3rem;
-    color: #2a1a08;
+    color: #2c2c2c;
     letter-spacing: 0.08em;
   }
   .dict-subtitle {
@@ -1385,7 +1385,7 @@
   .dict-def {
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
-    color: #2a1a08;
+    color: #2c2c2c;
     line-height: 1.7;
     margin-bottom: 0.3rem;
   }
@@ -1427,11 +1427,11 @@
   .exp-company, .exp-title { color: #8B3A3A !important; font-weight: bold !important; }
 
   
-  .mac-title { font-family:'Playfair Display',Georgia,serif; color: #3a2008 !important; }
+  .mac-title { font-family:'Cormorant Garamond',Georgia,serif; color: #2c2c2c !important; }
   #modal-mac .mac-title { color: rgba(245,234,214,0.7) !important; }
 
   
-  .mac-body div.journal-main-title, #journal-nola div.journal-main-title, #journal-geneva div.journal-main-title { color: #8B3A3A !important; font-weight: bold !important; font-size: 1.4rem !important; font-family:'Playfair Display',Georgia,serif; }
+  .mac-body div.journal-main-title, #journal-nola div.journal-main-title, #journal-geneva div.journal-main-title { color: #8B3A3A !important; font-weight: bold !important; font-size: 1.4rem !important; font-family:'Cormorant Garamond',Georgia,serif; }
 
   
   .back-btn {
@@ -1504,7 +1504,7 @@
     font-family: 'Courier New', monospace;
     font-size: 0.72em;
     padding: 10px 16px;
-    border: 1px solid rgba(200,150,46,0.4);
+    border: 1px solid rgba(139,58,58,0.4);
     white-space: nowrap;
     text-align: center;
     line-height: 1.6;
@@ -1518,7 +1518,7 @@
     left: 50%;
     transform: translateX(-50%);
     border: 6px solid transparent;
-    border-top-color: rgba(200,150,46,0.4);
+    border-top-color: rgba(139,58,58,0.4);
   }
   #gatto-wrapper:hover #gatto-tooltip { display: block; }
 
@@ -1531,7 +1531,7 @@
     font-size: 22px;
     cursor: pointer;
     background: rgba(0,0,0,0.55);
-    border: 2px solid rgba(200,150,46,0.6);
+    border: 2px solid rgba(139,58,58,0.6);
     border-radius: 50%;
     width: 48px;
     height: 48px;
@@ -1541,7 +1541,7 @@
     backdrop-filter: blur(8px);
     transition: background 0.3s, transform 0.2s;
     user-select: none;
-    box-shadow: 0 0 12px rgba(200,150,46,0.3);
+    box-shadow: 0 0 12px rgba(139,58,58,0.3);
   }
   #day-night-toggle:hover {
     background: rgba(255,255,255,0.12);
@@ -1578,7 +1578,7 @@
     font-family: 'Courier Prime', monospace;
     font-size: 0.55rem;
     letter-spacing: 0.2em;
-    color: rgba(200,150,46,0.6);
+    color: rgba(139,58,58,0.6);
     white-space: nowrap;
     opacity: 0;
     transition: opacity 0.2s;
@@ -1614,12 +1614,12 @@
     font-family: 'Courier Prime', monospace;
     font-size: 0.62rem;
     letter-spacing: 0.2em;
-    color: rgba(200,150,46,0.65);
+    color: rgba(139,58,58,0.65);
     cursor: pointer;
     text-transform: uppercase;
     z-index: 10;
   }
-  .pm-close:hover { color: rgba(200,150,46,1); }
+  .pm-close:hover { color: rgba(139,58,58,1); }
   .pm-body {
     padding: 2.5rem 2rem 2rem;
     font-family: 'Inter', sans-serif;
@@ -1634,29 +1634,29 @@
   }
   .pm-sec::before, .pm-sec::after {
     content: ''; flex: 1; height: 0.5px;
-    background: rgba(200,150,46,0.22);
+    background: rgba(139,58,58,0.22);
   }
   .pm-sec span {
     font-family: 'Courier Prime', monospace;
     font-size: 0.6rem; letter-spacing: 0.22em;
-    color: rgba(200,150,46,0.55);
+    color: rgba(139,58,58,0.55);
     white-space: nowrap; text-transform: uppercase;
   }
   .pm-quote { text-align: center; margin: 1.4rem 1.5rem 1.8rem; }
   .pm-quote p { font-style: italic; color: #5a4030; font-size: 0.9rem; margin: 0 0 0.4rem; }
-  .pm-attr { font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.14em; color: rgba(200,150,46,0.55); }
+  .pm-attr { font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.14em; color: rgba(139,58,58,0.55); }
   .pm-hl { font-style: italic; color: rgba(180,130,36,0.95); }
   .pm-banner { width: 100%; display: block; margin: 0.4rem 0; }
   .pm-gfx { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 0.6rem 0 1rem; }
   .pm-gcol { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 200px; max-width: 258px; }
   .pm-gcol svg { width: 100%; }
-  .pm-glabel { font-family: 'Courier Prime', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: rgba(200,150,46,0.5); text-transform: uppercase; margin-bottom: 0.6rem; }
+  .pm-glabel { font-family: 'Courier Prime', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: rgba(139,58,58,0.5); text-transform: uppercase; margin-bottom: 0.6rem; }
   .pm-ibox { min-height: 76px; text-align: center; width: 100%; padding: 0.3rem 0; }
-  .pm-iname { font-family: 'Courier Prime', monospace; font-size: 0.65rem; letter-spacing: 0.14em; color: rgba(200,150,46,0.85); text-transform: uppercase; margin-bottom: 0.2rem; }
+  .pm-iname { font-family: 'Courier Prime', monospace; font-size: 0.65rem; letter-spacing: 0.14em; color: rgba(139,58,58,0.85); text-transform: uppercase; margin-bottom: 0.2rem; }
   .pm-inote { font-size: 0.78rem; color: #8a6a50; font-style: italic; margin-bottom: 0.35rem; line-height: 1.5; }
   .pm-ilist { font-size: 0.88rem; color: #2a1f14; line-height: 2; }
   .pm-ihouse { font-family: 'Courier Prime', monospace; font-size: 0.65rem; color: #8a6a50; margin-left: 0.3rem; }
-  .pm-hint { font-family: 'Courier Prime', monospace; font-size: 0.6rem; letter-spacing: 0.14em; color: rgba(200,150,46,0.38); text-transform: uppercase; transition: opacity 0.2s; margin: 0.2rem 0 0; }
+  .pm-hint { font-family: 'Courier Prime', monospace; font-size: 0.6rem; letter-spacing: 0.14em; color: rgba(139,58,58,0.38); text-transform: uppercase; transition: opacity 0.2s; margin: 0.2rem 0 0; }
   .pm-closing { font-style: italic; color: #5a4030; font-size: 0.95rem; text-align: center; margin: 0; padding: 0 0.5rem; }
   path.pm-ps { cursor: pointer; transition: opacity 0.14s; opacity: 0.88; }
   path.pm-ps:hover { opacity: 1; }
@@ -1673,7 +1673,7 @@
     font-size: 20px;
     cursor: pointer;
     background: rgba(0,0,0,0.55);
-    border: 2px solid rgba(200,150,46,0.6);
+    border: 2px solid rgba(139,58,58,0.6);
     border-radius: 50%;
     width: 48px;
     height: 48px;
@@ -1682,7 +1682,7 @@
     backdrop-filter: blur(8px);
     transition: background 0.3s, transform 0.2s;
     user-select: none;
-    box-shadow: 0 0 12px rgba(200,150,46,0.3);
+    box-shadow: 0 0 12px rgba(139,58,58,0.3);
   }
   #audio-toggle:hover {
     background: rgba(255,255,255,0.12);
@@ -1761,7 +1761,7 @@
   right: 0;
   height: 64px;
   background: rgba(8,5,2,0.95);
-  border-top: 1px solid rgba(200,150,46,0.3);
+  border-top: 1px solid rgba(139,58,58,0.3);
   z-index: 9000;
   align-items: center;
   justify-content: space-around;
@@ -1771,7 +1771,7 @@
 #mobile-nav button {
   background: none;
   border: none;
-  color: rgba(200,150,46,0.8);
+  color: rgba(139,58,58,0.8);
   font-family: 'Courier New', monospace;
   font-size: 9px;
   letter-spacing: 0.08em;
@@ -1786,7 +1786,7 @@
 }
 
 #mobile-nav button span.icon { font-size: 18px; }
-#mobile-nav button:active { color: rgba(200,150,46,1); }
+#mobile-nav button:active { color: rgba(139,58,58,1); }
 
 @media (max-width: 768px) {
 
@@ -1853,10 +1853,10 @@
   transform: translateX(-50%);
   z-index: 9001;
   background: rgba(8,5,2,0.85);
-  border: 1px solid rgba(200,150,46,0.5);
+  border: 1px solid rgba(139,58,58,0.5);
   border-radius: 20px;
   padding: 6px 16px;
-  color: rgba(200,150,46,0.9);
+  color: rgba(139,58,58,0.9);
   font-family: 'Courier New', monospace;
   font-size: 10px;
   letter-spacing: 0.12em;
@@ -1899,7 +1899,7 @@
   <canvas id="rain-canvas"></canvas>
 <div id="schrodinger"></div>
 <div id="gatto-wrapper">
-    <div id="gatto-tooltip">Schrödinger — Curator of this room.<br>&quot;I may or may not be here. Do not disturb. I was once worshipped.&quot;</div>
+    <div id="gatto-tooltip">Schrödinger – Curator of this room.<br>&quot;I may or may not be here. Do not disturb. I was once worshipped.&quot;</div>
     <canvas id="gatto-canvas" width="220" height="124"></canvas>
     <audio id="chime-audio" src="chime.mp3" preload="auto"></audio>
     <audio id="birds-audio" loop><source src="Spring_Birds_Chirping_Sound_Effect__FREE_DOWNLOAD_.mp3" type="audio/mpeg"></audio>
@@ -1974,11 +1974,11 @@
         <!-- Mac clock bar -->
         <div style="grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; padding:0 0.5rem 0.5rem; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:0.5rem;">
           <span id="mac-clock" style="font-family:'Courier Prime',monospace;font-size:0.65rem;color:rgba(245,234,214,0.45);letter-spacing:0.12em;"></span>
-          <span style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(200,150,46,0.3);letter-spacing:0.1em;">bianca.portfolio</span>
+          <span style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">bianca.portfolio</span>
         </div>
         <!-- Folder: About -->
         <div class="folder-icon" onclick="openAbout()">
-          <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(200,150,46,0.15)" stroke="rgba(200,150,46,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(200,150,46,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(200,150,46,0.25)" stroke="rgba(200,150,46,0.4)" stroke-width="1"/></svg>
+          <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(139,58,58,0.15)" stroke="rgba(139,58,58,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(139,58,58,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(139,58,58,0.25)" stroke="rgba(139,58,58,0.4)" stroke-width="1"/></svg>
           <span class="folder-label">About</span>
         </div>
         <!-- Folder: Experiences -->
@@ -1992,7 +1992,7 @@
           <span class="folder-label">Journals</span>
         </div>
         <div class="folder-icon" onclick="window.open('works/works.html', '_blank')">
-          <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(200,150,46,0.15)" stroke="rgba(200,150,46,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(200,150,46,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(200,150,46,0.25)" stroke="rgba(200,150,46,0.4)" stroke-width="1"/></svg>
+          <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(139,58,58,0.15)" stroke="rgba(139,58,58,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(139,58,58,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(139,58,58,0.25)" stroke="rgba(139,58,58,0.4)" stroke-width="1"/></svg>
           <span class="folder-label">Works</span>
         </div>
         <!-- Folder: Mind Map -->
@@ -2110,16 +2110,16 @@
         <p style="margin-top:1rem;">
           <a href="https://www.vancleefarpels.com/en/the-maison/videos/extraordinary-object-the-automate-fee-ondine.html" target="_blank" style="
             font-family:'Courier Prime',monospace; font-size:0.68rem;
-            color:rgba(200,150,46,0.75); letter-spacing:0.12em;
-            text-decoration:none; border-bottom:1px solid rgba(200,150,46,0.3);
+            color:rgba(139,58,58,0.75); letter-spacing:0.12em;
+            text-decoration:none; border-bottom:1px solid rgba(139,58,58,0.3);
             transition:all 0.2s;
-          " onmouseover="this.style.color='rgba(200,150,46,1)';this.style.borderBottomColor='rgba(200,150,46,0.7)'" onmouseout="this.style.color='rgba(200,150,46,0.75)';this.style.borderBottomColor='rgba(200,150,46,0.3)'">
+          " onmouseover="this.style.color='rgba(139,58,58,1)';this.style.borderBottomColor='rgba(139,58,58,0.7)'" onmouseout="this.style.color='rgba(139,58,58,0.75)';this.style.borderBottomColor='rgba(139,58,58,0.3)'">
             ▶ Van Cleef &amp; Arpels, L'Automate Fée Ondine, Homo Faber 2024 ↗
           </a>
         </p>
         <div id="exp-richemont-gallery" class="exp-gallery"></div>
         <div style="margin-top:1.5rem;">
-          <div style="font-family:'Courier Prime',monospace;font-size:0.65rem;letter-spacing:0.25em;color:rgba(200,150,46,0.55);text-transform:uppercase;margin-bottom:0.6rem;">Van Cleef &amp; Arpels · L'Automate Fée Ondine · Homo Faber 2024</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:0.65rem;letter-spacing:0.25em;color:rgba(139,58,58,0.55);text-transform:uppercase;margin-bottom:0.6rem;">Van Cleef &amp; Arpels · L'Automate Fée Ondine · Homo Faber 2024</div>
           <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;">
             <iframe id="vancleef-yt-exp" src="https://www.youtube.com/embed/7B9RltuQiJg?rel=0&modestbranding=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
@@ -2204,7 +2204,7 @@
         <p>Inside the manufacture, it truly felt like the watchmaking version of Charlie and the Chocolate Factory. Seeing the engravings in person, the rubies used to avoid friction, and how they generate energy inside the mechanism - everything is built with an incredible sense of balance. I asked the people who work there what they listen to all day while working on those tiny, tiny pieces, and they replied: podcasts. They also told me that their eyesight has improved since working there. I don't know, I just found everything incredibly fascinating and it's amazing to think that they live in a little bubble, far away from the noise of the rest of the world.</p>
       
         <div style="margin-top:1.8rem;">
-          <div style="font-family:'Courier Prime',monospace;font-size:0.65rem;letter-spacing:0.25em;color:rgba(200,150,46,0.55);text-transform:uppercase;margin-bottom:0.6rem;">A. Lange &amp; Söhne · Craftsmanship Film</div>
+          <div style="font-family:'Courier Prime',monospace;font-size:0.65rem;letter-spacing:0.25em;color:rgba(139,58,58,0.55);text-transform:uppercase;margin-bottom:0.6rem;">A. Lange &amp; Söhne · Craftsmanship Film</div>
           <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;">
             <iframe src="https://www.youtube.com/embed/pZE-ORTurSY?rel=0&modestbranding=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
@@ -2401,7 +2401,7 @@
 <div class="modal-backdrop" id="modal-help" style="z-index:200;">
   <div style="
     background:linear-gradient(135deg, #1a120a, #120d06);
-    border:1px solid rgba(200,150,46,0.2);
+    border:1px solid rgba(139,58,58,0.2);
     border-radius:6px;
     width:min(420px, 90vw);
     padding:2rem 2.2rem 1.8rem;
@@ -2412,9 +2412,9 @@
     <span onclick="closeModal('modal-help')" style="
       position:absolute; top:0.9rem; right:1.1rem;
       font-family:'Courier Prime',monospace; font-size:0.65rem;
-      color:rgba(200,150,46,0.35); cursor:pointer; letter-spacing:0.1em;
+      color:rgba(139,58,58,0.35); cursor:pointer; letter-spacing:0.1em;
       transition:color 0.2s;
-    " onmouseover="this.style.color='rgba(200,150,46,0.8)'" onmouseout="this.style.color='rgba(200,150,46,0.35)'">close ×</span>
+    " onmouseover="this.style.color='rgba(139,58,58,0.8)'" onmouseout="this.style.color='rgba(139,58,58,0.35)'">close ×</span>
 
     <div style="font-family:'Inter',sans-serif;font-size:1.15rem;color:rgba(245,234,214,0.85);font-style:italic;margin-bottom:1.4rem;letter-spacing:0.05em;">
       How to explore the room
@@ -2471,7 +2471,7 @@
       </div>
     </div>
 
-    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(200,150,46,0.1);font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(200,150,46,0.3);letter-spacing:0.12em;text-align:center;">
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(139,58,58,0.1);font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(139,58,58,0.3);letter-spacing:0.12em;text-align:center;">
       look for the glowing dots, they mark what can be clicked
     </div>
   </div>
@@ -2492,20 +2492,20 @@
     <div style="position:fixed; top:1.2rem; right:1.5rem; z-index:200;">
       <span onclick="closeHiddenLibrary()" style="
         font-family:'Courier Prime',monospace; font-size:0.65rem;
-        color:rgba(200,150,46,0.45); cursor:pointer; letter-spacing:0.15em;
-        border:1px solid rgba(200,150,46,0.18); padding:0.3rem 0.9rem;
+        color:rgba(139,58,58,0.45); cursor:pointer; letter-spacing:0.15em;
+        border:1px solid rgba(139,58,58,0.18); padding:0.3rem 0.9rem;
         background:rgba(0,0,0,0.5); transition:all 0.2s;
-      " onmouseover="this.style.color='rgba(200,150,46,0.9)'" onmouseout="this.style.color='rgba(200,150,46,0.45)'">close ×</span>
+      " onmouseover="this.style.color='rgba(139,58,58,0.9)'" onmouseout="this.style.color='rgba(139,58,58,0.45)'">close ×</span>
     </div>
 
     <!-- Header -->
     <div style="text-align:center; margin-bottom:2.5rem; max-width:520px;">
-      <div style="font-family:'Courier Prime',monospace; font-size:0.62rem; color:rgba(200,150,46,0.45); letter-spacing:0.35em; text-transform:uppercase; margin-bottom:0.8rem;">— restricted access —</div>
+      <div style="font-family:'Courier Prime',monospace; font-size:0.62rem; color:rgba(139,58,58,0.45); letter-spacing:0.35em; text-transform:uppercase; margin-bottom:0.8rem;">— restricted access —</div>
       <div style="font-family:'Inter',sans-serif; font-size:clamp(1.4rem,3vw,2rem); color:rgba(245,234,214,0.85); letter-spacing:0.08em; font-style:italic; margin-bottom:0.6rem;">Hidden Library</div>
       <div style="font-family:'Inter',sans-serif; font-size:0.95rem; color:rgba(245,234,214,0.5); line-height:1.8; max-width:480px; text-align:center;">
-        To enter, you must execute the <span style="color:rgba(200,150,46,0.85); font-style:normal;">Scholar's Mate</span> —<br>
+        To enter, you must execute the <span style="color:rgba(139,58,58,0.85); font-style:normal;">Scholar's Mate</span> —<br>
         a four-move checkmate first recorded in<br>
-        <span style="font-size:0.82rem; color:rgba(200,150,46,0.55); font-style:normal; letter-spacing:0.03em;">Francis Beale's <em>The Royall Game of Chesse-Play</em>, 1656.</span><br>
+        <span style="font-size:0.82rem; color:rgba(139,58,58,0.55); font-style:normal; letter-spacing:0.03em;">Francis Beale's <em>The Royall Game of Chesse-Play</em>, 1656.</span><br>
         <span style="font-size:0.85rem; color:rgba(245,234,214,0.3);">You are White. Play these four moves in order.</span>
       </div>
     </div>
@@ -2516,7 +2516,7 @@
       <!-- Status message -->
       <div id="hl-chess-msg" style="
         font-family:'Courier Prime',monospace; font-size:0.72rem;
-        color:rgba(200,150,46,0.75); letter-spacing:0.12em; text-align:center;
+        color:rgba(139,58,58,0.75); letter-spacing:0.12em; text-align:center;
         min-height:1.4rem; transition:all 0.3s;
       ">White to move, begin your sequence.</div>
 
@@ -2528,13 +2528,13 @@
         <div id="hl-board" style="
           display:grid; grid-template-columns:repeat(8,1fr);
           width:min(440px, 90vw); height:min(440px, 90vw);
-          border:2px solid rgba(200,150,46,0.3);
-          box-shadow:0 0 40px rgba(200,150,46,0.08), 0 20px 60px rgba(0,0,0,0.7);
+          border:2px solid rgba(139,58,58,0.3);
+          box-shadow:0 0 40px rgba(139,58,58,0.08), 0 20px 60px rgba(0,0,0,0.7);
         "></div>
         <!-- Overlay for checkmate animation -->
         <div id="hl-checkmate-overlay" style="
           position:absolute; inset:0;
-          background:rgba(200,150,46,0.0);
+          background:rgba(139,58,58,0.0);
           pointer-events:none; transition:background 0.8s;
           display:flex; align-items:center; justify-content:center;
         "></div>
@@ -2542,41 +2542,41 @@
 
       <!-- File labels -->
       <div style="display:flex; gap:0; width:min(440px,90vw); justify-content:space-around; padding:0 2px;">
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(200,150,46,0.3);letter-spacing:0.1em;">a</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(200,150,46,0.3);letter-spacing:0.1em;">b</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(200,150,46,0.3);letter-spacing:0.1em;">c</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(200,150,46,0.3);letter-spacing:0.1em;">d</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(200,150,46,0.3);letter-spacing:0.1em;">e</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(200,150,46,0.3);letter-spacing:0.1em;">f</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(200,150,46,0.3);letter-spacing:0.1em;">g</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(200,150,46,0.3);letter-spacing:0.1em;">h</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">a</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">b</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">c</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">d</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">e</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">f</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">g</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">h</span>
       </div>
 
       <!-- Move guide -->
       <div style="
-        background:rgba(200,150,46,0.07); border:1px solid rgba(200,150,46,0.2);
+        background:rgba(139,58,58,0.07); border:1px solid rgba(139,58,58,0.2);
         border-radius:4px; padding:1.1rem 1.6rem; max-width:440px; width:100%;
       ">
-        <div style="font-family:'Courier Prime',monospace;font-size:0.62rem;color:rgba(200,150,46,0.6);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;text-align:center;">Your four moves</div>
+        <div style="font-family:'Courier Prime',monospace;font-size:0.62rem;color:rgba(139,58,58,0.6);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1rem;text-align:center;">Your four moves</div>
         <div style="display:flex;flex-direction:column;gap:0.55rem;">
           <div style="font-family:'Inter',sans-serif;font-size:0.98rem;color:rgba(245,234,214,0.8);">
-            <span style="color:rgba(200,150,46,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">01 ·</span>
-            Move your <strong style="color:rgba(245,234,214,0.9);">Pawn</strong> from <span style="color:rgba(200,150,46,0.9);font-family:'Courier Prime',monospace;">e2 → e4</span>
+            <span style="color:rgba(139,58,58,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">01 ·</span>
+            Move your <strong style="color:rgba(245,234,214,0.9);">Pawn</strong> from <span style="color:rgba(139,58,58,0.9);font-family:'Courier Prime',monospace;">e2 → e4</span>
           </div>
           <div style="font-family:'Inter',sans-serif;font-size:0.98rem;color:rgba(245,234,214,0.8);">
-            <span style="color:rgba(200,150,46,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">02 ·</span>
-            Move your <strong style="color:rgba(245,234,214,0.9);">Bishop</strong> from <span style="color:rgba(200,150,46,0.9);font-family:'Courier Prime',monospace;">f1 → c4</span>
+            <span style="color:rgba(139,58,58,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">02 ·</span>
+            Move your <strong style="color:rgba(245,234,214,0.9);">Bishop</strong> from <span style="color:rgba(139,58,58,0.9);font-family:'Courier Prime',monospace;">f1 → c4</span>
           </div>
           <div style="font-family:'Inter',sans-serif;font-size:0.98rem;color:rgba(245,234,214,0.8);">
-            <span style="color:rgba(200,150,46,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">03 ·</span>
-            Move your <strong style="color:rgba(245,234,214,0.9);">Queen</strong> from <span style="color:rgba(200,150,46,0.9);font-family:'Courier Prime',monospace;">d1 → h5</span>
+            <span style="color:rgba(139,58,58,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">03 ·</span>
+            Move your <strong style="color:rgba(245,234,214,0.9);">Queen</strong> from <span style="color:rgba(139,58,58,0.9);font-family:'Courier Prime',monospace;">d1 → h5</span>
           </div>
           <div style="font-family:'Inter',sans-serif;font-size:0.98rem;color:rgba(245,234,214,0.8);">
-            <span style="color:rgba(200,150,46,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">04 ·</span>
-            Move your <strong style="color:rgba(245,234,214,0.9);">Queen</strong> from <span style="color:rgba(200,150,46,0.9);font-family:'Courier Prime',monospace;">h5 → f7</span>, checkmate ✦
+            <span style="color:rgba(139,58,58,0.6);font-family:'Courier Prime',monospace;font-size:0.7rem;">04 ·</span>
+            Move your <strong style="color:rgba(245,234,214,0.9);">Queen</strong> from <span style="color:rgba(139,58,58,0.9);font-family:'Courier Prime',monospace;">h5 → f7</span>, checkmate ✦
           </div>
         </div>
-        <div style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(245,234,214,0.2);margin-top:1rem;text-align:center;letter-spacing:0.08em;border-top:1px solid rgba(200,150,46,0.08);padding-top:0.7rem;">
+        <div style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(245,234,214,0.2);margin-top:1rem;text-align:center;letter-spacing:0.08em;border-top:1px solid rgba(139,58,58,0.08);padding-top:0.7rem;">
           tap a piece to select it · tap the destination square · black responds automatically
         </div>
       </div>
@@ -2591,18 +2591,18 @@
       display:none;
     ">
       <div style="text-align:center; margin-bottom:2.5rem; position:relative;">
-        <div style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(200,150,46,0.4);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.8rem;">— access granted —</div>
+        <div style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(139,58,58,0.4);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.8rem;">— access granted —</div>
         <div style="font-family:'Inter',sans-serif;font-size:clamp(1.2rem,2.5vw,1.7rem);color:rgba(245,234,214,0.8);font-style:italic;">The Shelves, Unlocked</div>
         <div onclick="resetHiddenLibrary()" style="
           display:inline-block; margin-top:1rem;
           font-family:'Courier Prime',monospace; font-size:0.62rem;
-          color:rgba(200,150,46,0.45); letter-spacing:0.18em;
-          border:1px solid rgba(200,150,46,0.2); padding:0.3rem 1rem;
+          color:rgba(139,58,58,0.45); letter-spacing:0.18em;
+          border:1px solid rgba(139,58,58,0.2); padding:0.3rem 1rem;
           cursor:pointer; transition:all 0.2s;
           border-radius:2px;
-        " onmouseover="this.style.color='rgba(200,150,46,0.9)';this.style.borderColor='rgba(200,150,46,0.45)'" onmouseout="this.style.color='rgba(200,150,46,0.45)';this.style.borderColor='rgba(200,150,46,0.2)'">← back to chessboard</div>
+        " onmouseover="this.style.color='rgba(139,58,58,0.9)';this.style.borderColor='rgba(139,58,58,0.45)'" onmouseout="this.style.color='rgba(139,58,58,0.45)';this.style.borderColor='rgba(139,58,58,0.2)'">← back to chessboard</div>
       </div>
-      <p id="hl-books-tagline" style="display:none;font-family:'Courier New',monospace;color:rgba(200,150,46,0.7);font-size:0.8em;letter-spacing:0.15em;text-align:center;margin-bottom:2em;">— Books I liked. —</p>
+      <p id="hl-books-tagline" style="display:none;font-family:'Courier New',monospace;color:rgba(139,58,58,0.7);font-size:0.8em;letter-spacing:0.15em;text-align:center;margin-bottom:2em;">— Books I liked. —</p>
     <div id="hl-books-grid" style="
         display:grid;
         grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
@@ -3177,7 +3177,7 @@ function openReadingNow() {
       spineText.style.color = b.text;
       spineText.textContent = b.title;
       const dot = document.createElement('div');
-      dot.style.cssText = 'position:absolute;top:4px;right:4px;width:6px;height:6px;background:rgba(200,150,46,0.8);border-radius:50%;';
+      dot.style.cssText = 'position:absolute;top:4px;right:4px;width:6px;height:6px;background:rgba(139,58,58,0.8);border-radius:50%;';
       spine.appendChild(spineText); spine.appendChild(dot);
       const author = document.createElement('div');
       author.className = 'book-author';
@@ -3187,7 +3187,7 @@ function openReadingNow() {
     });
     // Add a note
     const note = document.createElement('div');
-    note.style.cssText = 'grid-column:1/-1;font-family:"EB Garamond",serif;font-style:italic;color:rgba(200,150,46,0.5);font-size:0.85rem;padding:1rem 0 0;text-align:center;';
+    note.style.cssText = 'grid-column:1/-1;font-family:"EB Garamond",serif;font-style:italic;color:rgba(139,58,58,0.5);font-size:0.85rem;padding:1rem 0 0;text-align:center;';
     note.textContent = '— currently on the desk —';
     grid.appendChild(note);
   }
@@ -3296,7 +3296,7 @@ function buildLibrary(grid) {
     // Gold dot if has personal note
     if (hasNote) {
       const dot = document.createElement('div');
-      dot.style.cssText = 'position:absolute;bottom:5px;right:5px;width:5px;height:5px;background:rgba(200,150,46,0.9);border-radius:50%;';
+      dot.style.cssText = 'position:absolute;bottom:5px;right:5px;width:5px;height:5px;background:rgba(139,58,58,0.9);border-radius:50%;';
       spine.appendChild(dot);
     }
 
@@ -3374,7 +3374,7 @@ function buildMindMap() {
   nodes.forEach(n => byId[n.id] = n);
 
   let html = `<defs>
-    <radialGradient id="mg-center" cx="50%" cy="40%"><stop offset="0%" stop-color="#c8962e"/><stop offset="100%" stop-color="#8a5a10"/></radialGradient>
+    <radialGradient id="mg-center" cx="50%" cy="40%"><stop offset="0%" stop-color="#8B3A3A"/><stop offset="100%" stop-color="#8a5a10"/></radialGradient>
     <radialGradient id="mg-dma" cx="50%" cy="40%"><stop offset="0%" stop-color="#3a8abf"/><stop offset="100%" stop-color="#1a4a6a"/></radialGradient>
     <radialGradient id="mg-lux" cx="50%" cy="40%"><stop offset="0%" stop-color="#bf6a3a"/><stop offset="100%" stop-color="#7a3a1a"/></radialGradient>
     <radialGradient id="mg-css" cx="50%" cy="40%"><stop offset="0%" stop-color="#3abf6a"/><stop offset="100%" stop-color="#1a5a3a"/></radialGradient>
@@ -3387,7 +3387,7 @@ function buildMindMap() {
     const na = byId[a], nb = byId[b];
     const isSub = nb.sub;
     html += `<line x1="${na.x}" y1="${na.y}" x2="${nb.x}" y2="${nb.y}"
-      stroke="${isSub ? 'rgba(150,150,180,0.25)' : 'rgba(200,150,46,0.4)'}"
+      stroke="${isSub ? 'rgba(150,150,180,0.25)' : 'rgba(139,58,58,0.4)'}"
       stroke-width="${isSub ? 1 : 2.5}"
       stroke-dasharray="${isSub ? '5 4' : 'none'}"/>`;
   });
@@ -3404,7 +3404,7 @@ function buildMindMap() {
 
     const glow = (n.main||n.branch) ? 'filter="url(#glow)"' : '';
     html += `<circle cx="${n.x}" cy="${n.y}" r="${n.r}" fill="${fill}"
-      stroke="${n.main ? 'rgba(200,150,46,0.7)' : n.branch ? 'rgba(150,180,220,0.35)' : 'rgba(150,150,180,0.2)'}"
+      stroke="${n.main ? 'rgba(139,58,58,0.7)' : n.branch ? 'rgba(150,180,220,0.35)' : 'rgba(150,150,180,0.2)'}"
       stroke-width="${n.main ? 2.5 : 1}" ${glow} data-id="${n.id}" style="cursor:pointer"/>`;
 
     const lines = n.label.split('\n');
@@ -3583,7 +3583,7 @@ function enterRoom() {
   if (enterBtn) { enterBtn.style.display = 'none'; }
   setTimeout(function() { enterRoomGear(); }, 2000);
   return;
-  // VIDEO INTRO — ora viene chiamato da enterRoomGear via _doEnterRoom
+  // VIDEO INTRO – ora viene chiamato da enterRoomGear via _doEnterRoom
   var wrap = document.getElementById('intro-video-wrap');
   var vid = document.getElementById('intro-video');
   wrap.style.display = 'block';
@@ -4023,7 +4023,7 @@ const HL_BOOKS = [
   { title: 'Brave New World', author: 'Aldous Huxley', color: '#1a2a3a', text: '#c8d8f0',
     review: 'Reassuring proof that things could be worse.' },
   { title: 'Amore e Psiche', author: 'Apuleius', color: '#5a3a1a', text: '#f5dcc8',
-    review: '\'Night fell, and after love\'s skirmishes...\' — Apuleius wrote this in 150 AD. Nobody has done it better since.' },
+    review: '\'Night fell, and after love\'s skirmishes...\' – Apuleius wrote this in 150 AD. Nobody has done it better since.' },
   { title: "A Room of One's Own", author: 'Virginia Woolf', color: '#3a1a4a', text: '#eac8f5',
     review: 'Virginia Woolf said what she said.' },
   { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', color: '#2a5f4f', text: '#c8e6c9',
@@ -4181,7 +4181,7 @@ function renderBoard() {
         display:flex; align-items:center; justify-content:center;
         position:relative; cursor:pointer;
         background:${isSelected ? 'rgba(246,212,100,0.85)' :
-          isTargetHint ? (isLight ? 'rgba(200,150,46,0.4)' : 'rgba(200,150,46,0.3)') :
+          isTargetHint ? (isLight ? 'rgba(139,58,58,0.4)' : 'rgba(139,58,58,0.3)') :
           isLight ? '#f0d9b5' : '#b58863'};
         transition:background 0.15s;
         font-size:min(32px, 7.5vw);
@@ -4214,7 +4214,7 @@ function renderBoard() {
       if (col === 0) {
         const lbl = document.createElement('div');
         lbl.textContent = row + 1;
-        lbl.style.cssText = 'position:absolute;top:2px;left:3px;font-family:"Courier Prime",monospace;font-size:0.45rem;color:rgba(200,150,46,0.45);pointer-events:none;';
+        lbl.style.cssText = 'position:absolute;top:2px;left:3px;font-family:"Courier Prime",monospace;font-size:0.45rem;color:rgba(139,58,58,0.45);pointer-events:none;';
         cell.appendChild(lbl);
       }
 
@@ -4333,7 +4333,7 @@ function flashWrong(msg) {
     board.style.transition = 'box-shadow 0.1s';
     board.style.boxShadow = '0 0 30px rgba(255,60,60,0.5), 0 20px 60px rgba(0,0,0,0.7)';
     setTimeout(() => {
-      board.style.boxShadow = '0 0 40px rgba(200,150,46,0.08), 0 20px 60px rgba(0,0,0,0.7)';
+      board.style.boxShadow = '0 0 40px rgba(139,58,58,0.08), 0 20px 60px rgba(0,0,0,0.7)';
     }, 500);
   }
   setChessMsg(msg, true);
@@ -4347,7 +4347,7 @@ function setChessMsg(text, isError) {
   const el = document.getElementById('hl-chess-msg');
   if (!el) return;
   el.textContent = text;
-  el.style.color = isError ? 'rgba(255,100,80,0.85)' : 'rgba(200,150,46,0.75)';
+  el.style.color = isError ? 'rgba(255,100,80,0.85)' : 'rgba(139,58,58,0.75)';
 }
 
 function updateMoveTracker() {
@@ -4359,9 +4359,9 @@ function updateMoveTracker() {
       font-family:'Courier Prime',monospace; font-size:0.62rem;
       letter-spacing:0.1em; padding:0.2rem 0.6rem;
       border-radius:2px;
-      color:${i < hlMoveStep ? 'rgba(200,150,46,0.9)' : 'rgba(200,150,46,0.25)'};
-      background:${i < hlMoveStep ? 'rgba(200,150,46,0.1)' : 'transparent'};
-      border:1px solid ${i < hlMoveStep ? 'rgba(200,150,46,0.3)' : 'rgba(200,150,46,0.1)'};
+      color:${i < hlMoveStep ? 'rgba(139,58,58,0.9)' : 'rgba(139,58,58,0.25)'};
+      background:${i < hlMoveStep ? 'rgba(139,58,58,0.1)' : 'transparent'};
+      border:1px solid ${i < hlMoveStep ? 'rgba(139,58,58,0.3)' : 'rgba(139,58,58,0.1)'};
       transition:all 0.4s;
     ">${m}</span>
   `).join('');
@@ -4374,8 +4374,8 @@ function triggerCheckmateReveal() {
   // Flash the board gold
   const board = document.getElementById('hl-board');
   const overlay = document.getElementById('hl-checkmate-overlay');
-  if (board) board.style.boxShadow = '0 0 60px rgba(200,150,46,0.5)';
-  if (overlay) overlay.style.background = 'rgba(200,150,46,0.15)';
+  if (board) board.style.boxShadow = '0 0 60px rgba(139,58,58,0.5)';
+  if (overlay) overlay.style.background = 'rgba(139,58,58,0.15)';
 
   updateMoveTracker();
 
@@ -4490,7 +4490,7 @@ function buildHiddenLibrary() {
     const authorEl = document.createElement('div');
     authorEl.style.cssText = `
       font-family:'Courier Prime',monospace; font-size:0.55rem;
-      color:rgba(200,150,46,0.45); letter-spacing:0.06em;
+      color:rgba(139,58,58,0.45); letter-spacing:0.06em;
       text-align:center; text-transform:uppercase;
     `;
     authorEl.textContent = b.author;
@@ -4763,7 +4763,7 @@ function startFLThree() {
     "Ho conosciuto i gatti del Colosseo. Daje. Mi hanno confermato quello che già sapevo: Totti è l'ottavo re di Roma. Come si dice da queste parti: nun c'è trippa pe' gatti. Per noi, però, un'eccezione si fa sempre.",
     "Los gatos de la Alhambra y yo nos reunimos cada año. Tapas, Rioja, conversaciones. Este año vimos juntos el show de Bad Bunny en el medio tiempo. Nos gustó mucho. Lo repetimos el año que viene.",
     "Larry of Downing Street is a dear friend. It was he who introduced me to Prince of Wales tea. He takes it without milk. So do I. We have standards.",
-    "Les chats de la Bibliothèque nationale lisent par osmose — c'est plus efficace. Ce sont eux qui m'ont parlé de Camus, entre deux Baudelaire. Ils écoutent aussi du rap français. On ne juge pas. Charger c'est ma chanson préférée.",
+    "Les chats de la Bibliothèque nationale lisent par osmose – c'est plus efficace. Ce sont eux qui m'ont parlé de Camus, entre deux Baudelaire. Ils écoutent aussi du rap français. On ne juge pas. Charger c'est ma chanson préférée.",
     "You clicked on a cat. Interesting life choices.",
     "One click. That's your limit.",
     "Fine. Hello. Now leave me alone.",
@@ -4797,7 +4797,7 @@ function startFLThree() {
       'line-height:1.7',
       'padding:0',
       'border-radius:6px',
-      'border:1px solid rgba(200,150,46,0.5)',
+      'border:1px solid rgba(139,58,58,0.5)',
       'max-width:300px',
       'min-width:220px',
       'opacity:0',
@@ -4807,13 +4807,13 @@ function startFLThree() {
       'box-shadow:0 4px 24px rgba(0,0,0,0.6)'
     ].join(';');
     var header = document.createElement('div');
-    header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(200,150,46,0.25);';
+    header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(139,58,58,0.25);';
     var name = document.createElement('span');
     name.textContent = 'Schrödinger';
-    name.style.cssText = 'font-family:\'Courier New\',monospace;font-size:11px;letter-spacing:0.15em;color:rgba(200,150,46,0.9);text-transform:uppercase;';
+    name.style.cssText = 'font-family:\'Courier New\',monospace;font-size:11px;letter-spacing:0.15em;color:rgba(139,58,58,0.9);text-transform:uppercase;';
     var close = document.createElement('button');
     close.textContent = '✕';
-    close.style.cssText = 'background:none;border:none;color:rgba(200,150,46,0.6);cursor:pointer;font-size:12px;padding:0;line-height:1;';
+    close.style.cssText = 'background:none;border:none;color:rgba(139,58,58,0.6);cursor:pointer;font-size:12px;padding:0;line-height:1;';
     close.onclick = function(){ bubble.style.opacity='0'; setTimeout(function(){ if(bubble.parentNode) bubble.remove(); }, 400); };
     header.appendChild(name);
     header.appendChild(close);
@@ -4880,7 +4880,7 @@ function initRainCanvas() {
 <script>
 (function() {
   // Schrödinger hourly messages
-  var hourlyMessages = {0: 'Still awake? Same.', 1: 'Fun fact: honey never expires. Archaeologists found 3,000-year-old honey in Egyptian tombs. Still edible.', 2: "A group of cats is called a clowder. Completely unrelated to the hour. You're welcome.", 3: "3am. We don't talk about 3am.", 4: 'Fun fact: the human eye can distinguish approximately 10 million different colours.', 5: "Early. Suspiciously early. Fun fact: Napoleon was not actually short — he was 5'7, average for his time.", 6: "Fun fact: a cat's purr vibrates between 25 and 150 Hz — a frequency shown to promote bone healing.", 7: "The day hasn't gone wrong yet. Fun fact: Oxford University is older than the Aztec Empire.", 8: 'Fun fact: the shortest war in history was between Britain and Zanzibar in 1896. It lasted 38 minutes.', 9: 'Fun fact: coffee is the second most traded commodity in the world after oil.', 10: 'Fun fact: Shakespeare invented over 1700 words we still use today, including lonely, bedroom and generous.', 11: 'Still going. Fun fact: the Eiffel Tower grows about 15cm taller in summer due to thermal expansion.', 12: 'Noon. Fun fact: a single cloud can weigh over a million pounds. The sky is full of very heavy things.', 13: 'Fun fact: Cleopatra lived closer in time to the Moon landing than to the construction of the Great Pyramid.', 14: 'The longest hour. Fun fact: there are more possible chess games than atoms in the observable universe.', 15: "Fun fact: the average person walks about 100,000 miles in their lifetime. That's four times around the Earth.", 16: 'Fun fact: cats can jump up to six times their body length. I choose not to, for aesthetic reasons.', 17: 'The light changes. Fun fact: the light you see from the sun is about 8 minutes old when it reaches you.', 18: 'Still at that desk? Fun fact: the word salary comes from the Latin salarium — Roman soldiers were partly paid in salt.', 19: 'Fun fact: it rains diamonds on Neptune and Uranus. The universe has priorities.', 20: "Still here? Fun fact: the dot over the letters i and j has a name. It's called a tittle.", 21: 'Fun fact: the shortest complete sentence in English is I am. Two words. Descartes needed more.', 22: "Send the email. Fun fact: the average person spends 6 years of their life dreaming. Don't waste the other 18.", 23: 'Almost midnight. Fun fact: cats are crepuscular — most active at dawn and dusk. This is neither. Yet here I am.'};
+  var hourlyMessages = {0: 'Still awake? Same.', 1: 'Fun fact: honey never expires. Archaeologists found 3,000-year-old honey in Egyptian tombs. Still edible.', 2: "A group of cats is called a clowder. Completely unrelated to the hour. You're welcome.", 3: "3am. We don't talk about 3am.", 4: 'Fun fact: the human eye can distinguish approximately 10 million different colours.', 5: "Early. Suspiciously early. Fun fact: Napoleon was not actually short – he was 5'7, average for his time.", 6: "Fun fact: a cat's purr vibrates between 25 and 150 Hz – a frequency shown to promote bone healing.", 7: "The day hasn't gone wrong yet. Fun fact: Oxford University is older than the Aztec Empire.", 8: 'Fun fact: the shortest war in history was between Britain and Zanzibar in 1896. It lasted 38 minutes.', 9: 'Fun fact: coffee is the second most traded commodity in the world after oil.', 10: 'Fun fact: Shakespeare invented over 1700 words we still use today, including lonely, bedroom and generous.', 11: 'Still going. Fun fact: the Eiffel Tower grows about 15cm taller in summer due to thermal expansion.', 12: 'Noon. Fun fact: a single cloud can weigh over a million pounds. The sky is full of very heavy things.', 13: 'Fun fact: Cleopatra lived closer in time to the Moon landing than to the construction of the Great Pyramid.', 14: 'The longest hour. Fun fact: there are more possible chess games than atoms in the observable universe.', 15: "Fun fact: the average person walks about 100,000 miles in their lifetime. That's four times around the Earth.", 16: 'Fun fact: cats can jump up to six times their body length. I choose not to, for aesthetic reasons.', 17: 'The light changes. Fun fact: the light you see from the sun is about 8 minutes old when it reaches you.', 18: 'Still at that desk? Fun fact: the word salary comes from the Latin salarium – Roman soldiers were partly paid in salt.', 19: 'Fun fact: it rains diamonds on Neptune and Uranus. The universe has priorities.', 20: "Still here? Fun fact: the dot over the letters i and j has a name. It's called a tittle.", 21: 'Fun fact: the shortest complete sentence in English is I am. Two words. Descartes needed more.', 22: "Send the email. Fun fact: the average person spends 6 years of their life dreaming. Don't waste the other 18.", 23: 'Almost midnight. Fun fact: cats are crepuscular – most active at dawn and dusk. This is neither. Yet here I am.'};
 
   var visitCount = parseInt(localStorage.getItem('portfolioVisits') || '0');
   localStorage.setItem('portfolioVisits', visitCount + 1);
@@ -4906,7 +4906,7 @@ function initRainCanvas() {
       'line-height:1.7',
       'padding:0',
       'border-radius:6px',
-      'border:1px solid rgba(200,150,46,0.5)',
+      'border:1px solid rgba(139,58,58,0.5)',
       'max-width:300px',
       'min-width:220px',
       'opacity:0',
@@ -4916,13 +4916,13 @@ function initRainCanvas() {
       'box-shadow:0 4px 24px rgba(0,0,0,0.6)'
     ].join(';');
     var header = document.createElement('div');
-    header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(200,150,46,0.25);';
+    header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(139,58,58,0.25);';
     var name = document.createElement('span');
     name.textContent = 'Schrödinger';
-    name.style.cssText = 'font-family:\"Courier New\",monospace;font-size:11px;letter-spacing:0.15em;color:rgba(200,150,46,0.9);text-transform:uppercase;';
+    name.style.cssText = 'font-family:\"Courier New\",monospace;font-size:11px;letter-spacing:0.15em;color:rgba(139,58,58,0.9);text-transform:uppercase;';
     var closeBtn = document.createElement('button');
     closeBtn.textContent = '✕';
-    closeBtn.style.cssText = 'background:none;border:none;color:rgba(200,150,46,0.6);cursor:pointer;font-size:12px;padding:0;line-height:1;';
+    closeBtn.style.cssText = 'background:none;border:none;color:rgba(139,58,58,0.6);cursor:pointer;font-size:12px;padding:0;line-height:1;';
     closeBtn.onclick = function(){ bubble.style.opacity='0'; setTimeout(function(){ if(bubble.parentNode) bubble.remove(); },400); };
     header.appendChild(name); header.appendChild(closeBtn);
     var body = document.createElement('div');
@@ -5059,10 +5059,10 @@ function initRainCanvas() {
     if (!wrapper) return;
     var bubble = document.createElement('div');
     bubble.id = 'cat-bubble';
-    bubble.style.cssText = 'position:fixed;bottom:calc(28% + 10vh);right:3%;background:rgba(12,8,4,0.96);color:#e8d5a0;font-family:Georgia,serif;font-size:14px;line-height:1.7;padding:0;border-radius:6px;border:1px solid rgba(200,150,46,0.5);max-width:300px;min-width:220px;opacity:0;transition:opacity 0.4s;pointer-events:auto;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.6)';
-    var hdr=document.createElement('div');hdr.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(200,150,46,0.25);';
-    var nm=document.createElement('span');nm.textContent='Schrödinger';nm.style.cssText='font-family:"Courier New",monospace;font-size:11px;letter-spacing:0.15em;color:rgba(200,150,46,0.9);text-transform:uppercase;';
-    var cl=document.createElement('button');cl.textContent='✕';cl.style.cssText='background:none;border:none;color:rgba(200,150,46,0.6);cursor:pointer;font-size:12px;padding:0;line-height:1;';
+    bubble.style.cssText = 'position:fixed;bottom:calc(28% + 10vh);right:3%;background:rgba(12,8,4,0.96);color:#e8d5a0;font-family:Georgia,serif;font-size:14px;line-height:1.7;padding:0;border-radius:6px;border:1px solid rgba(139,58,58,0.5);max-width:300px;min-width:220px;opacity:0;transition:opacity 0.4s;pointer-events:auto;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.6)';
+    var hdr=document.createElement('div');hdr.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(139,58,58,0.25);';
+    var nm=document.createElement('span');nm.textContent='Schrödinger';nm.style.cssText='font-family:"Courier New",monospace;font-size:11px;letter-spacing:0.15em;color:rgba(139,58,58,0.9);text-transform:uppercase;';
+    var cl=document.createElement('button');cl.textContent='✕';cl.style.cssText='background:none;border:none;color:rgba(139,58,58,0.6);cursor:pointer;font-size:12px;padding:0;line-height:1;';
     cl.onclick=function(){bubble.style.opacity='0';setTimeout(function(){if(bubble.parentNode)bubble.remove();},400);};
     hdr.appendChild(nm);hdr.appendChild(cl);
     var bd=document.createElement('div');bd.style.cssText='padding:12px 14px 14px;';bd.textContent=msg;
@@ -5123,19 +5123,19 @@ function initRainCanvas() {
 <!-- BROWNIAN MOTION MODAL -->
 <div class="modal-backdrop" id="modal-brownian" style="z-index:160;backdrop-filter:blur(3px);">
   <div style="background:#faf7f2;border:1px solid rgba(180,150,100,0.25);border-radius:6px;max-width:760px;width:92%;padding:3rem 3rem 2.5rem;position:relative;font-family:'Inter',sans-serif;color:#1a1a1a;max-height:92vh;overflow-y:auto;">
-    <span onclick="window.closeBrownian()" style="position:absolute;top:1.2rem;right:1.5rem;font-size:1.3rem;color:rgba(200,150,46,0.4);cursor:pointer;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='#3a2a10'" onmouseout="this.style.color='rgba(100,70,30,0.5)'">&times;</span>
+    <span onclick="window.closeBrownian()" style="position:absolute;top:1.2rem;right:1.5rem;font-size:1.3rem;color:rgba(139,58,58,0.4);cursor:pointer;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='#3a2a10'" onmouseout="this.style.color='rgba(100,70,30,0.5)'">&times;</span>
 
     <div style="font-style:normal;margin:0 0 1.8rem;">
       <p style="font-family:'Courier Prime',monospace;font-size:0.65rem;letter-spacing:0.3em;color:#8b6340;text-transform:uppercase;margin-bottom:1.4rem;">Brownian Motion</p>
 
-      <p style="font-size:1.05rem;line-height:1.9;color:#1a1a1a;font-style:normal;margin-bottom:1.1rem;">If we observe very small particles — a fleck of dust, a grain of pollen — suspended in air or in a liquid, we see them tremble. Driven by this trembling, they move at random, zigzagging, drifting slowly and steadily away from where they began.</p>
+      <p style="font-size:1.05rem;line-height:1.9;color:#1a1a1a;font-style:normal;margin-bottom:1.1rem;">If we observe very small particles – a fleck of dust, a grain of pollen – suspended in air or in a liquid, we see them tremble. Driven by this trembling, they move at random, zigzagging, drifting slowly and steadily away from where they began.</p>
 
-      <p style="font-size:1.05rem;line-height:1.9;color:#1a1a1a;font-style:normal;margin-bottom:1.1rem;">This zigzagging motion was called Brownian motion. It is as though the particles were being kicked at random — now this way, now that. They tremble because they are struck by individual air molecules, sometimes from the right, sometimes from the left.</p>
+      <p style="font-size:1.05rem;line-height:1.9;color:#1a1a1a;font-style:normal;margin-bottom:1.1rem;">This zigzagging motion was called Brownian motion. It is as though the particles were being kicked at random – now this way, now that. They tremble because they are struck by individual air molecules, sometimes from the right, sometimes from the left.</p>
 
-      <p style="font-size:1.05rem;line-height:1.9;color:#1a1a1a;font-style:normal;margin-bottom:1.4rem;">Those are atoms — invisible, billions of them — colliding against a single particle from every direction, every instant.</p>
+      <p style="font-size:1.05rem;line-height:1.9;color:#1a1a1a;font-style:normal;margin-bottom:1.4rem;">Those are atoms – invisible, billions of them – colliding against a single particle from every direction, every instant.</p>
 
-      <div style="border-left:2px solid rgba(200,150,46,0.4);padding-left:1.1rem;margin-top:1.4rem;">
-        <p style="font-size:0.98rem;line-height:1.85;color:#3a2a10;font-style:normal;">And what of the Eroica? In 1975, Richard Voss and John Clarke published a paper in <em style="font-style:italic;">Nature</em> demonstrating that the structure of great classical compositions — Beethoven among them — follows the same statistical distribution as Brownian motion: neither wholly random nor wholly predictable, but poised exactly between the two. The dust particle and the symphony obey the same hidden mathematics. What you are watching is the signature of the invisible.</p>
+      <div style="border-left:2px solid rgba(139,58,58,0.4);padding-left:1.1rem;margin-top:1.4rem;">
+        <p style="font-size:0.98rem;line-height:1.85;color:#3a2a10;font-style:normal;">And what of the Eroica? In 1975, Richard Voss and John Clarke published a paper in <em style="font-style:italic;">Nature</em> demonstrating that the structure of great classical compositions – Beethoven among them – follows the same statistical distribution as Brownian motion: neither wholly random nor wholly predictable, but poised exactly between the two. The dust particle and the symphony obey the same hidden mathematics. What you are watching is the signature of the invisible.</p>
       </div>
     </div>
 
@@ -5179,7 +5179,7 @@ function initRainCanvas() {
       var dx=dust.x-a.x,dy=dust.y-a.y,d=Math.sqrt(dx*dx+dy*dy);
       if(d<20){dust.vx+=dx/d*0.3;dust.vy+=dy/d*0.3;}
       ctx.beginPath();ctx.arc(a.x,a.y,a.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(200,150,46,0.2)';ctx.fill();
+      ctx.fillStyle='rgba(139,58,58,0.2)';ctx.fill();
     });
     dust.vx*=0.93;dust.vy*=0.93;
     dust.x+=dust.vx;dust.y+=dust.vy;
@@ -5190,12 +5190,12 @@ function initRainCanvas() {
     if(dust.trail.length>1){
       ctx.beginPath();ctx.moveTo(dust.trail[0].x,dust.trail[0].y);
       dust.trail.forEach(function(p){ctx.lineTo(p.x,p.y);});
-      ctx.strokeStyle='rgba(200,150,46,0.18)';ctx.lineWidth=1;ctx.stroke();
+      ctx.strokeStyle='rgba(139,58,58,0.18)';ctx.lineWidth=1;ctx.stroke();
     }
     var g=ctx.createRadialGradient(dust.x,dust.y,0,dust.x,dust.y,14);
     g.addColorStop(0,'rgba(232,213,160,0.95)');
-    g.addColorStop(0.4,'rgba(200,150,46,0.4)');
-    g.addColorStop(1,'rgba(200,150,46,0)');
+    g.addColorStop(0.4,'rgba(139,58,58,0.4)');
+    g.addColorStop(1,'rgba(139,58,58,0)');
     ctx.beginPath();ctx.arc(dust.x,dust.y,14,0,Math.PI*2);
     ctx.fillStyle=g;ctx.fill();
     eroicaAnim=requestAnimationFrame(tick);
@@ -5236,22 +5236,22 @@ function initRainCanvas() {
 
       <svg style="width:100%;margin:0.8rem 0 1.4rem" viewBox="0 0 540 100" xmlns="http://www.w3.org/2000/svg">
         <path id="pm-mp" d="M60,45 L460,45" fill="none"/>
-        <line x1="60" y1="45" x2="460" y2="45" stroke="rgba(200,150,46,0.35)" stroke-width="0.8" stroke-dasharray="3,5"/>
-        <circle cx="60"  cy="45" r="6" fill="rgba(200,150,46,0.85)"/>
-        <circle cx="260" cy="45" r="6" fill="rgba(200,150,46,0.85)"/>
-        <circle cx="460" cy="45" r="6" fill="rgba(200,150,46,0.85)"/>
-        <text x="60"  y="27" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(200,150,46,0.85)" letter-spacing="1">NOSE</text>
-        <text x="260" y="27" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(200,150,46,0.85)" letter-spacing="1">OLFACTORY BULB</text>
-        <text x="460" y="27" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(200,150,46,0.85)" letter-spacing="1">AMYGDALA &middot; HIPPOCAMPUS</text>
+        <line x1="60" y1="45" x2="460" y2="45" stroke="rgba(139,58,58,0.35)" stroke-width="0.8" stroke-dasharray="3,5"/>
+        <circle cx="60"  cy="45" r="6" fill="rgba(139,58,58,0.85)"/>
+        <circle cx="260" cy="45" r="6" fill="rgba(139,58,58,0.85)"/>
+        <circle cx="460" cy="45" r="6" fill="rgba(139,58,58,0.85)"/>
+        <text x="60"  y="27" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(139,58,58,0.85)" letter-spacing="1">NOSE</text>
+        <text x="260" y="27" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(139,58,58,0.85)" letter-spacing="1">OLFACTORY BULB</text>
+        <text x="460" y="27" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(139,58,58,0.85)" letter-spacing="1">AMYGDALA &middot; HIPPOCAMPUS</text>
         <text x="60"  y="64" text-anchor="middle" font-family="'Inter',sans-serif" font-size="10.5" fill="rgba(90,60,30,0.7)" font-style="italic">~400 receptor types</text>
         <text x="60"  y="79" text-anchor="middle" font-family="'Inter',sans-serif" font-size="10.5" fill="rgba(90,60,30,0.7)" font-style="italic">Nobel Prize 2004</text>
         <text x="260" y="64" text-anchor="middle" font-family="'Inter',sans-serif" font-size="10.5" fill="rgba(90,60,30,0.7)" font-style="italic">2 synapses to emotion</text>
         <text x="260" y="79" text-anchor="middle" font-family="'Inter',sans-serif" font-size="10.5" fill="rgba(90,60,30,0.7)" font-style="italic">the shortest path in the brain</text>
         <text x="460" y="64" text-anchor="middle" font-family="'Inter',sans-serif" font-size="10.5" fill="rgba(90,60,30,0.7)" font-style="italic">32% stronger recall</text>
         <text x="460" y="79" text-anchor="middle" font-family="'Inter',sans-serif" font-size="10.5" fill="rgba(90,60,30,0.7)" font-style="italic">than sound or image</text>
-        <circle r="4.5" fill="rgba(200,150,46,0.9)"><animateMotion dur="4.5s" repeatCount="indefinite"><mpath href="#pm-mp"/></animateMotion></circle>
-        <circle r="3" fill="rgba(200,150,46,0.45)"><animateMotion dur="4.5s" begin="-0.4s" repeatCount="indefinite"><mpath href="#pm-mp"/></animateMotion></circle>
-        <circle r="1.8" fill="rgba(200,150,46,0.2)"><animateMotion dur="4.5s" begin="-0.8s" repeatCount="indefinite"><mpath href="#pm-mp"/></animateMotion></circle>
+        <circle r="4.5" fill="rgba(139,58,58,0.9)"><animateMotion dur="4.5s" repeatCount="indefinite"><mpath href="#pm-mp"/></animateMotion></circle>
+        <circle r="3" fill="rgba(139,58,58,0.45)"><animateMotion dur="4.5s" begin="-0.4s" repeatCount="indefinite"><mpath href="#pm-mp"/></animateMotion></circle>
+        <circle r="1.8" fill="rgba(139,58,58,0.2)"><animateMotion dur="4.5s" begin="-0.8s" repeatCount="indefinite"><mpath href="#pm-mp"/></animateMotion></circle>
       </svg>
 
       <p>Once the stimulus is received, the brain decodes the message directed to the olfactory bulb, passing through the hypothalamus -- the part responsible for our spontaneous behaviors -- and provokes a hedonic reaction that leads to the immediate evocation of images and memories, before the neocortex intervenes to rationally identify the essences.</p>
@@ -5264,14 +5264,14 @@ function initRainCanvas() {
         <div class="pm-gcol">
           <div class="pm-glabel">The Fragrance Pyramid</div>
           <svg viewBox="0 0 260 228" xmlns="http://www.w3.org/2000/svg">
-            <path id="pm-pt" class="pm-ps" d="M130,8 L170,76 L90,76 Z" fill="rgba(200,150,46,0.12)" stroke="rgba(200,150,46,0.5)" stroke-width="0.8"/>
-            <path id="pm-ph" class="pm-ps" d="M90,80 L170,80 L208,148 L52,148 Z" fill="rgba(200,150,46,0.3)" stroke="rgba(200,150,46,0.6)" stroke-width="0.8"/>
-            <path id="pm-pb" class="pm-ps" d="M52,152 L208,152 L248,220 L12,220 Z" fill="rgba(200,150,46,0.54)" stroke="rgba(200,150,46,0.7)" stroke-width="0.8"/>
-            <text x="130" y="44"  text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(200,150,46,0.8)" letter-spacing="1" pointer-events="none">TOP</text>
+            <path id="pm-pt" class="pm-ps" d="M130,8 L170,76 L90,76 Z" fill="rgba(139,58,58,0.12)" stroke="rgba(139,58,58,0.5)" stroke-width="0.8"/>
+            <path id="pm-ph" class="pm-ps" d="M90,80 L170,80 L208,148 L52,148 Z" fill="rgba(139,58,58,0.3)" stroke="rgba(139,58,58,0.6)" stroke-width="0.8"/>
+            <path id="pm-pb" class="pm-ps" d="M52,152 L208,152 L248,220 L12,220 Z" fill="rgba(139,58,58,0.54)" stroke="rgba(139,58,58,0.7)" stroke-width="0.8"/>
+            <text x="130" y="44"  text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(139,58,58,0.8)" letter-spacing="1" pointer-events="none">TOP</text>
             <text x="130" y="59"  text-anchor="middle" font-family="'Inter',sans-serif" font-size="10" fill="rgba(90,60,30,0.6)" font-style="italic" pointer-events="none">30 min</text>
-            <text x="130" y="113" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(200,150,46,0.9)" letter-spacing="1" pointer-events="none">HEART</text>
+            <text x="130" y="113" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(139,58,58,0.9)" letter-spacing="1" pointer-events="none">HEART</text>
             <text x="130" y="128" text-anchor="middle" font-family="'Inter',sans-serif" font-size="10" fill="rgba(90,60,30,0.6)" font-style="italic" pointer-events="none">1 to 3 hours</text>
-            <text x="130" y="183" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(200,150,46,1)" letter-spacing="1" pointer-events="none">BASE</text>
+            <text x="130" y="183" text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(139,58,58,1)" letter-spacing="1" pointer-events="none">BASE</text>
             <text x="130" y="198" text-anchor="middle" font-family="'Inter',sans-serif" font-size="10" fill="rgba(90,60,30,0.65)" font-style="italic" pointer-events="none">4 to 8 hours</text>
           </svg>
           <div class="pm-ibox">
@@ -5292,7 +5292,7 @@ function initRainCanvas() {
             <line x1="262" y1="140" x2="190" y2="140" stroke="white" stroke-width="1.8"/>
             <line x1="140" y1="262" x2="140" y2="190" stroke="white" stroke-width="1.8"/>
             <line x1="18"  y1="140" x2="90"  y2="140" stroke="white" stroke-width="1.8"/>
-            <circle cx="140" cy="140" r="46" fill="#faf9f6" stroke="rgba(200,150,46,0.4)" stroke-width="0.8"/>
+            <circle cx="140" cy="140" r="46" fill="#faf9f6" stroke="rgba(139,58,58,0.4)" stroke-width="0.8"/>
             <text x="204" y="82"  text-anchor="middle" fill="white" font-size="10.5" font-family="'Courier Prime',monospace" letter-spacing="0.5">FRESH</text>
             <text x="204" y="206" text-anchor="middle" fill="white" font-size="10.5" font-family="'Courier Prime',monospace" letter-spacing="0.5">FLORAL</text>
             <text x="76"  y="206" text-anchor="middle" fill="white" font-size="10.5" font-family="'Courier Prime',monospace" letter-spacing="0.5">AMBER</text>
@@ -5444,9 +5444,9 @@ function initRainCanvas() {
 
 <!-- MOBILE CONTACT -->
 <div id="mobile-contact">
-  <a href="mailto:biancamariaboninsegni@gmail.com" style="color:rgba(200,150,46,0.9);text-decoration:none;">✉ email</a>
-  <span style="color:rgba(200,150,46,0.3);">|</span>
-  <a href="https://www.linkedin.com/in/bianca-maria-boninsegni/" target="_blank" style="color:rgba(200,150,46,0.9);text-decoration:none;">in linkedin</a>
+  <a href="mailto:biancamariaboninsegni@gmail.com" style="color:rgba(139,58,58,0.9);text-decoration:none;">✉ email</a>
+  <span style="color:rgba(139,58,58,0.3);">|</span>
+  <a href="https://www.linkedin.com/in/bianca-maria-boninsegni/" target="_blank" style="color:rgba(139,58,58,0.9);text-decoration:none;">in linkedin</a>
 </div>
 <div id="mobile-nav">
   <button onclick="openAbout()">
