@@ -17,7 +17,7 @@
     --dark: rgba(10, 8, 5, 0.72);
     --parchment: #f5ead6;
     --ink: #2a1f0e;
-    --gold: #8B3A3A;
+    --gold: #d4c9b0;
     --teal: #3d7a6e;
     --overlay: rgba(10, 6, 2, 0.18);
   }
@@ -181,7 +181,7 @@
     z-index: 5;
     border-radius: 4px;
   }
-  .hotspot:hover { background: rgba(139,58,58,0.12); outline: 1px solid rgba(139,58,58,0.25); }
+  .hotspot:hover { background: rgba(212,201,176,0.12); outline: 1px solid rgba(212,201,176,0.25); }
   .hotspot::after {
     content: attr(data-label);
     position: absolute;
@@ -223,13 +223,13 @@
     color: rgba(139,58,58,1);
     cursor: pointer;
     width: 28px; height: 28px; font-size: 0.8rem;
-    border: 1px solid rgba(139,58,58,0.5);
+    border: 1px solid rgba(212,201,176,0.5);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     transition: all 0.3s;
     background: rgba(0,0,0,0.4);
   }
-  #help-btn:hover { color: rgba(139,58,58,0.9); border-color: rgba(139,58,58,0.5); background: rgba(0,0,0,0.6); }
+  #help-btn:hover { color: rgba(139,58,58,0.9); border-color: rgba(212,201,176,0.5); background: rgba(0,0,0,0.6); }
   .hint-item {
     font-family: 'Courier Prime', monospace;
     font-size: 0.58rem;
@@ -246,7 +246,7 @@
     height: 12%;
     cursor: pointer;
   }
-  #hs-notepad:hover { background: rgba(139,58,58,0.06); outline: 1px solid rgba(139,58,58,0.15); }
+  #hs-notepad:hover { background: rgba(212,201,176,0.06); outline: 1px solid rgba(212,201,176,0.15); }
   #hs-notepad::after {
     content: '✉ contact';
     position: absolute;
@@ -483,7 +483,7 @@
     line-height: 1.75;
   }
   .mac-body::-webkit-scrollbar { width: 4px; }
-  .mac-body::-webkit-scrollbar-thumb { background: rgba(139,58,58,0.3); border-radius: 2px; }
+  .mac-body::-webkit-scrollbar-thumb { background: rgba(212,201,176,0.3); border-radius: 2px; }
 
   /* Mac desktop screen (folder icons) */
   #mac-desktop {
@@ -514,8 +514,8 @@
   .cv-btn {
     grid-column: 1 / -1;
     margin-top: 1rem;
-    background: linear-gradient(135deg, rgba(139,58,58,0.15), rgba(139,58,58,0.05));
-    border: 1px solid rgba(139,58,58,0.3);
+    background: linear-gradient(135deg, rgba(212,201,176,0.15), rgba(139,58,58,0.05));
+    border: 1px solid rgba(212,201,176,0.3);
     color: var(--gold);
     font-family: 'Courier Prime', monospace;
     font-size: 0.7rem;
@@ -546,17 +546,17 @@
     outline: none;
     transition: background 0.2s;
   }
-  .sudoku-cell:focus { background: rgba(139,58,58,0.12); border-color: var(--gold); }
+  .sudoku-cell:focus { background: rgba(212,201,176,0.12); border-color: var(--gold); }
   .sudoku-cell.given { color: rgba(139,58,58,0.9); pointer-events: none; background: rgba(139,58,58,0.05); }
   .sudoku-cell.wrong { background: rgba(255,80,60,0.15); border-color: rgba(255,80,60,0.5); }
   .sudoku-cell.correct { background: rgba(40,200,64,0.1); }
   /* 6x6 box borders, 2x3 boxes */
-  .sudoku-cell[data-c="2"] { border-right: 2px solid rgba(139,58,58,0.5); }
-  .sudoku-cell[data-c="3"] { border-left: 2px solid rgba(139,58,58,0.5); }
-  .sudoku-cell[data-r="1"] { border-bottom: 2px solid rgba(139,58,58,0.5); }
-  .sudoku-cell[data-r="2"] { border-top: 2px solid rgba(139,58,58,0.5); }
-  .sudoku-cell[data-r="3"] { border-bottom: 2px solid rgba(139,58,58,0.5); }
-  .sudoku-cell[data-r="4"] { border-top: 2px solid rgba(139,58,58,0.5); }
+  .sudoku-cell[data-c="2"] { border-right: 2px solid rgba(212,201,176,0.5); }
+  .sudoku-cell[data-c="3"] { border-left: 2px solid rgba(212,201,176,0.5); }
+  .sudoku-cell[data-r="1"] { border-bottom: 2px solid rgba(212,201,176,0.5); }
+  .sudoku-cell[data-r="2"] { border-top: 2px solid rgba(212,201,176,0.5); }
+  .sudoku-cell[data-r="3"] { border-bottom: 2px solid rgba(212,201,176,0.5); }
+  .sudoku-cell[data-r="4"] { border-top: 2px solid rgba(212,201,176,0.5); }
   #sudoku-msg {
     font-family: 'Courier Prime', monospace;
     font-size: 0.7rem;
@@ -636,7 +636,7 @@
     letter-spacing: 0.15em;
     background: rgba(0,0,0,0.7);
     padding: 0.5rem 1.2rem;
-    border: 1px solid rgba(139,58,58,0.5);
+    border: 1px solid rgba(212,201,176,0.5);
     border-radius: 2px;
     z-index: 50;
     pointer-events: none;
@@ -679,7 +679,7 @@
     transition: all 0.2s;
     text-transform: uppercase;
   }
-  .journal-tab:hover, .journal-tab.active { color: var(--gold); border-color: rgba(139,58,58,0.4); background: rgba(139,58,58,0.06); }
+  .journal-tab:hover, .journal-tab.active { color: var(--gold); border-color: rgba(212,201,176,0.4); background: rgba(212,201,176,0.06); }
   .journal-entry { display: none; }
   .journal-entry.active { display: block; }
   .journal-date { font-family: 'Courier Prime', monospace; font-size: 0.7rem; color: rgba(139,58,58,0.6); letter-spacing: 0.15em; margin-bottom: 1rem; }
@@ -764,7 +764,7 @@
     font-family: 'Courier Prime', monospace;
     font-size: 0.7rem; color: rgba(139,58,58,0.6);
     letter-spacing: 0.15em; cursor: pointer;
-    border: 1px solid rgba(139,58,58,0.25);
+    border: 1px solid rgba(212,201,176,0.25);
     padding: 0.3rem 0.8rem;
     background: rgba(0,0,0,0.5);
     transition: color 0.2s;
@@ -879,7 +879,7 @@
     cursor: pointer;
     z-index: 5;
   }
-  #hs-library:hover { background: rgba(139,58,58,0.06); outline: 1px solid rgba(139,58,58,0.15); }
+  #hs-library:hover { background: rgba(212,201,176,0.06); outline: 1px solid rgba(212,201,176,0.15); }
   #hs-library::after {
     content: '📚 hidden library';
     position: absolute;
@@ -903,7 +903,7 @@
   /* Library modal */
   .library-window {
     background: #1a120a;
-    border: 1px solid rgba(139,58,58,0.15);
+    border: 1px solid rgba(212,201,176,0.15);
     border-radius: 4px;
     width: min(700px, 92vw);
     max-height: 85vh;
@@ -930,12 +930,12 @@
     cursor: pointer;
     font-family: 'Courier Prime', monospace;
     font-size: 0.65rem;
-    color: rgba(139,58,58,0.4);
-    border: 1px solid rgba(139,58,58,0.15);
+    color: rgba(212,201,176,0.4);
+    border: 1px solid rgba(212,201,176,0.15);
     padding: 0.2rem 0.6rem;
     transition: all 0.2s;
   }
-  .library-close:hover { color: var(--gold); border-color: rgba(139,58,58,0.4); }
+  .library-close:hover { color: var(--gold); border-color: rgba(212,201,176,0.4); }
   .library-grid {
     overflow-y: auto;
     padding: 1.5rem;
@@ -966,7 +966,7 @@
     max-height: 70vh;
     overflow-y: scroll;
     background: linear-gradient(150deg, #1a120a, #120d06);
-    border: 1px solid rgba(139,58,58,0.25);
+    border: 1px solid rgba(212,201,176,0.25);
     border-radius: 4px;
     width: min(520px, 92vw);
     padding: 1.5rem 1.5rem 2rem;
@@ -984,7 +984,7 @@
   .book-note-author {
     font-family: 'Courier Prime', monospace;
     font-size: 0.62rem;
-    color: rgba(139,58,58,0.5);
+    color: rgba(212,201,176,0.5);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 1.2rem;
@@ -1002,7 +1002,7 @@
     position: absolute; top: 0.8rem; right: 1rem;
     font-family: 'Courier Prime', monospace;
     font-size: 0.65rem;
-    color: rgba(139,58,58,0.3);
+    color: rgba(212,201,176,0.3);
     cursor: pointer;
     transition: color 0.2s;
   }
@@ -1029,7 +1029,7 @@
   .book-author {
     font-family: 'Courier Prime', monospace;
     font-size: 0.52rem;
-    color: rgba(139,58,58,0.5);
+    color: rgba(212,201,176,0.5);
     letter-spacing: 0.05em;
     text-align: center;
     line-height: 1.3;
@@ -1082,7 +1082,7 @@
   .gollum-box {
     width: min(480px, 90vw);
     background: #0a0805;
-    border: 1px solid rgba(139,58,58,0.5);
+    border: 1px solid rgba(212,201,176,0.5);
     border-radius: 4px;
     padding: 2.5rem;
     text-align: center;
@@ -1103,7 +1103,7 @@
   }
   .gollum-input {
     background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(139,58,58,0.25);
+    border: 1px solid rgba(212,201,176,0.25);
     border-radius: 2px;
     color: rgba(245,234,214,0.85);
     font-family: 'Courier Prime', monospace;
@@ -1125,13 +1125,13 @@
     letter-spacing: 0.2em;
     color: rgba(139,58,58,0.6);
     background: transparent;
-    border: 1px solid rgba(139,58,58,0.5);
+    border: 1px solid rgba(212,201,176,0.5);
     padding: 0.4rem 1.2rem;
     cursor: pointer;
     text-transform: uppercase;
     transition: all 0.2s;
   }
-  .gollum-submit:hover { color: var(--gold); border-color: rgba(139,58,58,0.5); }
+  .gollum-submit:hover { color: var(--gold); border-color: rgba(212,201,176,0.5); }
   .gollum-error {
     font-family: 'Courier Prime', monospace;
     font-size: 0.65rem;
@@ -1504,7 +1504,7 @@
     font-family: 'Courier New', monospace;
     font-size: 0.72em;
     padding: 10px 16px;
-    border: 1px solid rgba(139,58,58,0.4);
+    border: 1px solid rgba(212,201,176,0.4);
     white-space: nowrap;
     text-align: center;
     line-height: 1.6;
@@ -1518,7 +1518,7 @@
     left: 50%;
     transform: translateX(-50%);
     border: 6px solid transparent;
-    border-top-color: rgba(139,58,58,0.4);
+    border-top-color: rgba(212,201,176,0.4);
   }
   #gatto-wrapper:hover #gatto-tooltip { display: block; }
 
@@ -1541,7 +1541,7 @@
     backdrop-filter: blur(8px);
     transition: background 0.3s, transform 0.2s;
     user-select: none;
-    box-shadow: 0 0 12px rgba(139,58,58,0.3);
+    box-shadow: 0 0 12px rgba(212,201,176,0.3);
   }
   #day-night-toggle:hover {
     background: rgba(255,255,255,0.12);
@@ -1650,7 +1650,7 @@
   .pm-gfx { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 0.6rem 0 1rem; }
   .pm-gcol { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 200px; max-width: 258px; }
   .pm-gcol svg { width: 100%; }
-  .pm-glabel { font-family: 'Courier Prime', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: rgba(139,58,58,0.5); text-transform: uppercase; margin-bottom: 0.6rem; }
+  .pm-glabel { font-family: 'Courier Prime', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: rgba(212,201,176,0.5); text-transform: uppercase; margin-bottom: 0.6rem; }
   .pm-ibox { min-height: 76px; text-align: center; width: 100%; padding: 0.3rem 0; }
   .pm-iname { font-family: 'Courier Prime', monospace; font-size: 0.65rem; letter-spacing: 0.14em; color: rgba(139,58,58,0.85); text-transform: uppercase; margin-bottom: 0.2rem; }
   .pm-inote { font-size: 0.78rem; color: #8a6a50; font-style: italic; margin-bottom: 0.35rem; line-height: 1.5; }
@@ -1682,7 +1682,7 @@
     backdrop-filter: blur(8px);
     transition: background 0.3s, transform 0.2s;
     user-select: none;
-    box-shadow: 0 0 12px rgba(139,58,58,0.3);
+    box-shadow: 0 0 12px rgba(212,201,176,0.3);
   }
   #audio-toggle:hover {
     background: rgba(255,255,255,0.12);
@@ -1761,7 +1761,7 @@
   right: 0;
   height: 64px;
   background: rgba(8,5,2,0.95);
-  border-top: 1px solid rgba(139,58,58,0.3);
+  border-top: 1px solid rgba(212,201,176,0.3);
   z-index: 9000;
   align-items: center;
   justify-content: space-around;
@@ -1853,7 +1853,7 @@
   transform: translateX(-50%);
   z-index: 9001;
   background: rgba(8,5,2,0.85);
-  border: 1px solid rgba(139,58,58,0.5);
+  border: 1px solid rgba(212,201,176,0.5);
   border-radius: 20px;
   padding: 6px 16px;
   color: rgba(139,58,58,0.9);
@@ -1974,11 +1974,11 @@
         <!-- Mac clock bar -->
         <div style="grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; padding:0 0.5rem 0.5rem; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:0.5rem;">
           <span id="mac-clock" style="font-family:'Courier Prime',monospace;font-size:0.65rem;color:rgba(245,234,214,0.45);letter-spacing:0.12em;"></span>
-          <span style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">bianca.portfolio</span>
+          <span style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(212,201,176,0.3);letter-spacing:0.1em;">bianca.portfolio</span>
         </div>
         <!-- Folder: About -->
         <div class="folder-icon" onclick="openAbout()">
-          <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(139,58,58,0.15)" stroke="rgba(139,58,58,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(139,58,58,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(139,58,58,0.25)" stroke="rgba(139,58,58,0.4)" stroke-width="1"/></svg>
+          <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(212,201,176,0.15)" stroke="rgba(212,201,176,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(212,201,176,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(212,201,176,0.25)" stroke="rgba(212,201,176,0.4)" stroke-width="1"/></svg>
           <span class="folder-label">About</span>
         </div>
         <!-- Folder: Experiences -->
@@ -1992,7 +1992,7 @@
           <span class="folder-label">Journals</span>
         </div>
         <div class="folder-icon" onclick="window.open('works/works.html', '_blank')">
-          <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(139,58,58,0.15)" stroke="rgba(139,58,58,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(139,58,58,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(139,58,58,0.25)" stroke="rgba(139,58,58,0.4)" stroke-width="1"/></svg>
+          <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(212,201,176,0.15)" stroke="rgba(212,201,176,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(212,201,176,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(212,201,176,0.25)" stroke="rgba(212,201,176,0.4)" stroke-width="1"/></svg>
           <span class="folder-label">Works</span>
         </div>
         <!-- Folder: Mind Map -->
@@ -2111,9 +2111,9 @@
           <a href="https://www.vancleefarpels.com/en/the-maison/videos/extraordinary-object-the-automate-fee-ondine.html" target="_blank" style="
             font-family:'Courier Prime',monospace; font-size:0.68rem;
             color:rgba(139,58,58,0.75); letter-spacing:0.12em;
-            text-decoration:none; border-bottom:1px solid rgba(139,58,58,0.3);
+            text-decoration:none; border-bottom:1px solid rgba(212,201,176,0.3);
             transition:all 0.2s;
-          " onmouseover="this.style.color='rgba(139,58,58,1)';this.style.borderBottomColor='rgba(139,58,58,0.7)'" onmouseout="this.style.color='rgba(139,58,58,0.75)';this.style.borderBottomColor='rgba(139,58,58,0.3)'">
+          " onmouseover="this.style.color='rgba(139,58,58,1)';this.style.borderBottomColor='rgba(139,58,58,0.7)'" onmouseout="this.style.color='rgba(139,58,58,0.75)';this.style.borderBottomColor='rgba(212,201,176,0.3)'">
             ▶ Van Cleef &amp; Arpels, L'Automate Fée Ondine, Homo Faber 2024 ↗
           </a>
         </p>
@@ -2471,7 +2471,7 @@
       </div>
     </div>
 
-    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(139,58,58,0.1);font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(139,58,58,0.3);letter-spacing:0.12em;text-align:center;">
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(139,58,58,0.1);font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(212,201,176,0.3);letter-spacing:0.12em;text-align:center;">
       look for the glowing dots, they mark what can be clicked
     </div>
   </div>
@@ -2528,7 +2528,7 @@
         <div id="hl-board" style="
           display:grid; grid-template-columns:repeat(8,1fr);
           width:min(440px, 90vw); height:min(440px, 90vw);
-          border:2px solid rgba(139,58,58,0.3);
+          border:2px solid rgba(212,201,176,0.3);
           box-shadow:0 0 40px rgba(139,58,58,0.08), 0 20px 60px rgba(0,0,0,0.7);
         "></div>
         <!-- Overlay for checkmate animation -->
@@ -2542,14 +2542,14 @@
 
       <!-- File labels -->
       <div style="display:flex; gap:0; width:min(440px,90vw); justify-content:space-around; padding:0 2px;">
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">a</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">b</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">c</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">d</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">e</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">f</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">g</span>
-        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(139,58,58,0.3);letter-spacing:0.1em;">h</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(212,201,176,0.3);letter-spacing:0.1em;">a</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(212,201,176,0.3);letter-spacing:0.1em;">b</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(212,201,176,0.3);letter-spacing:0.1em;">c</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(212,201,176,0.3);letter-spacing:0.1em;">d</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(212,201,176,0.3);letter-spacing:0.1em;">e</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(212,201,176,0.3);letter-spacing:0.1em;">f</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(212,201,176,0.3);letter-spacing:0.1em;">g</span>
+        <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;color:rgba(212,201,176,0.3);letter-spacing:0.1em;">h</span>
       </div>
 
       <!-- Move guide -->
@@ -2591,7 +2591,7 @@
       display:none;
     ">
       <div style="text-align:center; margin-bottom:2.5rem; position:relative;">
-        <div style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(139,58,58,0.4);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.8rem;">— access granted —</div>
+        <div style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(212,201,176,0.4);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.8rem;">— access granted —</div>
         <div style="font-family:'Inter',sans-serif;font-size:clamp(1.2rem,2.5vw,1.7rem);color:rgba(245,234,214,0.8);font-style:italic;">The Shelves, Unlocked</div>
         <div onclick="resetHiddenLibrary()" style="
           display:inline-block; margin-top:1rem;
@@ -3187,7 +3187,7 @@ function openReadingNow() {
     });
     // Add a note
     const note = document.createElement('div');
-    note.style.cssText = 'grid-column:1/-1;font-family:"EB Garamond",serif;font-style:italic;color:rgba(139,58,58,0.5);font-size:0.85rem;padding:1rem 0 0;text-align:center;';
+    note.style.cssText = 'grid-column:1/-1;font-family:"EB Garamond",serif;font-style:italic;color:rgba(212,201,176,0.5);font-size:0.85rem;padding:1rem 0 0;text-align:center;';
     note.textContent = '— currently on the desk —';
     grid.appendChild(note);
   }
@@ -3387,7 +3387,7 @@ function buildMindMap() {
     const na = byId[a], nb = byId[b];
     const isSub = nb.sub;
     html += `<line x1="${na.x}" y1="${na.y}" x2="${nb.x}" y2="${nb.y}"
-      stroke="${isSub ? 'rgba(150,150,180,0.25)' : 'rgba(139,58,58,0.4)'}"
+      stroke="${isSub ? 'rgba(150,150,180,0.25)' : 'rgba(212,201,176,0.4)'}"
       stroke-width="${isSub ? 1 : 2.5}"
       stroke-dasharray="${isSub ? '5 4' : 'none'}"/>`;
   });
@@ -4181,7 +4181,7 @@ function renderBoard() {
         display:flex; align-items:center; justify-content:center;
         position:relative; cursor:pointer;
         background:${isSelected ? 'rgba(246,212,100,0.85)' :
-          isTargetHint ? (isLight ? 'rgba(139,58,58,0.4)' : 'rgba(139,58,58,0.3)') :
+          isTargetHint ? (isLight ? 'rgba(212,201,176,0.4)' : 'rgba(212,201,176,0.3)') :
           isLight ? '#f0d9b5' : '#b58863'};
         transition:background 0.15s;
         font-size:min(32px, 7.5vw);
@@ -4359,9 +4359,9 @@ function updateMoveTracker() {
       font-family:'Courier Prime',monospace; font-size:0.62rem;
       letter-spacing:0.1em; padding:0.2rem 0.6rem;
       border-radius:2px;
-      color:${i < hlMoveStep ? 'rgba(139,58,58,0.9)' : 'rgba(139,58,58,0.25)'};
+      color:${i < hlMoveStep ? 'rgba(139,58,58,0.9)' : 'rgba(212,201,176,0.25)'};
       background:${i < hlMoveStep ? 'rgba(139,58,58,0.1)' : 'transparent'};
-      border:1px solid ${i < hlMoveStep ? 'rgba(139,58,58,0.3)' : 'rgba(139,58,58,0.1)'};
+      border:1px solid ${i < hlMoveStep ? 'rgba(212,201,176,0.3)' : 'rgba(139,58,58,0.1)'};
       transition:all 0.4s;
     ">${m}</span>
   `).join('');
@@ -4374,8 +4374,8 @@ function triggerCheckmateReveal() {
   // Flash the board gold
   const board = document.getElementById('hl-board');
   const overlay = document.getElementById('hl-checkmate-overlay');
-  if (board) board.style.boxShadow = '0 0 60px rgba(139,58,58,0.5)';
-  if (overlay) overlay.style.background = 'rgba(139,58,58,0.15)';
+  if (board) board.style.boxShadow = '0 0 60px rgba(212,201,176,0.5)';
+  if (overlay) overlay.style.background = 'rgba(212,201,176,0.15)';
 
   updateMoveTracker();
 
@@ -4797,7 +4797,7 @@ function startFLThree() {
       'line-height:1.7',
       'padding:0',
       'border-radius:6px',
-      'border:1px solid rgba(139,58,58,0.5)',
+      'border:1px solid rgba(212,201,176,0.5)',
       'max-width:300px',
       'min-width:220px',
       'opacity:0',
@@ -4807,7 +4807,7 @@ function startFLThree() {
       'box-shadow:0 4px 24px rgba(0,0,0,0.6)'
     ].join(';');
     var header = document.createElement('div');
-    header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(139,58,58,0.25);';
+    header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(212,201,176,0.25);';
     var name = document.createElement('span');
     name.textContent = 'Schrödinger';
     name.style.cssText = 'font-family:\'Courier New\',monospace;font-size:11px;letter-spacing:0.15em;color:rgba(139,58,58,0.9);text-transform:uppercase;';
@@ -4906,7 +4906,7 @@ function initRainCanvas() {
       'line-height:1.7',
       'padding:0',
       'border-radius:6px',
-      'border:1px solid rgba(139,58,58,0.5)',
+      'border:1px solid rgba(212,201,176,0.5)',
       'max-width:300px',
       'min-width:220px',
       'opacity:0',
@@ -4916,7 +4916,7 @@ function initRainCanvas() {
       'box-shadow:0 4px 24px rgba(0,0,0,0.6)'
     ].join(';');
     var header = document.createElement('div');
-    header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(139,58,58,0.25);';
+    header.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(212,201,176,0.25);';
     var name = document.createElement('span');
     name.textContent = 'Schrödinger';
     name.style.cssText = 'font-family:\"Courier New\",monospace;font-size:11px;letter-spacing:0.15em;color:rgba(139,58,58,0.9);text-transform:uppercase;';
@@ -5059,8 +5059,8 @@ function initRainCanvas() {
     if (!wrapper) return;
     var bubble = document.createElement('div');
     bubble.id = 'cat-bubble';
-    bubble.style.cssText = 'position:fixed;bottom:calc(28% + 10vh);right:3%;background:rgba(12,8,4,0.96);color:#e8d5a0;font-family:Georgia,serif;font-size:14px;line-height:1.7;padding:0;border-radius:6px;border:1px solid rgba(139,58,58,0.5);max-width:300px;min-width:220px;opacity:0;transition:opacity 0.4s;pointer-events:auto;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.6)';
-    var hdr=document.createElement('div');hdr.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(139,58,58,0.25);';
+    bubble.style.cssText = 'position:fixed;bottom:calc(28% + 10vh);right:3%;background:rgba(12,8,4,0.96);color:#e8d5a0;font-family:Georgia,serif;font-size:14px;line-height:1.7;padding:0;border-radius:6px;border:1px solid rgba(212,201,176,0.5);max-width:300px;min-width:220px;opacity:0;transition:opacity 0.4s;pointer-events:auto;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.6)';
+    var hdr=document.createElement('div');hdr.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(212,201,176,0.25);';
     var nm=document.createElement('span');nm.textContent='Schrödinger';nm.style.cssText='font-family:"Courier New",monospace;font-size:11px;letter-spacing:0.15em;color:rgba(139,58,58,0.9);text-transform:uppercase;';
     var cl=document.createElement('button');cl.textContent='✕';cl.style.cssText='background:none;border:none;color:rgba(139,58,58,0.6);cursor:pointer;font-size:12px;padding:0;line-height:1;';
     cl.onclick=function(){bubble.style.opacity='0';setTimeout(function(){if(bubble.parentNode)bubble.remove();},400);};
@@ -5123,7 +5123,7 @@ function initRainCanvas() {
 <!-- BROWNIAN MOTION MODAL -->
 <div class="modal-backdrop" id="modal-brownian" style="z-index:160;backdrop-filter:blur(3px);">
   <div style="background:#faf7f2;border:1px solid rgba(180,150,100,0.25);border-radius:6px;max-width:760px;width:92%;padding:3rem 3rem 2.5rem;position:relative;font-family:'Inter',sans-serif;color:#1a1a1a;max-height:92vh;overflow-y:auto;">
-    <span onclick="window.closeBrownian()" style="position:absolute;top:1.2rem;right:1.5rem;font-size:1.3rem;color:rgba(139,58,58,0.4);cursor:pointer;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='#3a2a10'" onmouseout="this.style.color='rgba(100,70,30,0.5)'">&times;</span>
+    <span onclick="window.closeBrownian()" style="position:absolute;top:1.2rem;right:1.5rem;font-size:1.3rem;color:rgba(212,201,176,0.4);cursor:pointer;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='#3a2a10'" onmouseout="this.style.color='rgba(100,70,30,0.5)'">&times;</span>
 
     <div style="font-style:normal;margin:0 0 1.8rem;">
       <p style="font-family:'Courier Prime',monospace;font-size:0.65rem;letter-spacing:0.3em;color:#8b6340;text-transform:uppercase;margin-bottom:1.4rem;">Brownian Motion</p>
@@ -5134,7 +5134,7 @@ function initRainCanvas() {
 
       <p style="font-size:1.05rem;line-height:1.9;color:#1a1a1a;font-style:normal;margin-bottom:1.4rem;">Those are atoms – invisible, billions of them – colliding against a single particle from every direction, every instant.</p>
 
-      <div style="border-left:2px solid rgba(139,58,58,0.4);padding-left:1.1rem;margin-top:1.4rem;">
+      <div style="border-left:2px solid rgba(212,201,176,0.4);padding-left:1.1rem;margin-top:1.4rem;">
         <p style="font-size:0.98rem;line-height:1.85;color:#3a2a10;font-style:normal;">And what of the Eroica? In 1975, Richard Voss and John Clarke published a paper in <em style="font-style:italic;">Nature</em> demonstrating that the structure of great classical compositions – Beethoven among them – follows the same statistical distribution as Brownian motion: neither wholly random nor wholly predictable, but poised exactly between the two. The dust particle and the symphony obey the same hidden mathematics. What you are watching is the signature of the invisible.</p>
       </div>
     </div>
@@ -5194,7 +5194,7 @@ function initRainCanvas() {
     }
     var g=ctx.createRadialGradient(dust.x,dust.y,0,dust.x,dust.y,14);
     g.addColorStop(0,'rgba(232,213,160,0.95)');
-    g.addColorStop(0.4,'rgba(139,58,58,0.4)');
+    g.addColorStop(0.4,'rgba(212,201,176,0.4)');
     g.addColorStop(1,'rgba(139,58,58,0)');
     ctx.beginPath();ctx.arc(dust.x,dust.y,14,0,Math.PI*2);
     ctx.fillStyle=g;ctx.fill();
@@ -5264,8 +5264,8 @@ function initRainCanvas() {
         <div class="pm-gcol">
           <div class="pm-glabel">The Fragrance Pyramid</div>
           <svg viewBox="0 0 260 228" xmlns="http://www.w3.org/2000/svg">
-            <path id="pm-pt" class="pm-ps" d="M130,8 L170,76 L90,76 Z" fill="rgba(139,58,58,0.12)" stroke="rgba(139,58,58,0.5)" stroke-width="0.8"/>
-            <path id="pm-ph" class="pm-ps" d="M90,80 L170,80 L208,148 L52,148 Z" fill="rgba(139,58,58,0.3)" stroke="rgba(139,58,58,0.6)" stroke-width="0.8"/>
+            <path id="pm-pt" class="pm-ps" d="M130,8 L170,76 L90,76 Z" fill="rgba(212,201,176,0.12)" stroke="rgba(212,201,176,0.5)" stroke-width="0.8"/>
+            <path id="pm-ph" class="pm-ps" d="M90,80 L170,80 L208,148 L52,148 Z" fill="rgba(212,201,176,0.3)" stroke="rgba(139,58,58,0.6)" stroke-width="0.8"/>
             <path id="pm-pb" class="pm-ps" d="M52,152 L208,152 L248,220 L12,220 Z" fill="rgba(139,58,58,0.54)" stroke="rgba(139,58,58,0.7)" stroke-width="0.8"/>
             <text x="130" y="44"  text-anchor="middle" font-family="'Courier Prime',monospace" font-size="11" fill="rgba(139,58,58,0.8)" letter-spacing="1" pointer-events="none">TOP</text>
             <text x="130" y="59"  text-anchor="middle" font-family="'Inter',sans-serif" font-size="10" fill="rgba(90,60,30,0.6)" font-style="italic" pointer-events="none">30 min</text>
@@ -5292,7 +5292,7 @@ function initRainCanvas() {
             <line x1="262" y1="140" x2="190" y2="140" stroke="white" stroke-width="1.8"/>
             <line x1="140" y1="262" x2="140" y2="190" stroke="white" stroke-width="1.8"/>
             <line x1="18"  y1="140" x2="90"  y2="140" stroke="white" stroke-width="1.8"/>
-            <circle cx="140" cy="140" r="46" fill="#faf9f6" stroke="rgba(139,58,58,0.4)" stroke-width="0.8"/>
+            <circle cx="140" cy="140" r="46" fill="#faf9f6" stroke="rgba(212,201,176,0.4)" stroke-width="0.8"/>
             <text x="204" y="82"  text-anchor="middle" fill="white" font-size="10.5" font-family="'Courier Prime',monospace" letter-spacing="0.5">FRESH</text>
             <text x="204" y="206" text-anchor="middle" fill="white" font-size="10.5" font-family="'Courier Prime',monospace" letter-spacing="0.5">FLORAL</text>
             <text x="76"  y="206" text-anchor="middle" fill="white" font-size="10.5" font-family="'Courier Prime',monospace" letter-spacing="0.5">AMBER</text>
@@ -5445,7 +5445,7 @@ function initRainCanvas() {
 <!-- MOBILE CONTACT -->
 <div id="mobile-contact">
   <a href="mailto:biancamariaboninsegni@gmail.com" style="color:rgba(139,58,58,0.9);text-decoration:none;">✉ email</a>
-  <span style="color:rgba(139,58,58,0.3);">|</span>
+  <span style="color:rgba(212,201,176,0.3);">|</span>
   <a href="https://www.linkedin.com/in/bianca-maria-boninsegni/" target="_blank" style="color:rgba(139,58,58,0.9);text-decoration:none;">in linkedin</a>
 </div>
 <div id="mobile-nav">
