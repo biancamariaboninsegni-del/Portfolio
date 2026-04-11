@@ -42,29 +42,70 @@
   #curtain.fade-out { opacity: 0; pointer-events: none; }
   #curtain-text {
     font-family: 'EB Garamond', serif;
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
-    color: rgba(245, 234, 214, 0.7);
-    letter-spacing: 0.2em;
+    font-size: clamp(0.85rem, 2vw, 1.1rem);
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.45em;
     font-style: italic;
     text-align: center;
     padding: 0 2rem;
     animation: fadeInText 2s ease forwards;
+    margin-bottom: 2rem;
+  }
+  #curtain-gear-wrap {
+    position: relative;
+    width: 300px; height: 300px;
+    cursor: pointer;
+    animation: fadeInText 2.5s ease forwards;
+  }
+  #curtain-snake {
+    width: 300px; height: 300px;
+    display: block;
+    transform-origin: center center;
+    border-radius: 50%;
+    animation: none;
+  }
+  #curtain-snake.spinning { animation: gearSpin 20s linear infinite; }
+  #curtain-gear-wrap:hover #curtain-snake.spinning { animation-duration: 11s; }
+  @keyframes gearSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  #curtain-outer-ring {
+    position: absolute; inset: -16px; border-radius: 50%;
+    border: 0.5px solid rgba(255,255,255,0.07);
+    animation: none;
+    pointer-events: none;
+  }
+  #curtain-outer-ring.spinning { animation: gearSpin 20s linear infinite reverse; }
+  #curtain-outer-ring::before {
+    content:''; position:absolute; top:50%; left:-2px;
+    width:2px; height:1px; background:rgba(255,255,255,0.25);
+  }
+  #curtain-outer-ring::after {
+    content:''; position:absolute; top:-2px; left:50%;
+    width:1px; height:2px; background:rgba(255,255,255,0.25);
   }
   #curtain-enter {
-    margin-top: 2.5rem;
+    margin-top: 2rem;
     font-family: 'Courier Prime', monospace;
-    font-size: 0.75rem;
-    color: rgba(200, 150, 46, 0.6);
+    font-size: 0.58rem;
+    color: rgba(255,255,255,0.18);
     letter-spacing: 0.35em;
     text-transform: uppercase;
     cursor: pointer;
-    border: 1px solid rgba(200, 150, 46, 0.3);
-    padding: 0.6rem 1.8rem;
-    transition: all 0.3s;
-    animation: fadeInText 3s ease forwards;
+    transition: color 0.4s;
+    animation: fadeInText 3.5s ease forwards;
   }
-  #curtain-enter:hover { color: var(--gold); border-color: var(--gold); background: rgba(200,150,46,0.05); }
-
+  #curtain-gear-wrap:hover ~ #curtain-enter { color: rgba(255,255,255,0.6); }
+  #curtain-gear-wrap.opening #curtain-snake {
+    animation: snakeDissolve 1.6s ease-in-out forwards !important;
+  }
+  #curtain-gear-wrap.opening #curtain-outer-ring {
+    animation: ringOut 1s ease-out forwards !important;
+  }
+  @keyframes snakeDissolve {
+    0%   { transform:rotate(0deg) scale(1); opacity:1; }
+    45%  { transform:rotate(220deg) scale(1.1); opacity:0.8; filter:brightness(1.6); }
+    100% { transform:rotate(460deg) scale(0.03); opacity:0; filter:brightness(5); }
+  }
+  @keyframes ringOut { to { transform:scale(2.8); opacity:0; } }
   @keyframes fadeInText { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
 
   /* ROOM */
@@ -1834,8 +1875,13 @@
   <video id="intro-video" src="room_intro.mp4" playsinline style="width:100%;height:100%;object-fit:cover;"></video>
 </div>
 <div id="curtain">
-  <p id="curtain-text">Bianca Maria Boninsegni<br><span style="font-style:normal; letter-spacing:0.35em; font-size:0.75em; opacity:0.6;">Portfolio</span></p>
-  <div id="curtain-enter" onclick="enterRoom()">Enter</div>
+  <p id="curtain-text">Bianca Maria Boninsegni</p>
+  <div id="curtain-gear-wrap" onclick="enterRoomGear()">
+    <img id="curtain-snake" src="img/ouroboros.png" alt="auryn">
+    <div id="curtain-outer-ring"></div>
+  </div>
+  <div id="curtain-enter">click to enter</div>
+  <audio id="clockwork-audio" src="audio/clockwork.mp3" loop></audio>
 </div>
 
 <!-- ROOM -->
@@ -3493,7 +3539,38 @@ function repositionHotspots() {
 
 window.addEventListener('resize', repositionHotspots);
 
+function enterRoomGear() {
+  var gear = document.getElementById('curtain-gear-wrap');
+  if (gear.classList.contains('opening')) return;
+  var audio = document.getElementById('clockwork-audio');
+  if (audio) { audio.pause(); }
+  gear.classList.add('opening');
+  var ctx = window._cwAudioCtx;
+  if (ctx) {
+    var interval = 180; var count = 0;
+    function accel() {
+      var buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate*0.05), ctx.sampleRate);
+      var d = buf.getChannelData(0);
+      for(var i=0;i<d.length;i++){var t=i/ctx.sampleRate;d[i]=Math.exp(-t*80)*(Math.random()*2-1)*0.35;}
+      var src=ctx.createBufferSource(); src.buffer=buf;
+      var g=ctx.createGain(); g.gain.value=0.6;
+      src.connect(g); g.connect(ctx.destination); src.start();
+      count++; interval=Math.max(25,interval-14);
+      if(count<14) setTimeout(accel,interval);
+    }
+    accel();
+  }
+  setTimeout(function() {
+    document.getElementById('curtain').classList.add('fade-out');
+    _doEnterRoom();
+    setTimeout(function(){ document.getElementById('curtain').style.display='none'; }, 1400);
+  }, 1600);
+}
+
 function enterRoom() {
+  _startGearAnimation();
+  var enterBtn = document.getElementById('curtain-enter');
+  if (enterBtn) { enterBtn.style.display = 'none'; }
   // Mostra video intro
   var wrap = document.getElementById('intro-video-wrap');
   var vid = document.getElementById('intro-video');
@@ -3513,6 +3590,31 @@ function enterRoom() {
   document.getElementById('curtain').classList.add('fade-out');
   setTimeout(() => document.getElementById('curtain').style.display = 'none', 800);
 }
+function _initCurtainAudio() {}
+function _startGearAnimation() {
+  var snake = document.getElementById('curtain-snake');
+  var ring = document.getElementById('curtain-outer-ring');
+  var audio = document.getElementById('clockwork-audio');
+  if (snake) snake.classList.add('spinning');
+  if (ring) ring.classList.add('spinning');
+  if (audio) {
+    window._cwAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audio.volume = 0.35;
+    audio.play().catch(function(){});
+  }
+  var gear = document.getElementById('curtain-gear-wrap');
+  if (gear) {
+    gear.addEventListener('mouseenter', function(){
+      if (snake) snake.style.animationDuration = '10s';
+      if (audio) audio.playbackRate = 1.6;
+    });
+    gear.addEventListener('mouseleave', function(){
+      if (snake) snake.style.animationDuration = '20s';
+      if (audio) audio.playbackRate = 1.0;
+    });
+  }
+}
+
 function _doEnterRoom() {
   window.dispatchEvent(new Event('roomEntered'));
   document.getElementById('curtain').classList.add('fade-out');
