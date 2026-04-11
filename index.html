@@ -64,8 +64,8 @@
     border-radius: 50%;
     animation: none;
   }
-  #curtain-snake.spinning { animation: gearSpin 20s linear infinite; }
-  #curtain-gear-wrap:hover #curtain-snake.spinning { animation-duration: 11s; }
+  #curtain-snake.spinning { animation: gearSpin 8s linear infinite; }
+  #curtain-gear-wrap:hover #curtain-snake.spinning { animation-duration: 5s; }
   @keyframes gearSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
   #curtain-outer-ring {
     position: absolute; inset: -16px; border-radius: 50%;
@@ -73,7 +73,7 @@
     animation: none;
     pointer-events: none;
   }
-  #curtain-outer-ring.spinning { animation: gearSpin 20s linear infinite reverse; }
+  #curtain-outer-ring.spinning { animation: gearSpin 8s linear infinite reverse; }
   #curtain-outer-ring::before {
     content:''; position:absolute; top:50%; left:-2px;
     width:2px; height:1px; background:rgba(255,255,255,0.25);
@@ -3561,9 +3561,25 @@ function enterRoomGear() {
     accel();
   }
   setTimeout(function() {
-    document.getElementById('curtain').classList.add('fade-out');
-    _doEnterRoom();
-    setTimeout(function(){ document.getElementById('curtain').style.display='none'; }, 1400);
+    var curtain = document.getElementById('curtain');
+    if (curtain) curtain.style.display = 'none';
+    var wrap = document.getElementById('intro-video-wrap');
+    var vid = document.getElementById('intro-video');
+    if (wrap && vid) {
+      wrap.style.display = 'block';
+      vid.play();
+      vid.onended = function() {
+        var fade = document.getElementById('intro-fade');
+        if (fade) { fade.style.display='block'; requestAnimationFrame(function(){ fade.style.opacity='1'; }); }
+        setTimeout(function(){
+          wrap.style.display='none';
+          _doEnterRoom();
+          setTimeout(function(){ if(fade){fade.style.opacity='0'; setTimeout(function(){fade.style.display='none';},600);} },100);
+        }, 650);
+      };
+    } else {
+      _doEnterRoom();
+    }
   }, 1600);
 }
 
@@ -3606,11 +3622,11 @@ function _startGearAnimation() {
   var gear = document.getElementById('curtain-gear-wrap');
   if (gear) {
     gear.addEventListener('mouseenter', function(){
-      if (snake) snake.style.animationDuration = '10s';
+      if (snake) snake.style.animationDuration = '4s';
       if (audio) audio.playbackRate = 1.6;
     });
     gear.addEventListener('mouseleave', function(){
-      if (snake) snake.style.animationDuration = '20s';
+      if (snake) snake.style.animationDuration = '8s';
       if (audio) audio.playbackRate = 1.0;
     });
   }
