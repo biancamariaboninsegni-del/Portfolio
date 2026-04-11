@@ -3545,6 +3545,10 @@ function enterRoomGear() {
   var audio = document.getElementById('clockwork-audio');
   if (audio) { audio.pause(); }
   gear.classList.add('opening');
+  var snake = document.getElementById('curtain-snake');
+  var ring = document.getElementById('curtain-outer-ring');
+  if (snake) { snake.classList.remove('spinning'); snake.style.animation = 'snakeDissolve 1.6s ease-in-out forwards'; }
+  if (ring) { ring.classList.remove('spinning'); ring.style.animation = 'ringOut 1s ease-out forwards'; }
   var ctx = window._cwAudioCtx;
   if (ctx) {
     var interval = 180; var count = 0;
