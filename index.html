@@ -4602,7 +4602,7 @@ function startFLThree() {
     const bg = room.style.backgroundImage;
     if(bg && bg!=="none" && !img.src){
       const m=bg.match(/url(["']?([^"')]+)["']?)/);
-      if(m){img.src=m[1];room.style.backgroundImage="none";}
+      if(m){img.src=m[1];room.style.backgroundImage="none";img.onload=function(){repositionHotspots();};}
     }
   });
   obs.observe(room,{attributes:true,attributeFilter:["style"]});
