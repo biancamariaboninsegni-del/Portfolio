@@ -5181,7 +5181,7 @@ function initRainCanvas() {
     } else {
       toggle.textContent = '☀';
       
-      var pimg=document.getElementById('parallax-img');if(pimg){pimg.onload=function(){repositionHotspots();};pimg.src='room.png';}window._isDay=false; document.body.classList.remove('day-mode'); stopDustAnim();
+      var pimg=document.getElementById('parallax-img');if(pimg){pimg.onload=function(){repositionHotspots();};pimg.src='room.png';}window._isDay=false; document.body.classList.remove('day-mode'); if(typeof stopDustAnim==='function') stopDustAnim();
       var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'none';
 
