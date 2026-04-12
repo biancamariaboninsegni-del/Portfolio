@@ -3618,9 +3618,11 @@ function enterRoomGear() {
   if (snake) { snake.style.animation = 'snakeDissolve 2.5s ease-in-out forwards'; }
   if (ring) { ring.style.animation = 'ringOut 2s ease-out forwards'; }
   setTimeout(function() {
-    var curtain = document.getElementById('curtain');
-    if (curtain) curtain.style.display = 'none';
     _showWelcomeScreen();
+    setTimeout(function() {
+      var curtain = document.getElementById('curtain');
+      if (curtain) curtain.style.display = 'none';
+    }, 50);
   }, 2800);
 }
 
