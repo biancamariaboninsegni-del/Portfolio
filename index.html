@@ -3769,6 +3769,7 @@ function startWHAnimation() {
 function startWHCanvas() {
   // Canvas 2D fallback, animated black hole + white hole
   const canvas = document.getElementById('wh-canvas');
+  if (!canvas || canvas.offsetWidth === 0) { setTimeout(startWHCanvas, 80); return; }
   const ctx = canvas.getContext('2d');
   const W = canvas.offsetWidth, H = canvas.offsetHeight;
   canvas.width = W; canvas.height = H;
@@ -4001,6 +4002,7 @@ function startFLAnimation() {
 function startFLCanvas() {
   // Canvas 2D fallback, sphere passing through plane + rotating square
   const canvas = document.getElementById('fl-canvas');
+  if (!canvas || canvas.offsetWidth === 0) { setTimeout(startFLCanvas, 80); return; }
   const ctx = canvas.getContext('2d');
   const W = canvas.offsetWidth, H = canvas.offsetHeight;
   canvas.width = W; canvas.height = H;
