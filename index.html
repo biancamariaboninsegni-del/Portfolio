@@ -3696,6 +3696,8 @@ function _doEnterRoom() {
   document.getElementById('day-night-toggle').style.removeProperty('display'); document.getElementById('day-night-toggle').style.display = 'flex';
   var hb = document.getElementById('help-btn'); if(hb) hb.style.display = 'flex';
   // (moved to _doEnterRoom)
+  var birds = document.getElementById('birds-audio'); if (birds) { birds.pause(); birds.currentTime = 0; }
+  isDay = false; window._isDay = false;
   initRain();
   var pimg = document.getElementById("parallax-img"); if(pimg && pimg.complete){ repositionHotspots(); } else if(pimg){ pimg.onload = function(){ repositionHotspots(); }; } else { setTimeout(repositionHotspots, 150); }
   // One-time zone flash to reveal clickable areas
