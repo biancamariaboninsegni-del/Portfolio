@@ -1937,6 +1937,8 @@
   
 
 <!-- HOTSPOTS -->
+
+<canvas id="dust-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;display:none;"></canvas>
 <div class="hotspot" id="hs-dust" onclick="openBrownian()"></div>
 <div class="hotspot" id="hs-imac" data-label="Open desktop" onclick="openMac()"></div>
 <div class="hotspot" id="hs-lamp" data-label="Toggle light" onclick="toggleLamp()"></div>
@@ -5511,5 +5513,73 @@ function initRainCanvas() {
     <span class="icon">🧠</span>mind map
   </button>
 </div>
+
+// Dust particles animation
+(function(){
+  const canvas = document.getElementById('dust-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animId;
+
+  function resize(){
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function createParticles(){
+    particles = [];
+    for(let i=0;i<80;i++){
+      particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*1.8+0.4,
+        opacity: Math.random()*0.5+0.1,
+        vx: (Math.random()-0.5)*0.3,
+        vy: -Math.random()*0.4-0.1,
+        life: Math.random()*200+100
+      });
+    }
+  }
+
+  function animateDust(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      p.x += p.vx + Math.sin(Date.now()*0.001+p.y)*0.15;
+      p.y += p.vy;
+      p.life--;
+      if(p.y<0||p.life<=0){
+        p.y = canvas.height;
+        p.x = Math.random()*canvas.width;
+        p.life = Math.random()*200+100;
+      }
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(255,230,160,${p.opacity})`;
+      ctx.fill();
+    });
+    animId = requestAnimationFrame(animateDust);
+  }
+
+  function startDust(){
+    canvas.style.display='block';
+    resize();
+    createParticles();
+    animateDust();
+  }
+
+  function stopDust(){
+    canvas.style.display='none';
+    cancelAnimationFrame(animId);
+  }
+
+  // Toggle con day mode
+  const observer = new MutationObserver(()=>{
+    if(document.body.classList.contains('day-mode')) startDust();
+    else stopDust();
+  });
+  observer.observe(document.body,{attributes:true,attributeFilter:['class']});
+  if(document.body.classList.contains('day-mode')) startDust();
+  window.addEventListener('resize',()=>{resize();createParticles();});
+})();
 </body>
 </html>
