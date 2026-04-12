@@ -5168,7 +5168,7 @@ function initRainCanvas() {
       // Stop rain, play birds
       stopRain();
       var birds = document.getElementById('birds-audio');
-      if (birds) { birds.currentTime = 0; birds.play().catch(function(){}); }
+      if (birds) { birds.muted = false; birds.currentTime = 0; birds.play().catch(function(){}); }
 
       // Hide rain canvas
       var rainCanvas = document.getElementById('rain-canvas');
@@ -5187,7 +5187,7 @@ function initRainCanvas() {
 
       // Stop birds, play rain
       var birds = document.getElementById('birds-audio');
-      if (birds) { birds.pause(); birds.load(); }
+      if (birds) { birds.muted = true; birds.pause(); birds.load(); }
       stopRain();
       setTimeout(function(){ initRain(); }, 100);
 
