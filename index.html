@@ -5139,9 +5139,7 @@ function initRainCanvas() {
       if (catEl) catEl.style.filter = 'brightness(1.35) sepia(0.25) saturate(1.2)';
 
       // Stop rain, play birds
-      if (typeof rainAudio !== 'undefined' && rainAudio) {
-        rainAudio.pause(); rainAudio.currentTime = 0;
-      }
+      stopRain();
       var birds = document.getElementById('birds-audio');
       if (birds) { birds.currentTime = 0; birds.play().catch(function(){}); }
 
@@ -5163,9 +5161,7 @@ function initRainCanvas() {
       // Stop birds, play rain
       var birds = document.getElementById('birds-audio');
       if (birds) { birds.pause(); birds.currentTime = 0; }
-      if (typeof rainAudio !== 'undefined' && rainAudio) {
-        rainAudio.play().catch(function(){});
-      }
+      startRain();
 
       // Show rain canvas
       var rainCanvas = document.getElementById('rain-canvas');
