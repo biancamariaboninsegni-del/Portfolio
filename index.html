@@ -3057,8 +3057,10 @@ function tryDrawer(n) {
     msg.classList.add('show'); setTimeout(()=>msg.classList.remove('show'),2200); return;
   }
   document.getElementById(`modal-drawer${n}`).classList.add('open');
-  if (n===1) { startWHAnimation(); fadeDot('dot-drawer1'); }
-  if (n===2) { startFLAnimation(); fadeDot('dot-drawer2'); }
+  setTimeout(() => {
+    if (n===1) { startWHAnimation(); fadeDot('dot-drawer1'); }
+    if (n===2) { startFLAnimation(); fadeDot('dot-drawer2'); }
+  }, 120);
 }
 buildSudoku();
 
