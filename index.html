@@ -2917,12 +2917,14 @@ let rainAudio = null, rainOn = false;
 function initRain() {
   if (rainOn) return;
   try {
-    rainAudio = new Audio('storm.mp3');
-    rainAudio.loop = true;
+    if (!rainAudio) {
+      rainAudio = new Audio('storm.mp3');
+      rainAudio.loop = true;
+    }
+    rainAudio.currentTime = 0;
     rainAudio.volume = 0;
     rainAudio.play().then(() => {
       rainOn = true;
-      // Fade in over 4 seconds
       let vol = 0;
       const fadeIn = setInterval(() => {
         vol = Math.min(0.55, vol + 0.02);
