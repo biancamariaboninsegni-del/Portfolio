@@ -5185,12 +5185,8 @@ function initRainCanvas() {
 
       // Stop birds, play rain
       var birds = document.getElementById('birds-audio');
-      if (birds) {
-        var p = birds.play();
-        if (p !== undefined) { p.then(function(){ birds.pause(); birds.currentTime = 0; }).catch(function(){}); }
-        else { birds.pause(); birds.currentTime = 0; }
-      }
-      rainOn = false;
+      if (birds) { birds.pause(); birds.currentTime = 0; }
+      stopRain();
       initRain();
 
       // Show rain canvas
