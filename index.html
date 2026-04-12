@@ -3700,6 +3700,8 @@ function _doEnterRoom() {
   // (moved to _doEnterRoom)
   var birds = document.getElementById('birds-audio'); if (birds) { birds.pause(); birds.currentTime = 0; }
   isDay = false; window._isDay = false;
+  document.body.classList.remove('day-mode');
+  var dayToggle = document.getElementById('day-night-toggle'); if (dayToggle) dayToggle.textContent = '☀';
   initRain();
   var pimg = document.getElementById("parallax-img"); if(pimg && pimg.complete){ repositionHotspots(); } else if(pimg){ pimg.onload = function(){ repositionHotspots(); }; } else { setTimeout(repositionHotspots, 150); }
   // One-time zone flash to reveal clickable areas
