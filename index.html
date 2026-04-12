@@ -2042,7 +2042,7 @@
           <span class="folder-label">Sudoku</span>
         </div>
         <!-- Folder: Drawings -->
-        <div class="folder-icon" onclick="openModal('modal-drawings')" style="cursor:pointer;">
+        <div class="folder-icon" onclick="document.getElementById('modal-drawings').style.display='block'" style="cursor:pointer;">
           <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(220,80,150,0.15)" stroke="rgba(220,80,150,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(220,80,150,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(220,80,150,0.25)" stroke="rgba(220,80,150,0.4)" stroke-width="1"/></svg>
           <span class="folder-label">Drawings</span>
         </div>
@@ -5574,18 +5574,18 @@ function stopDustAnim(){
 }
 
   <!-- Modal: Drawings -->
-  <div id="modal-drawings" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; overflow-y:auto; padding:2rem 1rem;">
+  <div id="modal-drawings" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; overflow-y:auto; padding:2rem 1rem; display:none;">
     <div style="max-width:680px; margin:0 auto; background:#faf9f7; border-radius:4px; padding:2.5rem 2.8rem; position:relative; font-family:'Georgia',serif;">
       <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:2rem; border-bottom:1px solid rgba(0,0,0,0.08); padding-bottom:1rem;">
         <h2 style="font-family:'Inter',sans-serif; font-size:1.3rem; font-weight:400; letter-spacing:0.08em; color:#1a1a1a; margin:0;">Drawings</h2>
-        <span onclick="closeModal('modal-drawings')" style="cursor:pointer; font-size:0.8rem; color:#999; letter-spacing:0.1em;">close ×</span>
+        <span onclick="document.getElementById('modal-drawings').style.display='none'" style="cursor:pointer; font-size:0.8rem; color:#999; letter-spacing:0.1em;">close ×</span>
       </div>
 
       <!-- Horse -->
       <div style="display:flex; gap:1.6rem; align-items:flex-start; margin-bottom:2.2rem;">
         <img src="img/drawing_horse.jpeg" style="width:200px; flex-shrink:0; filter:grayscale(15%); border-radius:2px;" />
         <div>
-          <p style="font-size:0.9rem; color:#2c2c2c; line-height:1.75; margin:0;">Copied from Leonardo using the Forever Piuma Leonardo 500th Ethergraf — a wooden stylus with a metal tip that leaves a mark without ink. The trace comes from the metal itself against the paper, the same principle as silverpoint. I have been reading the Codex Leicester: A New Edition, Leonardo's scientific notebook on water, light, and the movement of the Earth. Drawing him felt like a continuation of that.</p>
+          <p style="font-size:0.9rem; color:#2c2c2c; line-height:1.75; margin:0;">Copied from Leonardo using the Forever Piuma Leonardo 500th Ethergraf — a wooden stylus with a metal tip that leaves a mark without ink. The trace comes from the metal itself against the paper, the same principle as silverpoint. A gift from my friends. I have been reading the Codex Leicester: A New Edition, Leonardo's scientific notebook on water, light, and the movement of the Earth. What draws me to Leonardo is how he thinks by analogy: the flow of rivers mapped onto the veins of the human body, the movement of water understood through the movement of air. Drawing him felt like a continuation of that.</p>
         </div>
       </div>
 
