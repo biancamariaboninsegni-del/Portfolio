@@ -5131,7 +5131,7 @@ function initRainCanvas() {
     if (!wrapper) return;
     var bubble = document.createElement('div');
     bubble.id = 'cat-bubble';
-    if (document.querySelector('.modal-backdrop.open')) return;
+    var anyModal = document.querySelector('.modal-backdrop.open') || Array.from(document.querySelectorAll('.modal-backdrop')).some(function(m){ return m.style.display === 'block' || m.style.display === 'flex'; }); if (anyModal) return;
     bubble.style.cssText = 'position:fixed;bottom:calc(28% + 10vh);right:3%;background:rgba(12,8,4,0.96);color:#e8d5a0;font-family:Georgia,serif;font-size:14px;line-height:1.7;padding:0;border-radius:6px;border:1px solid rgba(212,201,176,0.5);max-width:300px;min-width:220px;opacity:0;transition:opacity 0.4s;pointer-events:auto;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.6)';
     var hdr=document.createElement('div');hdr.style.cssText='display:flex;justify-content:space-between;align-items:center;padding:8px 12px 6px;border-bottom:1px solid rgba(212,201,176,0.25);';
     var nm=document.createElement('span');nm.textContent='Schrödinger';nm.style.cssText='font-family:"Courier New",monospace;font-size:11px;letter-spacing:0.15em;color:rgba(212,201,176,0.9);text-transform:uppercase;';
