@@ -5142,6 +5142,16 @@ function initRainCanvas() {
     setTimeout(function(){ bubble.style.opacity = '1'; }, 50);
   }
 
+  window.addEventListener('roomEntered', function() {
+    if (isDay) {
+      isDay = false;
+      toggle.textContent = '☀';
+      var birds = document.getElementById('birds-audio');
+      if (birds) { birds.pause(); birds.currentTime = 0; }
+      stopDustAnim();
+    }
+  });
+
   toggle.addEventListener('click', function(){
     isDay = !isDay;
     var room = document.getElementById('room');
