@@ -5529,8 +5529,8 @@ function startDustAnim(){
   canvas.style.height = '100%';
   canvas.style.pointerEvents = 'none';
   canvas.style.zIndex = '3';
-  canvas.width = canvas.offsetWidth || window.innerWidth;
-  canvas.height = canvas.offsetHeight || window.innerHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   const ctx = canvas.getContext('2d');
   const pts = Array.from({length:90}, ()=>({
     x: Math.random()*canvas.width,
