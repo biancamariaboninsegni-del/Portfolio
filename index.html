@@ -2041,6 +2041,11 @@
           <svg viewBox="0 0 52 52" fill="none"><rect x="6" y="6" width="40" height="40" rx="2" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/><line x1="6" y1="19" x2="46" y2="19" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="6" y1="33" x2="46" y2="33" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="19" y1="6" x2="19" y2="46" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="33" y1="6" x2="33" y2="46" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>
           <span class="folder-label">Sudoku</span>
         </div>
+        <!-- Folder: Drawings -->
+        <div class="folder-icon" onclick="openModal('modal-drawings')" style="cursor:pointer;">
+          <svg viewBox="0 0 52 52" fill="none"><rect x="4" y="14" width="44" height="32" rx="3" fill="rgba(220,80,150,0.15)" stroke="rgba(220,80,150,0.5)" stroke-width="1.5"/><path d="M4 20h44" stroke="rgba(220,80,150,0.3)" stroke-width="1"/><path d="M4 18l8-4h10l3 4" fill="rgba(220,80,150,0.25)" stroke="rgba(220,80,150,0.4)" stroke-width="1"/></svg>
+          <span class="folder-label">Drawings</span>
+        </div>
         <!-- Sudoku game -->
         <div id="sudoku-container" style="grid-column: 1 / -1;">
           <div id="sudoku-grid"></div>
@@ -5567,5 +5572,50 @@ function stopDustAnim(){
   if(canvas) canvas.style.display = 'none';
   if(window._dustAnim){ cancelAnimationFrame(window._dustAnim); window._dustAnim=null; }
 }
+
+  <!-- Modal: Drawings -->
+  <div id="modal-drawings" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; overflow-y:auto; padding:2rem 1rem;">
+    <div style="max-width:680px; margin:0 auto; background:#faf9f7; border-radius:4px; padding:2.5rem 2.8rem; position:relative; font-family:'Georgia',serif;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:2rem; border-bottom:1px solid rgba(0,0,0,0.08); padding-bottom:1rem;">
+        <h2 style="font-family:'Inter',sans-serif; font-size:1.3rem; font-weight:400; letter-spacing:0.08em; color:#1a1a1a; margin:0;">Drawings</h2>
+        <span onclick="closeModal('modal-drawings')" style="cursor:pointer; font-size:0.8rem; color:#999; letter-spacing:0.1em;">close ×</span>
+      </div>
+
+      <!-- Horse -->
+      <div style="display:flex; gap:1.6rem; align-items:flex-start; margin-bottom:2.2rem;">
+        <img src="img/drawing_horse.jpeg" style="width:200px; flex-shrink:0; filter:grayscale(15%); border-radius:2px;" />
+        <div>
+          <p style="font-size:0.9rem; color:#2c2c2c; line-height:1.75; margin:0;">Copied from Leonardo using the Forever Piuma Leonardo 500th Ethergraf — a wooden stylus with a metal tip that leaves a mark without ink. The trace comes from the metal itself against the paper, the same principle as silverpoint. I have been reading the Codex Leicester: A New Edition, Leonardo's scientific notebook on water, light, and the movement of the Earth. Drawing him felt like a continuation of that.</p>
+        </div>
+      </div>
+
+      <!-- Butterflies -->
+      <img src="img/drawing_butterflies.jpeg" style="width:100%; border-radius:2px; margin-bottom:0.5rem; filter:grayscale(10%);" />
+      <p style="font-size:0.75rem; color:#aaa; font-family:'Courier Prime',monospace; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:2.2rem;">Farfalle · from a 1960s entomology volume</p>
+
+      <!-- Morandi + Portrait side by side -->
+      <div style="display:flex; gap:1.2rem; margin-bottom:2.2rem;">
+        <div style="flex:1;">
+          <img src="img/drawing_morandi.jpeg" style="width:100%; border-radius:2px; filter:grayscale(10%);" />
+          <p style="font-size:0.75rem; color:#aaa; font-family:'Courier Prime',monospace; letter-spacing:0.1em; text-transform:uppercase; margin-top:0.4rem;">After Morandi</p>
+        </div>
+        <div style="flex:1;">
+          <img src="img/drawing_portrait.jpeg" style="width:100%; border-radius:2px; filter:grayscale(10%);" />
+          <p style="font-size:0.75rem; color:#aaa; font-family:'Courier Prime',monospace; letter-spacing:0.1em; text-transform:uppercase; margin-top:0.4rem;">Portrait study</p>
+        </div>
+      </div>
+
+      <!-- New Orleans -->
+      <img src="img/drawing_neworleans.jpeg" style="width:100%; border-radius:2px; margin-bottom:0.5rem; filter:grayscale(10%);" />
+      <p style="font-size:0.75rem; color:#aaa; font-family:'Courier Prime',monospace; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:2.2rem;">St. Charles · New Orleans, 2022</p>
+
+      <!-- Non dominant hand -->
+      <div style="display:flex; gap:1.6rem; align-items:flex-start; margin-bottom:1rem;">
+        <img src="img/drawing_nondominant.jpeg" style="width:180px; flex-shrink:0; filter:grayscale(10%); border-radius:2px;" />
+        <p style="font-size:0.9rem; color:#2c2c2c; line-height:1.75; margin:0; font-style:italic;">When you move abroad, things might be out of the usual — like using a different hand to write.</p>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
