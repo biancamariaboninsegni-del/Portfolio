@@ -4959,6 +4959,7 @@ function initRainCanvas() {
 
   function showCatMessage(msg, duration) {
     duration = duration || 6000;
+    var anyModal = document.querySelector('.modal-backdrop.open') || Array.from(document.querySelectorAll('.modal-backdrop')).some(function(m){ return m.style.display === 'block' || m.style.display === 'flex'; }); if (anyModal) return;
     var wrapper = document.getElementById('gatto-wrapper');
     if (!wrapper) return;
     
