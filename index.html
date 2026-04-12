@@ -5134,7 +5134,7 @@ function initRainCanvas() {
     if (isDay) {
       toggle.textContent = '🌙';
       
-      var pimg=document.getElementById('parallax-img');if(pimg){pimg.onload=function(){repositionHotspots();setTimeout(function(){posHS('hs-luna',0.590,0.62,0.022,0.065);},100);};pimg.src='Background_Daylight_withperfume.png';}window._isDay=true; document.body.classList.add('day-mode'); setTimeout(startDustAnim, 500);
+      try{var pimg=document.getElementById('parallax-img');if(pimg){pimg.onload=function(){if(typeof repositionHotspots==='function')repositionHotspots();setTimeout(function(){if(typeof posHS==='function')posHS('hs-luna',0.590,0.62,0.022,0.065);},100);};pimg.src='Background_Daylight_withperfume.png';}window._isDay=true; document.body.classList.add('day-mode'); setTimeout(function(){if(typeof startDustAnim==='function')startDustAnim();}, 500);}catch(e){}
       var catEl = document.getElementById('schrodinger');
       if (catEl) catEl.style.filter = 'brightness(1.35) sepia(0.25) saturate(1.2)';
 
