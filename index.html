@@ -5149,8 +5149,8 @@ function initRainCanvas() {
       isDay = false;
       toggle.textContent = '☀';
       var birds = document.getElementById('birds-audio');
-      if (birds) { birds.pause(); birds.currentTime = 0; }
-      stopDustAnim();
+      if (birds) { birds.pause(); birds.load(); }
+      if (typeof stopDustAnim === 'function') stopDustAnim();
     }
   });
 
@@ -5187,7 +5187,7 @@ function initRainCanvas() {
 
       // Stop birds, play rain
       var birds = document.getElementById('birds-audio');
-      if (birds) { birds.pause(); birds.currentTime = 0; birds.src = birds.src; }
+      if (birds) { birds.pause(); birds.load(); }
       stopRain();
       setTimeout(function(){ initRain(); }, 100);
 
