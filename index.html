@@ -4820,7 +4820,7 @@ function startFLThree() {
       if(dir===1&&pos>70){phase="sitting";pt=0;cat.src=poses.sitting;}
       else if(dir===-1&&pos<5){phase="resting";pt=0;cat.src=poses.resting;}
     }else if(phase==="sitting"&&pt>4000){phase="walking";pt=0;dir=-1;cat.src=poses.walking;}
-    else if(phase==="resting"&&pt>5000){phase="sleeping";pt=0;cat.src=poses.sleeping;}
+    else if(phase==="resting"&&pt>5000){phase="sleeping";pt=0;cat.src="scat_sleep.gif";}
     else if(phase==="sleeping"&&pt>8000){phase="walking";pt=0;dir=1;pos=-12;cat.style.left=pos+"%";cat.src=poses.walking;}
     requestAnimationFrame(u);
   }
