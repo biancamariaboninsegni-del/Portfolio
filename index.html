@@ -3125,7 +3125,18 @@ function buildExpGalleries() {
       const img = document.createElement('img');
       img.src = item.src;
       img.alt = item.caption || '';
-      if(item.style){ img.style.cssText = item.style; wrap.style.background='none'; wrap.style.boxShadow='none'; }
+      if(item.style){ 
+        img.style.cssText = item.style; 
+        wrap.style.background='none'; 
+        wrap.style.boxShadow='none';
+        wrap.style.border='none';
+        wrap.style.padding='0';
+        wrap.style.margin='0 auto';
+        wrap.style.display='flex';
+        wrap.style.justifyContent='center';
+        wrap.style.width='100%';
+        wrap.style.minHeight='unset';
+      }
 
       const caption = document.createElement('div');
       caption.className = 'exp-photo-caption';
