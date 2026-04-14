@@ -703,7 +703,7 @@
 
   /* Experience image gallery */
   /* Experience photo, full bleed, cinematic */
-  .exp-photo-wrap { position:relative; cursor:pointer; margin-bottom:2rem; background:none !important; box-shadow:none !important; border:none !important; padding:0 !important; }
+  .exp-photo-wrap { position:relative; cursor:pointer; margin-bottom:0.2rem; background:none !important; box-shadow:none !important; border:none !important; padding:0 !important; }
   .exp-photo-wrap::after {
     content: '';
     position: absolute;
@@ -718,7 +718,7 @@
     transform: scale(1.025);
     filter: sepia(0) contrast(1.06) saturate(1.0);
   }
-  .exp-photo-caption { font-family:'EB Garamond',Georgia,serif; font-size:0.82rem; font-style:italic; color:#555; padding:0.4rem 0 1.2rem 0; background:transparent !important; text-align:left; display:block; }
+  .exp-photo-caption { font-family:'EB Garamond',Georgia,serif; font-size:0.75rem; font-style:italic; color:#999; padding:0.6rem 0 2rem 0; background:transparent !important; text-align:left; display:block; letter-spacing:0.01em; }
   .exp-photo-zoom-hint { display:none; }
   .exp-photo-wrap:hover .exp-photo-zoom-hint { display:none; }
   /* keep old .exp-gallery for compat */
@@ -5390,7 +5390,7 @@ function initRainCanvas() {
       <p style="color:#222222;">Once the stimulus is received, the brain decodes the message directed to the <strong>olfactory bulb</strong>, passing through the hypothalamus — the part responsible for our spontaneous behaviors — and provokes a hedonic reaction that leads to the immediate evocation of images and memories, before the neocortex intervenes to rationally identify the essences.</p>
 
       <img src="img/BANNER.png" alt="" class="pm-banner" />
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin:1.5rem 0;">
+      <div style="display:flex;flex-direction:column;gap:2rem;margin:2rem 0;">
         <img src="img/perfume_1.jpeg" style="width:100%;height:auto;display:block;" />
         <img src="img/perfume_2.jpeg" style="width:100%;height:auto;display:block;" />
         <img src="img/perfume_3.jpeg" style="width:100%;height:auto;display:block;" />
