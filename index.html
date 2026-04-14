@@ -704,14 +704,7 @@
   /* Experience image gallery */
   /* Experience photo, full bleed, cinematic */
   .exp-photo-wrap { position:relative; cursor:pointer; margin-bottom:0.2rem; background:none !important; box-shadow:none !important; border:none !important; padding:0 !important; }
-  .exp-photo-wrap::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(20,10,0,0.55) 0%, transparent 55%);
-    pointer-events: none;
-    transition: opacity 0.4s;
-  }
+  .exp-photo-wrap::after { display:none; }
   .exp-photo-wrap:hover::after { opacity: 0.7; }
   .exp-photo-wrap img { width:100%; height:auto; display:block; object-fit:unset; }
   .exp-photo-wrap:hover img {
