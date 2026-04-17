@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/ambient-effects.js"></script>
     <link rel="icon" type="image/png" href="img/BMB_monogram.png">
     <link rel="apple-touch-icon" href="img/BMB_monogram.png">
 <meta charset="UTF-8">
@@ -1383,8 +1385,8 @@
 
   #journal-nola p, #journal-geneva p,
   #journal-nola div, #journal-geneva div,
-  #exp-campari p, #exp-richemont p, #exp-christies p, #exp-newOrleans p,
-  #exp-campari div, #exp-richemont div, #exp-christies div, #exp-newOrleans div,
+  #exp-campari p, #exp-richemont p, #exp-christies p,
+  #exp-campari div, #exp-richemont div, #exp-christies div,
   .mac-body p, .mac-body div, .mac-body span, .mac-body li {
     color: #1a1a1a !important;
     font-style: normal !important;
@@ -1839,7 +1841,7 @@
   align-items: center;
   text-decoration: none;
 }
-  /* Christie's experience gallery - 2 foto eleganti */
+  /* Christie's experience gallery - 3 foto eleganti */
   #exp-christies-gallery {
     display: flex;
     gap: 1rem;
@@ -1847,7 +1849,7 @@
   }
   #exp-christies-gallery .gallery-item {
     flex: 1;
-    max-width: 200px;
+    max-width: 160px;
   }
   #exp-christies-gallery .gallery-item img {
     width: 100%;
@@ -1859,6 +1861,8 @@
   }
 
 </style>
+<link rel="stylesheet" href="css/main.css">
+<script src="js/ambient-effects.js"></script>
 </head>
 <body>
 
@@ -2105,7 +2109,6 @@
         <span class="journal-tab exp-tab active" onclick="switchExp('campari', this)">Campari</span>
         <span class="journal-tab exp-tab" onclick="switchExp('richemont', this)">Richemont</span>
         <span class="journal-tab exp-tab" onclick="switchExp('christies', this)">Christie's</span>
-        <span class="journal-tab exp-tab" onclick="switchExp('newOrleans', this)">New Orleans</span>
       </div>
       <div id="exp-campari" class="journal-entry active">
         <div class="journal-date">03/2025, 09/2025 · Milan, Italy</div>
@@ -2145,22 +2148,12 @@
         <p>In the Jewelry Department at Christie's, I supported the <strong>"Jewels & Watches: La Dolce Vita"</strong> auction, which achieved €1.77M in total sales. My contribution centred on coordinating professional photo shoots to create the premium digital assets and promotional materials necessary for such an event.</p>
         <p style="margin-top:1rem;">I conducted deep-dive market intelligence research into <strong>High-Net-Worth Individual behaviour</strong> and luxury trends to inform targeted communication strategies, enforcing uncompromising premium standards across all client-facing touchpoints and digital catalogs.</p>
         <div id="exp-christies-gallery" class="exp-gallery">
+    <div class="gallery-item" onclick="openLightbox(this, '')"><img src="works/christies/cs6.webp" alt="Christie's venue"></div>
     <div class="gallery-item" onclick="openLightbox(this, '')"><img src="works/christies/cs5.webp" alt="Diamond necklace"></div>
     <div class="gallery-item" onclick="openLightbox(this, '')"><img src="works/christies/csdragon.webp" alt="Cartier dragon"></div>
 </div>
       </div>
 
-      <div id="exp-newOrleans" class="journal-entry">
-        <div class="journal-date">01/2023, 05/2023 · New Orleans, Louisiana</div>
-        <p style="font-weight:500; margin-bottom:0.8rem;">Exchange Semester · Loyola University New Orleans</p>
-        <p>During my semester at Loyola University New Orleans, I maintained a 4.0/4.0 GPA, utilizing the experience as a strategic laboratory to bridge heritage storytelling with scalable business models.</p>
-        <p style="margin-top:1rem;">In my Entrepreneurship class, I learned something Americans are truly masters of: the art of selling a product. Each of us had to develop a product based on a need we felt was “extremely necessary” at that moment. Mine? I spent my entire first month sick because my dormitory was a constant 18°C. My roommate even had a private AC unit, so I was literally surrounded. I tried to turn up the thermostat every chance I got, but it was four against one and I ended up sleeping in a sweater. I am convinced our Italian bodies just aren’t built for that kind of cold.</p>
-        <p style="margin-top:1rem;">Naturally, I could only think of one thing: I hate AC. I ended up producing a jingle with the help of one of my roommates from Maryland who was a music major. We set the jingle to the tune of John Paul Young: <em>“Hate is in the AC, everywhere I look around, Hate is in the AC, every car I get to ride... And I don’t know if I’m being chilly, Don’t know if I’ll survive...”</em> I invented a smart air conditioning that, based on your vital and environmental parameters, would change the air in the room.</p>
-        <p style="margin-top:1rem;">My classmates did the same, though they were even more talented. They would start their presentations with true acting skills, pretending to have lost something and searching their pockets until a friend entered the scene to present the “product of the century.” You would immediately want to buy it. Between the bright colors, the packages, and the slogans, I must say I learned a lot about their way of communicating and turning everything into an experience. Even my professor was a true performer. One day, he asked us: “What do you think about the budgeting assignment on Excel?” Someone in my class replied, “First I was afraid...” and the professor immediately cut him off, singing along to himself: <em>“First I was afraid, I was petrified!”</em></p>
-        <p style="margin-top:1rem;">By integrating Lean Startup principles, Design Thinking, and the Jobs-to-be-Done framework, I moved beyond theory into the pragmatic validation of new ventures. This analytical focus was balanced by the History of Modern Art, where I explored the power of social messaging through the work of Jacob Lawrence, and the History of Cinema, where I analyzed New Orleans as a sophisticated narrative asset. Examining location branding in productions like The Curious Case of Benjamin Button, American Horror Story: Coven, and The Originals provided a firsthand look at how cultural capital is transformed into global media value.</p>
-        <p style="margin-top:1rem;">The result is a professional profile grounded in economic logic and strategic frameworks, yet driven by a pursuit of aesthetic and cultural excellence.</p>
-        <div id="exp-newOrleans-gallery" class="exp-gallery"></div>
-      </div>
     </div>
   </div>
 </div>
@@ -3098,7 +3091,7 @@ const expImages = {
 };
 
 function buildExpGalleries() {
-  ['campari','richemont','christies','newOrleans'].forEach(key => {
+  ['campari','richemont','christies'].forEach(key => {
     const container = document.getElementById(`exp-${key}-gallery`);
     if (!container) return;
     const items = expImages[key] || [];
@@ -5628,6 +5621,7 @@ function initRainCanvas() {
 
 
 
+<script>
 // Dust particles animation v2
 window._dustAnim = null;
 function startDustAnim(){
@@ -5676,6 +5670,7 @@ function stopDustAnim(){
   if(canvas) canvas.style.display = 'none';
   if(window._dustAnim){ cancelAnimationFrame(window._dustAnim); window._dustAnim=null; }
 }
+</script>
 
   <!-- Modal: Drawings -->
   <div id="modal-drawings" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; overflow-y:auto; padding:2rem 1rem; display:none;">
