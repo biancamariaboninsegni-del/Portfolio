@@ -2227,25 +2227,266 @@
 
 <!-- ===== BASEBALL MODAL ===== -->
 <div class="modal-backdrop" id="modal-baseball">
-  <div class="parchment-window" style="max-width:600px;">
+  <div class="parchment-window" style="max-width:900px;">
     <div class="parchment-header">
       <span class="parchment-title">Games I love</span>
       <span class="parchment-close" onclick="closeModal('modal-baseball')">close ×</span>
     </div>
     <div class="parchment-body">
       <video src="img/baseball.mp4" autoplay loop muted playsinline style="width:100%;border-radius:4px;margin-bottom:1.8rem;object-fit:cover;max-height:200px;"></video>
-      <p>I knew absolutely nothing about sport. Not a single game of football in my life, basketball only because my family is devoted to Fortitudo. My only memory of baseball before New Orleans was the scene in Twilight — the one played during a thunderstorm, with Supermassive Black Hole by Muse pounding in the background. Which, in retrospect, is not a bad introduction to anything.</p>
+
+      <p>I knew absolutely nothing about sport. Not a single game of football in my life, basketball only because my family is devoted to Fortitudo. My only memory of baseball before New Orleans was the scene in Twilight, the one played during a thunderstorm, with Supermassive Black Hole by Muse pounding in the background. Which, in retrospect, is not a bad introduction to anything.</p>
       <p>Then I arrived in Louisiana and everything changed.</p>
-      <p>What struck me immediately was the structure of it. Baseball is, almost uniquely among major sports, a game that asks the same person to be good at two completely different things — batting and fielding, offense and defense. You cannot delegate. You cannot specialise into comfort. Every player must hold both halves of the game.</p>
-      <p>And then there is the patience. Baseball rewards waiting. You stand at the plate and you wait for the right pitch, and if you swing too early or too late, it does not matter how much force you brought — the result is the same. Timing is everything. Rushing is always a mistake.</p>
+      <p>What struck me immediately was the structure of it. Baseball is, almost uniquely among major sports, a game that asks the same person to be good at two completely different things: batting and fielding, offense and defense. You cannot delegate. You cannot specialise into comfort. Every player must hold both halves of the game.</p>
+      <p>And then there is the patience. Baseball rewards waiting. You stand at the plate and you wait for the right pitch, and if you swing too early or too late, it does not matter how much force you brought. The result is the same. Timing is everything. Rushing is always a mistake.</p>
       <p>There is also something almost philosophical about failure being built into the structure of the game. The best batters in history fail seven times out of ten. The sport does not pretend otherwise. It simply asks you to come back to the plate.</p>
       <p>I came back to the plate many times that semester. I did not always hit.</p>
-      <p>These days I find myself saying it often — <em>"I don't play baseball, but I've hit a home run"</em> — when something good happens. A door opens, a conversation goes somewhere unexpected, a project lands. It has become the phrase I use for when life surprises me in the right direction.</p>
+      <p>These days I find myself saying it often: <em>"I don't play baseball, but I've hit a home run"</em> — when something good happens. A door opens, a conversation goes somewhere unexpected, a project lands. It has become the phrase I use for when life surprises me in the right direction.</p>
       <p>I came back from Louisiana with one thing I wanted to give someone.</p>
-      <p>When Mulan returns from war, she gives her father the sword of Shan Yu and the Emperor's crest. My father was not sitting under a cherry tree — he was at a computer. I did not have a sword. But I had a baseball.</p>
+      <p>When Mulan returns from war, she gives her father the sword of Shan Yu and the Emperor's crest. My father was not sitting under a cherry tree. He was at a computer. I did not have a sword. But I had a baseball.</p>
+
+      <!-- GIF Moneyball -->
+      <div style="margin:2rem 0;text-align:center;">
+        <img src="URL_DELLA_GIF" alt="Moneyball" style="width:100%;max-width:500px;border-radius:4px;opacity:0.92;" />
+        <p style="font-family:'Courier Prime',monospace;font-size:0.6rem;color:rgba(42,31,14,0.4);letter-spacing:0.12em;margin-top:0.5rem;text-transform:uppercase;">Moneyball, 2011 · dir. Bennett Miller</p>
+      </div>
+
+      <!-- Charts section -->
+      <div id="baseball-charts-section" style="background:#eeebe4;border-radius:4px;padding:2rem 1.5rem;margin-top:1.5rem;font-family:'Plus Jakarta Sans',sans-serif;">
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #1a1a1a;padding-bottom:0.5rem;margin-bottom:2.5rem;flex-wrap:wrap;gap:0.4rem;">
+          <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#1a1a1a;">Baseball · Four studies in data</span>
+          <span style="font-size:0.62rem;color:#888;">Baseball Reference · M. Lewis (2003) · R.E. Smith, UW · Psychological Science</span>
+        </div>
+
+        <!-- Fig 01 -->
+        <div class="bb-block" id="bb1" style="margin-bottom:3.5rem;opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;">
+          <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#999;margin-bottom:0.4rem;">Fig. 01</p>
+          <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:0.3rem;">The best batters in history fail seven times out of ten</p>
+          <p style="font-size:0.76rem;color:#555;margin-bottom:1.2rem;line-height:1.5;">Career batting averages, all-time greats vs. 2023 MLB average.</p>
+          <div style="font-size:0.6rem;color:#aaa;font-weight:600;display:flex;justify-content:space-between;margin-left:120px;margin-bottom:5px;"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+          <div id="bb-dots"></div>
+          <p style="font-size:0.6rem;color:#aaa;margin-top:0.6rem;font-style:italic;">Baseball Reference, career statistics.</p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid #d0cdc6;margin:3rem 0;">
+
+        <!-- Fig 02 -->
+        <div class="bb-block" id="bb2" style="margin-bottom:3.5rem;opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;">
+          <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#999;margin-bottom:0.4rem;">Fig. 02</p>
+          <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:0.3rem;">Oakland, 2002 — 103 wins on a $40M budget</p>
+          <p style="font-size:0.76rem;color:#555;margin-bottom:1.2rem;line-height:1.5;">MLB team payroll vs. season wins. The A's matched the Yankees at less than a third of the cost.</p>
+          <div style="position:relative;width:100%;height:300px;"><canvas id="bb-chart2" role="img" aria-label="Scatter: Oakland $40M 103W, Yankees $126M 103W."></canvas></div>
+          <p style="font-size:0.6rem;color:#aaa;margin-top:0.6rem;font-style:italic;">Baseball Reference · M. Lewis, Moneyball (2003).</p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid #d0cdc6;margin:3rem 0;">
+
+        <!-- Fig 03 -->
+        <div class="bb-block" id="bb3" style="margin-bottom:3.5rem;opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;">
+          <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#999;margin-bottom:0.4rem;">Fig. 03</p>
+          <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:0.3rem;">Self-confidence predicts a long career better than physical talent</p>
+          <p style="font-size:0.76rem;color:#555;margin-bottom:1.2rem;line-height:1.5;">Pearson r correlations between psychological traits and MLB career longevity.</p>
+          <div style="position:relative;width:100%;height:230px;"><canvas id="bb-chart3" role="img" aria-label="Self-confidence r=0.68 leads. Physical talent r=0.38 lowest."></canvas></div>
+          <p style="font-size:0.6rem;color:#aaa;margin-top:0.6rem;font-style:italic;">Smith, R.E. · University of Washington.</p>
+        </div>
+
+        <hr style="border:none;border-top:1px solid #d0cdc6;margin:3rem 0;">
+
+        <!-- Fig 04 -->
+        <div class="bb-block" id="bb4" style="opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;">
+          <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#999;margin-bottom:0.4rem;">Fig. 04</p>
+          <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:0.3rem;">Watching the ball hit the bat is physically impossible</p>
+          <p style="font-size:0.76rem;color:#555;margin-bottom:1.4rem;line-height:1.5;">A fastball at 95 mph takes 400 ms. The human eye cannot keep up.</p>
+
+          <div id="bb-tl-rows"></div>
+
+          <div style="margin-top:1.8rem;">
+            <div style="display:flex;justify-content:space-between;font-size:0.58rem;color:#aaa;font-weight:600;margin-bottom:5px;"><span>0 ms</span><span>100</span><span>200</span><span>300</span><span>400 ms</span></div>
+            <div id="bb-tl-bar" style="display:flex;height:38px;border-radius:3px;overflow:hidden;opacity:0;transition:opacity 0.5s ease 1.1s;">
+              <div style="width:37.5%;background:#1e5ba0;display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:rgba(255,255,255,0.9);letter-spacing:0.06em;">detect</div>
+              <div style="width:25%;background:#cc1f6e;display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:rgba(255,255,255,0.9);letter-spacing:0.06em;">decide</div>
+              <div style="width:37.5%;background:#1f7a62;display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:rgba(255,255,255,0.9);letter-spacing:0.06em;">swing</div>
+            </div>
+            <div style="display:flex;margin-top:5px;">
+              <div style="width:37.5%;font-size:0.55rem;color:#aaa;text-align:center;">0–150 ms</div>
+              <div style="width:25%;font-size:0.55rem;color:#aaa;text-align:center;">150–250</div>
+              <div style="width:37.5%;font-size:0.55rem;color:#aaa;text-align:center;">250–400 ms</div>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-left:3px solid #cc1f6e;padding:0.9rem 1rem;margin-top:1.6rem;border-radius:0 3px 3px 0;">
+            <p style="font-size:0.82rem;color:#333;line-height:1.65;">The farthest a batter can track a pitch is <strong>5.5 feet</strong> in front of the plate. Once the swing is committed, the ball still has nearly half the plate to travel. The contact point is invisible.</p>
+          </div>
+          <p style="font-size:0.6rem;color:#aaa;margin-top:0.7rem;font-style:italic;">Stadler, M. (2008) · The Psychology of Baseball · American Psychological Society.</p>
+        </div>
+
+      </div><!-- end charts section -->
     </div>
   </div>
 </div>
+
+<script>
+(function(){
+  var FONT="'Plus Jakarta Sans',sans-serif";
+  var TICK='#aaa', GRID='rgba(0,0,0,0.07)';
+  var C_PINK='#cc1f6e', C_BLUE='#1e5ba0', C_TEAL='#1f7a62';
+
+  function buildBBDots(){
+    var data=[
+      {name:'2023 avg',ba:0.248},{name:'M. Mantle',ba:0.298},{name:'D. Jeter',ba:0.310},
+      {name:'J. DiMaggio',ba:0.325},{name:'B. Ruth',ba:0.342},{name:'T. Williams',ba:0.344},{name:'Ty Cobb',ba:0.366}
+    ];
+    var cont=document.getElementById('bb-dots');
+    if(!cont)return;
+    data.forEach(function(d,i){
+      var failPct=((1-d.ba)*100).toFixed(1);
+      var hitW=(d.ba*100)+'%';
+      var row=document.createElement('div');
+      row.style.cssText='display:flex;align-items:center;margin-bottom:0.8rem;';
+      row.innerHTML='<div style="font-size:0.68rem;font-weight:500;color:#333;width:120px;flex-shrink:0;text-align:right;padding-right:12px;">'+d.name+'</div>'+
+        '<div style="flex:1;height:22px;background:#e2dfd8;border-radius:2px;position:relative;overflow:hidden;">'+
+        '<div id="bbd'+i+'" style="height:100%;background:'+C_BLUE+';border-radius:2px;width:0;transition:width 0.9s cubic-bezier(0.22,1,0.36,1);transition-delay:'+(i*70)+'ms;position:relative;">'+
+        '<span style="position:absolute;right:-2px;top:50%;transform:translateY(-50%);font-size:0.6rem;font-weight:700;color:'+C_PINK+';white-space:nowrap;padding-right:4px;opacity:0;transition:opacity 0.4s ease 0.9s;" id="bbdf'+i+'">← '+failPct+'% fail</span>'+
+        '</div></div>'+
+        '<div style="font-size:0.6rem;color:#aaa;font-weight:500;margin-left:8px;width:32px;flex-shrink:0;">.'+Math.round(d.ba*1000)+'</div>';
+      cont.appendChild(row);
+    });
+  }
+
+  function buildBBTlRows(){
+    var rows=[
+      {label:'ball in flight',w:'100%',bg:'#ddd',val:'400 ms'},
+      {label:'visual detection',w:'37.5%',bg:C_BLUE,val:'150 ms'},
+      {label:'decision window',w:'25%',bg:C_PINK,val:'100 ms'},
+      {label:'swing committed',w:'37.5%',bg:C_TEAL,val:'150 ms'},
+      {label:'trackable range',w:'38%',bg:'#e8a020',val:'5.5 ft'}
+    ];
+    var cont=document.getElementById('bb-tl-rows');
+    if(!cont)return;
+    rows.forEach(function(r,i){
+      var row=document.createElement('div');
+      row.style.cssText='display:grid;grid-template-columns:130px 1fr 60px;align-items:center;gap:0.5rem 0.8rem;margin-bottom:0.65rem;';
+      row.innerHTML='<div style="font-size:0.66rem;font-weight:500;color:#555;text-align:right;">'+r.label+'</div>'+
+        '<div style="height:16px;background:#e2dfd8;border-radius:2px;overflow:hidden;">'+
+        '<div id="bbtl'+i+'" style="height:100%;background:'+r.bg+';width:0;border-radius:2px;transition:width 1s cubic-bezier(0.22,1,0.36,1);transition-delay:'+(i*150)+'ms;"></div></div>'+
+        '<div style="font-size:0.63rem;color:#888;font-weight:500;">'+r.val+'</div>';
+      cont.appendChild(row);
+    });
+  }
+
+  function bbChart2(){
+    if(typeof Chart==='undefined'){setTimeout(bbChart2,200);return;}
+    var rest=[
+      {label:'NY Yankees',x:125.9,y:103},{label:'Texas',x:105.7,y:73},{label:'LA Dodgers',x:94.9,y:92},
+      {label:'Atlanta',x:93.4,y:101},{label:'Cleveland',x:78.9,y:74},{label:'Boston',x:78.6,y:93},
+      {label:'SF Giants',x:78.3,y:95},{label:'Baltimore',x:60.5,y:67},{label:'Anaheim',x:62.0,y:99},
+      {label:'Chicago WSx',x:57.0,y:81},{label:'Colorado',x:56.9,y:73},{label:'Minnesota',x:40.2,y:94},
+      {label:'Florida',x:41.7,y:79},{label:'Pittsburgh',x:42.3,y:72},{label:'Tampa Bay',x:34.4,y:55}
+    ];
+    var TT2={backgroundColor:'#fff',titleColor:'#1a1a1a',bodyColor:'#555',borderColor:'#ddd',borderWidth:1,padding:10,
+      titleFont:{family:FONT,size:12,weight:'700'},bodyFont:{family:FONT,size:10.5}};
+    var ch=new Chart(document.getElementById('bb-chart2'),{
+      type:'bubble',
+      data:{datasets:[
+        {label:'MLB',data:rest.map(function(d){return Object.assign({},d,{r:6});}),backgroundColor:'rgba(30,91,160,0.2)',borderColor:'rgba(30,91,160,0.45)',borderWidth:1.5},
+        {label:"Oakland",data:[{label:"Oakland A's",x:40.0,y:103,r:10}],backgroundColor:C_PINK,borderWidth:0}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,animation:{duration:1000,easing:'easeOutQuart'},
+        plugins:{legend:{display:false},tooltip:Object.assign({},TT2,{callbacks:{label:function(c){return ' '+c.raw.label+'  $'+c.raw.x+'M  '+c.raw.y+'W';}}})},
+        scales:{
+          x:{min:22,max:148,grid:{color:GRID},ticks:{callback:function(v){return '$'+v+'M';},color:TICK,font:{weight:'600',family:FONT}},
+            title:{display:true,text:'Payroll (USD millions)',color:'#999',font:{size:10,family:FONT,weight:'600'}}},
+          y:{min:48,max:118,grid:{color:GRID},ticks:{color:TICK,font:{weight:'600',family:FONT}},
+            title:{display:true,text:'Season wins',color:'#999',font:{size:10,family:FONT,weight:'600'}}}
+        }
+      }
+    });
+    Chart.register({id:'bbLabels2',afterDatasetsDraw:function(chart){
+      var ctx=chart.ctx;
+      var pairs=[
+        {ds:0,idx:0,lines:['NY Yankees','$126M · 103W'],col:C_BLUE,dx:-10,dy:-18,align:'right'},
+        {ds:1,idx:0,lines:["Oakland A's",'$40M · 103W'],col:C_PINK,dx:13,dy:0,align:'left'}
+      ];
+      ctx.save();
+      pairs.forEach(function(p){
+        var meta=chart.getDatasetMeta(p.ds);
+        if(!meta.data[p.idx])return;
+        var pt=meta.data[p.idx];
+        ctx.textAlign=p.align;
+        p.lines.forEach(function(line,li){
+          ctx.font=(li===0?'700':'400')+' 11px '+FONT;
+          ctx.fillStyle=p.col;
+          ctx.fillText(line,pt.x+p.dx,pt.y+p.dy+li*14);
+        });
+      });
+      ctx.restore();
+    }});
+  }
+
+  function bbChart3(){
+    if(typeof Chart==='undefined'){setTimeout(bbChart3,200);return;}
+    var traits=['physical talent','peaking under pressure','coping with adversity','achievement motivation','self-confidence'];
+    var corr=[0.38,0.43,0.48,0.52,0.68];
+    var TT3={backgroundColor:'#fff',titleColor:'#1a1a1a',bodyColor:'#555',borderColor:'#ddd',borderWidth:1,padding:10,
+      titleFont:{family:FONT,size:12,weight:'700'},bodyFont:{family:FONT,size:10.5},
+      callbacks:{label:function(c){return ' r = '+c.raw.toFixed(2);}}};
+    new Chart(document.getElementById('bb-chart3'),{
+      type:'bar',
+      data:{labels:traits,datasets:[{data:corr,
+        backgroundColor:corr.map(function(v,i){return i===4?C_PINK:'rgba(30,91,160,'+(0.18+i*0.12)+')';}),
+        borderWidth:0,borderRadius:3}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:1000,easing:'easeOutQuart'},
+        plugins:{legend:{display:false},tooltip:TT3},
+        scales:{x:{min:0,max:0.80,grid:{color:GRID},ticks:{color:TICK,font:{weight:'600',family:FONT}}},
+          y:{grid:{display:false},ticks:{color:'#333',font:{weight:'600',family:FONT}}}}}
+    });
+  }
+
+  buildBBDots();
+  buildBBTlRows();
+
+  var bbObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var el=e.target; el.style.opacity='1'; el.style.transform='translateY(0)';
+      if(!el._done){el._done=true;
+        if(el.id==='bb1'){setTimeout(function(){
+          for(var i=0;i<7;i++)(function(idx){
+            setTimeout(function(){
+              var b=document.getElementById('bbd'+idx);
+              var lbl=document.getElementById('bbdf'+idx);
+              if(b){b.style.width=['24.8%','29.8%','31%','32.5%','34.2%','34.4%','36.6%'][idx];}
+              if(lbl)lbl.style.opacity='1';
+            },idx*70);
+          })(i);
+        },200);}
+        if(el.id==='bb2')bbChart2();
+        if(el.id==='bb3')bbChart3();
+        if(el.id==='bb4'){setTimeout(function(){
+          for(var i=0;i<5;i++)(function(idx){
+            setTimeout(function(){
+              var b=document.getElementById('bbtl'+idx);
+              if(b)b.style.width=['100%','37.5%','25%','37.5%','38%'][idx];
+            },idx*150);
+          })(i);
+          setTimeout(function(){
+            var bar=document.getElementById('bb-tl-bar');
+            if(bar)bar.style.opacity='1';
+          },1000);
+        },150);}
+      }
+      bbObs.unobserve(el);
+    });
+  },{threshold:0.1});
+
+  ['bb1','bb2','bb3','bb4'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)bbObs.observe(el);
+  });
+})();
+</script>
 
 <!-- ===== DRAWER 1: WHITE HOLES ===== -->
 <div class="modal-backdrop" id="modal-drawer1">
