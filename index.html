@@ -2376,7 +2376,7 @@
     });
   }
 
-  function bbChart2(){
+  window.bbChart2 = function bbChart2(){
     if(typeof Chart==='undefined'){setTimeout(bbChart2,200);return;}
     var rest=[
       {label:'NY Yankees',x:125.9,y:103},{label:'Texas',x:105.7,y:73},{label:'LA Dodgers',x:94.9,y:92},
@@ -2425,7 +2425,7 @@
     }});
   }
 
-  function bbChart3(){
+  window.bbChart3 = function bbChart3(){
     if(typeof Chart==='undefined'){setTimeout(bbChart3,200);return;}
     var traits=['physical talent','peaking under pressure','coping with adversity','achievement motivation','self-confidence'];
     var corr=[0.38,0.43,0.48,0.52,0.68];
