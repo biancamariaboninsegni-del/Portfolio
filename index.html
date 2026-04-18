@@ -5435,10 +5435,6 @@ function startFLThree() {
       frame=(frame+1)%totalFrames;
     }, 1000/20);
   };
-  canvas.addEventListener('click', function() {
-    var a=document.getElementById('meow-audio');
-    if(a){a.pause();a.currentTime=0;a.play();}
-  });
   var schrodinger = document.getElementById('schrodinger');
   if(schrodinger){
     schrodinger.addEventListener('click', function() {
