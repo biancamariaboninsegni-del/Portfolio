@@ -5412,13 +5412,13 @@ function startFLThree() {
   };
   canvas.addEventListener('click', function() {
     var a=document.getElementById('meow-audio');
-    if(a){a.currentTime=0;a.play();}
+    if(a){a.pause();a.currentTime=0;a.play();}
   });
   var schrodinger = document.getElementById('schrodinger');
   if(schrodinger){
     schrodinger.addEventListener('click', function() {
       var a=document.getElementById('meow-audio');
-      if(a){a.currentTime=0;a.play();}
+      if(a){a.pause();a.currentTime=0;a.play();}
     });
   }
 })();
