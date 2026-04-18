@@ -1843,13 +1843,13 @@
 }
   /* Christie's experience gallery - 3 foto eleganti */
   #exp-christies-gallery {
-    display: flex;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
     margin-top: 1rem;
   }
   #exp-christies-gallery .gallery-item {
-    flex: 1;
-    max-width: 160px;
+    width: 100%;
   }
   #exp-christies-gallery .gallery-item img {
     width: 100%;
