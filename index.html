@@ -3334,7 +3334,24 @@ function openHiddenLibrary() {
   fadeDot('dot-library');
 }
 function openMindMap() { document.getElementById('modal-mindmap').classList.add('open'); setTitle('Mind Map'); setTimeout(buildMindMap,80); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); setTitle(null); }
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  setTitle(null);
+  if(id === 'modal-baseball') {
+    ['bb1','bb2','bb3','bb4'].forEach(function(bid){
+      var el = document.getElementById(bid);
+      if(el) { el._done = false; el.style.opacity = '0'; el.style.transform = 'translateY(18px)'; }
+    });
+    var dots = document.getElementById('bb-dots');
+    if(dots) dots.innerHTML = '';
+    var tlrows = document.getElementById('bb-tl-rows');
+    if(tlrows) tlrows.innerHTML = '';
+    var tlbar = document.getElementById('bb-tl-bar');
+    if(tlbar) tlbar.style.opacity = '0';
+    if(typeof buildBBDots === 'function') buildBBDots();
+    if(typeof buildBBTlRows === 'function') buildBBTlRows();
+  }
+}
 function openModal(id) {
   document.getElementById(id).classList.add('open');
   if(id === 'modal-baseball') {
