@@ -5637,7 +5637,8 @@ function initRainCanvas() {
       // Stop rain, play birds
       stopRain();
       var birds = document.getElementById('birds-audio');
-      if (birds) { birds.muted = false; birds.currentTime = 0; birds.play().catch(function(){}); }
+      var _isMuted = localStorage.getItem('audio-muted') === '1';
+      if (birds) { birds.muted = _isMuted; birds.currentTime = 0; if(!_isMuted) birds.play().catch(function(){}); }
 
       // Hide rain canvas
       var rainCanvas = document.getElementById('rain-canvas');
