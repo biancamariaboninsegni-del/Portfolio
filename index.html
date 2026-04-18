@@ -368,6 +368,23 @@
   }
 
 
+  /* Post-it CV */
+  #hs-postit {
+    position: absolute;
+    width: 7%;
+    aspect-ratio: 1;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.15s ease;
+  }
+  #hs-postit:hover { transform: scale(1.06) rotate(-1deg); }
+  #postit-img {
+    position: absolute;
+    width: 7%;
+    pointer-events: none;
+    z-index: 9;
+  }
+
   /* Dust/Brownian hotspot */
   #hs-dust {
     position: fixed;
@@ -1946,6 +1963,8 @@
 
 <canvas id="dust-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;display:none;"></canvas>
 <div class="hotspot" id="hs-dust" onclick="openBrownian()"></div>
+<img id="postit-img" src="img/postit_cv.png" alt="download cv">
+<a id="hs-postit" href="CV_BMB.pdf" download></a>
 <div class="hotspot" id="hs-imac" data-label="Open desktop" onclick="openMac()"></div>
 <div class="hotspot" id="hs-lamp" data-label="Toggle light" onclick="toggleLamp()"></div>
 <div class="hotspot" id="hs-drawer1" data-label="White Holes ✦ solve sudoku first" onclick="tryDrawer(1)"></div>
@@ -4045,6 +4064,8 @@ function repositionHotspots() {
   posHS('hs-lamp',     0.5573, 0.4348, 0.04, 0.08);
   posHS('hs-books',    0.5292, 0.5409, 0.03, 0.07);
   posHS('hs-ipod',     0.4182, 0.5621, 0.03, 0.04);
+  posHS('hs-postit',  0.72, 0.72, 0.07, 0.07);
+  document.getElementById('postit-img').style.cssText = 'position:absolute;width:7%;left:'+(0.72*100)+'%;top:'+(0.72*100)+'%;pointer-events:none;z-index:9;';
   posHS('hs-notepad',  0.4182, 0.5621, 0.03, 0.04);
   posHS('hs-drawer1',  0.3995, 0.6409, 0.07, 0.07);
   posHS('hs-drawer2',  0.5656, 0.6510, 0.07, 0.07);
