@@ -1647,7 +1647,7 @@
   .pm-quote { text-align: center; margin: 1.4rem 1.5rem 1.8rem; }
   .pm-quote p { font-style: italic; color: #5a4030; font-size: 0.9rem; margin: 0 0 0.4rem; }
   .pm-attr { font-family: 'Courier Prime', monospace; font-size: 0.62rem; letter-spacing: 0.14em; color: rgba(212,201,176,0.55); }
-  .pm-hl { font-style: italic; color: #b85c38; }
+  .pm-hl { font-style: normal; font-weight: 700; color: #9a7ab0; }
   .pm-banner { width: 100%; display: block; margin: 0.4rem 0; }
   .pm-gfx { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 0.6rem 0 1rem; }
   .pm-gcol { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 200px; max-width: 258px; }
@@ -2465,13 +2465,13 @@ function showColorFamily(family) {
 
       <p>I knew absolutely nothing about sport. Not a single game of football in my life, basketball only because my family is devoted to Fortitudo. My only memory of baseball before New Orleans was the scene in Twilight, the one played during a thunderstorm, with Supermassive Black Hole by Muse pounding in the background. Which, in retrospect, is not a bad introduction to anything.</p>
       <p>Then I arrived in Louisiana and everything changed.</p>
-      <p>What struck me immediately was the structure of it. Baseball is, almost uniquely among major sports, a game that asks the same person to be good at two completely different things: batting and fielding, offense and defense. You cannot delegate. You cannot specialise into comfort. Every player must hold both halves of the game.</p>
-      <p>And then there is the patience. Baseball rewards waiting. You stand at the plate and you wait for the right pitch, and if you swing too early or too late, it does not matter how much force you brought. The result is the same. Timing is everything. Rushing is always a mistake.</p>
-      <p>There is also something almost philosophical about failure being built into the structure of the game. The best batters in history fail seven times out of ten. The sport does not pretend otherwise. It simply asks you to come back to the plate.</p>
+      <p>What struck me immediately was the structure of it. Baseball is, almost uniquely among major sports, a game that asks the same person to be good at two completely different things: <strong>batting and fielding, offense and defense</strong>. You cannot delegate. You cannot specialise into comfort. Every player must hold both halves of the game.</p>
+      <p>And then there is the patience. Baseball rewards waiting. You stand at the plate and you wait for the right pitch, and if you swing too early or too late, it does not matter how much force you brought. The result is the same. <strong>Timing is everything.</strong> Rushing is always a mistake.</p>
+      <p>There is also something almost philosophical about failure being built into the structure of the game. The best batters in history <strong>fail seven times out of ten</strong>. The sport does not pretend otherwise. It simply asks you to come back to the plate.</p>
       <p>I came back to the plate many times that semester. I did not always hit.</p>
       <p>These days I find myself saying it often: <em>"I don't play baseball, but I've hit a home run"</em> when something good happens. A door opens, a conversation goes somewhere unexpected, a project lands. It has become the phrase I use for when life surprises me in the right direction.</p>
       <p>I came back from Louisiana with one thing I wanted to give someone.</p>
-      <p>When Mulan returns from war, she gives her father the sword of Shan Yu and the Emperor's crest. My father was not sitting under a cherry tree. He was at a computer. I did not have a sword. But I had a baseball.</p>
+      <p>When Mulan returns from war, she gives her father the sword of Shan Yu and the Emperor's crest. My father was not sitting under a cherry tree. He was at a computer. I did not have a sword. But I had a <strong>baseball</strong>.</p>
 
       <!-- GIF Moneyball -->
       <div style="margin:2rem 0;text-align:center;">
@@ -2491,7 +2491,7 @@ function showColorFamily(family) {
         <!-- Fig 01 -->
         <div class="bb-block" id="bb1" style="margin-bottom:3.5rem;opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease;">
           <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#999;margin-bottom:0.4rem;">Fig. 01</p>
-          <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:0.3rem;">The best batters in history fail seven times out of ten</p>
+          <p style="font-size:1.1rem;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:0.3rem;">The best batters in history <strong>fail seven times out of ten</strong></p>
           <p style="font-size:0.76rem;color:#555;margin-bottom:1.2rem;line-height:1.5;">Career batting averages, all-time greats vs. 2023 MLB average.</p>
           <div style="font-size:0.6rem;color:#aaa;font-weight:600;display:flex;justify-content:space-between;margin-left:120px;margin-bottom:5px;"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
           <div id="bb-dots"></div>
@@ -5731,7 +5731,17 @@ function initRainCanvas() {
 
     <div style="font-style:normal;margin:0 0 1.8rem;">
       <p style="font-family:'Courier Prime',monospace;font-size:0.65rem;letter-spacing:0.3em;color:#8b6340;text-transform:uppercase;margin-bottom:1.4rem;">Brownian Motion</p>
-      <p style="font-size:0.9rem;line-height:1.8;color:#1a1a1a;">
+      <p style="font-size:1.05rem;line-height:1.9;color:#1a1a1a;font-style:normal;margin-bottom:1.1rem;">If we observe very small particles – a fleck of dust, a grain of pollen – suspended in air or in a liquid, we see them tremble. Driven by this trembling, they move at random, zigzagging, drifting slowly and steadily away from where they began.</p>
+
+      <p style="font-size:1.05rem;line-height:1.9;color:#1a1a1a;font-style:normal;margin-bottom:1.1rem;">This zigzagging motion was called Brownian motion. It is as though the particles were being kicked at random – now this way, now that. They tremble because they are struck by individual air molecules, sometimes from the right, sometimes from the left.</p>
+
+      <p style="font-size:1.05rem;line-height:1.9;color:#1a1a1a;font-style:normal;margin-bottom:1.4rem;">Those are atoms – invisible, billions of them – colliding against a single particle from every direction, every instant.</p>
+
+      <div style="border-left:2px solid rgba(212,201,176,0.4);padding-left:1.1rem;margin-top:1.4rem;">
+        <p style="font-size:0.98rem;line-height:1.85;color:#3a2a10;font-style:normal;">And what of the Eroica? In 1975, Richard Voss and John Clarke published a paper in <em style="font-style:italic;">Nature</em> demonstrating that the structure of great classical compositions – Beethoven among them – follows the same statistical distribution as Brownian motion: neither wholly random nor wholly predictable, but poised exactly between the two. The dust particle and the symphony obey the same hidden mathematics. What you are watching is the signature of the invisible.</p>
+      </div>
+
+      <p style="margin-top:1.6rem;font-size:0.9rem;line-height:1.8;color:#1a1a1a;">
         <a href="https://www.youtube.com/watch?v=8AunZS44Fbw" target="_blank" style="color:#8b6340;text-decoration:underline;text-underline-offset:3px;font-family:'Courier Prime',monospace;letter-spacing:0.05em;">watch on YouTube →</a>
       </p>
     </div>
