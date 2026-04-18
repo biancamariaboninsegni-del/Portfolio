@@ -2547,76 +2547,8 @@ function showColorFamily(family) {
     });
   }
 
-  window.bbChart2 = function bbChart2(){
-    if(typeof Chart==='undefined'){setTimeout(bbChart2,200);return;}
-    var rest=[
-      {label:'NY Yankees',x:125.9,y:103},{label:'Texas',x:105.7,y:73},{label:'LA Dodgers',x:94.9,y:92},
-      {label:'Atlanta',x:93.4,y:101},{label:'Cleveland',x:78.9,y:74},{label:'Boston',x:78.6,y:93},
-      {label:'SF Giants',x:78.3,y:95},{label:'Baltimore',x:60.5,y:67},{label:'Anaheim',x:62.0,y:99},
-      {label:'Chicago WSx',x:57.0,y:81},{label:'Colorado',x:56.9,y:73},{label:'Minnesota',x:40.2,y:94},
-      {label:'Florida',x:41.7,y:79},{label:'Pittsburgh',x:42.3,y:72},{label:'Tampa Bay',x:34.4,y:55}
-    ];
-    var TT2={backgroundColor:'#fff',titleColor:'#1a1a1a',bodyColor:'#555',borderColor:'#ddd',borderWidth:1,padding:10,
-      titleFont:{family:FONT,size:12,weight:'700'},bodyFont:{family:FONT,size:10.5}};
-    var ch=new Chart(document.getElementById('bb-chart2'),{
-      type:'bubble',
-      data:{datasets:[
-        {label:'MLB',data:rest.map(function(d){return Object.assign({},d,{r:6});}),backgroundColor:'rgba(30,91,160,0.2)',borderColor:'rgba(30,91,160,0.45)',borderWidth:1.5},
-        {label:"Oakland",data:[{label:"Oakland A's",x:40.0,y:103,r:10}],backgroundColor:C_PINK,borderWidth:0}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,animation:{duration:1000,easing:'easeOutQuart'},
-        plugins:{legend:{display:false},tooltip:Object.assign({},TT2,{callbacks:{label:function(c){return ' '+c.raw.label+'  $'+c.raw.x+'M  '+c.raw.y+'W';}}})},
-        scales:{
-          x:{min:22,max:148,grid:{color:GRID},ticks:{callback:function(v){return '$'+v+'M';},color:TICK,font:{weight:'600',family:FONT}},
-            title:{display:true,text:'Payroll (USD millions)',color:'#999',font:{size:10,family:FONT,weight:'600'}}},
-          y:{min:48,max:118,grid:{color:GRID},ticks:{color:TICK,font:{weight:'600',family:FONT}},
-            title:{display:true,text:'Season wins',color:'#999',font:{size:10,family:FONT,weight:'600'}}}
-        }
-      }
-    });
-    Chart.register({id:'bbLabels2',afterDatasetsDraw:function(chart){
-      var ctx=chart.ctx;
-      var pairs=[
-        {ds:0,idx:0,lines:['NY Yankees','$126M · 103W'],col:C_BLUE,dx:-10,dy:-18,align:'right'},
-        {ds:1,idx:0,lines:["Oakland A's",'$40M · 103W'],col:C_PINK,dx:13,dy:0,align:'left'}
-      ];
-      ctx.save();
-      pairs.forEach(function(p){
-        var meta=chart.getDatasetMeta(p.ds);
-        if(!meta.data[p.idx])return;
-        var pt=meta.data[p.idx];
-        ctx.textAlign=p.align;
-        p.lines.forEach(function(line,li){
-          ctx.font=(li===0?'700':'400')+' 11px '+FONT;
-          ctx.fillStyle=p.col;
-          ctx.fillText(line,pt.x+p.dx,pt.y+p.dy+li*14);
-        });
-      });
-      ctx.restore();
-    }});
-  }
 
-  window.bbChart3 = function bbChart3(){
-    if(typeof Chart==='undefined'){setTimeout(bbChart3,200);return;}
-    var traits=['physical talent','peaking under pressure','coping with adversity','achievement motivation','self-confidence'];
-    var corr=[0.38,0.43,0.48,0.52,0.68];
-    var TT3={backgroundColor:'#fff',titleColor:'#1a1a1a',bodyColor:'#555',borderColor:'#ddd',borderWidth:1,padding:10,
-      titleFont:{family:FONT,size:12,weight:'700'},bodyFont:{family:FONT,size:10.5},
-      callbacks:{label:function(c){return ' r = '+c.raw.toFixed(2);}}};
-    new Chart(document.getElementById('bb-chart3'),{
-      type:'bar',
-      data:{labels:traits,datasets:[{data:corr,
-        backgroundColor:corr.map(function(v,i){return i===4?C_PINK:'rgba(30,91,160,'+(0.18+i*0.12)+')';}),
-        borderWidth:0,borderRadius:3}]},
-      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:1000,easing:'easeOutQuart'},
-        plugins:{legend:{display:false},tooltip:TT3},
-        scales:{x:{min:0,max:0.80,grid:{color:GRID},ticks:{color:TICK,font:{weight:'600',family:FONT}}},
-          y:{grid:{display:false},ticks:{color:'#333',font:{weight:'600',family:FONT}}}}}
-    });
-  }
 
-  buildBBDots();
-  buildBBTlRows();
 
   var bbObs=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
