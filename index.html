@@ -1863,6 +1863,7 @@
 </style>
 <link rel="stylesheet" href="css/main.css">
 <script src="js/ambient-effects.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 </head>
 <body>
 
@@ -2411,7 +2412,7 @@ function showColorFamily(family) {
       <p>And then there is the patience. Baseball rewards waiting. You stand at the plate and you wait for the right pitch, and if you swing too early or too late, it does not matter how much force you brought. The result is the same. Timing is everything. Rushing is always a mistake.</p>
       <p>There is also something almost philosophical about failure being built into the structure of the game. The best batters in history fail seven times out of ten. The sport does not pretend otherwise. It simply asks you to come back to the plate.</p>
       <p>I came back to the plate many times that semester. I did not always hit.</p>
-      <p>These days I find myself saying it often: <em>"I don't play baseball, but I've hit a home run"</em> — when something good happens. A door opens, a conversation goes somewhere unexpected, a project lands. It has become the phrase I use for when life surprises me in the right direction.</p>
+      <p>These days I find myself saying it often: <em>"I don't play baseball, but I've hit a home run"</em> when something good happens. A door opens, a conversation goes somewhere unexpected, a project lands. It has become the phrase I use for when life surprises me in the right direction.</p>
       <p>I came back from Louisiana with one thing I wanted to give someone.</p>
       <p>When Mulan returns from war, she gives her father the sword of Shan Yu and the Emperor's crest. My father was not sitting under a cherry tree. He was at a computer. I did not have a sword. But I had a baseball.</p>
 
@@ -6035,6 +6036,56 @@ function initRainCanvas() {
     setTimeout(function(){ setAudioMute(true); }, 500);
   }
 })();
+
+// Funzioni globali per i grafici baseball
+window.bbChart2 = function() {
+  if(typeof Chart === 'undefined') { setTimeout(window.bbChart2, 300); return; }
+  var c2 = Chart.getChart(document.getElementById('bb-chart2'));
+  if(c2) c2.destroy();
+  var FONT="'Plus Jakarta Sans',sans-serif";
+  var TT={backgroundColor:'#fff',titleColor:'#1a1a1a',bodyColor:'#555',borderColor:'#ddd',borderWidth:1,padding:10,titleFont:{family:FONT,size:12,weight:'700'},bodyFont:{family:FONT,size:10.5}};
+  var rest=[
+    {label:'NY Yankees',x:125.9,y:103},{label:'Texas',x:105.7,y:73},{label:'LA Dodgers',x:94.9,y:92},
+    {label:'Atlanta',x:93.4,y:101},{label:'Cleveland',x:78.9,y:74},{label:'Boston',x:78.6,y:93},
+    {label:'SF Giants',x:78.3,y:95},{label:'Baltimore',x:60.5,y:67},{label:'Anaheim',x:62.0,y:99},
+    {label:'Chicago WSx',x:57.0,y:81},{label:'Colorado',x:56.9,y:73},{label:'Minnesota',x:40.2,y:94},
+    {label:'Florida',x:41.7,y:79},{label:'Pittsburgh',x:42.3,y:72},{label:'Tampa Bay',x:34.4,y:55}
+  ];
+  new Chart(document.getElementById('bb-chart2'),{
+    type:'bubble',
+    data:{datasets:[
+      {data:rest.map(function(d){return{label:d.label,x:d.x,y:d.y,r:6};}),backgroundColor:'rgba(30,91,160,0.22)',borderColor:'rgba(30,91,160,0.5)',borderWidth:1.5},
+      {data:[{label:"Oakland A's",x:40.0,y:103,r:10}],backgroundColor:'#cc1f6e',borderWidth:0}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:1000},
+      plugins:{legend:{display:false},tooltip:Object.assign({},TT,{callbacks:{label:function(c){return ' '+c.raw.label+'  $'+c.raw.x+'M  '+c.raw.y+'W';}}})},
+      scales:{
+        x:{min:22,max:148,grid:{color:'rgba(0,0,0,0.07)'},ticks:{callback:function(v){return'$'+v+'M';},color:'#aaa',font:{family:FONT,weight:'600'}},title:{display:true,text:'Payroll (USD millions)',color:'#999',font:{size:10,family:FONT}}},
+        y:{min:48,max:118,grid:{color:'rgba(0,0,0,0.07)'},ticks:{color:'#aaa',font:{family:FONT,weight:'600'}},title:{display:true,text:'Season wins',color:'#999',font:{size:10,family:FONT}}}
+      }
+    }
+  });
+};
+
+window.bbChart3 = function() {
+  if(typeof Chart === 'undefined') { setTimeout(window.bbChart3, 300); return; }
+  var c3 = Chart.getChart(document.getElementById('bb-chart3'));
+  if(c3) c3.destroy();
+  var FONT="'Plus Jakarta Sans',sans-serif";
+  var TT={backgroundColor:'#fff',titleColor:'#1a1a1a',bodyColor:'#555',borderColor:'#ddd',borderWidth:1,padding:10,titleFont:{family:FONT,size:12,weight:'700'},bodyFont:{family:FONT,size:10.5}};
+  new Chart(document.getElementById('bb-chart3'),{
+    type:'bar',
+    data:{
+      labels:['physical talent','peaking under pressure','coping with adversity','achievement motivation','self-confidence'],
+      datasets:[{data:[0.38,0.43,0.48,0.52,0.68],
+        backgroundColor:['rgba(30,91,160,0.18)','rgba(30,91,160,0.28)','rgba(30,91,160,0.4)','rgba(30,91,160,0.55)','#cc1f6e'],
+        borderWidth:0,borderRadius:3}]
+    },
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:{duration:1000},
+      plugins:{legend:{display:false},tooltip:Object.assign({},TT,{callbacks:{label:function(c){return ' r = '+c.raw.toFixed(2);}}})},
+      scales:{x:{min:0,max:0.80,grid:{color:'rgba(0,0,0,0.07)'},ticks:{color:'#aaa',font:{family:FONT,weight:'600'}}},y:{grid:{display:false},ticks:{color:'#333',font:{family:FONT,weight:'600'}}}}}
+  });
+};
 </script>
 
 
