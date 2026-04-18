@@ -2586,6 +2586,8 @@ function showColorFamily(family) {
     });
   },{threshold:0.1});
 
+  buildBBDots();
+  buildBBTlRows();
   ['bb1','bb2','bb3','bb4'].forEach(function(id){
     var el=document.getElementById(id);
     if(el)bbObs.observe(el);
