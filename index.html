@@ -5310,54 +5310,7 @@ function startFLThree() {
   var _catClickIdx = 0;
   var wrapper = document.getElementById('gatto-wrapper');
   if(wrapper){ wrapper.addEventListener('click', function(){ cat.click(); }); }
-  function playPurr() {
-    try {
-      var ctx = new (window.AudioContext || window.webkitAudioContext)();
-      var osc = ctx.createOscillator();
-      var gain = ctx.createGain();
-      var lfo = ctx.createOscillator();
-      var lfoGain = ctx.createGain();
-      lfo.frequency.value = 28;
-      lfoGain.gain.value = 0.08;
-      lfo.connect(lfoGain);
-      lfoGain.connect(gain.gain);
-      osc.type = 'sawtooth';
-      osc.frequency.value = 52;
-      gain.gain.value = 0.12;
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      lfo.start();
-      osc.start();
-      gain.gain.setTargetAtTime(0, ctx.currentTime + 1.8, 0.35);
-      setTimeout(function(){ try{osc.stop();lfo.stop();ctx.close();}catch(e){} }, 3200);
-    } catch(e) {}
-  }
 
-  function showPurrText() {
-    var purr = document.createElement('div');
-    purr.textContent = 'purrr...';
-    purr.style.cssText = [
-      'position:fixed',
-      'font-family:Georgia,serif',
-      'font-style:italic',
-      'font-size:13px',
-      'color:rgba(220,190,140,0.9)',
-      'pointer-events:none',
-      'z-index:9999',
-      'transition:opacity 2s ease, transform 2s ease',
-      'opacity:1'
-    ].join(';');
-    var cat = document.getElementById('schrodinger');
-    var rect = cat.getBoundingClientRect();
-    purr.style.left = (rect.left + rect.width/2 - 24) + 'px';
-    purr.style.top = (rect.top - 24) + 'px';
-    document.body.appendChild(purr);
-    setTimeout(function(){
-      purr.style.opacity = '0';
-      purr.style.transform = 'translateY(-28px)';
-    }, 80);
-    setTimeout(function(){ purr.remove(); }, 2200);
-  }
 
   var _catPhaseRef = { get: function(){ return window._catCurrentPhase || 'walking'; } };
 
@@ -5366,13 +5319,13 @@ function startFLThree() {
     var msg;
     if (phase === 'sleeping') {
       msg = ['Seriously.', 'I was dreaming of Milan.', '...zzzz... wh who dares.', 'Non ci posso credere.'][Math.floor(Math.random()*4)];
-      playPurr();
-      showPurrText();
+      
+      
     } else if (phase === 'resting') {
       msg = clickMessages[_catClickIdx % clickMessages.length];
       _catClickIdx++;
-      playPurr();
-      showPurrText();
+      
+      
     } else {
       msg = clickMessages[_catClickIdx % clickMessages.length];
       _catClickIdx++;
