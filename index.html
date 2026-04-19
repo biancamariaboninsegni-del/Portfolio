@@ -3396,7 +3396,13 @@ function openModal(id) {
           if(id === 'bb1') {
             var bb1el = document.getElementById('bb1');
             var alreadyPlayed = bb1el && bb1el._animPlayed;
-            if(!alreadyPlayed) {
+            if(alreadyPlayed) {
+              [0.248,0.298,0.310,0.325,0.342,0.344,0.366].forEach(function(ba,i){
+                var b=document.getElementById('bbd'+i);var lbl=document.getElementById('bbdf'+i);
+                if(b){b.style.transition='none';b.style.width=(ba*100).toFixed(1)+'%';}
+                if(lbl)lbl.style.opacity='1';
+              });
+            } else {
               if(bb1el) bb1el._animPlayed = true;
               for(var r=0;r<7;r++){var br=document.getElementById('bbd'+r);if(br){br.style.transition='none';br.style.width='0%';}var lr=document.getElementById('bbdf'+r);if(lr)lr.style.opacity='0';}
               setTimeout(function(){
