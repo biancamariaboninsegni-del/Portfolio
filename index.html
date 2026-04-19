@@ -2452,7 +2452,7 @@ function showColorFamily(family) {
     data.images.forEach(function(img, i) {
       var el = document.createElement('div');
       el.style.cssText = 'break-inside:avoid;margin-bottom:10px;';
-      el.innerHTML = '<img src="img/colors/' + img + '" style="width:100%;display:block;border-radius:2px;opacity:0;transition:opacity 0.5s ease ' + (i * 0.08) + 's;" onload="this.style.opacity='1'" />';
+      el.innerHTML = '<img src="img/colors/' + img + '" style="width:100%;display:block;border-radius:2px;opacity:0;transition:opacity 0.5s ease ' + (i * 0.08) + 's;" onload="this.style.opacity=1" />';
       grid.appendChild(el);
     });
   }
