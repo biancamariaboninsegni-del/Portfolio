@@ -3368,6 +3368,12 @@ function closeModal(id) {
       if(el) { el._done = false; el.style.opacity = '0'; el.style.transform = 'translateY(18px)'; }
     });
     var dots = document.getElementById('bb-dots');
+    for(var i=0;i<7;i++){
+      var b=document.getElementById("bbd"+i);
+      if(b) b.style.width="0%";
+      var lbl=document.getElementById("bbdf"+i);
+      if(lbl) lbl.style.opacity="0";
+    }
     if(dots) dots.innerHTML = '';
     var tlrows = document.getElementById('bb-tl-rows');
     if(tlrows) tlrows.innerHTML = '';
