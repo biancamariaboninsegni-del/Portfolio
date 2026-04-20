@@ -1,0 +1,16 @@
+/* Ottimizza il curtain per GPU */
+#curtain {
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+/* Se l'utente non vuole animazioni */
+@media (prefers-reduced-motion: reduce) {
+  #curtain { transition: none !important; }
+  * { animation-duration: 0.01ms !important; }
+}
+
+/* Corregge font */
+#curtain-text {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+}
