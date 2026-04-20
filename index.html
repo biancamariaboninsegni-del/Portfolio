@@ -3374,10 +3374,7 @@ function closeModal(id) {
   }
 }
 function openModal(id) {
-  var modalEl = document.getElementById(id);
-  modalEl.classList.add('open');
-  var scrollable = modalEl.querySelector('.parchment-body');
-  if(scrollable) scrollable.scrollTop = 0;
+  document.getElementById(id).classList.add('open');
   if(id === 'modal-baseball') {
     for(var r=0;r<7;r++){var br=document.getElementById('bbd'+r);if(br){br.style.transition='none';br.style.width='0%';}var lr=document.getElementById('bbdf'+r);if(lr)lr.style.opacity='0';}
     for(var t=0;t<5;t++){var tb=document.getElementById('bbtl'+t);if(tb){tb.style.transition='none';tb.style.width='0%';}}
