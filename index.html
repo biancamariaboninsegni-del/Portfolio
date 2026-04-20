@@ -35,6 +35,64 @@
   }
   #curtain.fade-out { opacity: 0; pointer-events: none; }
   #curtain-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.3em;
+    text-align: center;
+    padding: 0 2rem;
+    animation: fadeInText 2s ease forwards;
+    margin-bottom: 2rem;
+  }
+  #curtain-gear-wrap {
+    position: relative;
+    width: 300px; height: 300px;
+    cursor: pointer;
+    animation: fadeInText 2.5s ease forwards;
+  }
+  #curtain-snake {
+    width: 300px; height: 300px;
+    display: block;
+    transform-origin: center center;
+    border-radius: 50%;
+    animation: none;
+  }
+  #curtain-snake.spinning { animation: gearSpin 8s linear infinite; }
+  #curtain-gear-wrap:hover #curtain-snake.spinning { animation-duration: 5s; }
+  @keyframes gearSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  #curtain-outer-ring {
+    position: absolute; inset: -16px; border-radius: 50%;
+    border: 0.5px solid rgba(255,255,255,0.07);
+    animation: none;
+    pointer-events: none;
+  }
+  #curtain-outer-ring.spinning { animation: gearSpin 8s linear infinite reverse; }
+  #curtain-enter {
+    margin-top: 2rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.58rem;
+    color: rgba(255,255,255,0.18);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.4s;
+    animation: fadeInText 3.5s ease forwards;
+  }
+  #curtain-gear-wrap:hover ~ #curtain-enter { color: rgba(255,255,255,0.6); }
+  #curtain-gear-wrap.opening #curtain-snake {
+    animation: snakeDissolve 1.6s ease-in-out forwards !important;
+  }
+  #curtain-gear-wrap.opening #curtain-outer-ring {
+    animation: ringOut 1s ease-out forwards !important;
+  }
+  @keyframes snakeDissolve {
+    0%   { transform:rotate(0deg); opacity:1; }
+    100% { transform:rotate(460deg); opacity:0; }
+  }
+  @keyframes ringOut { to { transform:scale(2.8); opacity:0; } }
+  @keyframes fadeInText { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
+  #curtain-text {
     font-family: 'EB Garamond', serif;
     font-size: clamp(1rem, 2.5vw, 1.4rem);
     color: rgba(245, 234, 214, 0.7);
