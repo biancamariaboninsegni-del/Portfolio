@@ -3389,8 +3389,8 @@ function openModal(id) {
           el.style.opacity = '1';
           el.style.transform = 'translateY(0)';
           if(bid === 'bb1') {
-            requestAnimationFrame(function(){
-              for(var r=0;r<7;r++){var br=document.getElementById('bbd'+r);if(br){window.getComputedStyle(br).width;br.style.transition='';}}
+            requestAnimationFrame(function(){requestAnimationFrame(function(){
+              for(var r=0;r<7;r++){var br=document.getElementById('bbd'+r);if(br){br.style.transition='';}}
               [0.248,0.298,0.310,0.325,0.342,0.344,0.366].forEach(function(ba,i){
                 setTimeout(function(){
                   var b=document.getElementById('bbd'+i);var lbl=document.getElementById('bbdf'+i);
@@ -3398,18 +3398,18 @@ function openModal(id) {
                   if(lbl)lbl.style.opacity='1';
                 },i*120+200);
               });
-            });
+            });});
           }
           if(bid === 'bb2') bbChart2();
           if(bid === 'bb3') bbChart3();
           if(bid === 'bb4') {
-            requestAnimationFrame(function(){
-              for(var t=0;t<5;t++){var tb=document.getElementById('bbtl'+t);if(tb){window.getComputedStyle(tb).width;tb.style.transition='';}}
+            requestAnimationFrame(function(){requestAnimationFrame(function(){
+              for(var t=0;t<5;t++){var tb=document.getElementById('bbtl'+t);if(tb){tb.style.transition='';}}
               ['100%','37.5%','25%','37.5%','38%'].forEach(function(w,i){
                 setTimeout(function(){var b=document.getElementById('bbtl'+i);if(b)b.style.width=w;},i*150);
               });
               setTimeout(function(){var bar=document.getElementById('bb-tl-bar');if(bar)bar.style.opacity='1';},1000);
-            });
+            });});
           }
         }
       });
