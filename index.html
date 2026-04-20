@@ -2621,9 +2621,19 @@ function showColorFamily(family) {
       if(!e.isIntersecting)return;
       var el=e.target; el.style.opacity='1'; el.style.transform='translateY(0)';
       if(!el._done){el._done=true;
+        if(el.id==='bb1'){setTimeout(function(){
+          for(var i=0;i<7;i++)(function(idx){
+            setTimeout(function(){
+              var b=document.getElementById('bbd'+idx);
+              var lbl=document.getElementById('bbdf'+idx);
+              if(b){b.style.width=['24.8%','29.8%','31%','32.5%','34.2%','34.4%','36.6%'][idx];}
+              if(lbl)lbl.style.opacity='1';
+            },idx*70);
+          })(i);
+        },200);}
         if(el.id==='bb2')bbChart2();
         if(el.id==='bb3')bbChart3();
-        if(false){setTimeout(function(){
+        if(el.id==='bb4'){setTimeout(function(){
           for(var i=0;i<5;i++)(function(idx){
             setTimeout(function(){
               var b=document.getElementById('bbtl'+idx);
