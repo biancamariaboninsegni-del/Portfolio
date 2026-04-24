@@ -2072,6 +2072,15 @@
   }
   #modal-schrodinger.active ~ #schro-scanlines { display:block; }
 
+
+/* Cat in a Box — transparent background fix */
+.desktop-icon img[src*="cat"],
+.desktop-icon img[alt*="cat"],
+.desktop-icon img[alt*="Cat"] {
+  mix-blend-mode: multiply;
+  background: transparent;
+}
+
 </style>
 <link rel="stylesheet" href="css/main.css">
 <script src="js/ambient-effects.js"></script>
