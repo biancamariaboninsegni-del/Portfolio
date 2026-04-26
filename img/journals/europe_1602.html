@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f5f0e8; font-family: 'Georgia', serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 1rem; }
+  .map-container { position: relative; width: 100%; max-width: 680px; }
+  .map-title { font-family: 'Courier New', monospace; font-size: 0.62rem; letter-spacing: 0.28em; color: #9a8a6a; text-transform: uppercase; text-align: center; margin-bottom: 0.7rem; }
+  svg { width: 100%; height: auto; display: block; }
+  .legend { display: flex; align-items: center; gap: 6px; margin-top: 0.6rem; justify-content: center; font-size: 0.62rem; color: #9a8a6a; font-family: 'Courier New', monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; background: #8b1a10; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="map-container">
+  <div class="map-title">Europe · Anno Domini MDCII</div>
+  <div style="position:relative;">
+    <svg viewBox="0 0 700 520" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="seaGrad" cx="50%" cy="50%" r="60%"><stop offset="0%" stop-color="#d8e8f0"/><stop offset="100%" stop-color="#c0d4e0"/></radialGradient>
+        <radialGradient id="genevaGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(139,26,16,0.15)"/><stop offset="100%" stop-color="rgba(139,26,16,0)"/></radialGradient>
+      </defs>
+      <rect width="700" height="520" fill="url(#seaGrad)" rx="3"/>
+      <g stroke="rgba(160,140,100,0.12)" stroke-width="0.5"><line x1="0" y1="104" x2="700" y2="104"/><line x1="0" y1="208" x2="700" y2="208"/><line x1="0" y1="312" x2="700" y2="312"/><line x1="0" y1="416" x2="700" y2="416"/><line x1="140" y1="0" x2="140" y2="520"/><line x1="280" y1="0" x2="280" y2="520"/><line x1="420" y1="0" x2="420" y2="520"/><line x1="560" y1="0" x2="560" y2="520"/></g>
+      <path d="M 340 10 L 360 15 L 375 30 L 380 55 L 370 75 L 360 90 L 355 110 L 350 130 L 340 145 L 330 155 L 320 150 L 315 135 L 320 115 L 325 90 L 320 65 L 310 45 L 315 25 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <path d="M 355 110 L 375 105 L 395 100 L 410 110 L 415 130 L 405 150 L 390 160 L 375 155 L 360 145 L 355 130 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <path d="M 315 155 L 325 145 L 335 150 L 330 165 L 318 168 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <path d="M 105 80 L 120 70 L 140 75 L 155 90 L 160 110 L 155 135 L 145 155 L 130 165 L 115 160 L 100 148 L 98 125 L 100 100 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <path d="M 75 95 L 90 88 L 100 97 L 95 115 L 80 120 L 70 110 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <path d="M 155 175 L 175 168 L 210 165 L 240 168 L 265 175 L 280 190 L 278 215 L 265 235 L 250 248 L 230 258 L 205 260 L 180 252 L 162 238 L 150 218 L 148 198 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <path d="M 120 255 L 145 245 L 175 252 L 200 260 L 215 275 L 218 300 L 210 325 L 195 345 L 170 360 L 140 362 L 115 352 L 100 332 L 98 305 L 105 278 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <path d="M 215 155 L 240 148 L 270 148 L 300 150 L 330 155 L 355 162 L 375 178 L 385 200 L 378 225 L 360 245 L 335 258 L 305 265 L 278 260 L 265 245 L 265 225 L 278 210 L 280 190 L 265 175 L 240 168 L 215 165 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <path d="M 272 228 L 290 222 L 308 225 L 318 238 L 310 252 L 292 256 L 275 252 L 268 240 Z" fill="#cfc3a0" stroke="#a09060" stroke-width="1"/>
+      <path d="M 265 255 L 280 248 L 305 250 L 325 260 L 340 278 L 345 300 L 340 325 L 325 350 L 308 368 L 295 372 L 285 358 L 288 335 L 295 310 L 290 285 L 275 268 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <path d="M 355 155 L 390 148 L 425 145 L 455 150 L 475 168 L 470 195 L 450 215 L 420 225 L 390 222 L 365 215 L 350 200 L 352 178 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <path d="M 340 260 L 370 250 L 400 248 L 430 252 L 455 265 L 465 288 L 458 312 L 440 330 L 415 340 L 388 338 L 365 325 L 350 305 L 348 280 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <path d="M 410 108 L 450 100 L 510 95 L 560 98 L 600 110 L 620 135 L 615 165 L 590 185 L 555 195 L 515 198 L 480 190 L 455 175 L 445 155 L 425 145 Z" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <rect x="80" y="390" width="420" height="60" rx="4" fill="#d4c8a0" stroke="#b0a060" stroke-width="0.8"/>
+      <g font-family="Georgia, serif" fill="rgba(80,60,30,0.55)" font-style="italic">
+        <text x="120" y="125" font-size="9" text-anchor="middle">Anglia</text>
+        <text x="155" y="210" font-size="9" text-anchor="middle">Gallia</text>
+        <text x="155" y="305" font-size="9" text-anchor="middle">Hispania</text>
+        <text x="310" y="205" font-size="9" text-anchor="middle">Sacrum Romanum Imperium</text>
+        <text x="310" y="310" font-size="9" text-anchor="middle">Italia</text>
+        <text x="415" y="185" font-size="9" text-anchor="middle">Moscovia</text>
+        <text x="415" y="290" font-size="9" text-anchor="middle">Ottomannicum</text>
+        <text x="355" y="70" font-size="9" text-anchor="middle">Scandinavia</text>
+        <text x="250" y="430" font-size="9" text-anchor="middle">Africa Septentrionalis</text>
+      </g>
+      <ellipse cx="286" cy="237" rx="28" ry="20" fill="url(#genevaGlow)"/>
+      <circle cx="286" cy="237" r="5" fill="#8b1a10" stroke="#fff" stroke-width="1.5"/>
+      <circle cx="286" cy="237" r="9" fill="none" stroke="rgba(139,26,16,0.4)" stroke-width="1"><animate attributeName="r" from="5" to="18" dur="2s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" from="0.6" to="0" dur="2s" repeatCount="indefinite"/></circle>
+      <text x="294" y="232" font-size="9" font-family="Georgia, serif" fill="#8b1a10" font-weight="bold">Geneva</text>
+      <rect x="2" y="2" width="696" height="516" fill="none" stroke="rgba(160,140,100,0.4)" stroke-width="2" rx="3"/>
+      <g transform="translate(645,460)"><text x="0" y="-18" text-anchor="middle" font-size="9" font-family="Georgia" fill="#8b1a10" font-weight="bold">N</text><text x="0" y="12" text-anchor="middle" font-size="7" font-family="Georgia" fill="#9a8a6a">S</text><text x="-14" y="1" text-anchor="middle" font-size="7" font-family="Georgia" fill="#9a8a6a">W</text><text x="14" y="1" text-anchor="middle" font-size="7" font-family="Georgia" fill="#9a8a6a">E</text><line x1="0" y1="-14" x2="0" y2="8" stroke="#8b1a10" stroke-width="0.8"/><line x1="-10" y1="0" x2="10" y2="0" stroke="#9a8a6a" stroke-width="0.8"/></g>
+      <text x="25" y="500" font-size="8" font-family="'Courier New', monospace" fill="rgba(160,140,100,0.5)" letter-spacing="2">MDCII · 1602</text>
+    </svg>
+    <div style="position:absolute;left:43%;top:50%;transform:translateY(-110%);background:#fff9f0;border:1px solid #d4c8a0;border-radius:4px;padding:10px 13px;width:190px;font-size:0.72rem;color:#3a2a10;line-height:1.6;box-shadow:0 3px 10px rgba(0,0,0,0.12);pointer-events:none;">
+      <strong style="font-size:0.78rem;display:block;margin-bottom:4px;color:#8b1a10;letter-spacing:0.04em;">Geneva · 1602</strong>
+      A city of 15,000 souls. Protestant stronghold. Allied with Bern and the Swiss cantons.<br><br>
+      <em style="color:#9a7040;font-size:0.68rem;">Night of 11–12 December: the Escalade.</em>
+    </div>
+  </div>
+  <div class="legend"><div class="legend-dot"></div>Geneva, Republic · under Savoyard threat</div>
+</div>
+</body>
+</html>
