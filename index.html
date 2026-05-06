@@ -2850,6 +2850,137 @@ function showColorFamily(family) {
 }
 </script>
 
+<!-- ========== ITHACA MODAL (book page) ========== -->
+<style>
+  #modal-ithaca .ithaca-page {
+    max-width: 760px; width: 92%;
+    background: #ffffff;
+    color: #1a1a1a;
+    padding: 0;
+    border-radius: 4px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+    max-height: 90vh; overflow-y: auto;
+    position: relative;
+    font-family: 'Lora', Georgia, serif;
+  }
+  #modal-ithaca .ithaca-close {
+    position: absolute; top: 14px; right: 18px;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.78rem; color: #999;
+    cursor: pointer; user-select: none;
+    padding: 6px 10px; z-index: 5;
+    transition: color 0.2s;
+  }
+  #modal-ithaca .ithaca-close:hover { color: #1a1a1a; }
+  #modal-ithaca .ithaca-photo {
+    width: 100%; height: 320px; object-fit: cover; display: block;
+    border-radius: 4px 4px 0 0;
+  }
+  #modal-ithaca .ithaca-inner {
+    padding: 2.4rem 3rem 3rem;
+  }
+  #modal-ithaca .ithaca-eyebrow {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 0.6rem;
+  }
+  #modal-ithaca .ithaca-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 0.2rem;
+    color: #1a1a1a;
+  }
+  #modal-ithaca .ithaca-byline {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.86rem;
+    font-style: italic;
+    color: #666;
+    margin-bottom: 2.4rem;
+  }
+  #modal-ithaca .ithaca-stanza {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.18rem;
+    line-height: 1.85;
+    text-align: center;
+    margin: 2rem 0 1rem;
+    color: #1a1a1a;
+  }
+  #modal-ithaca .ithaca-stanza .ithaca-bold {
+    font-weight: 700;
+    display: block;
+  }
+  #modal-ithaca .ithaca-attribution {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.75rem;
+    font-style: italic;
+    color: #999;
+    text-align: center;
+    margin-bottom: 2.6rem;
+  }
+  #modal-ithaca .ithaca-divider {
+    width: 60px; height: 1px;
+    background: #ddd;
+    margin: 0 auto 2.4rem;
+  }
+  #modal-ithaca .ithaca-body p {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #2a2a2a;
+    margin-bottom: 1.4rem;
+  }
+  #modal-ithaca .ithaca-body p:first-child::first-letter {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 3.4rem;
+    line-height: 0.9;
+    float: left;
+    margin: 0.2rem 0.6rem 0 0;
+    color: #c9a443;
+    font-weight: 600;
+  }
+</style>
+<div class="modal-backdrop" id="modal-ithaca">
+  <div class="ithaca-page">
+    <span class="ithaca-close" onclick="closeModal('modal-ithaca')">close ×</span>
+    <img src="img/san_luca.jpeg" alt="San Luca, Bologna" class="ithaca-photo" />
+    <div class="ithaca-inner">
+      <div class="ithaca-eyebrow">From the library</div>
+      <h1 class="ithaca-title">Ithaca</h1>
+      <div class="ithaca-byline">Constantine P. Cavafy, 1911</div>
+
+      <div class="ithaca-stanza">
+        <span class="ithaca-bold">Keep Ithaca always in your mind.</span>
+        <span class="ithaca-bold">Arriving there is what you're destined for.</span>
+        But don't hurry the journey at all.<br/>
+        Better if it lasts for years.
+      </div>
+      <div class="ithaca-attribution">from Cavafy, "Ithaca"</div>
+      <div class="ithaca-divider"></div>
+
+      <div class="ithaca-body">
+        <p>For me, coming home means seeing San Luca on the way back from a long journey, hidden, or rather protected, by the green hills. I am in a season of my life when I still want many experiences: to learn, to grow, to discover those parts of yourself that only show themselves when you are far from where you grew up. I want to be surrounded by stimulating people, to live moments I will one day know how to tell, and at the same time to listen to the stories of people who have already walked different roads.</p>
+
+        <p>I think this is why I love podcasts so much: there is something deeply rewarding in following someone else's path, in seeing how life's sliding doors have brought them exactly where they are now.</p>
+
+        <p>For me, Ithaca is not a new place. It is returning somewhere I have already been, still myself but a little different. Like when you reread a classic: the book is the same, but you are the one who has changed.</p>
+
+        <p>I love the idea that living in different places lets you take a small piece from each. In mindset, I feel 100% American: I love that kindness is contagious, that one extra compliment or one small gesture of care will always beat pessimism and individualism. And I am also a little Swiss, because I am made of layers (a semi-quote from Shrek), and sometimes I need time before I let someone in.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openIthacaModal() {
+  document.getElementById('modal-ithaca').classList.add('open');
+}
+</script>
+
 <div class="modal-backdrop" id="modal-baseball">
   <div class="parchment-window" style="max-width:900px;">
     <div class="parchment-header">
@@ -4998,7 +5129,7 @@ const HL_BOOKS = [
     review: 'To be read on a train, in summer, slowly.' },
   { title: 'My Brilliant Friend', author: 'Elena Ferrante', color: '#5c3a1a', text: '#f5e0c8',
     review: 'Still confused about who I\'m rooting for. Four books in.' },
-  { title: 'Ithaca', author: 'Constantinos Cavafy', color: '#1a4a5a', text: '#c8f0f5',
+  { title: 'Ithaca', author: 'Constantinos Cavafy', color: '#c9a443', text: '#1a1208', expanded: true,
     review: 'For us Bolognesi, Ithaca is San Luca. When it appears between the hills on the way back from a journey, you know you\'re home.' },
   { title: 'Chronicle of a Death Foretold', author: 'Gabriel García Márquez', color: '#4a1a1a', text: '#f5c8c8',
     review: 'A good study in how small towns work. And don\'t.' },
@@ -5408,6 +5539,12 @@ function buildHiddenLibrary() {
       reviewPanel.style.opacity = '0';
       reviewPanel.style.pointerEvents = 'none';
     });
+
+    // Books with expanded=true open a dedicated modal on click
+    if (b.expanded === true && b.title === 'Ithaca') {
+      cover.style.cursor = 'pointer';
+      cover.addEventListener('click', () => openIthacaModal());
+    }
 
     const authorEl = document.createElement('div');
     authorEl.style.cssText = `
