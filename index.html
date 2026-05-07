@@ -2629,10 +2629,7 @@
         </div>
         <div>
           <div class="wada-trigger" onclick="openWadaModal()" role="button" tabindex="0">
-            <div class="wada-trigger-eyebrow">A Dictionary of</div>
-            <div class="wada-trigger-title">Colour<br/>Combinations</div>
-            <div class="wada-trigger-rule"></div>
-            <div class="wada-trigger-byline">Sanzo Wada · Tokyo · 1933</div>
+            <img src="img/colors/wada_cover.webp" alt="A Dictionary of Color Combinations, Sanzo Wada, Seigensha 1933" class="wada-trigger-img" />
             <div class="wada-trigger-cta">leaf through the book →</div>
           </div>
           <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#999;margin-bottom:0.5rem;">Sanzo Wada · Tokyo · 1933</p>
@@ -2871,18 +2868,19 @@ function showColorFamily(family) {
     font-family: 'Lora', Georgia, serif;
     font-size: 0.78rem; color: #888;
     cursor: pointer; user-select: none;
-    padding: 6px 10px; z-index: 50;
+    padding: 6px 10px; z-index: 200;
     transition: color 0.2s;
   }
   #modal-wada .wada-close:hover { color: #1a1a1a; }
   #modal-wada .wada-book {
     perspective: 2200px;
     width: 100%; max-width: 540px;
-    aspect-ratio: 0.78 / 1;
+    aspect-ratio: 0.72 / 1;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
     border-radius: 2px 4px 4px 2px;
+    background: #faf6ec;
   }
   #modal-wada .wada-page {
     position: absolute; inset: 0;
@@ -2890,7 +2888,6 @@ function showColorFamily(family) {
     transform-origin: left center;
     transition: transform 1.05s cubic-bezier(0.4, 0.0, 0.2, 1);
     cursor: pointer;
-    background: #faf6ec;
     box-shadow: inset 4px 0 0 rgba(0,0,0,0.04), 0 2px 12px rgba(0,0,0,0.10);
   }
   #modal-wada .wada-page.flipped { transform: rotateY(-180deg); }
@@ -2902,52 +2899,17 @@ function showColorFamily(family) {
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     overflow: hidden;
-    padding: 2.2rem 2rem;
-    box-sizing: border-box;
   }
   #modal-wada .wada-back { transform: rotateY(180deg); background: #f5efe2; }
-  #modal-wada .wada-cover {
-    background: linear-gradient(135deg, #e8d8a8 0%, #d4ba75 50%, #b59850 100%);
-    color: #2a1f10;
-    text-align: center;
-  }
-  #modal-wada .wada-cover-eyebrow {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 0.78rem; letter-spacing: 0.32em; text-transform: uppercase;
-    margin-bottom: 0.4rem; opacity: 0.7;
-  }
-  #modal-wada .wada-cover-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 2.2rem; font-weight: 600; line-height: 1.05;
-    letter-spacing: 0.02em; margin-bottom: 1.6rem;
-  }
-  #modal-wada .wada-cover-rule {
-    width: 60px; height: 1px; background: #2a1f10; margin: 0 auto 1.4rem;
-    opacity: 0.4;
-  }
-  #modal-wada .wada-cover-byline {
-    font-family: 'Lora', Georgia, serif;
-    font-style: italic; font-size: 0.86rem;
-  }
-  #modal-wada .wada-cover-year {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 0.9rem; letter-spacing: 0.18em;
-    margin-top: 0.4rem; opacity: 0.6;
-  }
-  #modal-wada .wada-plate {
-    padding: 0; display: block; background: #faf6ec;
-  }
+  #modal-wada .wada-plate { padding: 0; }
   #modal-wada .wada-plate img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
+    width: 100%; height: 100%; object-fit: contain; object-position: center;
+    background: #faf6ec; display: block;
   }
-  #modal-wada .wada-folio {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic; font-size: 0.7rem; color: #888;
-    position: absolute; bottom: 12px; left: 0; right: 0; text-align: center;
-  }
+  #modal-wada .wada-cover-face img { object-fit: cover; }
   #modal-wada .wada-note {
     text-align: left; align-items: flex-start; justify-content: flex-start;
-    padding: 2.6rem 2rem 2.6rem;
+    padding: 2.4rem 1.8rem;
   }
   #modal-wada .wada-note-eyebrow {
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -2956,13 +2918,13 @@ function showColorFamily(family) {
   }
   #modal-wada .wada-note h4 {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.6rem; font-weight: 600; line-height: 1.15;
-    color: #1a1a1a; margin-bottom: 1.2rem;
+    font-size: 1.5rem; font-weight: 600; line-height: 1.15;
+    color: #1a1a1a; margin-bottom: 1rem;
   }
   #modal-wada .wada-note p {
     font-family: 'Lora', Georgia, serif;
-    font-size: 0.92rem; line-height: 1.78;
-    color: #333; margin-bottom: 1rem;
+    font-size: 0.86rem; line-height: 1.78;
+    color: #333; margin-bottom: 0.9rem;
   }
   #modal-wada .wada-controls {
     display: flex; justify-content: space-between; align-items: center;
@@ -2984,50 +2946,33 @@ function showColorFamily(family) {
   #modal-wada .wada-folio-counter {
     font-style: italic; letter-spacing: 0.12em;
   }
-  /* The trigger card in the Atlas section */
+  /* Trigger card in the Atlas section: now a real cover image */
   .wada-trigger {
     cursor: pointer;
-    background: linear-gradient(135deg, #e8d8a8 0%, #d4ba75 50%, #b59850 100%);
-    color: #2a1f10;
-    border-radius: 2px;
-    padding: 2rem 1.4rem;
-    text-align: center;
+    background: transparent;
+    padding: 0;
     margin-bottom: 1.2rem;
-    box-shadow: 3px 4px 12px rgba(0,0,0,0.18);
+    box-shadow: 3px 4px 14px rgba(0,0,0,0.18);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
-  }
-  .wada-trigger::before {
-    content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
-    width: 1px; background: rgba(0,0,0,0.18);
+    border-radius: 2px;
   }
   .wada-trigger:hover {
     transform: translateY(-3px);
     box-shadow: 5px 8px 22px rgba(0,0,0,0.28);
   }
-  .wada-trigger-eyebrow {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
-    opacity: 0.68; margin-bottom: 0.4rem;
-  }
-  .wada-trigger-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.5rem; font-weight: 600; line-height: 1.1;
-    letter-spacing: 0.01em; margin-bottom: 0.9rem;
-  }
-  .wada-trigger-rule {
-    width: 40px; height: 1px; background: #2a1f10;
-    margin: 0 auto 0.8rem; opacity: 0.4;
-  }
-  .wada-trigger-byline {
-    font-family: 'Lora', Georgia, serif;
-    font-style: italic; font-size: 0.7rem;
+  .wada-trigger-img {
+    width: 100%; height: auto; display: block;
+    border-radius: 2px;
   }
   .wada-trigger-cta {
     font-family: 'Lora', Georgia, serif;
-    font-size: 0.62rem; font-style: italic;
-    margin-top: 1rem; opacity: 0.65;
+    font-size: 0.66rem; font-style: italic;
+    text-align: center;
+    color: rgba(0,0,0,0.65);
+    padding: 0.6rem 0;
+    background: #faf6ec;
   }
 </style>
 
@@ -3036,8 +2981,8 @@ function showColorFamily(family) {
     <span class="wada-close" onclick="closeModal('modal-wada')">close ×</span>
 
     <div class="wada-book" id="wada-book">
-      <!-- Page 4 (closing note) — at bottom of stack -->
-      <div class="wada-page" data-idx="3" style="z-index:2;">
+      <!-- Page 15 (postscript) - bottom of stack -->
+      <div class="wada-page" data-idx="14" style="z-index:2;">
         <div class="wada-face wada-note">
           <div class="wada-note-eyebrow">Postscript</div>
           <h4>Wada knew it first.</h4>
@@ -3046,30 +2991,101 @@ function showColorFamily(family) {
         </div>
         <div class="wada-face wada-back"></div>
       </div>
-      <!-- Page 3 (plate 2) -->
-      <div class="wada-page" data-idx="2" style="z-index:4;">
+      <!-- Plate 13: wada_plate_13.jpg -->
+      <div class="wada-page" data-idx="13" style="z-index:4;">
         <div class="wada-face wada-plate">
-          <img src="img/colors/wada2.jpg" alt="Sanzo Wada plate II"/>
-          <div class="wada-folio">II</div>
+          <img src="img/colors/wada_plate_13.jpg" alt="Sanzo Wada Light Brownish Olive · Deep Slate Green · Dusky Green · Blackish Olive" loading="lazy"/>
         </div>
         <div class="wada-face wada-back"></div>
       </div>
-      <!-- Page 2 (plate 1) -->
-      <div class="wada-page" data-idx="1" style="z-index:6;">
+      <!-- Plate 12: wada_plate_12.jpg -->
+      <div class="wada-page" data-idx="12" style="z-index:6;">
         <div class="wada-face wada-plate">
-          <img src="img/colors/wada.jpg" alt="Sanzo Wada plate I"/>
-          <div class="wada-folio">I</div>
+          <img src="img/colors/wada_plate_12.jpg" alt="Sanzo Wada Laelia Pink · Olive · Sulphur Yellow · Corinthian Pink" loading="lazy"/>
         </div>
         <div class="wada-face wada-back"></div>
       </div>
-      <!-- Page 1 (cover) — top of stack -->
-      <div class="wada-page" data-idx="0" style="z-index:8;">
-        <div class="wada-face wada-cover">
-          <div class="wada-cover-eyebrow">A Dictionary of</div>
-          <div class="wada-cover-title">Colour<br/>Combinations</div>
-          <div class="wada-cover-rule"></div>
-          <div class="wada-cover-byline">Sanzo Wada</div>
-          <div class="wada-cover-year">Tokyo · 1933</div>
+      <!-- Plate 11: wada_plate_11.jpg -->
+      <div class="wada-page" data-idx="11" style="z-index:8;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada_plate_11.jpg" alt="Sanzo Wada Vistoris Lake · Violet Carmine · Black · Laelia Pink" loading="lazy"/>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Plate 10: wada_plate_10.webp -->
+      <div class="wada-page" data-idx="10" style="z-index:10;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada_plate_10.webp" alt="Sanzo Wada Plates 281-282" loading="lazy"/>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Plate 9: wada_plate_09.webp -->
+      <div class="wada-page" data-idx="9" style="z-index:12;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada_plate_09.webp" alt="Sanzo Wada Plates 263-264" loading="lazy"/>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Plate 8: wada_plate_08.jpg -->
+      <div class="wada-page" data-idx="8" style="z-index:14;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada_plate_08.jpg" alt="Sanzo Wada Plate 237 — Carmine Red · Salvia Blue · Madder Brown" loading="lazy"/>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Plate 7: wada_plate_07.jpg -->
+      <div class="wada-page" data-idx="7" style="z-index:16;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada_plate_07.jpg" alt="Sanzo Wada Plate 230 — Sulphur Yellow · Salvia Blue · Light Brown Drab · Deep Slate Olive" loading="lazy"/>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Plate 6: wada_plate_06.jpg -->
+      <div class="wada-page" data-idx="6" style="z-index:18;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada_plate_06.jpg" alt="Sanzo Wada Plate 209 — Yellow Orange · Salvia Blue · Ivory Buff" loading="lazy"/>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Plate 5: wada_plate_05.jpg -->
+      <div class="wada-page" data-idx="5" style="z-index:20;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada_plate_05.jpg" alt="Sanzo Wada Plates 199-200" loading="lazy"/>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Plate 4: wada_plate_04.webp -->
+      <div class="wada-page" data-idx="4" style="z-index:22;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada_plate_04.webp" alt="Sanzo Wada Plates 185-188" loading="lazy"/>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Plate 3: wada_plate_03.jpg -->
+      <div class="wada-page" data-idx="3" style="z-index:24;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada_plate_03.jpg" alt="Sanzo Wada Plate 147 — Turquoise Green · Vandyke Red · Spinel Red" loading="lazy"/>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Plate 2: wada_plate_02.jpg -->
+      <div class="wada-page" data-idx="2" style="z-index:26;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada_plate_02.jpg" alt="Sanzo Wada Plate 35 — Salvia Blue · Sulphur Yellow · Cossack Green" loading="lazy"/>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Plate 1: wada_plate_01.webp -->
+      <div class="wada-page" data-idx="1" style="z-index:28;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada_plate_01.webp" alt="Sanzo Wada Plates 33-36" loading="lazy"/>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Page 1: cover (top of stack) -->
+      <div class="wada-page" data-idx="0" style="z-index:30;">
+        <div class="wada-face wada-plate wada-cover-face">
+          <img src="img/colors/wada_cover.webp" alt="A Dictionary of Color Combinations - Sanzo Wada, Seigensha 1933"/>
         </div>
         <div class="wada-face wada-back"></div>
       </div>
@@ -3077,18 +3093,17 @@ function showColorFamily(family) {
 
     <div class="wada-controls">
       <button class="wada-btn" id="wada-prev" onclick="wadaPrev()">← previous</button>
-      <span class="wada-folio-counter" id="wada-counter">page 1 of 4</span>
+      <span class="wada-folio-counter" id="wada-counter">page 1 of 15</span>
       <button class="wada-btn" id="wada-next" onclick="wadaNext()">next →</button>
     </div>
   </div>
 </div>
 
 <script>
-let wadaIdx = 0; // index of next page to flip (0 = cover still visible)
-const wadaTotal = 4;
+let wadaIdx = 0;
+const wadaTotal = 15;
 
 function openWadaModal() {
-  // reset flips
   document.querySelectorAll('#modal-wada .wada-page').forEach(p => p.classList.remove('flipped'));
   wadaIdx = 0;
   updateWadaUI();
@@ -3097,7 +3112,6 @@ function openWadaModal() {
 
 function wadaNext() {
   if (wadaIdx >= wadaTotal - 1) return;
-  // Flip the page with data-idx = wadaIdx
   const target = document.querySelector('#modal-wada .wada-page[data-idx="' + wadaIdx + '"]');
   if (target) target.classList.add('flipped');
   wadaIdx++;
@@ -3116,15 +3130,11 @@ function updateWadaUI() {
   document.getElementById('wada-counter').textContent = 'page ' + (wadaIdx + 1) + ' of ' + wadaTotal;
   document.getElementById('wada-prev').disabled = (wadaIdx === 0);
   document.getElementById('wada-next').disabled = (wadaIdx >= wadaTotal - 1);
-  // Click anywhere on top page to advance
-  document.querySelectorAll('#modal-wada .wada-page').forEach(p => {
-    p.onclick = null;
-  });
+  document.querySelectorAll('#modal-wada .wada-page').forEach(p => { p.onclick = null; });
   const top = document.querySelector('#modal-wada .wada-page[data-idx="' + wadaIdx + '"]');
   if (top) top.onclick = function() { wadaNext(); };
 }
 
-// Keyboard support when modal is open
 document.addEventListener('keydown', function(e) {
   if (!document.getElementById('modal-wada').classList.contains('open')) return;
   if (e.key === 'ArrowRight') wadaNext();
