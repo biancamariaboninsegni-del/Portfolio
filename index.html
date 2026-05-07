@@ -2628,8 +2628,13 @@
           <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:0.6rem;color:#bbb;margin-top:0.8rem;">Santa Felicita, Florence · cf. Shearman, Mannerism, Penguin, 1967</p>
         </div>
         <div>
-          <img src="img/colors/wada.jpg" style="width:100%;border-radius:2px;margin-bottom:0.6rem;" alt="Sanzo Wada Dictionary 1933" />
-          <img src="img/colors/wada2.jpg" style="width:100%;border-radius:2px;margin-bottom:1.2rem;" alt="Sanzo Wada colour combinations" />
+          <div class="wada-trigger" onclick="openWadaModal()" role="button" tabindex="0">
+            <div class="wada-trigger-eyebrow">A Dictionary of</div>
+            <div class="wada-trigger-title">Colour<br/>Combinations</div>
+            <div class="wada-trigger-rule"></div>
+            <div class="wada-trigger-byline">Sanzo Wada · Tokyo · 1933</div>
+            <div class="wada-trigger-cta">leaf through the book →</div>
+          </div>
           <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#999;margin-bottom:0.5rem;">Sanzo Wada · Tokyo · 1933</p>
           <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1rem;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:0.9rem;">348 combinations. Colours studied together, not alone.</h3>
           <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:0.92rem;color:#333;line-height:1.75;margin-bottom:0.8rem;">Sanzo Wada published his dictionary in 1933: 348 colour combinations built from 159 carefully selected colours, each assembled by hand. He did not study colours alone. He studied how they behave <strong>together</strong>.</p>
@@ -2848,6 +2853,284 @@ function showColorFamily(family) {
   board.style.display = 'block';
   board.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
+</script>
+
+<!-- ========== WADA FLIP-BOOK MODAL ========== -->
+<style>
+  #modal-wada .wada-stage {
+    width: 92%; max-width: 720px;
+    background: #f4ede0;
+    border-radius: 4px;
+    padding: 2.4rem 2rem 1.6rem;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+    position: relative;
+    max-height: 92vh; overflow-y: auto;
+  }
+  #modal-wada .wada-close {
+    position: absolute; top: 14px; right: 18px;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.78rem; color: #888;
+    cursor: pointer; user-select: none;
+    padding: 6px 10px; z-index: 50;
+    transition: color 0.2s;
+  }
+  #modal-wada .wada-close:hover { color: #1a1a1a; }
+  #modal-wada .wada-book {
+    perspective: 2200px;
+    width: 100%; max-width: 540px;
+    aspect-ratio: 0.78 / 1;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px 4px 4px 2px;
+  }
+  #modal-wada .wada-page {
+    position: absolute; inset: 0;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    transition: transform 1.05s cubic-bezier(0.4, 0.0, 0.2, 1);
+    cursor: pointer;
+    background: #faf6ec;
+    box-shadow: inset 4px 0 0 rgba(0,0,0,0.04), 0 2px 12px rgba(0,0,0,0.10);
+  }
+  #modal-wada .wada-page.flipped { transform: rotateY(-180deg); }
+  #modal-wada .wada-face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: #faf6ec;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    overflow: hidden;
+    padding: 2.2rem 2rem;
+    box-sizing: border-box;
+  }
+  #modal-wada .wada-back { transform: rotateY(180deg); background: #f5efe2; }
+  #modal-wada .wada-cover {
+    background: linear-gradient(135deg, #e8d8a8 0%, #d4ba75 50%, #b59850 100%);
+    color: #2a1f10;
+    text-align: center;
+  }
+  #modal-wada .wada-cover-eyebrow {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.78rem; letter-spacing: 0.32em; text-transform: uppercase;
+    margin-bottom: 0.4rem; opacity: 0.7;
+  }
+  #modal-wada .wada-cover-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.2rem; font-weight: 600; line-height: 1.05;
+    letter-spacing: 0.02em; margin-bottom: 1.6rem;
+  }
+  #modal-wada .wada-cover-rule {
+    width: 60px; height: 1px; background: #2a1f10; margin: 0 auto 1.4rem;
+    opacity: 0.4;
+  }
+  #modal-wada .wada-cover-byline {
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic; font-size: 0.86rem;
+  }
+  #modal-wada .wada-cover-year {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.9rem; letter-spacing: 0.18em;
+    margin-top: 0.4rem; opacity: 0.6;
+  }
+  #modal-wada .wada-plate {
+    padding: 0; display: block; background: #faf6ec;
+  }
+  #modal-wada .wada-plate img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  #modal-wada .wada-folio {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic; font-size: 0.7rem; color: #888;
+    position: absolute; bottom: 12px; left: 0; right: 0; text-align: center;
+  }
+  #modal-wada .wada-note {
+    text-align: left; align-items: flex-start; justify-content: flex-start;
+    padding: 2.6rem 2rem 2.6rem;
+  }
+  #modal-wada .wada-note-eyebrow {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #999; margin-bottom: 0.6rem;
+  }
+  #modal-wada .wada-note h4 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.6rem; font-weight: 600; line-height: 1.15;
+    color: #1a1a1a; margin-bottom: 1.2rem;
+  }
+  #modal-wada .wada-note p {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.92rem; line-height: 1.78;
+    color: #333; margin-bottom: 1rem;
+  }
+  #modal-wada .wada-controls {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 540px; margin: 1.2rem auto 0;
+    font-family: 'Lora', Georgia, serif;
+    color: #888; font-size: 0.78rem;
+  }
+  #modal-wada .wada-btn {
+    background: none; border: 1px solid rgba(0,0,0,0.12);
+    color: #555; padding: 8px 16px;
+    border-radius: 2px; cursor: pointer;
+    font-family: 'Lora', Georgia, serif; font-size: 0.78rem;
+    transition: all 0.2s;
+  }
+  #modal-wada .wada-btn:hover:not(:disabled) {
+    background: #1a1a1a; color: #faf6ec; border-color: #1a1a1a;
+  }
+  #modal-wada .wada-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  #modal-wada .wada-folio-counter {
+    font-style: italic; letter-spacing: 0.12em;
+  }
+  /* The trigger card in the Atlas section */
+  .wada-trigger {
+    cursor: pointer;
+    background: linear-gradient(135deg, #e8d8a8 0%, #d4ba75 50%, #b59850 100%);
+    color: #2a1f10;
+    border-radius: 2px;
+    padding: 2rem 1.4rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    box-shadow: 3px 4px 12px rgba(0,0,0,0.18);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .wada-trigger::before {
+    content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+    width: 1px; background: rgba(0,0,0,0.18);
+  }
+  .wada-trigger:hover {
+    transform: translateY(-3px);
+    box-shadow: 5px 8px 22px rgba(0,0,0,0.28);
+  }
+  .wada-trigger-eyebrow {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
+    opacity: 0.68; margin-bottom: 0.4rem;
+  }
+  .wada-trigger-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.5rem; font-weight: 600; line-height: 1.1;
+    letter-spacing: 0.01em; margin-bottom: 0.9rem;
+  }
+  .wada-trigger-rule {
+    width: 40px; height: 1px; background: #2a1f10;
+    margin: 0 auto 0.8rem; opacity: 0.4;
+  }
+  .wada-trigger-byline {
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic; font-size: 0.7rem;
+  }
+  .wada-trigger-cta {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.62rem; font-style: italic;
+    margin-top: 1rem; opacity: 0.65;
+  }
+</style>
+
+<div class="modal-backdrop" id="modal-wada">
+  <div class="wada-stage">
+    <span class="wada-close" onclick="closeModal('modal-wada')">close ×</span>
+
+    <div class="wada-book" id="wada-book">
+      <!-- Page 4 (closing note) — at bottom of stack -->
+      <div class="wada-page" data-idx="3" style="z-index:2;">
+        <div class="wada-face wada-note">
+          <div class="wada-note-eyebrow">Postscript</div>
+          <h4>Wada knew it first.</h4>
+          <p>In 1933, in Tokyo, Sanzo Wada published a dictionary of 348 colour combinations built from 159 carefully chosen colours, each plate assembled by hand. He did not study colours alone. He studied how they behave together.</p>
+          <p>Thirty years later, Josef Albers would arrive at the same conclusion at Yale: <em>"In visual perception, a colour is almost never seen as it really is."</em> Wada had already known it. He just never wrote it down as theory.</p>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Page 3 (plate 2) -->
+      <div class="wada-page" data-idx="2" style="z-index:4;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada2.jpg" alt="Sanzo Wada plate II"/>
+          <div class="wada-folio">II</div>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Page 2 (plate 1) -->
+      <div class="wada-page" data-idx="1" style="z-index:6;">
+        <div class="wada-face wada-plate">
+          <img src="img/colors/wada.jpg" alt="Sanzo Wada plate I"/>
+          <div class="wada-folio">I</div>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+      <!-- Page 1 (cover) — top of stack -->
+      <div class="wada-page" data-idx="0" style="z-index:8;">
+        <div class="wada-face wada-cover">
+          <div class="wada-cover-eyebrow">A Dictionary of</div>
+          <div class="wada-cover-title">Colour<br/>Combinations</div>
+          <div class="wada-cover-rule"></div>
+          <div class="wada-cover-byline">Sanzo Wada</div>
+          <div class="wada-cover-year">Tokyo · 1933</div>
+        </div>
+        <div class="wada-face wada-back"></div>
+      </div>
+    </div>
+
+    <div class="wada-controls">
+      <button class="wada-btn" id="wada-prev" onclick="wadaPrev()">← previous</button>
+      <span class="wada-folio-counter" id="wada-counter">page 1 of 4</span>
+      <button class="wada-btn" id="wada-next" onclick="wadaNext()">next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let wadaIdx = 0; // index of next page to flip (0 = cover still visible)
+const wadaTotal = 4;
+
+function openWadaModal() {
+  // reset flips
+  document.querySelectorAll('#modal-wada .wada-page').forEach(p => p.classList.remove('flipped'));
+  wadaIdx = 0;
+  updateWadaUI();
+  document.getElementById('modal-wada').classList.add('open');
+}
+
+function wadaNext() {
+  if (wadaIdx >= wadaTotal - 1) return;
+  // Flip the page with data-idx = wadaIdx
+  const target = document.querySelector('#modal-wada .wada-page[data-idx="' + wadaIdx + '"]');
+  if (target) target.classList.add('flipped');
+  wadaIdx++;
+  updateWadaUI();
+}
+
+function wadaPrev() {
+  if (wadaIdx <= 0) return;
+  wadaIdx--;
+  const target = document.querySelector('#modal-wada .wada-page[data-idx="' + wadaIdx + '"]');
+  if (target) target.classList.remove('flipped');
+  updateWadaUI();
+}
+
+function updateWadaUI() {
+  document.getElementById('wada-counter').textContent = 'page ' + (wadaIdx + 1) + ' of ' + wadaTotal;
+  document.getElementById('wada-prev').disabled = (wadaIdx === 0);
+  document.getElementById('wada-next').disabled = (wadaIdx >= wadaTotal - 1);
+  // Click anywhere on top page to advance
+  document.querySelectorAll('#modal-wada .wada-page').forEach(p => {
+    p.onclick = null;
+  });
+  const top = document.querySelector('#modal-wada .wada-page[data-idx="' + wadaIdx + '"]');
+  if (top) top.onclick = function() { wadaNext(); };
+}
+
+// Keyboard support when modal is open
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('modal-wada').classList.contains('open')) return;
+  if (e.key === 'ArrowRight') wadaNext();
+  else if (e.key === 'ArrowLeft') wadaPrev();
+  else if (e.key === 'Escape') document.getElementById('modal-wada').classList.remove('open');
+});
 </script>
 
 <!-- ========== ITHACA MODAL (book page) ========== -->
