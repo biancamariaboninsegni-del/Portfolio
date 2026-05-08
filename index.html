@@ -2852,6 +2852,113 @@ function showColorFamily(family) {
 }
 </script>
 
+<!-- ========== BOOK REVIEW MODAL ========== -->
+<style>
+  #modal-book-review .br-page {
+    width: 92%; max-width: 640px;
+    background: #ffffff;
+    color: #1a1a1a;
+    border-radius: 4px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+    max-height: 92vh; overflow-y: auto;
+    position: relative;
+    font-family: 'Lora', Georgia, serif;
+  }
+  #modal-book-review .br-close {
+    position: absolute; top: 14px; right: 18px;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.78rem; color: #888;
+    cursor: pointer; user-select: none;
+    padding: 6px 10px; z-index: 5;
+    transition: color 0.2s;
+  }
+  #modal-book-review .br-close:hover { color: #1a1a1a; }
+  #modal-book-review .br-cover {
+    width: 100%; max-height: 320px; object-fit: contain;
+    background: #f4ede0; display: block;
+    border-radius: 4px 4px 0 0;
+  }
+  #modal-book-review .br-cover-fallback {
+    width: 100%; height: 220px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 4px 4px 0 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.6rem; font-style: italic;
+    text-align: center; padding: 1.2rem;
+    line-height: 1.25;
+  }
+  #modal-book-review .br-inner {
+    padding: 2rem 2.4rem 2.6rem;
+  }
+  #modal-book-review .br-eyebrow {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.7rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: #999;
+    margin-bottom: 0.5rem;
+  }
+  #modal-book-review .br-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.7rem; font-weight: 600;
+    line-height: 1.15;
+    color: #1a1a1a;
+    margin-bottom: 0.3rem;
+  }
+  #modal-book-review .br-author {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.9rem; font-style: italic;
+    color: #666;
+    margin-bottom: 1.6rem;
+  }
+  #modal-book-review .br-divider {
+    width: 50px; height: 1px;
+    background: #ddd;
+    margin-bottom: 1.6rem;
+  }
+  #modal-book-review .br-review {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.02rem;
+    line-height: 1.85;
+    color: #2a2a2a;
+    white-space: pre-wrap;
+  }
+</style>
+<div class="modal-backdrop" id="modal-book-review">
+  <div class="br-page">
+    <span class="br-close" onclick="closeModal('modal-book-review')">close ×</span>
+    <img id="br-cover" class="br-cover" src="" alt="" style="display:none;" />
+    <div id="br-cover-fallback" class="br-cover-fallback" style="display:none;"></div>
+    <div class="br-inner">
+      <div class="br-eyebrow">From the library</div>
+      <h1 class="br-title" id="br-title"></h1>
+      <div class="br-author" id="br-author"></div>
+      <div class="br-divider"></div>
+      <div class="br-review" id="br-review"></div>
+    </div>
+  </div>
+</div>
+<script>
+function openBookReview(book) {
+  document.getElementById('br-title').textContent = book.title;
+  document.getElementById('br-author').textContent = book.author;
+  document.getElementById('br-review').textContent = book.review || '';
+  var img = document.getElementById('br-cover');
+  var fb = document.getElementById('br-cover-fallback');
+  if (book.cover) {
+    img.src = book.cover;
+    img.alt = book.title;
+    img.style.display = 'block';
+    fb.style.display = 'none';
+  } else {
+    img.style.display = 'none';
+    fb.style.display = 'flex';
+    fb.style.background = book.color || '#1a1a1a';
+    fb.style.color = book.text || '#fff';
+    fb.textContent = book.title;
+  }
+  document.getElementById('modal-book-review').classList.add('open');
+}
+</script>
+
 <!-- ========== WADA FLIP-BOOK MODAL ========== -->
 <style>
   #modal-wada { z-index: 200; }
@@ -5371,17 +5478,17 @@ function startFLCanvas() {
 // ============================================================
 
 const HL_BOOKS = [
-  { title: 'Brave New World', author: 'Aldous Huxley', color: '#1a2a3a', text: '#c8d8f0',
+  { title: 'Brave New World', author: 'Aldous Huxley', color: '#1a2a3a', text: '#c8d8f0', cover: 'img/library/brave_new_world.jpg',
     review: 'Reassuring proof that things could be worse.' },
-  { title: 'Amore e Psiche', author: 'Apuleius', color: '#5a3a1a', text: '#f5dcc8',
+  { title: 'Amore e Psiche', author: 'Apuleius', color: '#5a3a1a', text: '#f5dcc8', cover: 'img/library/amore_psiche.jpg',
     review: '\'Night fell, and after love\'s skirmishes...\' \u2013 Apuleius wrote this in 150 AD. Nobody has done it better since.' },
-  { title: "A Room of One's Own", author: 'Virginia Woolf', color: '#3a1a4a', text: '#eac8f5',
+  { title: "A Room of One's Own", author: 'Virginia Woolf', color: '#3a1a4a', text: '#eac8f5', cover: 'img/library/room_of_ones_own.jpg',
     review: 'Virginia Woolf said what she said.' },
   { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', color: '#2a5f4f', text: '#c8e6c9', cover: 'img/library/great_gatsby.jpg',
     review: 'Five stars for the prose. Zero stars for the decision-making.' },
   { title: 'The Lion, the Witch and the Wardrobe', author: 'C.S. Lewis', color: '#5c3d1e', text: '#f5e6cc', cover: 'img/library/lion_witch_wardrobe.jpg',
     review: 'Not a teenager anymore but I will always love this.' },
-  { title: 'Orlando Furioso', author: 'Ludovico Ariosto', color: '#4a1a2a', text: '#f5c8d0',
+  { title: 'Orlando Furioso', author: 'Ludovico Ariosto', color: '#4a1a2a', text: '#f5c8d0', cover: 'img/library/orlando_furioso.jpg',
     review: 'An epic poem about a knight who loses his mind over a woman. The rest is details.' },
   { title: 'Inferno', author: 'Dante Alighieri', color: '#8b1a1a', text: '#ffd0d0', cover: 'img/library/inferno.jpg',
     review: 'Dante spent eternity ranking people he didn\'t like. Relatable.' },
@@ -5395,7 +5502,7 @@ const HL_BOOKS = [
     review: 'Poetry, the kind that creates the conditions for beauty to appear, can only tell the truth. That is why we read so little of it: too much reality all at once is something humankind cannot bear. Today we no longer read poetry, because we have resigned ourselves to the idea that reality is only what we can see.' },
   { title: 'Not for Profit', author: 'Martha C. Nussbaum', color: '#3a3a1a', text: '#f0f0c8', cover: 'img/library/non_per_profitto.jpg',
     review: 'Nussbaum makes a case for the humanities. Filed under: things I should have sent to people who ask why I studied arts.' },
-  { title: 'The Man Who Mistook His Wife for a Hat', author: 'Oliver Sacks', color: '#2a1a4a', text: '#d0c8f5',
+  { title: 'The Man Who Mistook His Wife for a Hat', author: 'Oliver Sacks', color: '#2a1a4a', text: '#d0c8f5', cover: 'img/library/uomo_cappello.jpg',
     review: 'Oliver Sacks made neurology the most fascinating thing you\'ve never studied. The title alone deserved a Nobel.' },
   { title: 'The Metamorphoses', author: 'Ovid', color: '#5c2a1a', text: '#f5d0c8', cover: 'img/library/metamorfosi.jpg',
     review: 'Ovid spent his exile writing about people turning into things. Productive response to a bad situation.' },
@@ -5433,7 +5540,7 @@ const HL_BOOKS = [
     review: 'Arendt\'s claim, watching Eichmann at trial: evil rarely looks demonic. It usually looks bureaucratic, ordinary, the result of a man who stopped thinking. A book to take slowly. Worth pairing with her later The Life of the Mind, and with the film on Göring and his psychiatrist.' },
   { title: '21 Lessons for the 21st Century', author: 'Yuval Noah Harari', color: '#3a2a4a', text: '#dcc8f0', cover: 'img/library/harari_21.jpg',
     review: 'Harari makes the case that the 21st century demands mindfulness. In those ten or fifteen minutes of meditation you finally focus on breath and sensation, mind and body in the same room, without drifting into the day\'s tasks or superfluous opinions. His best argument: feelings are not the opposite of rationality but its evolution. Feelings are calculations, only the calculation happens below the threshold of awareness. Millions of neurons compute probabilities of survival without us noticing, and so we wrongly think that our fear, our choices, even our opinion of the European Union, are the result of some mysterious free will. The one thing I do not buy is his certainty that data will eclipse everything. Information alone has never beaten knowing what to do with it. The book left me with more questions than answers, which is its own kind of recommendation: the more I read, the more I wanted to read.' },
-  { title: 'Ci vediamo in agosto', author: 'Gabriel García Márquez', color: '#4a2a1a', text: '#f5d8c8',
+  { title: 'Ci vediamo in agosto', author: 'Gabriel García Márquez', color: '#4a2a1a', text: '#f5d8c8', cover: 'img/library/ci_vediamo_agosto.jpg',
     review: 'To be read on a train, in summer, slowly.' },
   { title: 'My Brilliant Friend', author: 'Elena Ferrante', color: '#5c3a1a', text: '#f5e0c8', cover: 'img/library/my_brilliant_friend.jpg',
     review: 'Still confused about who I\'m rooting for. Four books in.' },
@@ -5865,10 +5972,12 @@ function buildHiddenLibrary() {
       reviewPanel.style.pointerEvents = 'none';
     });
 
-    // Books with expanded=true open a dedicated modal on click
+    // Click handlers
+    cover.style.cursor = 'pointer';
     if (b.expanded === true && b.title === 'Ithaca') {
-      cover.style.cursor = 'pointer';
       cover.addEventListener('click', () => openIthacaModal());
+    } else {
+      cover.addEventListener('click', () => openBookReview(b));
     }
 
     const titleBelow = document.createElement('div');
