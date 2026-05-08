@@ -3858,7 +3858,10 @@ function openIthacaModal() {
           border-radius:2px;
         " onmouseover="this.style.color='rgba(212,201,176,0.9)';this.style.borderColor='rgba(212,201,176,0.45)'" onmouseout="this.style.color='rgba(212,201,176,0.45)';this.style.borderColor='rgba(212,201,176,0.2)'">← back to chessboard</div>
       </div>
-      <p id="hl-books-tagline" style="display:none;font-family:'Courier New',monospace;color:rgba(212,201,176,0.7);font-size:0.8em;letter-spacing:0.15em;text-align:center;margin-bottom:2em;"> Books I liked. </p>
+      <div id="hl-books-tagline" style="display:none;font-family:'Lora',Georgia,serif;color:rgba(245,234,214,0.78);font-size:0.95rem;line-height:1.78;text-align:left;max-width:620px;margin:0 auto 3rem;">
+        <p style="margin-bottom:1rem;">I've always been an eager reader. The books I read as a kid shaped who I am today: from <em>Geronimo Stilton</em> in primary school to <em>The Neverending Story</em> in middle school, then Virginia Woolf and Charlotte Brontë, Greek and Latin classics in high school, and these days a more varied list.</p>
+        <p style="margin-bottom:0;">I try to diversify, though when I find an author I love I want to read everything they have ever written. The goal is to keep learning what I do not yet know.</p>
+      </div>
     <div id="hl-books-grid" style="
         display:grid;
         grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
@@ -5371,72 +5374,86 @@ const HL_BOOKS = [
   { title: 'Brave New World', author: 'Aldous Huxley', color: '#1a2a3a', text: '#c8d8f0',
     review: 'Reassuring proof that things could be worse.' },
   { title: 'Amore e Psiche', author: 'Apuleius', color: '#5a3a1a', text: '#f5dcc8',
-    review: '\'Night fell, and after love\'s skirmishes...\' – Apuleius wrote this in 150 AD. Nobody has done it better since.' },
+    review: '\'Night fell, and after love\'s skirmishes...\' \u2013 Apuleius wrote this in 150 AD. Nobody has done it better since.' },
   { title: "A Room of One's Own", author: 'Virginia Woolf', color: '#3a1a4a', text: '#eac8f5',
     review: 'Virginia Woolf said what she said.' },
-  { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', color: '#2a5f4f', text: '#c8e6c9',
+  { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', color: '#2a5f4f', text: '#c8e6c9', cover: 'img/library/great_gatsby.jpg',
     review: 'Five stars for the prose. Zero stars for the decision-making.' },
-  { title: 'The Lion, the Witch and the Wardrobe', author: 'C.S. Lewis', color: '#5c3d1e', text: '#f5e6cc',
+  { title: 'The Lion, the Witch and the Wardrobe', author: 'C.S. Lewis', color: '#5c3d1e', text: '#f5e6cc', cover: 'img/library/lion_witch_wardrobe.jpg',
     review: 'Not a teenager anymore but I will always love this.' },
   { title: 'Orlando Furioso', author: 'Ludovico Ariosto', color: '#4a1a2a', text: '#f5c8d0',
     review: 'An epic poem about a knight who loses his mind over a woman. The rest is details.' },
-  { title: 'Inferno', author: 'Dante Alighieri', color: '#8b1a1a', text: '#ffd0d0',
+  { title: 'Inferno', author: 'Dante Alighieri', color: '#8b1a1a', text: '#ffd0d0', cover: 'img/library/inferno.jpg',
     review: 'Dante spent eternity ranking people he didn\'t like. Relatable.' },
-  { title: 'Perfume', author: 'Patrick Süskind', color: '#1a3a5c', text: '#c8dff5',
+  { title: 'Perfume', author: 'Patrick Süskind', color: '#1a3a5c', text: '#c8dff5', cover: 'img/library/perfume.jpg',
     review: 'A serial killer with an extraordinary gift. Somehow you root for him anyway.' },
-  { title: 'Norwegian Wood', author: 'Haruki Murakami', color: '#3d2b1a', text: '#f0d5b0',
+  { title: 'Norwegian Wood', author: 'Haruki Murakami', color: '#3d2b1a', text: '#f0d5b0', cover: 'img/library/norwegian_wood.jpg',
     review: 'The Japanese cure for reader\'s block. Side effects include existential crisis.' },
-  { title: 'The Screwtape Letters', author: 'C.S. Lewis', color: '#4a2060', text: '#dfc8f5',
+  { title: 'The Screwtape Letters', author: 'C.S. Lewis', color: '#4a2060', text: '#dfc8f5', cover: 'img/library/berlicche.jpg',
     review: 'My decision-making process, distilled. One choice, two hundred scenarios. Louis CK called it \'Of Course But Maybe\'. C.S. Lewis did it first.' },
   { title: 'La voce a te dovuta', author: 'Pedro Salinas', color: '#1a4a3a', text: '#c8f0e0',
-    review: 'The one Salinas book that doesn\'t want to hurt you.' },
-  { title: 'Not for Profit', author: 'Martha C. Nussbaum', color: '#3a3a1a', text: '#f0f0c8',
+    review: 'Poetry, the kind that creates the conditions for beauty to appear, can only tell the truth. That is why we read so little of it: too much reality all at once is something humankind cannot bear. Today we no longer read poetry, because we have resigned ourselves to the idea that reality is only what we can see.' },
+  { title: 'Not for Profit', author: 'Martha C. Nussbaum', color: '#3a3a1a', text: '#f0f0c8', cover: 'img/library/non_per_profitto.jpg',
     review: 'Nussbaum makes a case for the humanities. Filed under: things I should have sent to people who ask why I studied arts.' },
   { title: 'The Man Who Mistook His Wife for a Hat', author: 'Oliver Sacks', color: '#2a1a4a', text: '#d0c8f5',
     review: 'Oliver Sacks made neurology the most fascinating thing you\'ve never studied. The title alone deserved a Nobel.' },
-  { title: 'The Metamorphoses', author: 'Ovid', color: '#5c2a1a', text: '#f5d0c8',
+  { title: 'The Metamorphoses', author: 'Ovid', color: '#5c2a1a', text: '#f5d0c8', cover: 'img/library/metamorfosi.jpg',
     review: 'Ovid spent his exile writing about people turning into things. Productive response to a bad situation.' },
-  { title: 'Animal Farm / 1984', author: 'George Orwell', color: '#1c1c1c', text: '#e8e8e8',
+  { title: 'Animal Farm / 1984', author: 'George Orwell', color: '#1c1c1c', text: '#e8e8e8', cover: 'img/library/animal_farm_1984.jpg',
     review: 'Sooner or later, you recognise the farm. And your role in it.' },
-  { title: 'The Iliad / The Odyssey', author: 'Homer', color: '#5a4a1a', text: '#f5e8c8',
+  { title: 'The Iliad / The Odyssey', author: 'Homer', color: '#5a4a1a', text: '#f5e8c8', cover: 'img/library/iliad_odyssey.jpg',
     review: 'Two books. One war, one journey home. Homer understood that these are the only two stories that exist.' },
-  { title: 'The Witches', author: 'Roald Dahl', color: '#1a3a1a', text: '#c8f0c8',
+  { title: 'The Witches', author: 'Roald Dahl', color: '#1a3a1a', text: '#c8f0c8', cover: 'img/library/the_witches.jpg',
     review: 'Still afraid of people wearing gloves.' },
-  { title: 'The Neverending Story', author: 'Michael Ende', color: '#1a2a5c', text: '#c8d8f5',
+  { title: 'The Neverending Story', author: 'Michael Ende', color: '#1a2a5c', text: '#c8d8f5', cover: 'img/library/neverending_story.jpg',
     review: 'A reader, reading a book, where a reader is reading. Story in the story. Never-ending. Still indecisive about the princess name.' },
-  { title: 'La boutique del mistero', author: 'Dino Buzzati', color: '#3a1a3a', text: '#f0c8f0',
+  { title: 'La boutique del mistero', author: 'Dino Buzzati', color: '#3a1a3a', text: '#f0c8f0', cover: 'img/library/boutique_mistero.jpg',
     review: 'Buzzati writes dread the way light enters a room at the wrong angle. You cannot say exactly what is wrong. And that is everything.' },
-  { title: 'Spoon River Anthology', author: 'Edgar Lee Masters', color: '#4a3a1a', text: '#f5e8c8',
+  { title: 'Spoon River Anthology', author: 'Edgar Lee Masters', color: '#4a3a1a', text: '#f5e8c8', cover: 'img/library/spoon_river.jpg',
     review: 'An entire town, dead, finally honest. Edgar Lee Masters invented the tell-all memoir before it was a genre.' },
-  { title: 'The Order of Time', author: 'Carlo Rovelli', color: '#1a3a5a', text: '#c8e0f5',
+  { title: 'The Order of Time', author: 'Carlo Rovelli', color: '#1a3a5a', text: '#c8e0f5', cover: 'img/library/order_of_time.jpg',
     review: 'Physics written like poetry. Changed how I think about the present moment as the only thing that actually exists.' },
-  { title: 'Flatland', author: 'Edwin A. Abbott', color: '#1a1a3a', text: '#c8c8f5',
+  { title: 'The Meaning of It All', author: 'Richard P. Feynman', color: '#3a4a6a', text: '#d0dceb', cover: 'img/library/feynman_meaning.jpg',
+    review: 'Feynman\'s lesson, distilled: admit you don\'t know, and keep the attitude of someone still figuring out which direction to take. That is what lets you vary, reflect, discover new things, and slowly advance your knowledge of yourself, in order to do what you actually want, even when you do not yet know what that is.' },
+  { title: 'Codex Leicester', author: 'Leonardo da Vinci', color: '#1a3a3a', text: '#c8e0e0', cover: 'img/library/codex_leicester.jpg',
+    review: 'There is so much to learn from the way Leonardo thought. The Codex Leicester is not as famous as the Mona Lisa or The Last Supper, and Dan Brown fans will be disappointed to know it hides no codes protecting age-old secrets. But it is a scientific treasure. Some of the insights here, like how blood flows through the heart, were so far ahead of their time that researchers only verified them a few decades ago. Leonardo was insatiably curious about pretty much every area of natural science and human experience. He studied, in meticulous detail, everything from the flow of water to the rise of smoke to the muscles you use when you smile.' },
+  { title: 'Flatland', author: 'Edwin A. Abbott', color: '#1a1a3a', text: '#c8c8f5', cover: 'img/library/flatland.jpg',
     review: 'A Victorian novella about geometry that is actually about everything else. (Further notes in the right drawer.)' },
-  { title: 'Confusione di stelle', author: 'Alda Merini', color: '#5a1a3a', text: '#f5c8e0',
+  { title: 'Confusione di stelle', author: 'Alda Merini', color: '#5a1a3a', text: '#f5c8e0', cover: 'img/library/confusione_stelle.jpg',
     review: 'Alda Merini. To be read in small doses, like something very strong.' },
-  { title: 'The Tartar Steppe', author: 'Dino Buzzati', color: '#3a2a1a', text: '#f0e0c8',
+  { title: 'The Tartar Steppe', author: 'Dino Buzzati', color: '#3a2a1a', text: '#f0e0c8', cover: 'img/library/deserto_tartari.jpg',
     review: 'Buzzati wrote this bored at his desk, watching time refuse to pass. The opposite is a conversation where hours disappear. I think about this often.' },
-  { title: 'Of Mice and Men', author: 'John Steinbeck', color: '#2a3a1a', text: '#d8f0c8',
+  { title: 'Of Mice and Men', author: 'John Steinbeck', color: '#2a3a1a', text: '#d8f0c8', cover: 'img/library/of_mice_men.jpg',
     review: 'So many tears. No further comment.' },
-  { title: 'The Stranger', author: 'Albert Camus', color: '#2a2a2a', text: '#e8e8e8',
+  { title: 'Billy Budd', author: 'Herman Melville', color: '#5a1a1a', text: '#f5d0d0', cover: 'img/library/billy_budd.jpg',
+    review: 'Justice has always been a thing I get stuck on. As Harari points out, we live in a moment when injustice has decreased but not disappeared, and from a position of relative comfort it is easy to forget what life looks like for someone who happened to be born elsewhere. Melville is brutal at making you feel exactly that: the helplessness, the inequality, the randomness so often interwoven with injustice. There is no recourse for Billy Budd, only the wrong side of arbitrary power.' },
+  { title: 'The Stranger', author: 'Albert Camus', color: '#2a2a2a', text: '#e8e8e8', cover: 'img/library/the_stranger.jpg',
     review: 'Unlocks certain thoughts you didn\'t know you were having.' },
+  { title: 'Eichmann in Jerusalem', author: 'Hannah Arendt', color: '#2a1a1a', text: '#e0c8c8', cover: 'img/library/arendt_eichmann.jpg',
+    review: 'Arendt\'s claim, watching Eichmann at trial: evil rarely looks demonic. It usually looks bureaucratic, ordinary, the result of a man who stopped thinking. A book to take slowly. Worth pairing with her later The Life of the Mind, and with the film on Göring and his psychiatrist.' },
+  { title: '21 Lessons for the 21st Century', author: 'Yuval Noah Harari', color: '#3a2a4a', text: '#dcc8f0', cover: 'img/library/harari_21.jpg',
+    review: 'Harari makes the case that the 21st century demands mindfulness. In those ten or fifteen minutes of meditation you finally focus on breath and sensation, mind and body in the same room, without drifting into the day\'s tasks or superfluous opinions. His best argument: feelings are not the opposite of rationality but its evolution. Feelings are calculations, only the calculation happens below the threshold of awareness. Millions of neurons compute probabilities of survival without us noticing, and so we wrongly think that our fear, our choices, even our opinion of the European Union, are the result of some mysterious free will. The one thing I do not buy is his certainty that data will eclipse everything. Information alone has never beaten knowing what to do with it. The book left me with more questions than answers, which is its own kind of recommendation: the more I read, the more I wanted to read.' },
   { title: 'Ci vediamo in agosto', author: 'Gabriel García Márquez', color: '#4a2a1a', text: '#f5d8c8',
     review: 'To be read on a train, in summer, slowly.' },
-  { title: 'My Brilliant Friend', author: 'Elena Ferrante', color: '#5c3a1a', text: '#f5e0c8',
+  { title: 'My Brilliant Friend', author: 'Elena Ferrante', color: '#5c3a1a', text: '#f5e0c8', cover: 'img/library/my_brilliant_friend.jpg',
     review: 'Still confused about who I\'m rooting for. Four books in.' },
-  { title: 'Ithaca', author: 'Constantinos Cavafy', color: '#c9a443', text: '#1a1208', expanded: true,
+  { title: 'Ithaca', author: 'Constantine P. Cavafy', color: '#e8e0c8', text: '#1a1208', cover: 'img/library/ithaca.jpg', expanded: true,
     review: 'For us Bolognesi, Ithaca is San Luca. When it appears between the hills on the way back from a journey, you know you\'re home.' },
-  { title: 'Chronicle of a Death Foretold', author: 'Gabriel García Márquez', color: '#4a1a1a', text: '#f5c8c8',
+  { title: 'The Master and Margarita', author: 'Mikhail Bulgakov', color: '#1a3a5a', text: '#c8e0f5', cover: 'img/library/master_margarita.jpg',
+    review: 'One of the best love stories ever written. If you cannot understand it the first time, give it a second chance.' },
+  { title: 'Chronicle of a Death Foretold', author: 'Gabriel García Márquez', color: '#4a1a1a', text: '#f5c8c8', cover: 'img/library/chronicle_death.jpg',
     review: 'A good study in how small towns work. And don\'t.' },
-  { title: 'Nella notte più buia il linguaggio ci chiede di cosa siamo fatti', author: 'Han Kang', color: '#1a1a2a', text: '#d0d0f5',
+  { title: 'Nella notte più buia il linguaggio ci chiede di cosa siamo fatti', author: 'Han Kang', color: '#1a1a2a', text: '#d0d0f5', cover: 'img/library/han_kang.jpg',
     review: 'I could read everything she\'s ever written. Han Kang never wastes a word.' },
-  { title: 'Carrie', author: 'Stephen King', color: '#2a0a0a', text: '#f0c8c8',
+  { title: 'Carrie', author: 'Stephen King', color: '#2a0a0a', text: '#f0c8c8', cover: 'img/library/carrie.jpg',
     review: 'Stephen King\'s real gift isn\'t horror. It\'s the psychology of people who hurt and people who get hurt.' },
-  { title: 'Othello', author: 'William Shakespeare', color: '#1a1a1a', text: '#e8e8e8',
+  { title: 'Hamlet', author: 'William Shakespeare', color: '#5c1a1a', text: '#f5d0d0', cover: 'img/library/hamlet.jpg',
+    review: 'What I love about Hamlet is the wordplay as a sign of the mind\'s exuberance: the famous kin/kind line already does it in the very first scene. The opening monologue, O that this too too solid flesh would melt, comes from a longing for the undefined, for what is not. The self-deception is brilliantly captured in the line about having a pigeon\'s liver, lacking the gall that would let him return bitterness to those who oppress him. But what stays with me most is the moment Hamlet starts pretending to be mad. He cannot fight on equal terms, so he weaponises unpredictability: madness disarms the opponent and turns him into an invisible observer. He stands before an injustice and must use intellect to outsmart the system. Brilliant strategy disguised as breakdown.' },
+  { title: 'Othello', author: 'William Shakespeare', color: '#1a1a1a', text: '#e8e8e8', cover: 'img/library/othello.jpg',
     review: 'Hands down the worst pillow fight in history.' },
-  { title: 'The Celebrated Jumping Frog of Calaveras County', author: 'Mark Twain', color: '#5a3a1a', text: '#f5e0c8',
+  { title: 'The Celebrated Jumping Frog of Calaveras County', author: 'Mark Twain', color: '#5a3a1a', text: '#f5e0c8', cover: 'img/library/jumping_frog.jpg',
     review: "'Good little girls should always show marked deference for the aged. Unless they sass you first.' Mark Twain, 1865." },
-  { title: 'Six Memos for the Next Millennium', author: 'Italo Calvino', color: '#1a3a2a', text: '#c8f0d8',
+  { title: 'Six Memos for the Next Millennium', author: 'Italo Calvino', color: '#1a3a2a', text: '#c8f0d8', cover: 'img/library/six_memos.jpg',
     review: 'Calvino\'s last lectures. A must. No negotiation.' },
 ];
 
@@ -5756,67 +5773,80 @@ function triggerCheckmateReveal() {
 function buildHiddenLibrary() {
   const grid = document.getElementById('hl-books-grid');
   if (!grid || grid.children.length > 0) return;
-  // Add tagline
   const tagline = document.getElementById('hl-books-tagline');
   if (tagline) tagline.style.display = 'block';
 
   HL_BOOKS.forEach((b, idx) => {
     const card = document.createElement('div');
     card.style.cssText = `
-      display:flex; flex-direction:column; gap:0.5rem;
+      display:flex; flex-direction:column; gap:0.55rem;
       cursor:pointer; opacity:0; transform:translateY(16px);
       transition:opacity 0.5s ease ${(idx * 0.04).toFixed(2)}s, transform 0.5s ease ${(idx * 0.04).toFixed(2)}s;
     `;
 
-    // Book cover
+    // Book cover container
     const cover = document.createElement('div');
     cover.style.cssText = `
       background:${b.color};
       border-radius:2px 4px 4px 2px;
-      height:190px;
+      height:230px;
       position:relative;
-      box-shadow:3px 4px 12px rgba(0,0,0,0.6), inset 2px 0 0 rgba(255,255,255,0.08);
+      box-shadow:3px 4px 14px rgba(0,0,0,0.55), inset 2px 0 0 rgba(255,255,255,0.06);
       transition:transform 0.3s ease, box-shadow 0.3s ease;
       overflow:hidden;
-      display:flex; align-items:center; justify-content:center; padding:1rem;
     `;
 
-    // Spine edge
-    const spine = document.createElement('div');
-    spine.style.cssText = `
-      position:absolute; left:0; top:0; bottom:0; width:6px;
-      background:rgba(0,0,0,0.25);
-      border-right:1px solid rgba(255,255,255,0.06);
-    `;
-    cover.appendChild(spine);
+    if (b.cover) {
+      // Real cover image
+      const img = document.createElement('img');
+      img.src = b.cover;
+      img.alt = b.title;
+      img.loading = 'lazy';
+      img.style.cssText = `
+        width:100%; height:100%; object-fit:cover; object-position:center;
+        display:block;
+      `;
+      cover.appendChild(img);
+    } else {
+      // Fallback: color block + title typography
+      cover.style.padding = '1rem';
+      cover.style.display = 'flex';
+      cover.style.alignItems = 'center';
+      cover.style.justifyContent = 'center';
+      const spine = document.createElement('div');
+      spine.style.cssText = `
+        position:absolute; left:0; top:0; bottom:0; width:6px;
+        background:rgba(0,0,0,0.25);
+        border-right:1px solid rgba(255,255,255,0.06);
+      `;
+      cover.appendChild(spine);
+      const titleEl = document.createElement('div');
+      titleEl.style.cssText = `
+        font-family:'Cormorant Garamond',Georgia,serif; font-size:1rem; font-weight:500;
+        color:${b.text}; text-align:center; line-height:1.3;
+        font-style:italic; position:relative; z-index:1;
+      `;
+      titleEl.textContent = b.title;
+      cover.appendChild(titleEl);
+    }
 
-    const titleEl = document.createElement('div');
-    titleEl.style.cssText = `
-      font-family:'Inter',sans-serif; font-size:0.82rem;
-      color:${b.text}; text-align:center; line-height:1.4;
-      font-style:italic; position:relative; z-index:1;
-    `;
-    titleEl.textContent = b.title;
-    cover.appendChild(titleEl);
-
-    // Review panel (slides up on hover)
+    // Review panel (slides in on hover) — looks like a slip of cream paper
     const reviewPanel = document.createElement('div');
     reviewPanel.style.cssText = `
       position:absolute; inset:0;
-      background:rgba(8,4,0,0.97);
+      background:rgba(250,246,236,0.97);
       display:flex; align-items:center; justify-content:center;
-      padding:1rem;
-      opacity:0; transition:opacity 0.3s ease;
+      padding:1.1rem 1rem;
+      opacity:0; transition:opacity 0.28s ease;
       pointer-events:none;
-      z-index:2;
+      z-index:3;
     `;
     const reviewText = document.createElement('div');
     reviewText.style.cssText = `
-      font-family:'Inter',sans-serif; font-size:1rem;
-      color:#fff; line-height:1.7;
+      font-family:'Lora',Georgia,serif; font-size:0.78rem;
+      color:#1a1208; line-height:1.6;
       text-align:left; font-style:italic;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-      padding: 0 0.2rem; overflow-y:auto; max-height:160px;
+      overflow-y:auto; max-height:200px; max-width:100%;
     `;
     reviewText.textContent = b.review;
     reviewPanel.appendChild(reviewText);
@@ -5824,13 +5854,13 @@ function buildHiddenLibrary() {
 
     cover.addEventListener('mouseenter', () => {
       cover.style.transform = 'translateY(-4px) scale(1.02)';
-      cover.style.boxShadow = '5px 8px 20px rgba(0,0,0,0.8)';
+      cover.style.boxShadow = '5px 8px 22px rgba(0,0,0,0.7)';
       reviewPanel.style.opacity = '1';
       reviewPanel.style.pointerEvents = 'auto';
     });
     cover.addEventListener('mouseleave', () => {
       cover.style.transform = '';
-      cover.style.boxShadow = '3px 4px 12px rgba(0,0,0,0.6), inset 2px 0 0 rgba(255,255,255,0.08)';
+      cover.style.boxShadow = '3px 4px 14px rgba(0,0,0,0.55), inset 2px 0 0 rgba(255,255,255,0.06)';
       reviewPanel.style.opacity = '0';
       reviewPanel.style.pointerEvents = 'none';
     });
@@ -5841,19 +5871,28 @@ function buildHiddenLibrary() {
       cover.addEventListener('click', () => openIthacaModal());
     }
 
+    const titleBelow = document.createElement('div');
+    titleBelow.style.cssText = `
+      font-family:'Lora',Georgia,serif; font-size:0.72rem;
+      color:rgba(245,234,214,0.78); line-height:1.35;
+      text-align:center; font-style:italic;
+      padding:0 4px;
+    `;
+    titleBelow.textContent = b.title;
+
     const authorEl = document.createElement('div');
     authorEl.style.cssText = `
-      font-family:'Courier Prime',monospace; font-size:0.55rem;
-      color:rgba(212,201,176,0.45); letter-spacing:0.06em;
+      font-family:'Courier Prime',monospace; font-size:0.54rem;
+      color:rgba(212,201,176,0.5); letter-spacing:0.08em;
       text-align:center; text-transform:uppercase;
     `;
     authorEl.textContent = b.author;
 
     card.appendChild(cover);
+    card.appendChild(titleBelow);
     card.appendChild(authorEl);
     grid.appendChild(card);
 
-    // Staggered entrance
     setTimeout(() => {
       card.style.opacity = '1';
       card.style.transform = 'translateY(0)';
