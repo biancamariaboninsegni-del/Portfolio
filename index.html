@@ -2496,7 +2496,11 @@
       <span class="parchment-close" onclick="closeModal('modal-journals'); document.getElementById('modal-mac').classList.add('open')" style="margin-right:0.5rem;">← back</span><span class="mac-title">Journals</span>
     </div>
     <div class="mac-body" style="position:relative;">
-      
+      <div style="text-align:center; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid rgba(0,0,0,0.06); margin-bottom:0.2rem;">
+        <span style="font-family:'Cormorant Garamond',Georgia,serif; font-size:1.05rem; font-style:italic; color:#5a4a3a; letter-spacing:0.02em;">&ldquo;You can&rsquo;t always get what you want. You get what you need.&rdquo;</span>
+        <div style="font-family:'Courier Prime',monospace; font-size:0.58rem; color:#aaa; letter-spacing:0.18em; text-transform:uppercase; margin-top:0.4rem;">The Rolling Stones</div>
+      </div>
+
       <div class="journal-tabs">
         <span class="journal-tab active" onclick="switchJournal('nola', this)">New Orleans</span>
         <span class="journal-tab" onclick="switchJournal('geneva', this)">Geneva</span>
@@ -3373,7 +3377,9 @@ document.addEventListener('keydown', function(e) {
 
         <p>For me, Ithaca is not a new place. It is returning somewhere I have already been, still myself but a little different. Like when you reread a classic: the book is the same, but you are the one who has changed.</p>
 
-        <p>I love the idea that living in different places lets you take a small piece from each. In mindset, I feel 100% American: I love that kindness is contagious, that one extra compliment or one small gesture of care will always beat pessimism and individualism. And I am also a little Swiss, because I am made of layers (a semi-quote from Shrek), and sometimes I need time before I let someone in.</p>
+        <p>I love the idea that living in different places lets you take a small piece from each. In mindset, I feel 100% American: I love that kindness is contagious, that one extra compliment or one small gesture of care will always beat pessimism and individualism. And I am also a little Swiss, because I am made of layers (a semi-quote from Shrek), and sometimes I need time before I let someone in. Layers, and that requires time to unfold.</p>
+
+        <p style="font-family:'Courier Prime',monospace; font-size:0.78rem; color:#8a7a5a; border-left:2px solid #c9a443; padding-left:1rem; margin-top:1.6rem; line-height:1.7;"><strong style="letter-spacing:0.1em;">Fun fact: Complicato</strong><br/>The word comes from the Latin <em>cum plicas</em>, many folds. To explain, <em>spiegare</em> comes from <em>ex-plicare</em>: to remove the folds from things, to bring them from complication (<em>com-plicazione</em>, many folds) to simplicity (<em>sem-plicita</em>, a single fold, which is not banality, but the nucleus of maximum density).</p>
       </div>
     </div>
   </div>
@@ -5487,7 +5493,7 @@ const HL_BOOKS = [
   { title: "A Room of One's Own", author: 'Virginia Woolf', color: '#3a1a4a', text: '#eac8f5', cover: 'img/library/room_of_ones_own.jpg',
     review: 'Virginia Woolf said what she said.' },
   { title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', color: '#2a5f4f', text: '#c8e6c9', cover: 'img/library/great_gatsby.jpg',
-    review: 'Five stars for the prose. Zero stars for the decision-making.' },
+    review: 'Five stars for the prose. Zero stars for the decision-making.\n\nI always read it for the aesthetic, for the beauty of the words, the dialogues, and the atmospheres. It is as if he embroiders words. I also liked Tender is the Night for the same reason. This Side of Paradise, on the other hand, did not feel like it was on the same level. The depth of the characters and the plot do not always match the aesthetic quality.' },
   { title: 'The Lion, the Witch and the Wardrobe', author: 'C.S. Lewis', color: '#5c3d1e', text: '#f5e6cc', cover: 'img/library/lion_witch_wardrobe.jpg',
     review: 'Not a teenager anymore but I will always love this.' },
   { title: 'Orlando Furioso', author: 'Ludovico Ariosto', color: '#4a1a2a', text: '#f5c8d0', cover: 'img/library/orlando_furioso.jpg',
@@ -5517,9 +5523,9 @@ const HL_BOOKS = [
   { title: 'The Neverending Story', author: 'Michael Ende', color: '#1a2a5c', text: '#c8d8f5', cover: 'img/library/neverending_story.jpg',
     review: 'A reader, reading a book, where a reader is reading. Story in the story. Never-ending. Still indecisive about the princess name.' },
   { title: 'La boutique del mistero', author: 'Dino Buzzati', color: '#3a1a3a', text: '#f0c8f0', cover: 'img/library/boutique_mistero.jpg',
-    review: 'Buzzati writes dread the way light enters a room at the wrong angle. You cannot say exactly what is wrong. And that is everything.' },
+    review: 'Buzzati writes dread the way light enters a room at the wrong angle. You cannot say exactly what is wrong. And that is everything.\n\nMy favourite short stories in this collection are The Enchanted Jacket, which narrates human greed at the expense of others, and Seven Floors. Outside of this collection, I also really liked The Killing of the Dragon, also written in the 60s.\n\nThrough Buzzati, I saw clearly why we love storytelling and why we love stories. During the subway rides to Sesto San Giovanni and the countless transfers between the yellow, green, and finally red lines, I had read Stephen King\'s On Writing. I find that the power of words is an incredible force that King defines as "telepathy." How powerful is it to be able to transmit images, emotions, and sensations through stories that can take you elsewhere for a limited time? While Buzzati\'s messages seem to address the universal, the timeless and spaceless dimension, all the typical situations of his present emerge on the other hand. I often think back to the long nights he spent at Corriere della Sera and how he used his mind to go wherever he wanted, teleporting beyond the boundaries of time and space.' },
   { title: 'Spoon River Anthology', author: 'Edgar Lee Masters', color: '#4a3a1a', text: '#f5e8c8', cover: 'img/library/spoon_river.jpg',
-    review: 'An entire town, dead, finally honest. Edgar Lee Masters invented the tell-all memoir before it was a genre.' },
+    review: 'An entire town, dead, finally honest. Edgar Lee Masters invented the tell-all memoir before it was a genre.\n\nMy favourite poem is George Gray: the man who chose safety over life, who kept his soul in a bowl like a boat, and who finally understands: "And catch the winds of destiny."' },
   { title: 'The Order of Time', author: 'Carlo Rovelli', color: '#1a3a5a', text: '#c8e0f5', cover: 'img/library/order_of_time.jpg',
     review: 'Physics written like poetry. Changed how I think about the present moment as the only thing that actually exists.' },
   { title: 'The Meaning of It All', author: 'Richard P. Feynman', color: '#3a4a6a', text: '#d0dceb', cover: 'img/library/feynman_meaning.jpg',
@@ -5535,11 +5541,11 @@ const HL_BOOKS = [
   { title: 'Of Mice and Men', author: 'John Steinbeck', color: '#2a3a1a', text: '#d8f0c8', cover: 'img/library/of_mice_men.jpg',
     review: 'So many tears. No further comment.' },
   { title: 'Billy Budd', author: 'Herman Melville', color: '#5a1a1a', text: '#f5d0d0', cover: 'img/library/billy_budd.jpg',
-    review: 'Justice has always been a thing I get stuck on. As Harari points out, we live in a moment when injustice has decreased but not disappeared, and from a position of relative comfort it is easy to forget what life looks like for someone who happened to be born elsewhere. Melville is brutal at making you feel exactly that: the helplessness, the inequality, the randomness so often interwoven with injustice. There is no recourse for Billy Budd, only the wrong side of arbitrary power.' },
+    review: 'Justice has always been a thing I get stuck on. As Harari points out, we live in a moment when injustice has decreased but not disappeared, and from a position of relative comfort it is easy to forget what life looks like for someone who happened to be born elsewhere. Melville is brutal at making you feel exactly that: the helplessness, the inequality, the randomness so often interwoven with injustice. There is no recourse for Billy Budd, only the wrong side of arbitrary power.\n\nOne of my favourite short stories is also Bartleby, the Scrivener: A Story of Wall Street. "I would prefer not to." Three words, the quietest possible rebellion.' },
   { title: 'The Stranger', author: 'Albert Camus', color: '#2a2a2a', text: '#e8e8e8', cover: 'img/library/the_stranger.jpg',
     review: 'Unlocks certain thoughts you didn\'t know you were having.' },
   { title: 'Eichmann in Jerusalem', author: 'Hannah Arendt', color: '#2a1a1a', text: '#e0c8c8', cover: 'img/library/arendt_eichmann.jpg',
-    review: 'Arendt\'s claim, watching Eichmann at trial: evil rarely looks demonic. It usually looks bureaucratic, ordinary, the result of a man who stopped thinking. A book to take slowly. Worth pairing with her later The Life of the Mind, and with the film on Göring and his psychiatrist.' },
+    review: 'Arendt\'s claim, watching Eichmann at trial: evil rarely looks demonic. It usually looks bureaucratic, ordinary, the result of a man who stopped thinking. A book to take slowly. Worth pairing with her later The Life of the Mind, with the film on Goring and his psychiatrist, and with Susan Neiman\'s Evil in Modern Thought: An Alternative History of Philosophy.' },
   { title: '21 Lessons for the 21st Century', author: 'Yuval Noah Harari', color: '#3a2a4a', text: '#dcc8f0', cover: 'img/library/harari_21.jpg',
     review: 'Harari makes the case that the 21st century demands mindfulness. In those ten or fifteen minutes of meditation you finally focus on breath and sensation, mind and body in the same room, without drifting into the day\'s tasks or superfluous opinions. His best argument: feelings are not the opposite of rationality but its evolution. Feelings are calculations, only the calculation happens below the threshold of awareness. Millions of neurons compute probabilities of survival without us noticing, and so we wrongly think that our fear, our choices, even our opinion of the European Union, are the result of some mysterious free will. The one thing I do not buy is his certainty that data will eclipse everything. Information alone has never beaten knowing what to do with it. The book left me with more questions than answers, which is its own kind of recommendation: the more I read, the more I wanted to read.' },
   { title: 'Ci vediamo in agosto', author: 'Gabriel García Márquez', color: '#4a2a1a', text: '#f5d8c8', cover: 'img/library/ci_vediamo_agosto.jpg',
@@ -7397,7 +7403,7 @@ export function unlock(neo) {
 
       <img src="img/Roger_Federer.webp" style="width:100%;border-radius:4px;margin-bottom:1.8rem;" alt="Roger Federer at Wimbledon"/>
 
-      <p>I joined the gym. Me, who for years skipped PE (with no regrets, I still think that volleyball sucks). Immediately, I realized one thing: <strong>I think too much.</strong></p>
+      <p>I joined the gym. Me, who for years skipped PE (with no regrets, I still think that volleyball sucks). Immediately, I realized one thing: <strong>I think too much.</strong> (Also, the first time I tried to figure out the machines, I had a full-on PTSD episode from the many afternoons spent studying pulleys, weights, and constraint reactions for Physics. A lat pulldown machine is just an Atwood machine with ambitions.)</p>
       <p>I noticed it while trying to memorize that endless series of instructions: straight back, look ahead, bend your knees, which, instead of helping me, blocked me. There were too many stimuli, and I am convinced that the society we live in, where background noise is always present, is not of great help. I discovered that I could perform the exercises correctly only when I stopped giving myself orders. Only when I stopped judging myself. Then I started reading <em>The Inner Game of Tennis</em> and I saw all the dots connecting; everything started to make sense.</p>
       <p>As <strong>Timothy Gallwey</strong>, a tennis coach, would say: you must quiet the thinking mind and trust the body. There is a huge difference between obeying a direction and truly feeling the movement. To do so, he started from the basics: he did not give verbal instructions to his students but showed them how to grip the racket, how to move their feet, or how to hit the ball.</p>
       <p>Children know this instinctively: they learn languages, they learn sports, and they live in the present with a naturalness that we adults have forgotten. Children's brains learn movements in a procedural and implicit way, often bypassing the conscious criticism typical of adults. The inner game encourages exactly this: staying in touch with the innate learning process, without striving to conform to an external model.</p>
