@@ -7437,7 +7437,151 @@ export function unlock(neo) {
 
             <p style="color:#1a4d2e; font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; margin:1.5rem 0 0.5rem;">The circle</p>
             <p>It begins with an ouroboros. Passes through the invisible. Climbs 666 arches. Meets the monsters that come from within. Takes what it needs, not what it wanted. Ends with the stars.</p>
+
+            <p style="color:#1a4d2e; font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; margin:1.5rem 0 0.5rem;">The cat in the room</p>
+            <p>The cat is not only a thought experiment. It lives in the room: on the desk, on the bookshelf, always visible. Uncertainty is not confined to a philosophical exercise. It is in the everyday domestic space. Schrödinger and San Luca share the same logic: what you inhabit daily without fully knowing.</p>
+
+            <p style="color:#1a4d2e; font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; margin:1.5rem 0 0.5rem;">Tennis / Temet Nosce</p>
+            <p>In tennis, the game begins at love: from <em>l&apos;&oelig;uf</em>, the egg, the zero, the Nothing. Points do not count as one, two, three. They follow a logic of their own. You arrive at deuce: absolute parity. And then advantage: the decisive point that can always revert. You do not win until you truly win. This is the structure of Temet Nosce: know yourself well enough to recognise when you have the advantage, and not to confuse it with victory.</p>
+
+            <p style="color:#1a4d2e; font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; margin:1.5rem 0 0.5rem;">Four languages</p>
+            <p>The site speaks four languages. Each language is a frame through which reality is perceived differently: a different dimension, in Flatland&apos;s terms. The monolingual cannot see what is untranslatable. And Plato&apos;s cave: each language is one set of shadows on the wall. To speak four is to know that no single frame is complete.</p>
+
             <p style="margin-top:1.5rem; font-style:italic;">l&apos;Amor che move il sole e l&apos;altre stelle.</p>
+
+            <div style="margin-top:2.5rem;">
+              <p style="font-size:0.7rem; letter-spacing:0.2em; color:#004d1a; text-transform:uppercase; margin:0 0 1rem;">Visual map</p>
+              <div style="background:#050e05; border-radius:4px; overflow:hidden; position:relative;">
+                <svg id="s7-atlas-svg" viewBox="0 0 680 500" style="width:100%; display:block;"></svg>
+                <div id="s7-atlas-info" style="background:#030f03; border-top:1px solid #002a0e; padding:9px 16px; font-family:'Share Tech Mono',monospace; font-size:11px; color:#1a7a3a; letter-spacing:.04em; line-height:1.6; min-height:44px; opacity:0; transition:opacity .2s;"><span id="s7-atlas-ic"></span></div>
+                <div style="position:absolute; top:10px; right:12px; font-family:'Share Tech Mono',monospace; font-size:9px; color:#002a0e; letter-spacing:.18em; text-transform:uppercase; pointer-events:none;">hover · click to lock</div>
+              </div>
+            </div>
+            <script>
+(function(){
+if(document.getElementById('s7-atlas-svg').querySelector('circle'))return;
+var NS='http://www.w3.org/2000/svg';
+function mk(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+var N=[
+{id:'uncertainty',lb:'Uncertainty',type:'theme',x:315,y:248},
+{id:'desire',lb:'Desire',type:'theme',x:380,y:180},
+{id:'journey',lb:'Journey',type:'theme',x:448,y:248},
+{id:'invisible',lb:'Invisible',type:'theme',x:280,y:308},
+{id:'episteme',lb:'Epistemology',type:'theme',x:215,y:222},
+{id:'timeo',lb:'Time in Objects',type:'theme',x:275,y:162},
+{id:'political',lb:'Political Thread',type:'theme',x:398,y:308},
+{id:'schrodinger',lb:'Schrödinger',sh:'Schrödinger',x:108,y:158},
+{id:'carroll',lb:'Carroll · Alice',sh:'Carroll · Alice',x:192,y:62},
+{id:'matrix',lb:'The Matrix',sh:'The Matrix',x:375,y:44},
+{id:'feynman',lb:'Feynman',sh:'Feynman',x:558,y:72},
+{id:'ende',lb:'Ende · The Nothing',sh:'Ende · Nothing',x:68,y:290},
+{id:'dante',lb:'Dante',sh:'Dante',x:295,y:468},
+{id:'cavafy',lb:'Cavafy · Ithaca',sh:'Cavafy · Ithaca',x:490,y:435},
+{id:'sanluca',lb:'San Luca',sh:'San Luca',x:605,y:242},
+{id:'rolling',lb:'Rolling Stones',sh:'Rolling Stones',x:592,y:150},
+{id:'debello',lb:'De Bello Helvetico',sh:'De Bello Helv.',x:572,y:372},
+{id:'salinas',lb:'Salinas',sh:'Salinas',x:98,y:415},
+{id:'perfume',lb:'Perfumery',sh:'Perfumery',x:78,y:352},
+{id:'flatland',lb:'Flatland · Harari',sh:'Flatland · Harari',x:485,y:65},
+{id:'luxury',lb:"Campari · Richemont · Christie's",sh:"C · R · C",x:572,y:458},
+{id:'pworks',lb:'Arendt · Billy Budd · Spoon River',sh:'Arendt · BB · SR',x:145,y:472},
+{id:'cat_room',lb:'Cat in the Room',sh:'Cat in the Room',x:160,y:195},
+{id:'tennis',lb:'Tennis · Temet Nosce',sh:'Tennis',x:345,y:92},
+{id:'languages',lb:'Four Languages',sh:'Four Languages',x:525,y:108}
+];
+var L=[
+{s:'uncertainty',t:'schrodinger',d:'Enter without knowing. The box is closed.'},
+{s:'uncertainty',t:'carroll',d:'A door opening onto the incomprehensible. No answer guaranteed.'},
+{s:'uncertainty',t:'matrix',d:'You do not know what is real until you choose.'},
+{s:'uncertainty',t:'feynman',d:'Uncertainty is the structure of reality, not a limit of knowledge.'},
+{s:'uncertainty',t:'rolling',d:"You can't always get what you want."},
+{s:'desire',t:'ende',d:'The Nothing is the absence of desire itself.'},
+{s:'desire',t:'dante',d:'Desiderium from sidus: the star that guides from afar.'},
+{s:'desire',t:'cavafy',d:'The desire for Ithaca sets the journey in motion.'},
+{s:'desire',t:'rolling',d:'The real need emerges after surface desire is disappointed.'},
+{s:'desire',t:'carroll',d:'Imaginary numbers: desired before they were necessary.'},
+{s:'journey',t:'cavafy',d:'The destination is the pretext. Fear not the Laestrygonians.'},
+{s:'journey',t:'sanluca',d:'666 arches: not a monument to look at, a path to walk.'},
+{s:'journey',t:'debello',d:'Geneva: a difficult, non-linear journey.'},
+{s:'journey',t:'rolling',d:'The tortuous journey gives what you need.'},
+{s:'journey',t:'dante',d:'Desire earned through trial becomes the engine of ascent.'},
+{s:'invisible',t:'perfume',d:'Bypasses the thalamus: perception before thought.'},
+{s:'invisible',t:'salinas',d:'La voz a ti debida: presence as voice, not visible form.'},
+{s:'invisible',t:'schrodinger',d:'What is in the box when you are not looking?'},
+{s:'invisible',t:'matrix',d:'Reality exists where you are not observing it.'},
+{s:'episteme',t:'flatland',d:'Incapable of perceiving dimensions that exist.'},
+{s:'episteme',t:'feynman',d:'Uncertainty is structural, not filled by more data.'},
+{s:'episteme',t:'carroll',d:'j x i is not i x j: order changes everything.'},
+{s:'episteme',t:'matrix',d:"Descartes before quantum physics: the brain in a vat."},
+{s:'timeo',t:'luxury',d:'Three roles, one theme: objects carry time.'},
+{s:'political',t:'pworks',d:'Systems that crush the individual, never declared.'},
+{s:'ende',t:'dante',d:'Both close on the stars. Desire as orientation toward love.'},
+{s:'sanluca',t:'cavafy',d:'The same structure: the path matters, not the summit.'},
+{s:'salinas',t:'perfume',d:'The same structure: presence as invisible vibration.'},
+{s:'cat_room',t:'schrodinger',d:'The cat is not only a thought experiment. It lives in the room.'},
+{s:'cat_room',t:'sanluca',d:'Both are the quotidian made significant. Uncertainty as everyday companion.'},
+{s:'tennis',t:'uncertainty',d:'Advantage can always revert to deuce. You do not win until you truly win.'},
+{s:'tennis',t:'desire',d:"Love from l'oeuf: zero, the Nothing, the origin of every game."},
+{s:'languages',t:'episteme',d:'Each language is a frame through which reality is perceived differently.'},
+{s:'languages',t:'flatland',d:'The monolingual cannot see what is untranslatable.'},
+{s:'languages',t:'matrix',d:"Plato's cave: each language is one set of shadows on the wall."}
+];
+var nm={};N.forEach(function(n){nm[n.id]=n;});
+L.forEach(function(l){l.sn=nm[l.s];l.tn=nm[l.t];});
+var svg=document.getElementById('s7-atlas-svg');
+L.forEach(function(l){
+var li=mk('line',{x1:l.sn.x,y1:l.sn.y,x2:l.tn.x,y2:l.tn.y,stroke:'#002a0e','stroke-width':'0.8'});
+svg.appendChild(li);l.el=li;li.style.cursor='pointer';
+li.onmouseover=function(){if(!lk){hlL(l);sh('<b>'+l.sn.lb+' / '+l.tn.lb+'</b>&nbsp; '+l.d);}};
+li.onmouseout=function(){if(!lk)clr();};
+li.onclick=function(e){e.stopPropagation();if(lk===l){lk=null;clr();return;}lk=l;hlL(l);sh('<b>'+l.sn.lb+' / '+l.tn.lb+'</b>&nbsp; '+l.d);};
+});
+N.forEach(function(n){
+var g=document.createElementNS(NS,'g');g.style.cursor='pointer';
+var r=n.type==='theme'?22:13;
+var c=mk('circle',{cx:n.x,cy:n.y,r:r,fill:n.type==='theme'?'#001a05':'#020c02',stroke:n.type==='theme'?'#005520':'#003d18','stroke-width':n.type==='theme'?'1.5':'1'});
+var tx=mk('text',{x:n.x,y:n.y+r+13,'text-anchor':'middle',fill:n.type==='theme'?'#005520':'#003d18','font-family':"'Share Tech Mono','Courier New',monospace",'font-size':n.type==='theme'?'11':'9.5','font-weight':n.type==='theme'?'bold':'normal','letter-spacing':'0.06em'});
+tx.textContent=n.sh||n.lb;g.appendChild(c);g.appendChild(tx);n.c=c;n.t=tx;svg.appendChild(g);
+g.onmouseover=function(){if(!lk){hlN(n.id);sh('<b>'+n.lb+'</b>');}};
+g.onmouseout=function(){if(!lk)clr();};
+g.onclick=function(e){e.stopPropagation();if(lk&&lk===n.id){lk=null;clr();return;}lk=n.id;hlN(n.id);sh('<b>'+n.lb+'</b>');};
+});
+svg.onclick=function(){lk=null;clr();};
+var lk=null;
+function hlN(id){
+var cs=new Set([id]);
+L.forEach(function(l){if(l.s===id||l.t===id){cs.add(l.s);cs.add(l.t);}});
+N.forEach(function(n){act(n,cs.has(n.id));});
+L.forEach(function(l){actL(l,l.s===id||l.t===id);});}
+function hlL(lk2){
+N.forEach(function(n){act(n,n.id===lk2.s||n.id===lk2.t);});
+L.forEach(function(l){actL(l,l===lk2);});}
+function act(n,a){
+n.c.setAttribute('stroke',a?(n.type==='theme'?'#00e055':'#00b341'):(n.type==='theme'?'#005520':'#003d18'));
+n.c.setAttribute('fill',a?(n.type==='theme'?'#002e0e':'#001508'):(n.type==='theme'?'#001a05':'#020c02'));
+n.c.style.opacity=a?'1':'0.12';
+n.t.setAttribute('fill',a?(n.type==='theme'?'#00e055':'#00b341'):'#001a05');
+n.t.style.opacity=a?'1':'0.08';}
+function actL(l,a){
+l.el.setAttribute('stroke',a?'#00b341':'#002a0e');
+l.el.setAttribute('stroke-width',a?'1.8':'0.8');
+l.el.style.opacity=a?'1':'0.07';}
+function clr(){
+N.forEach(function(n){
+n.c.setAttribute('stroke',n.type==='theme'?'#005520':'#003d18');
+n.c.setAttribute('fill',n.type==='theme'?'#001a05':'#020c02');
+n.c.style.opacity='1';
+n.t.setAttribute('fill',n.type==='theme'?'#005520':'#003d18');
+n.t.style.opacity='1';});
+L.forEach(function(l){
+l.el.setAttribute('stroke','#002a0e');
+l.el.setAttribute('stroke-width','0.8');
+l.el.style.opacity='1';});
+document.getElementById('s7-atlas-info').style.opacity='0';}
+function sh(h){document.getElementById('s7-atlas-ic').innerHTML=h;document.getElementById('s7-atlas-info').style.opacity='1';}
+})();
+            </script>
+
 
           </div>
         </div>
