@@ -2946,6 +2946,16 @@ function openBookReview(book) {
   document.getElementById('br-title').textContent = book.title;
   document.getElementById('br-author').textContent = book.author;
   document.getElementById('br-review').textContent = book.review || '';
+  var existing = document.getElementById('br-review-image');
+  if (existing) existing.remove();
+  if (book.reviewImage) {
+    var ri = document.createElement('img');
+    ri.id = 'br-review-image';
+    ri.src = book.reviewImage;
+    ri.alt = '';
+    ri.style.cssText = 'display:block; width:100%; max-width:480px; border-radius:4px; margin:1.4rem auto 0; object-fit:cover;';
+    document.getElementById('br-review').after(ri);
+  }
   var img = document.getElementById('br-cover');
   var fb = document.getElementById('br-cover-fallback');
   if (book.cover) {
@@ -5521,7 +5531,7 @@ const HL_BOOKS = [
   { title: 'The Witches', author: 'Roald Dahl', color: '#1a3a1a', text: '#c8f0c8', cover: 'img/library/the_witches.jpg',
     review: 'Still afraid of people wearing gloves.' },
   { title: 'The Neverending Story', author: 'Michael Ende', color: '#1a2a5c', text: '#c8d8f5', cover: 'img/library/neverending_story.jpg',
-    review: 'A reader, reading a book, where a reader is reading. Story in the story. Never-ending. Still indecisive about the princess name.' },
+    review: 'A reader, reading a book, where a reader is reading. Story in the story. Never-ending. Still indecisive about the princess name.\n\nUnfortunately the movie didn\'t follow the book...but this moment was still epic.', reviewImage: 'img/library/neverendingstory_fortunadrago.jpeg' },
   { title: 'La boutique del mistero', author: 'Dino Buzzati', color: '#3a1a3a', text: '#f0c8f0', cover: 'img/library/boutique_mistero.jpg',
     review: 'Buzzati writes dread the way light enters a room at the wrong angle. You cannot say exactly what is wrong. And that is everything.\n\nMy favourite short stories in this collection are The Enchanted Jacket, which narrates human greed at the expense of others, and Seven Floors. Outside of this collection, I also really liked The Killing of the Dragon, also written in the 60s.\n\nThrough Buzzati, I saw clearly why we love storytelling and why we love stories. During the subway rides to Sesto San Giovanni and the countless transfers between the yellow, green, and finally red lines, I had read Stephen King\'s On Writing. I find that the power of words is an incredible force that King defines as "telepathy." How powerful is it to be able to transmit images, emotions, and sensations through stories that can take you elsewhere for a limited time? While Buzzati\'s messages seem to address the universal, the timeless and spaceless dimension, all the typical situations of his present emerge on the other hand. I often think back to the long nights he spent at Corriere della Sera and how he used his mind to go wherever he wanted, teleporting beyond the boundaries of time and space.' },
   { title: 'Spoon River Anthology', author: 'Edgar Lee Masters', color: '#4a3a1a', text: '#f5e8c8', cover: 'img/library/spoon_river.jpg',
@@ -5545,7 +5555,7 @@ const HL_BOOKS = [
   { title: 'The Stranger', author: 'Albert Camus', color: '#2a2a2a', text: '#e8e8e8', cover: 'img/library/the_stranger.jpg',
     review: 'Unlocks certain thoughts you didn\'t know you were having.' },
   { title: 'Eichmann in Jerusalem', author: 'Hannah Arendt', color: '#2a1a1a', text: '#e0c8c8', cover: 'img/library/arendt_eichmann.jpg',
-    review: 'Arendt\'s claim, watching Eichmann at trial: evil rarely looks demonic. It usually looks bureaucratic, ordinary, the result of a man who stopped thinking. A book to take slowly. Worth pairing with her later The Life of the Mind, with the film on Goring and his psychiatrist, and with Susan Neiman\'s Evil in Modern Thought: An Alternative History of Philosophy.' },
+    review: 'Arendt\'s claim, watching Eichmann at trial: evil rarely looks demonic. It usually looks bureaucratic, ordinary, the result of a man who stopped thinking. A book to take slowly. Worth pairing with her later The Life of the Mind, with the film Nuremberg (2025, Vanderbilt), and with Susan Neiman\'s Evil in Modern Thought: An Alternative History of Philosophy.' },
   { title: '21 Lessons for the 21st Century', author: 'Yuval Noah Harari', color: '#3a2a4a', text: '#dcc8f0', cover: 'img/library/harari_21.jpg',
     review: 'Harari makes the case that the 21st century demands mindfulness. In those ten or fifteen minutes of meditation you finally focus on breath and sensation, mind and body in the same room, without drifting into the day\'s tasks or superfluous opinions. His best argument: feelings are not the opposite of rationality but its evolution. Feelings are calculations, only the calculation happens below the threshold of awareness. Millions of neurons compute probabilities of survival without us noticing, and so we wrongly think that our fear, our choices, even our opinion of the European Union, are the result of some mysterious free will. The one thing I do not buy is his certainty that data will eclipse everything. Information alone has never beaten knowing what to do with it. The book left me with more questions than answers, which is its own kind of recommendation: the more I read, the more I wanted to read.' },
   { title: 'Ci vediamo in agosto', author: 'Gabriel García Márquez', color: '#4a2a1a', text: '#f5d8c8', cover: 'img/library/ci_vediamo_agosto.jpg',
