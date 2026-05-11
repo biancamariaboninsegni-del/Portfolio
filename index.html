@@ -2950,6 +2950,7 @@ function openBookReview(book) {
   var html = rawText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   html = html.replace(/\n/g, '<br><br>');
   html = html.replace(/"([^"]+)"/g, '<span style="color:#8a6a3a;font-style:italic;">"$1"</span>');
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong style="color:#4a6a8a;font-weight:600;">$1</strong>');
   reviewEl.innerHTML = html;
   document.querySelectorAll('.br-review-image').forEach(function(el){ el.remove(); });
   var reviewImgs = book.reviewImages || (book.reviewImage ? [book.reviewImage] : []);
@@ -5535,7 +5536,7 @@ const HL_BOOKS = [
   { title: 'The Iliad / The Odyssey', author: 'Homer', color: '#5a4a1a', text: '#f5e8c8', cover: 'img/library/iliad_odyssey.jpg',
     review: 'Two books. One war, one journey home. Homer understood that these are the only two stories that exist.' },
   { title: 'The Witches', author: 'Roald Dahl', color: '#1a3a1a', text: '#c8f0c8', cover: 'img/library/the_witches.jpg',
-    review: 'Still afraid of people wearing gloves.' },
+    review: 'Still afraid of people wearing gloves.', reviewImage: 'img/library/roalddahl_goodthoughts.webp' },
   { title: 'The Neverending Story', author: 'Michael Ende', color: '#1a2a5c', text: '#c8d8f5', cover: 'img/library/neverending_story.jpg',
     review: 'A reader, reading a book, where a reader is reading. Story in the story. Never-ending. Still indecisive about the princess name.\n\nUnfortunately the movie didn\'t follow the book, but this moment was still epic:', reviewImage: 'img/library/neverendingstory_fortunadrago.jpeg' },
   { title: 'La boutique del mistero', author: 'Dino Buzzati', color: '#3a1a3a', text: '#f0c8f0', cover: 'img/library/boutique_mistero.jpg',
@@ -5579,7 +5580,7 @@ const HL_BOOKS = [
   { title: 'Carrie', author: 'Stephen King', color: '#2a0a0a', text: '#f0c8c8', cover: 'img/library/carrie.jpg',
     review: 'Stephen King\'s real gift isn\'t horror. It\'s the psychology of people who hurt and people who get hurt.' },
   { title: 'Hamlet', author: 'William Shakespeare', color: '#5c1a1a', text: '#f5d0d0', cover: 'img/library/hamlet.jpg',
-    review: 'What I love about Hamlet is the wordplay as a sign of the mind\'s exuberance: the famous kin/kind line already does it in the very first scene. The opening monologue, O that this too too solid flesh would melt, comes from a longing for the undefined, for what is not. The self-deception is brilliantly captured in the line about having a pigeon\'s liver, lacking the gall that would let him return bitterness to those who oppress him. But what stays with me most is the moment Hamlet starts pretending to be mad. He cannot fight on equal terms, so he weaponises unpredictability: madness disarms the opponent and turns him into an invisible observer. He stands before an injustice and must use intellect to outsmart the system. Brilliant strategy disguised as breakdown.' },
+    review: 'What I love about Hamlet is **the wordplay as a sign of the mind\'s exuberance**: the famous **kin/kind line** already does it in the very first scene.\n\nThe opening monologue, **O that this too too solid flesh would melt**, comes from a longing for the undefined, for what is not.\n\nThe self-deception is brilliantly captured in the line about having **a pigeon\'s liver**, lacking the gall that would let him return bitterness to those who oppress him.\n\nBut what stays with me most is the moment **Hamlet starts pretending to be mad**. He cannot fight on equal terms, so he weaponises unpredictability: madness disarms the opponent and turns him into an invisible observer. He stands before an injustice and must use intellect to outsmart the system.\n\n**Brilliant strategy disguised as breakdown.**' },
   { title: 'Othello', author: 'William Shakespeare', color: '#1a1a1a', text: '#e8e8e8', cover: 'img/library/othello.jpg',
     review: 'Hands down the worst pillow fight in history.' },
   { title: 'The Celebrated Jumping Frog of Calaveras County', author: 'Mark Twain', color: '#5a3a1a', text: '#f5e0c8', cover: 'img/library/jumping_frog.jpg',
