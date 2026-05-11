@@ -2945,7 +2945,12 @@ function showColorFamily(family) {
 function openBookReview(book) {
   document.getElementById('br-title').textContent = book.title;
   document.getElementById('br-author').textContent = book.author;
-  document.getElementById('br-review').textContent = book.review || '';
+  var reviewEl = document.getElementById('br-review');
+  var rawText = book.review || '';
+  var html = rawText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  html = html.replace(/\n/g, '<br><br>');
+  html = html.replace(/"([^"]+)"/g, '<span style="color:#8a6a3a;font-style:italic;">"$1"</span>');
+  reviewEl.innerHTML = html;
   document.querySelectorAll('.br-review-image').forEach(function(el){ el.remove(); });
   var reviewImgs = book.reviewImages || (book.reviewImage ? [book.reviewImage] : []);
   var reviewEl = document.getElementById('br-review');
