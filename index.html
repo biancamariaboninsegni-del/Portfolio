@@ -2951,6 +2951,7 @@ function openBookReview(book) {
   html = html.replace(/\n/g, '<br><br>');
   html = html.replace(/"([^"]+)"/g, '<span style="color:#8a6a3a;font-style:italic;">"$1"</span>');
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong style="color:#4a6a8a;font-weight:600;">$1</strong>');
+  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
   reviewEl.innerHTML = html;
   document.querySelectorAll('.br-review-image').forEach(function(el){ el.remove(); });
   var reviewImgs = book.reviewImages || (book.reviewImage ? [book.reviewImage] : []);
