@@ -7413,13 +7413,13 @@ if(document.getElementById('s7-atlas-svg').querySelector('circle'))return;
 var NS='http://www.w3.org/2000/svg';
 function mk(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
 var N=[
-{id:'uncertainty',lb:'Uncertainty',type:'theme',x:315,y:248},
-{id:'desire',lb:'Desire',type:'theme',x:380,y:180},
-{id:'journey',lb:'Journey',type:'theme',x:448,y:248},
-{id:'invisible',lb:'Invisible',type:'theme',x:280,y:308},
-{id:'episteme',lb:'Points of View',type:'theme',x:215,y:222},
-{id:'timeo',lb:'Time in Objects',type:'theme',x:275,y:162},
-{id:'political',lb:'Political Thread',type:'theme',x:398,y:308},
+{id:'uncertainty',lb:'Uncertainty',type:'theme',x:335,y:248},
+{id:'desire',lb:'Desire',type:'theme',x:385,y:195},
+{id:'journey',lb:'Journey',type:'theme',x:430,y:258},
+{id:'invisible',lb:'Invisible',type:'theme',x:295,y:300},
+{id:'episteme',lb:'Points of View',type:'theme',x:250,y:225},
+{id:'timeo',lb:'Time in Objects',type:'theme',x:300,y:175},
+{id:'political',lb:'Political Thread',type:'theme',x:390,y:305},
 {id:'schrodinger',lb:'Schrödinger',sh:'Schrödinger',x:108,y:158},
 {id:'carroll',lb:'Carroll · Alice',sh:'Carroll · Alice',x:192,y:62},
 {id:'matrix',lb:'The Matrix',sh:'The Matrix',x:375,y:44},
@@ -7438,7 +7438,9 @@ var N=[
 {id:'cat_room',lb:'Cat in the Room',sh:'Cat in the Room',x:160,y:195},
 {id:'tennis',lb:'Tennis · Temet Nosce',sh:'Tennis',x:345,y:92},
 {id:'languages',lb:'Four Languages',sh:'Four Languages',x:525,y:108},
-{id:'auryn',lb:'Auryn · Ouroboros',sh:'Auryn',x:160,y:340}
+{id:'auryn',lb:'Auryn · Ouroboros',sh:'Auryn',x:160,y:340},
+{id:'buzzati',lb:'Buzzati · Deserto',sh:'Buzzati',x:180,y:118},
+{id:'rovelli',lb:'Rovelli · Order of Time',sh:'Rovelli',x:108,y:62}
 ];
 var L=[
 {s:'uncertainty',t:'schrodinger',d:'Enter without knowing. The box is closed.'},
@@ -7465,6 +7467,8 @@ var L=[
 {s:'episteme',t:'carroll',d:'j x i is not i x j: order changes everything.'},
 {s:'episteme',t:'matrix',d:"Descartes before quantum physics: the brain in a vat."},
 {s:'timeo',t:'luxury',d:'Three roles, one theme: objects carry time.'},
+{s:'timeo',t:'buzzati',d:'The Tartar Steppe: time as suspended waiting, life measured in anticipation.'},
+{s:'timeo',t:'rovelli',d:'The Order of Time: events crowd together chaotically. The present is built, or lost.'},
 {s:'political',t:'pworks',d:'Systems that crush the individual, never declared.'},
 {s:'ende',t:'dante',d:'Both close on the stars. Desire as orientation toward love.'},
 {s:'sanluca',t:'cavafy',d:'The same structure: the path matters, not the summit.'},
@@ -7514,7 +7518,7 @@ var themeText = {
   'episteme': '<b>DIFFERENT POINTS OF VIEW</b><br><br>Flatland: the two-dimensional character cannot imagine volume, not from stupidity but from structure. The site speaks four languages. Each language is a frame through which reality is perceived differently. The monolingual cannot see what is untranslatable. Each language is one set of shadows on the wall. To speak four is to know that no single frame is complete. In Carroll mathematics: j x i is not i x j. The order of things changes their meaning entirely.',
   'journey': '<b>THE JOURNEY</b><br><br>San Luca is in the room. It is Bologna, always visible. But San Luca is reached through 666 arches, almost four kilometres: not a monument to look at, a path to walk. Cavafy: fear not the Laestrygonians. Ithaca gave you the beautiful journey; without her you would not have set out. The <em>De Bello Helvetico</em>: a path that gives what you need, not what you had planned. Dante closes it: desire earned through trial becomes the engine of ascent. <em>Puro e disposto a salire le stelle.</em>',
   'desire': '<b>NO CONTROL</b><br><br>In tennis the game begins at love: from <em>l’oeuf</em>, the egg, the zero, the Nothing. You arrive at deuce, then advantage: the decisive point that can always revert. You do not win until you truly win. The Rolling Stones: you get what you need. Ende: the Nothing advances when people stop desiring. You cannot control the outcome. But you can orient your desire.',
-  'circle': '<b>THE CIRCLE</b><br><br>The Auryn ouroboros opens the portfolio: two serpents entwined, each biting the other tail, inscribed with <em>Do What You Wish</em>. The symbol of Fantastica in the Neverending Story. The cycle without end. The cat lives in the room. San Luca is visible from the window. The site does not illustrate these themes. It enacts them.<br><br><em>l’Amor che move il sole e l’altre stelle.</em>'
+  'circle': '<b>THE CIRCLE</b><br><br>The Auryn ouroboros opens the portfolio: two serpents entwined, each biting the other tail, inscribed with <em>Do What You Wish</em>. The symbol of Fantastica in the Neverending Story. The cycle without end. Buzzati: time as a loop of waiting, the desert that never changes while everything inside you does. Rovelli: the present is not a fixed point, it is built or lost. The cat lives in the room. San Luca is visible from the window. The site does not illustrate these themes. It enacts them.<br><br><em>l’Amor che move il sole e l’altre stelle.</em>'
 };
 svg.onclick=function(){lk=null;clr();};
 var lk=null;
