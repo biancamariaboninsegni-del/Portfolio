@@ -3017,6 +3017,15 @@ function openBookReview(book) {
     fb.style.color = book.text || '#fff';
     fb.textContent = book.title;
   }
+  if (book.title === 'Billy Budd') {
+    var senEssay = document.getElementById('billy-sen-essay');
+    if (senEssay) {
+      var wrapper = document.createElement('div');
+      wrapper.style.cssText = 'margin-top:2rem;background:#1a120a;border-radius:6px;padding:1.5rem 1.5rem 1.2rem;';
+      wrapper.innerHTML = senEssay.innerHTML;
+      document.getElementById('br-review').after(wrapper);
+    }
+  }
   document.getElementById('modal-book-review').classList.add('open');
 }
 </script>
