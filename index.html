@@ -999,7 +999,9 @@
     border-left: 2px solid rgba(212,201,176,0.2);
     padding-left: 1rem;
     font-style: italic;
-  }
+    overflow-y: auto;
+  max-height: 62vh;
+}
   .book-note-close {
     position: absolute; top: 0.8rem; right: 1rem;
     font-family: 'Courier Prime', monospace;
@@ -4891,6 +4893,12 @@ function openBookNote(title) {
   const rawNote = displayNote.note || '';
   const rendered = typeof renderReview === 'function' ? renderReview(rawNote) : rawNote.replace(/\*\*([^*]+)\*\*/g, '<strong style="color:#c8b8e8;font-weight:500;">$1</strong>').replace(/\*([^*]+)\*/g, '<em>$1</em>').replace(/\\n\\n/g, '<br><br>');
   document.getElementById('bnote-text').innerHTML = rendered;
+  if (title === 'Billy Budd') {
+    const senEssay = document.getElementById('billy-sen-essay');
+    if (senEssay) {
+      document.getElementById('bnote-text').innerHTML += senEssay.innerHTML;
+    }
+  }
   document.getElementById('modal-book-note').classList.add('open');
 }
 
