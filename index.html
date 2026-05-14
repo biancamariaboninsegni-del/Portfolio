@@ -2961,7 +2961,7 @@ function showColorFamily(family) {
     font-size: 1.02rem;
     line-height: 1.85;
     color: #2a2a2a;
-    white-space: pre-wrap;
+    white-space: normal;
   }
 </style>
 <div class="modal-backdrop" id="modal-book-review">
@@ -4888,7 +4888,9 @@ function openBookNote(title) {
   const displayNote = note || { author: bookData ? bookData.author : '', note: bookData ? bookData.review : '' };
   document.getElementById('bnote-title').textContent = title;
   document.getElementById('bnote-author').textContent = displayNote.author;
-  document.getElementById('bnote-text').textContent = displayNote.note;
+  const rawNote = displayNote.note || '';
+  const rendered = typeof renderReview === 'function' ? renderReview(rawNote) : rawNote.replace(/\*\*([^*]+)\*\*/g, '<strong style="color:#c8b8e8;font-weight:500;">$1</strong>').replace(/\*([^*]+)\*/g, '<em>$1</em>').replace(/\\n\\n/g, '<br><br>');
+  document.getElementById('bnote-text').innerHTML = rendered;
   document.getElementById('modal-book-note').classList.add('open');
 }
 
